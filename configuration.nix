@@ -60,6 +60,10 @@
   };
   programs.waybar.enable = true;
 
+  fonts.fonts = with pkgs; [
+    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+  ];
+
   networking.hostName = "nixxy"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -144,6 +148,7 @@
     vim
     wget
     kitty
+    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

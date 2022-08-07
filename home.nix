@@ -19,5 +19,24 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [ htop ];
+  home.packages = with pkgs; [ 
+	htop 
+	neomutt
+	flameshot
+	gdb
+	tmux
+	isync
+	notmuch
+	cmst
+	tdesktop
+	mc
+	zathura
+	feh
+	steam
+  ];
+		home.file = {
+			".vimrc" = {
+				source = ./.vimrc;
+			};
+		};
 }
