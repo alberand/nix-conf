@@ -21,6 +21,7 @@
     in {
 			nixosConfigurations = {
 				nixxy = lib.nixosSystem {
+					inherit pkgs;
 					inherit system;
 					modules = [ 
 						./configuration.nix 
