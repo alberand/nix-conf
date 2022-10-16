@@ -1,0 +1,172 @@
+#!/usr/bin/env sh
+
+# Shell configuration
+#
+# @author: Andrey Albershteyn
+# @date: 2018
+
+#==============================================================================
+# Configuration
+#==============================================================================
+
+# Locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+# Some settings for tmux.
+alias tmux="TERM=screen-256color tmux"
+export TERM=screen-256color
+
+alias vim="nvim"
+
+# Editor for pacman
+export VISUAL="nvim"
+export EDITOR="nvim"
+
+# Minicom colors
+export MINICOM="-m -c on"
+
+# Add local scripts
+export PATH=$PATH:$HOME/.local/bin
+
+# Editor for cscope (by default it's vi)
+export CSCOPE_EDITOR=nvim
+
+with_passwords(){
+    pwds=`gpg  --no-tty -qd ~/.passwords.template.gpg`
+    eval "$pwds"
+    $@
+}
+alias mutt="with_passwords mutt"
+alias neomutt="with_passwords neomutt"
+alias mbsync="with_passwords mbsync"
+
+# Just usefull aliases
+# Applications
+alias viml="/usr/bin/vim --servername vimlatex"
+alias cal="cal -ym"
+alias mc='. /usr/lib/mc/mc-wrapper.sh'
+alias ipy='ipython3'
+
+# Blog
+BLOG_ROOT=$HOME/Projects/blog
+alias blog='cd $BLOG_ROOT; cat README.rst'
+
+# Allows to passthrough user's aliases to sudo
+alias sudo='sudo '
+
+# Pythons
+alias py2='python2'
+alias py3='python3'
+alias py='python'
+
+# Connect to ssh-agent run by systemd
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+#==============================================================================
+# Commands
+#==============================================================================
+# PDF Reader
+function pdfreader(){
+	zathura "$1" >/dev/null 2>&1 &
+}
+alias pdf=pdfreader
+
+# Image viewver
+function show_image(){
+	feh "$1" >/dev/null 2>&1 &
+}
+alias img=show_image
+
+# Run application wihout standart output
+function quiet_runner(){
+	"$1" "$2" >/dev/null 2>&1 &
+}
+alias mute=quiet_runner
+
+# For latex. This script convert .png and .jpg images to eps
+function convert_to_eps(){
+    ~/.scripts/converter.sh "$@"
+}
+alias toeps=convert_to_eps
+
+# ex - archive extractor
+# usage: ex <file>
+function ex() {
+    if [ -f $1 ] ; then
+    case $1 in
+        *.tar.bz2) tar xjf $1 ;;
+        *.tar.gz) tar xzf $1 ;;
+        *.tar.xz) tar xf $1 ;;
+        *.bz2) bunzip2 $1 ;;
+        *.rar) unrar x $1 ;;
+        *.gz) gunzip $1 ;;
+        *.tar) tar xf $1 ;;
+        *.tbz2) tar xjf $1 ;;
+        *.tgz) tar xzf $1 ;;
+        *.zip) unzip $1 ;;
+        *.Z) uncompress $1;;
+        *.7z) 7z x $1 ;;
+        *) echo "'$1' cannot be extracted via ex()" ;;
+    esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# pack - archive packager
+# usage: pack <file_1> <file_2> ...
+function pack() {
+    bad=0
+
+    for var in "$@"
+    do
+        # If argument is file or directory.
+        if ! $( [ -f "$var" ] || [ -d "$var" ] ) ; then
+            echo "'$var' is not a valid file or directory."
+            bad=1
+        fi
+    done
+
+    # If all entities are valid pack it.
+    echo "Packed files:"
+    if [ $bad -eq 0 ] ; then
+        name=$(echo "$1" | cut -d'.' -f1)
+        tar -cvzf "$name".tar "$@"
+    fi
+}
+
+# pdfsearch - search in all pdf's for pattern (in current directory)
+# Usage: pdfsearch "pattern"
+function pdfsearch(){
+    find . -name '*.pdf' -exec sh -c "pdftotext \"{}\" - | grep --with-filename --label=\"{}\" --color \"$1\"" \;
+}
+
+# Colored man pages
+function man() {
+	env \
+		LESS_TERMCAP_md=$'\e[1;36m' \
+		LESS_TERMCAP_me=$'\e[0m' \
+		LESS_TERMCAP_se=$'\e[0m' \
+		LESS_TERMCAP_so=$'\e[1;40;92m' \
+		LESS_TERMCAP_ue=$'\e[0m' \
+		LESS_TERMCAP_us=$'\e[1;32m' \
+			man "$@"
+}
+
+# Platformio set up
+export PLATFORMIO_FORCE_COLOR=true
+
+# Linux Dev
+KERNEL=$HOME/Projects/kernel/linux
+alias kernel="cd $KERNEL"
+fm() {
+	git --no-pager -C $KERNEL log --no-merges -n 1 --oneline --grep "$1" | cut -d' ' -f1
+}
+
+mm() {
+	parse-lore.py $@
+}
+
+alias bkr-reboot="bkr system-power --action=reboot"

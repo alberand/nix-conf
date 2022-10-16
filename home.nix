@@ -56,11 +56,41 @@ in
 	steam
   ];
 
-  # home.file = {
-    # ".vimrc" = {
-      # source = ./.vimrc;
-    # };
-  # };
+  home.file = {
+    ".vimrc" = {
+      source = ./.vimrc;
+    };
+    ".ctags" = {
+      source = ./.ctags;
+    };
+    ".gdbinit" = {
+      source = ./.gdbinit;
+    };
+    ".gitconfig" = {
+      source = ./.gitconfig;
+    };
+    ".gitignore" = {
+      source = ./.gitignore;
+    };
+    ".mbsyncrc" = {
+      source = ./.mbsyncrc;
+    };
+    ".muttrc" = {
+      source = ./.muttrc;
+    };
+    ".shrc.local" = {
+      source = ./.shrc.local;
+    };
+    ".tmux.conf" = {
+      source = ./.tmux.conf;
+    };
+    ".vimrc.local" = {
+      source = ./.vimrc.local;
+    };
+    ".zshrc" = {
+      source = ./.zshrc;
+    };
+  };
 
   services.pipewire = {
     enable = true;

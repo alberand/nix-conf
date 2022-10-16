@@ -1,0 +1,37 @@
+" Plugins manager
+"
+" Filetype plugin indent on
+set nocompatible              " required
+filetype off                  " required
+
+call plug#begin()
+
+Plug 'sjl/badwolf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+
+call plug#end()
+
+" Set color scheme
+colorscheme badwolf
+
+" Latex
+let g:LatexBox_latexmk_options = "-pvc -pdf  -auxdir=/tmp"
+let g:TCLevel = 4
+let g:Tex_CompileRule_pdf = 'latexmk -pdf'
+let g:LatexBox_latexmk_preview_continuously=1
+let g:LatexBox_latexmk_async=1
+let g:Tex_ShowErrorContext = 0
+let g:Tex_GotoError = 0
+
+" Powerline
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'powerlineish'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
