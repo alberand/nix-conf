@@ -149,7 +149,7 @@ in
 
   # services.flatpak.enable = true;
 
-  environment.variables.EDITOR = "vim";
+  environment.variables.EDITOR = "nvim";
 
   services.grafana = {
 	enable = true;
@@ -185,7 +185,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     htop
-    vim
+    neovim
     wget
     kitty
     git
@@ -239,7 +239,14 @@ in
 
   programs.ssh.startAgent = true;
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    ohMyZsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "robbyrussell";
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

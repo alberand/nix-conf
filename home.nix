@@ -34,7 +34,6 @@
 	zsh
 	feh
 	steam
-
   ];
 
   home.file = {
