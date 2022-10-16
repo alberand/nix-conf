@@ -36,23 +36,13 @@
 	steam
   ];
 
-  neovim.override {
-	configure.packages.myVimPackage = with pkgs.vimPlugins; {
-    # loaded on launch
-    start = [ youcompleteme fugitive ];
-    # manually loadable by calling `:packadd $plugin-name` (or by autocommand)
-    opt = [ phpCompletion elm-vim ];
-  };
-	}
+  imports =
+    [
+      ./modules/nvim.nix
+    ];
+
 
   home.file = {
-	".vim" = {
-		source = ./.vim;
-		recursive = true;
-	};
-    ".vimrc" = {
-      source = ./.vimrc;
-    };
     ".ctags" = {
       source = ./.ctags;
     };
