@@ -56,6 +56,8 @@
 		waybar
 		font-awesome
 		wofi
+		dbus-sway-environment
+		bemenu
 	];
   };
   programs.waybar.enable = true;
@@ -212,9 +214,9 @@
   system.stateVersion = "22.05"; # Did you read the comment?
 
 
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
+  # nix = {
+    # package = pkgs.nixFlakes;
+    # extraOptions = "experimental-features = nix-command flakes";
+  # };
 }
 
