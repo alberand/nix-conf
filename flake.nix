@@ -17,8 +17,8 @@
         		config.allowUnfree = true;
       		};
 
-      	lib = nixpkgs.lib;
-    in {
+      		lib = nixpkgs.lib;
+    	in {
 			nixosConfigurations = {
 				nixxy = lib.nixosSystem {
 					inherit pkgs;
