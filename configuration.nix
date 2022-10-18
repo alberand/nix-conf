@@ -85,20 +85,7 @@ in
     '';
   };
 
-  programs.sway = {
-	enable = true;
-	extraPackages = with pkgs; [
-      		swaylock
-      		wl-clipboard
-      		mako
-		kitty
-		waybar
-		font-awesome
-		wofi
-		bemenu
-	];
-  };
-  programs.waybar.enable = true;
+  security.polkit.enable = true;
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })

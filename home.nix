@@ -34,12 +34,44 @@
 	zsh
 	feh
 	steam
+    swaylock
+    wl-clipboard
+    mako
+	kitty
+	waybar
+	font-awesome
+	wofi
+	bemenu
   ];
 
   imports =
     [
       ./modules/nvim.nix
     ];
+
+  wayland.windowManager.sway = {
+	enable = true;
+	config = rec {
+        terminal = "kitty";
+        menu = "wofi --show run";
+        # Status bar(s)
+        bars = [{
+          command = "waybar";
+          position = "top";
+        }];
+        # Display device configuration
+        output = {
+          eDP-1 = {
+            # Set HIDP scale (pixel integer scaling)
+            scale = "1";
+			bg = "#000000 solid_color";
+	      };
+	    };
+      };
+  };
+  services.waybar.enable = true;
+  services.mako.enable = true;
+  services.swayidle.enable = true;
 
 
   home.file = {

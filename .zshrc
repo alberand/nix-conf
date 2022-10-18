@@ -31,14 +31,11 @@ plugins=(git)
 # User configuration
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH"
 
-# Add oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-
 if [ -f ~/.shrc.local ]; then
     . ~/.shrc.local
 fi
 
 # Run Xorg on tty0 automatically
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    exec startx
+    exec sway
 fi
