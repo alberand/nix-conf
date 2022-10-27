@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
   home.username = "alberand";
   home.homeDirectory = "/home/alberand";
 
@@ -19,62 +17,37 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.packages = with pkgs; [ 
-	htop 
-	neomutt
-	flameshot
-	thunderbird
-	gdb
-	tmux
-	isync
-	notmuch
-	cmst
-	tdesktop
-	mc
-	zathura
-	zsh
-	feh
-	steam
-    swaylock
-    wl-clipboard
-    mako
-	kitty
-	waybar
-	font-awesome
-	wofi
-	bemenu
-  ];
+	home.packages = with pkgs; [ 
+		htop 
+		neomutt
+		flameshot
+		thunderbird
+		gdb
+		tmux
+		isync
+		notmuch
+		cmst
+		tdesktop
+		mc
+		zathura
+		zsh
+		feh
+		steam
+		swaylock
+		wl-clipboard
+		mako
+		kitty
+		waybar
+		font-awesome
+		wofi
+		bemenu
+	];
 
-  imports =
-    [
-      ./modules/nvim.nix
-    ];
-
-  # programs.light.enable = true;
-  # user.extraGroups = [ "video" ];
-
-  wayland.windowManager.sway = {
-	enable = true;
-	config = rec {
-        terminal = "kitty";
-        menu = "wofi --show run";
-        # Status bar(s)
-        bars = [{
-          command = "waybar";
-          position = "top";
-        }];
-        # Display device configuration
-        output = {
-          Virtual-1 = {
-            # Set HIDP scale (pixel integer scaling)
-            scale = "1";
-			bg = "#000000 solid_color";
-	      };
-	    };
-      };
-  };
-
-  # programs.swaylock.enable = true;
+	imports =
+	[
+		./modules/nvim.nix
+		./modules/sway.nix
+	];
 
   home.file = {
     ".ctags" = {
