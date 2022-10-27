@@ -47,6 +47,7 @@
 	[
 		./modules/nvim.nix
 		./modules/sway.nix
+		./modules/waybar.nix
 	];
 
   home.file = {

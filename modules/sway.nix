@@ -6,16 +6,21 @@
 		config = rec {
 			terminal = "kitty";
 			menu = "wofi --show run";
-			modifier = "Mod4"
+			modifier = "Mod4";
 
 			fonts = {
-				names = [ "FiraCode" "DroidSansMono" ];
-				style = "Bold Semi-Condensed";
+				names = [ "DroidSansMono" ];
 				size = 11.0;
 			};
 
 			gaps = {
-				outer = 5;
+				inner = 5;
+			};
+
+			input."type:keyboard" = {
+				xkb_layout = "us,ru";
+				xkb_options = "grp:win_space_toggle";
+				xkb_numlock = "enabled";
 			};
 
 			# Status bar(s)
