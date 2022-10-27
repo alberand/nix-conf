@@ -23,6 +23,7 @@
 	htop 
 	neomutt
 	flameshot
+	thunderbird
 	gdb
 	tmux
 	isync
@@ -49,6 +50,9 @@
       ./modules/nvim.nix
     ];
 
+  # programs.light.enable = true;
+  # user.extraGroups = [ "video" ];
+
   wayland.windowManager.sway = {
 	enable = true;
 	config = rec {
@@ -61,7 +65,7 @@
         }];
         # Display device configuration
         output = {
-          eDP-1 = {
+          Virtual-1 = {
             # Set HIDP scale (pixel integer scaling)
             scale = "1";
 			bg = "#000000 solid_color";
@@ -69,10 +73,8 @@
 	    };
       };
   };
-  services.waybar.enable = true;
-  services.mako.enable = true;
-  services.swayidle.enable = true;
 
+  # programs.swaylock.enable = true;
 
   home.file = {
     ".ctags" = {
@@ -98,9 +100,6 @@
     };
     ".tmux.conf" = {
       source = ./.tmux.conf;
-    };
-    ".vimrc.local" = {
-      source = ./.vimrc.local;
     };
     ".zshrc" = {
       source = ./.zshrc;

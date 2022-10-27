@@ -65,6 +65,7 @@ in
 	devices = ["nodev"];
     };
   };
+  boot.extraModprobeConfig = "options kvm_intel nested=1";
 
   # Vulkan API/OpenCL API/Modern AMD Graphics Core Next (GCN) GPUs
   hardware.opengl.extraPackages = with pkgs; [
@@ -86,6 +87,23 @@ in
   };
 
   security.polkit.enable = true;
+  systemd.user.services.mako.enable = true;
+  systemd.user.services.waybar.enable = true;
+  systemd.user.services.swayidle.enable = true;
+  systemd.user.services.kanshi = {
+    description = "Kanshi output autoconfig ";
+    wantedBy = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    serviceConfig = {
+      # kanshi doesn't have an option to specifiy config file yet, so it looks
+      # at .config/kanshi/config
+      ExecStart = ''
+      ${pkgs.kanshi}/bin/kanshi
+      '';
+      RestartSec = 5;
+      Restart = "always";
+    };
+  };
 
   fonts.fonts = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
