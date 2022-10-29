@@ -41,6 +41,7 @@
 		font-awesome
 		wofi
 		bemenu
+		tdesktop
 	];
 
 	imports =
