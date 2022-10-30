@@ -50,22 +50,24 @@ in
     ];
 
   # Use the systemd-boot EFI boot loader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader = {
-    efi = {
-	# canTouchEfiVariables = true;
-	efiSysMountPoint = "/boot/efi";
-    };
     grub = {
 	enable = true;
 	version = 2;
-	efiInstallAsRemovable = true;
 	efiSupport = true;
-	devices = ["nodev"];
+	enableCryptodisk = true;
+	device = "nodev";
     };
   };
-  boot.extraModprobeConfig = "options kvm_intel nested=1";
+  boot.initrd.luks.devices = {
+    crypted = {
+	device = "/dev/disk/by-uuid/4e62f0f4-6b77-4947-b031-c7d5652a8eb3";
+	preLVM = true;
+    };
+  };
+  # boot.extraModprobeConfig = "options kvm_intel nested=1";
 
   # Vulkan API/OpenCL API/Modern AMD Graphics Core Next (GCN) GPUs
   hardware.opengl.extraPackages = with pkgs; [
