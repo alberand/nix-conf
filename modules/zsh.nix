@@ -3,12 +3,12 @@
 {
 	programs.zsh = {
   		enable = true;
-  		ohMyZsh = {
+  		oh-my-zsh = {
     			enable = true;
      			plugins = [ "git" ];
-     			# theme = "robbyrussell";
-     			theme = "spaceship";
+     			theme = "robbyrussell";
     		};
+
 		initExtra = ''
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
@@ -32,7 +32,7 @@ if [ -f ~/.shrc.local ]; then
 fi
 
 # Run Xorg on tty0 automatically
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+if [ -z "\$\{DISPLAY\}" ] && [ "\$\{XDG_VTNR\}" -eq 1 ]; then
     exec sway
 fi
 		'';
