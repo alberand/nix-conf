@@ -3,13 +3,14 @@
 {
 	wayland.windowManager.sway = {
 		enable = true;
+		wrapperFeatures.gtk = true;
 		config = rec {
 			terminal = "kitty";
 			menu = "wofi --show run";
-			modifier = "Mod4";
+			modifier = "Mod1";
 
 			fonts = {
-				names = [ "DroidSansMono" ];
+				names = [ "DroidSansMono" "Inconsolata" ];
 				size = 11.0;
 			};
 
@@ -38,6 +39,11 @@
 					res = "1920x1080";
 				};
 			};
+
+			floating.criteria = [ 
+				{ title = "Steam - Update News"; } 
+				{ class = "Pavucontrol"; } 
+			];
 		};
 
 		extraSessionCommands = ''

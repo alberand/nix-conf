@@ -68,10 +68,15 @@ in
     };
   };
   # boot.extraModprobeConfig = "options kvm_intel nested=1";
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
   # Vulkan API/OpenCL API/Modern AMD Graphics Core Next (GCN) GPUs
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages = with pkgs; [
 	rocm-opencl-icd
+	rocm-opencl-runtime
 	amdvlk
   ];
 
@@ -92,23 +97,31 @@ in
   systemd.user.services.mako.enable = true;
   systemd.user.services.waybar.enable = true;
   systemd.user.services.swayidle.enable = true;
-  systemd.user.services.kanshi = {
-    description = "Kanshi output autoconfig ";
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    serviceConfig = {
+  # systemd.user.services.kanshi = {
+    # description = "Kanshi output autoconfig ";
+    # wantedBy = [ "graphical-session.target" ];
+    # partOf = [ "graphical-session.target" ];
+    # serviceConfig = {
       # kanshi doesn't have an option to specifiy config file yet, so it looks
       # at .config/kanshi/config
-      ExecStart = ''
-      ${pkgs.kanshi}/bin/kanshi
-      '';
-      RestartSec = 5;
-      Restart = "always";
-    };
-  };
+      # ExecStart = ''
+      # ${pkgs.kanshi}/bin/kanshi
+      # '';
+      # RestartSec = 5;
+      # Restart = "always";
+    # };
+  # };
 
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+	noto-fonts
+	noto-fonts-cjk
+	noto-fonts-emoji
+	fira-code
+	fira-code-symbols
+	inconsolata
+	dina-font
+	proggyfonts
+    	(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Inconsolata" ]; })
   ];
 
   networking.hostName = "nixxy"; # Define your hostname.
@@ -117,7 +130,7 @@ in
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
   # networking.defaultGateway = "192.168.0.1";
   networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
-  networking.interfaces.enp1s0.useDHCP = true;
+  networking.interfaces.enp34s0.useDHCP = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
@@ -133,28 +146,6 @@ in
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkbOptions in tty.
   # };
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.layout = "us";
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # services.flatpak.enable = true;
 
   environment.variables.EDITOR = "nvim";
 
@@ -178,7 +169,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alberand = {
     isNormalUser = true;
-    description = "It's me. I found myself here.";
+    description = "Andrey Albershteyn";
     extraGroups = [ "wheel" "sudo" "docker" "libvirt" "networkmanager" ];
     uid = 1000;
     shell = pkgs.zsh;
@@ -192,6 +183,7 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     htop
+    vim
     neovim
     wget
     kitty
@@ -199,6 +191,10 @@ in
   ];
 
   security.rtkit.enable = true;
+
+  # Enable sound.
+  sound.enable = true;
+  # hardware.pulseaudio.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -230,8 +226,6 @@ in
     # enableSSHSupport = true;
   };
 
-  # List services that you want to enable:
-
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
@@ -246,14 +240,6 @@ in
 
   programs.ssh.startAgent = true;
 
-  programs.zsh = {
-    enable = true;
-    ohMyZsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "robbyrussell";
-    };
-  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
