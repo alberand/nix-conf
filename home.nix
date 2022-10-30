@@ -52,6 +52,7 @@
 		./modules/sway.nix
 		./modules/waybar.nix
 		./modules/zsh.nix
+		./modules/mako.nix
 	];
 
   home.file = {

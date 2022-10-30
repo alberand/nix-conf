@@ -94,7 +94,6 @@ in
   };
 
   security.polkit.enable = true;
-  systemd.user.services.mako.enable = true;
   systemd.user.services.waybar.enable = true;
   systemd.user.services.swayidle.enable = true;
   # systemd.user.services.kanshi = {
