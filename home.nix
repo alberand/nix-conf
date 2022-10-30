@@ -42,6 +42,7 @@
 		wofi
 		bemenu
 		tdesktop
+		allacrity
 	];
 
 	imports =
