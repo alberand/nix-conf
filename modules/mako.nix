@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
 {
-	systemd.user.services.mako = {
-		enable = true;
+	#systemd.user.services.mako.enable = true;
+	programs.mako = {
 		borderRadius = 5;
 	};
 }

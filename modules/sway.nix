@@ -9,10 +9,11 @@
 			menu = "wofi --show run";
 			modifier = "Mod1";
 
-			fonts = {
-				names = [ "DroidSansMono" "Inconsolata" ];
-				size = 11.0;
-			};
+			# fonts = {
+				# names = [ "DroidSansMono" "Inconsolata" ];
+				# size = 11.0;
+			# };
+			fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
 
 			gaps = {
 				inner = 5;

@@ -86,7 +86,6 @@ in
   	channel = https://nixos.org/channels/nixos-unstable;
   };
 
-  
   systemd = {
     extraConfig = ''
       DefaultTimeoutStopSec=30 # Don't block reboot for too long

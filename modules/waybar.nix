@@ -1,32 +1,14 @@
 { pkgs, ... }:
 
 {
-programs.waybar = {
-settings = {
-  mainBar = {
-    layer = "top";
-    position = "top";
-    height = 30;
-    output = [
-      "Virtual-1"
-    ];
-    modules-left = [ "sway/workspaces" "sway/mode" "wlr/taskbar" ];
-    modules-center = [ "sway/window" "custom/hello-from-waybar" ];
-    modules-right = [ "mpd" "custom/mymodule#with-css-id" "temperature" ];
-
-    "sway/workspaces" = {
-      disable-scroll = true;
-      all-outputs = true;
-    };
-    "custom/hello-from-waybar" = {
-      format = "hello {}";
-      max-length = 40;
-      interval = "once";
-      exec = pkgs.writeShellScript "hello-from-waybar" ''
-        echo "from within waybar"
-      '';
-    };
-  };
-};
-};
+	home.file."wofi/config".text = ''
+    		image_size=48
+		width=200
+    		columns=3
+    		allow_images=true
+    		insensitive=true
+    		run-always_parse_args=true
+    		run-cache_file=/dev/null
+    		run-exec_search=true
+	'';
 }

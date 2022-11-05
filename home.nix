@@ -53,6 +53,7 @@
 		./modules/waybar.nix
 		./modules/zsh.nix
 		./modules/mako.nix
+		./modules/wofi.nix
 	];
 
   home.file = {
