@@ -62,10 +62,10 @@
 
 			keybindings = let 
 				mod = "Mod1";
-				left = "n";
-        			down = "e";
-        			up = "i";
-        			right = "o";
+				left = "h";
+        			down = "j";
+        			up = "k";
+        			right = "l";
 				inherit terminal menu;
 			in
 			{
@@ -118,7 +118,7 @@
             "${mod}+Shift+9" = "move container to workspace number 9";
             "${mod}+Shift+0" = "move container to workspace number 10";
 
-            "${mod}+h" = "split h";
+            "${mod}+i" = "split h";
             "${mod}+v" = "split v";
             "${mod}+f" = "fullscreen toggle";
             "${mod}+comma" = "layout stacking";
@@ -129,7 +129,8 @@
 
             "${mod}+Shift+c" = "reload";
             "${mod}+Shift+r" = "restart";
-            "${mod}+Shift+v" = ''mode "system:  [r]eboot  [p]oweroff  [l]ogout"'';
+            # "${mod}+Shift+v" = ''mode "system:  [r]eboot  [p]oweroff  [l]ogout"'';
+	    "${mod}+Shift+e" = ''exec swaynag -t warning -m "You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session." -B "Yes, exit sway" "swaymsg exit"'';
 
             "${mod}+r" = "mode resize";
 
