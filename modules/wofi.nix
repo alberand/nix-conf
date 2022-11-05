@@ -1,10 +1,10 @@
 { pkgs, ... }:
 
 {
-	home.file.".config/wofi/config".text = ''
+	xdg.configFile."wofi/config".text = ''
     		image_size=48
 		width=200
-		stylesheet=~/.config/wofi/theme.css
+		stylesheet=$XDG_CONFIG_HOME/wofi/theme.css
     		columns=3
     		allow_images=true
     		insensitive=true
@@ -13,5 +13,5 @@
     		run-exec_search=true
 	'';
 
-	home.file.".config/wofi/theme.css".source = configs/wofi-theme.css;
+	xdg.configFile."wofi/theme.css".source = ../configs/wofi-theme.css;
 }
