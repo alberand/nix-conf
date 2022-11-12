@@ -44,6 +44,7 @@
 		tdesktop
 		alacritty
 		foot
+		jellyfin
 	];
 
 	imports =

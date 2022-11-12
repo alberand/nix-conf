@@ -121,6 +121,8 @@ in
     # };
   # };
 
+  services.jellyfin.enable = true;
+
   fonts.fonts = with pkgs; [
 	noto-fonts
 	noto-fonts-cjk
@@ -140,6 +142,72 @@ in
   # networking.defaultGateway = "192.168.0.1";
   networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
   networking.interfaces.enp34s0.useDHCP = true;
+
+  	# VPN configuration
+	# Configure the NAT/Firewall
+  	networking.nat.enable = true;
+  	networking.nat.externalInterface = "enp34s0";
+  	networking.nat.internalInterfaces = [ "wg0" ];
+  	networking.firewall.enable = true;
+  	networking.firewall = {
+    		allowedTCPPorts = [ 53 ];
+    		allowedUDPPorts = [ 53 51820 ];
+  	};
+
+  # Enable WireGuard
+  networking.wireguard.interfaces = {
+    # "wg0" is the network interface name. You can name the interface arbitrarily.
+    wg0 = {
+      # Determines the IP address and subnet of the client's end of the tunnel interface.
+      ips = [ "10.64.156.60/32" ];
+      listenPort = 51820; # to match firewall allowedUDPPorts (without this wg
+	# uses random port numbers)
+
+	# This allows the wireguard server to route your traffic to the internet and hence be like a VPN
+    # For this to work you have to set the dnsserver IP of your router (or dnsserver of choice) in your clients
+    postSetup = ''
+      ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.64.156.60/32 -o enp34s0 -j MASQUERADE
+    '';
+
+    # This undoes the above command
+    postShutdown = ''
+      ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.64.156.60/32 -o enp34s0 -j MASQUERADE
+    '';
+
+      # Path to the private key file.
+      #
+      # Note: The private key can also be included inline via the privateKey option,
+      # but this makes the private key world-readable; thus, using privateKeyFile is
+      # recommended.
+      privateKeyFile = "/etc/mullvad-vpn.key";
+
+	peers = [
+        # For a client configuration, one peer entry for the server will suffice.
+        {
+          # Public key of the server (not a file path).
+          publicKey = "1493vtFUbIfSpQKRBki/1d0YgWIQwMV4AQAvGxjCNVM=";
+
+          # List of IPs assigned to this peer within the tunnel subnet. Used to configure routing.
+          # For a server peer this should be the whole subnet.
+          allowedIPs = [ "0.0.0.0/0" ];
+
+          # Set this to the server IP and port.
+          endpoint = "185.195.233.66:51820";
+
+          # Send keepalives every 25 seconds. Important to keep NAT tables alive.
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
+
+	# DNS Server
+  services.dnsmasq = {
+    enable = true;
+    extraConfig = ''
+      interface=wg0
+    '';
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
@@ -175,6 +243,15 @@ in
 	};
   };
 
+  users.groups.media = {
+	name = "media";
+	gid = 8096;
+	members = [
+		"alberand"
+		"jellyfin"
+	];
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alberand = {
     isNormalUser = true;
@@ -197,6 +274,12 @@ in
     wget
     kitty
     git
+    wireguard-tools
+    unzip
+
+    # utils
+    lshw
+    pciutils
   ];
 
   security.rtkit.enable = true;
