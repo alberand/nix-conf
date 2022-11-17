@@ -168,10 +168,10 @@ in
             # '';
             postSetup = ''
               wg set wg0 fwmark 51820
-              iptables -I OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -o wg0 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
-              ip6tables -I OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/ip6tables -I OUTPUT ! -o wg0 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
             '';
@@ -180,10 +180,10 @@ in
                 # ip route del ${server_ip}
             # '';
             postShutdown = ''
-              iptables -D OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/iptables -D OUTPUT ! -o wg0 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
-              ip6tables -D OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/ip6tables -D OUTPUT ! -o wg0 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
             '';
@@ -377,7 +377,7 @@ in
   virtualisation.oci-containers.containers = {
     "deluge" = {
       image = "binhex/arch-delugevpn";
-      autoStart = false;
+      autoStart = true;
       ports = [ 
 	    "8112:8112" 
 	    "8118:8118" 
