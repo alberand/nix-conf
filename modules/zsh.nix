@@ -32,7 +32,8 @@ if [ -f ~/.shrc.local ]; then
 fi
 
 # Run Xorg on tty0 automatically
-if [ -z "\$\{DISPLAY\}" ] && [ "\$\{XDG_VTNR\}" -eq 1 ]; then
+# if [ -z "\$\{DISPLAY\}" ] && [ "\$\{XDG_VTNR\}" -eq 1 ]; then
+if [[ "$(tty)" == /dev/tty1 ]]; then
     exec sway
 fi
 		'';

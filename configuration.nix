@@ -125,15 +125,25 @@ in
 	# Pick only one of the below networking options.
 	# networking.wireless.enable = true;
 	networking.networkmanager.enable = true;
-	networking.networkmanager.dns = "dnsmasq";
+	networking.networkmanager.dns = "default";
 	# networking.defaultGateway = "192.168.0.1";
 	# networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
 	# networking.nameservers = [ "10.64.156.60" ];
 	networking.interfaces.enp34s0.useDHCP = true;
+    # Route for wireguard VPN
+    networking.interfaces.enp34s0.ipv4.routes = [{
+      address = "185.195.233.66";
+      prefixLength = 32;
+      via = "192.168.0.1";
+    }];
+    # Temporary fix for https://github.com/NixOS/nixpkgs/issues/162260
+    systemd.services.network-addresses-enp34s0 = {
+      after = [ "dhcpcd.service" ];
+    };
 
 	# VPN configuration
 	# Configure the NAT/Firewall
-	networking.nat.enable = true;
+	networking.nat.enable = false;
 	networking.nat.externalInterface = "enp34s0";
 	networking.nat.internalInterfaces = [ "wg0" ];
 	networking.firewall.enable = true;
@@ -154,13 +164,13 @@ in
 			# uses random port numbers)
 			listenPort = 51820;
 
-			postSetup = ''
-				ip route add ${server_ip} via 192.168.0.1 dev enp34s0
-			'';
+            # postSetup = ''
+                # ip route add ${server_ip} via 192.168.0.1 dev enp34s0
+            # '';
 
-			postShutdown = ''
-				ip route del ${server_ip}
-			'';
+            # postShutdown = ''
+                # ip route del ${server_ip}
+            # '';
 
 			# Path to the private key file.
 			privateKeyFile = "/etc/mullvad-vpn.key";
@@ -175,12 +185,12 @@ in
 	};
 
 	# DNS Server
-	services.dnsmasq = {
-		enable = true;
-		extraConfig = ''
-			interface=wg0
-		'';
-	};
+    # services.dnsmasq = {
+        # enable = true;
+        # extraConfig = ''
+            # interface=wg0
+        # '';
+    # };
 
 	# Set your time zone.
 	time.timeZone = "Europe/Prague";
@@ -229,6 +239,7 @@ in
 		git
 		wireguard-tools
 		unzip
+        podman-compose
 
 		# utils
 		lshw
@@ -269,9 +280,16 @@ in
 	'';
 
 	# Enable the OpenSSH daemon.
-	services.openssh.enable = true;
-	programs.ssh.startAgent = true;
-	programs.gnupg.agent.enable = true;
+	services.openssh = {
+		enable = true;
+		forwardX11 = true;
+	};
+
+	programs.ssh = {
+		startAgent = true;
+		agentTimeout = "24h";
+	};
+	programs.gnupg.agent.enable = false;
 	security.rtkit.enable = true;
 	services.jellyfin.enable = true;
 
@@ -327,6 +345,45 @@ in
 			defaultNetwork.dnsname.enable = true;
 		};
 	};
+
+  virtualisation.oci-containers.backend = "podman";
+  virtualisation.oci-containers.containers = {
+    "deluge" = {
+      image = "binhex/arch-delugevpn";
+      autoStart = false;
+      ports = [ 
+	    "8112:8112" 
+	    "8118:8118" 
+	    "58846:58846" 
+	    "58946:58946" 
+      ];
+      volumes = [
+	    "/media:/media"
+	    "/home/alberand/.deluge:/config"
+        "/etc/localtime:/etc/localtime:ro"
+      ];
+      environment = {
+        PUID = "1000";
+        PGID = "100";
+        VPN_ENABLED = "yes";
+        VPN_CLIENT = "wireguard";
+	    VPN_PROV = "custom";
+        STRICT_PORT_FORWARD = "yes";
+        ENABLE_PRIVOXY = "yes";
+        LAN_NETWORK = "192.168.0.100/32";
+        NAME_SERVERS = "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
+        DELUGE_DAEMON_LOG_LEVEL = "trace";
+        DELUGE_WEB_LOG_LEVEL = "trace";
+        DEBUG = "true";
+        UMASK = "000";
+        TZ = "Europe/London";
+      };
+      extraOptions = [
+        "--privileged=true"
+	    ''--sysctl="net.ipv4.conf.all.src_valid_mark=1"''
+      ];
+    };
+  };
 
 	# This value determines the NixOS release from which the default
 	# settings for stateful data, like file locations and database versions

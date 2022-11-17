@@ -13,7 +13,11 @@
 				# names = [ "DroidSansMono" "Inconsolata" ];
 				# size = 11.0;
 			# };
-			fonts = { names = [ "Fira Code" ]; size = 9.0; style = "Normal"; };
+            fonts = {
+                names = [ "Fira Code" ];
+                size = 9.0;
+                style = "Normal";
+            };
 
 			gaps = {
 				inner = 5;
@@ -47,25 +51,19 @@
 			];
 
 			startup = [
-				{ command = "firefox"; }
-				{ command = "kitty"; }
-				{ command = "thunderbird"; }
+				{ command = "swaymsg 'workspace 1; exec firefox'"; }
+				{ command = "swaymsg 'workspace 2; exec kitty'"; }
+				{ command = "swaymsg 'workspace 10; exec thunderbird'"; }
 				{ command = "flameshot"; }
-				{ command = "telegram-desktop"; }
+				{ command = "swaymsg 'workspace 9; exec telegram-desktop'"; }
 			];
-
-        		assigns = {
-          			"1" = [ { class = "firefox"; } ];
-          			"9" = [ { class = "telegram-desktop"; } ];
-          			"10" = [ { class = "thunderbird"; } ];
-        		};
 
 			keybindings = let 
 				mod = "Mod1";
 				left = "h";
-        			down = "j";
-        			up = "k";
-        			right = "l";
+        		down = "j";
+        		up = "k";
+        		right = "l";
 				inherit terminal menu;
 			in
 			{
@@ -130,7 +128,7 @@
             "${mod}+Shift+c" = "reload";
             "${mod}+Shift+r" = "restart";
             # "${mod}+Shift+v" = ''mode "system:  [r]eboot  [p]oweroff  [l]ogout"'';
-	    "${mod}+Shift+e" = ''exec swaynag -t warning -m "You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session." -B "Yes, exit sway" "swaymsg exit"'';
+	        "${mod}+Shift+e" = ''exec swaynag -t warning -m "You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session." -B "Yes, exit sway" "swaymsg exit"'';
 
             "${mod}+r" = "mode resize";
 

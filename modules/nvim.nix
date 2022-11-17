@@ -7,6 +7,7 @@
     	nvim-fzf 
     	nvim-treesitter 
     	nvim-treesitter-context
+		vim-nix
     	vim-airline 
     	vim-airline-themes
 		vim-numbertoggle
