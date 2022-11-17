@@ -142,9 +142,6 @@ in
 
 	# VPN configuration
 	# Configure the NAT/Firewall
-	networking.nat.enable = false;
-	networking.nat.externalInterface = "enp34s0";
-	networking.nat.internalInterfaces = [ "wg0" ];
 	networking.firewall.enable = true;
 	networking.firewall = {
 		allowedTCPPorts = [ 53 ];
@@ -168,7 +165,7 @@ in
             # '';
             postSetup = ''
               wg set wg0 fwmark 51820
-              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -o wg0 ! -d 192.168.0.0/24 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
               ${pkgs.iptables}/bin/ip6tables -I OUTPUT ! -o wg0 -m mark ! \
@@ -180,7 +177,7 @@ in
                 # ip route del ${server_ip}
             # '';
             postShutdown = ''
-              ${pkgs.iptables}/bin/iptables -D OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/iptables -D OUTPUT ! -o wg0 ! -d 192.168.0.0/24 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
               ${pkgs.iptables}/bin/ip6tables -D OUTPUT ! -o wg0 -m mark ! \
@@ -268,6 +265,7 @@ in
 		# utils
 		lshw
 		pciutils
+        ntfs3g
 	];
 
 	# Enable sound.
@@ -373,6 +371,9 @@ in
 		};
 	};
 
+  systemd.services.podman-deluge = {
+      after = [ "wireguard-wg0.service" ];
+  };
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers = {
     "deluge" = {
