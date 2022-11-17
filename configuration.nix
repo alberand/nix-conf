@@ -128,7 +128,6 @@ in
 	networking.networkmanager.dns = "default";
 	# networking.defaultGateway = "192.168.0.1";
 	# networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
-	# networking.nameservers = [ "10.64.156.60" ];
 	networking.interfaces.enp34s0.useDHCP = true;
     # Route for wireguard VPN
     networking.interfaces.enp34s0.ipv4.routes = [{
@@ -167,10 +166,27 @@ in
             # postSetup = ''
                 # ip route add ${server_ip} via 192.168.0.1 dev enp34s0
             # '';
+            postSetup = ''
+              wg set wg0 fwmark 51820
+              iptables -I OUTPUT ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
+              ip6tables -I OUTPUT ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
+            '';
 
             # postShutdown = ''
                 # ip route del ${server_ip}
             # '';
+            postShutdown = ''
+              iptables -D OUTPUT ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
+              ip6tables -D OUTPUT ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
+            '';
 
 			# Path to the private key file.
 			privateKeyFile = "/etc/mullvad-vpn.key";
@@ -212,14 +228,22 @@ in
 		members = [
 			"alberand"
 			"jellyfin"
+            "deluge"
 		];
+	};
+
+	users.users.deluge = {
+		isNormalUser = true;
+		description = "Deluge";
+		extraGroups = [ "media" ];
+		uid = 1002;
 	};
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.alberand = {
 		isNormalUser = true;
 		description = "Andrey Albershteyn";
-		extraGroups = [ "wheel" "sudo" "libvirt" "networkmanager" ];
+		extraGroups = [ "wheel" "sudo" "libvirt" "networkmanager" "wireshark" ];
 		uid = 1000;
 		shell = pkgs.zsh;
 		packages = with pkgs; [
@@ -291,7 +315,10 @@ in
 	};
 	programs.gnupg.agent.enable = false;
 	security.rtkit.enable = true;
-	services.jellyfin.enable = true;
+    services.jellyfin = {
+      enable = true;
+      openFirewall = true;
+    };
 
 	services.grafana = {
 		enable = true;
@@ -363,8 +390,8 @@ in
         "/etc/localtime:/etc/localtime:ro"
       ];
       environment = {
-        PUID = "1000";
-        PGID = "100";
+        PUID = "0";
+        PGID = "8096";
         VPN_ENABLED = "yes";
         VPN_CLIENT = "wireguard";
 	    VPN_PROV = "custom";

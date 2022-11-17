@@ -45,6 +45,7 @@
 		alacritty
 		foot
 		jellyfin
+        wireshark
 	];
 
 	imports =
