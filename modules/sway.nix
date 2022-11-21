@@ -48,6 +48,7 @@
 			floating.criteria = [ 
 				{ title = "Steam - Update News"; } 
 				{ class = "Pavucontrol"; } 
+                { app_id = "org.kde.kdeconnect.sms"; }
 			];
 
 			startup = [
@@ -55,6 +56,7 @@
 				{ command = "swaymsg 'workspace 2; exec kitty'"; }
 				{ command = "swaymsg 'workspace 10; exec thunderbird'"; }
 				{ command = "flameshot"; }
+				{ command = "kdeconnect-indicator"; }
 				{ command = "swaymsg 'workspace 9; exec telegram-desktop'"; }
 			];
 

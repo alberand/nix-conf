@@ -155,7 +155,6 @@ in
     # Temporary fix for https://github.com/NixOS/nixpkgs/issues/162260
     systemd.services.network-addresses-enp34s0 = {
       after = [ "dhcpcd.service" ];
-      requires = [ "dhcpcd.service" ];
       preStart = "sleep 10\n";
     };
     systemd.services.wireguard-wg0 = {
@@ -188,7 +187,7 @@ in
               # Mark packets on the wg0 interface
               wg set wg0 fwmark 51820
 
-              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
               ${pkgs.iptables}/bin/ip6tables -I OUTPUT ! -o wg0 -m mark ! \
@@ -198,18 +197,37 @@ in
               # Exclude deluge web gui from firewall rules
               ${pkgs.iptables}/bin/iptables -I OUTPUT -p tcp --dport 8112 \
                 -j ACCEPT
+
+              # Exclude KDE-connect ports
+              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p udp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p tcp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p udp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
             '';
 
             postShutdown = ''
-              ${pkgs.iptables}/bin/iptables -D OUTPUT ! -o wg0 -m mark ! \
+              ${pkgs.iptables}/bin/iptables -D OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
               ${pkgs.iptables}/bin/ip6tables -D OUTPUT ! -o wg0 -m mark ! \
                 --mark $(wg show wg0 fwmark) -m addrtype ! \
                 --dst-type LOCAL -j REJECT
 
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -p tcp --dport 8112 \
+              ${pkgs.iptables}/bin/iptables -D OUTPUT -p tcp -s --dport 8112 \
                 -j ACCEPT
+
+              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p udp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p tcp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p udp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p tcp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
             '';
 
 			# Path to the private key file.
@@ -431,6 +449,8 @@ in
       ];
     };
   };
+
+    programs.kdeconnect.enable = true;
 
 	# This value determines the NixOS release from which the default
 	# settings for stateful data, like file locations and database versions

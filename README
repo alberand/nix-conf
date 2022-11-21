@@ -1,0 +1,4 @@
+
+secretes
+- /etc/mullvad-vpn.key & /mullvad-vpn.conf
+- ~/.deluge/wireguard/wg0.conf
