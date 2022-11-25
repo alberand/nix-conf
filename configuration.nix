@@ -42,6 +42,9 @@ in
 {
 	imports = [
 		./hardware-configuration.nix
+		./modules/wireguard.nix
+		./modules/podman-deluge.nix
+		./modules/tailscale.nix
 	];
 
 	# Use the systemd-boot EFI boot loader.
@@ -127,119 +130,17 @@ in
 	networking.networkmanager.enable = true;
 	networking.networkmanager.dns = "default";
 	networking.defaultGateway = "192.168.0.1";
-	networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    # networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
     networking.interfaces.enp34s0.useDHCP = true;
-    # Route for wireguard VPN. Not sure why it's needed but without the route
-    # the system can not reach VPN server. TODO investigate it
-    networking.interfaces.enp34s0.ipv4.routes = [{
-      address = "185.195.233.66";
-      prefixLength = 32;
-      via = "192.168.0.1";
-    }];
-    # Restart network interface upon suspend (don't know how to make services
-    # restart by itself). We need to restart network-addresses-enp34s0 as it
-    # creates route specified above. After suspend dhcpcd flushes all routes. We
-    # need to add the route and restart our VPN tunnel (don't know why also).
-    systemd.services.suspend-restart = {
-      wantedBy = [ "suspend.target" ];
-      after = [ "suspend.target" ];
-      description = "Restart network interface to initialize routes";
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = ''
-          ${pkgs.systemd}/bin/systemctl --no-block restart \
-            network-addresses-enp34s0.service
-        '';         
-      };
-    };
-    # Temporary fix for https://github.com/NixOS/nixpkgs/issues/162260
-    systemd.services.network-addresses-enp34s0 = {
-      after = [ "dhcpcd.service" ];
-      preStart = "sleep 10\n";
-    };
-    systemd.services.wireguard-wg0 = {
-      after = [ "network-addresses-enp34s0.service" ];
-      requires = [ "network-addresses-enp34s0.service" ];
-    };
-
 	# VPN configuration
 	# Configure the NAT/Firewall
 	networking.firewall.enable = true;
+    # TODO not sure what it is but Tailscale wants it
+    networking.firewall.checkReversePath = "loose";
 	networking.firewall = {
-		allowedTCPPorts = [ 53 ];
-		allowedUDPPorts = [ 53 51820 ];
-	};
-
-	# Enable WireGuard
-	networking.wireguard.interfaces = let
-		server_ip = "185.195.233.66";
-	in {
-		wg0 = {
-			# Determines the IP address and subnet of the client's
-			# end of the tunnel interface.
-			ips = [ "10.64.156.60/32" ];
-			# to match firewall allowedUDPPorts (without this wg
-			# uses random port numbers)
-			listenPort = 51820;
-
-            # Configure killswitch
-            postSetup = ''
-              # Mark packets on the wg0 interface
-              wg set wg0 fwmark 51820
-
-              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
-                --mark $(wg show wg0 fwmark) -m addrtype ! \
-                --dst-type LOCAL -j REJECT
-              ${pkgs.iptables}/bin/ip6tables -I OUTPUT ! -o wg0 -m mark ! \
-                --mark $(wg show wg0 fwmark) -m addrtype ! \
-                --dst-type LOCAL -j REJECT
-
-              # Exclude deluge web gui from firewall rules
-              ${pkgs.iptables}/bin/iptables -I OUTPUT -p tcp --dport 8112 \
-                -j ACCEPT
-
-              # Exclude KDE-connect ports
-              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p udp \
-                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p tcp \
-                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p udp \
-                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
-                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            '';
-
-            postShutdown = ''
-              ${pkgs.iptables}/bin/iptables -D OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
-                --mark $(wg show wg0 fwmark) -m addrtype ! \
-                --dst-type LOCAL -j REJECT
-              ${pkgs.iptables}/bin/ip6tables -D OUTPUT ! -o wg0 -m mark ! \
-                --mark $(wg show wg0 fwmark) -m addrtype ! \
-                --dst-type LOCAL -j REJECT
-
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -p tcp -s --dport 8112 \
-                -j ACCEPT
-
-              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p udp \
-                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p tcp \
-                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p udp \
-                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p tcp \
-                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            '';
-
-			# Path to the private key file.
-			privateKeyFile = "/etc/mullvad-vpn.key";
-
-			peers = [{
-				publicKey = "1493vtFUbIfSpQKRBki/1d0YgWIQwMV4AQAvGxjCNVM=";
-                allowedIPs = [ "0.0.0.0/0" ];
-				endpoint = "${server_ip}:51820";
-				persistentKeepalive = 25;
-			}];
-		};
+        trustedInterfaces = [ "tailscale0" ];
+		allowedTCPPorts = [ 53 22 ];
+		allowedUDPPorts = [ 53 51820 config.services.tailscale.port ];
 	};
 
 	# Set your time zone.
@@ -298,6 +199,7 @@ in
 		wireguard-tools
 		unzip
         podman-compose
+        tailscale
 
 		# utils
 		lshw
@@ -355,6 +257,21 @@ in
       openFirewall = true;
     };
 
+	virtualisation = {
+        oci-containers.backend = "podman";
+		podman = {
+			enable = true;
+			# Create a `docker` alias for podman, to use it as a
+			# drop-in replacement
+			dockerCompat = true;
+			# Required for containers under podman-compose to be
+			# able to talk to each other.
+			defaultNetwork.dnsname.enable = true;
+		};
+	};
+
+    programs.kdeconnect.enable = true;
+
 	services.grafana = {
 		enable = true;
 		port = 3000;
@@ -395,62 +312,6 @@ in
 		allowReboot = false;
 		channel = https://nixos.org/channels/nixos-unstable;
 	};
-
-	virtualisation = {
-		podman = {
-			enable = true;
-			# Create a `docker` alias for podman, to use it as a
-			# drop-in replacement
-			dockerCompat = true;
-			# Required for containers under podman-compose to be
-			# able to talk to each other.
-			defaultNetwork.dnsname.enable = true;
-		};
-	};
-
-  systemd.services.podman-deluge = {
-      after = [ "wireguard-wg0.service" ];
-  };
-  virtualisation.oci-containers.backend = "podman";
-  virtualisation.oci-containers.containers = {
-    "deluge" = {
-      image = "binhex/arch-delugevpn";
-      autoStart = true;
-      ports = [ 
-	    "127.0.0.1:8112:8112" 
-	    "8118:8118" 
-	    "58846:58846" 
-	    "58946:58946" 
-      ];
-      volumes = [
-	    "/media:/media"
-	    "/home/alberand/.deluge:/config"
-        "/etc/localtime:/etc/localtime:ro"
-      ];
-      environment = {
-        PUID = "0";
-        PGID = "8096";
-        VPN_ENABLED = "yes";
-        VPN_CLIENT = "wireguard";
-	    VPN_PROV = "custom";
-        STRICT_PORT_FORWARD = "yes";
-        ENABLE_PRIVOXY = "yes";
-        LAN_NETWORK = "192.168.0.100/32";
-        NAME_SERVERS = "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
-        DELUGE_DAEMON_LOG_LEVEL = "trace";
-        DELUGE_WEB_LOG_LEVEL = "trace";
-        DEBUG = "true";
-        UMASK = "000";
-        TZ = "Europe/London";
-      };
-      extraOptions = [
-        "--privileged=true"
-	    ''--sysctl="net.ipv4.conf.all.src_valid_mark=1"''
-      ];
-    };
-  };
-
-    programs.kdeconnect.enable = true;
 
 	# This value determines the NixOS release from which the default
 	# settings for stateful data, like file locations and database versions
