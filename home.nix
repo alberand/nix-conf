@@ -18,19 +18,15 @@
 	programs.home-manager.enable = true;
 
 	home.packages = with pkgs; [ 
-		htop 
 		neomutt
 		flameshot
+		firefox
 		thunderbird
-		gdb
-		tmux
 		isync
 		notmuch
 		cmst
 		tdesktop
-		mc
 		zathura
-		zsh
 		feh
 		steam
 		swaylock
@@ -56,6 +52,7 @@
 		./modules/zsh.nix
 		./modules/mako.nix
 		./modules/wofi.nix
+		./modules/tmux.nix
 	];
 
   home.file = {
@@ -79,9 +76,6 @@
     };
     ".shrc.local" = {
       source = ./.shrc.local;
-    };
-    ".tmux.conf" = {
-      source = ./.tmux.conf;
     };
   };
 

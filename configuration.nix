@@ -123,11 +123,10 @@ in
 
 	networking.hostName = "nixxy";
 	# Pick only one of the below networking options.
-	# networking.wireless.enable = true;
 	networking.networkmanager.enable = true;
 	networking.networkmanager.dns = "default";
 	networking.defaultGateway = "192.168.0.1";
-    # networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
     networking.interfaces.enp34s0.useDHCP = true;
 	# VPN configuration
 	# Configure the NAT/Firewall
@@ -177,10 +176,6 @@ in
 		extraGroups = [ "wheel" "sudo" "libvirt" "networkmanager" "wireshark" ];
 		uid = 1000;
 		shell = pkgs.zsh;
-		packages = with pkgs; [
-			firefox
-			thunderbird
-		];
 	};
 
 	# List packages installed in system profile. To search, run:
@@ -194,8 +189,11 @@ in
 		git
 		wireguard-tools
 		unzip
-        podman-compose
         tailscale
+		zsh
+		gdb
+		tmux
+		mc
 
 		# utils
 		lshw
