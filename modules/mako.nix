@@ -3,6 +3,7 @@
 {
 	#systemd.user.services.mako.enable = true;
 	programs.mako = {
-		borderRadius = 5;
+        enable = true;
+        defaultTimeout = 5000;
 	};
 }

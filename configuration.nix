@@ -45,6 +45,8 @@ in
 		./modules/wireguard.nix
 		./modules/podman-deluge.nix
 		./modules/tailscale.nix
+		./modules/nginx.nix
+		./modules/grafana.nix
 	];
 
 	# Use the systemd-boot EFI boot loader.
@@ -97,20 +99,15 @@ in
 	security.polkit.enable = true;
 	systemd.user.services.waybar.enable = true;
 	systemd.user.services.swayidle.enable = true;
-	# systemd.user.services.kanshi = {
-		# description = "Kanshi output autoconfig ";
-		# wantedBy = [ "graphical-session.target" ];
-		# partOf = [ "graphical-session.target" ];
-		# serviceConfig = {
-			# kanshi doesn't have an option to specifiy config file yet, so it looks
-			# at .config/kanshi/config
-			# ExecStart = ''
-			# ${pkgs.kanshi}/bin/kanshi
-			# '';
-			# RestartSec = 5;
-			# Restart = "always";
-		# };
-	# };
+    systemd.user.services.kanshi = {
+        description = "kanshi daemon";
+        serviceConfig = {
+            Type = "simple";
+            ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
+            RestartSec = 5;
+            Restart = "always";
+        };
+    };
 
 	fonts.fonts = with pkgs; [
 		noto-fonts
@@ -148,11 +145,10 @@ in
 
 	# Select internationalisation properties.
 	i18n.defaultLocale = "en_US.UTF-8";
-	# console = {
-	#		font = "Lat2-Terminus16";
-	#		keyMap = "us";
-	#		useXkbConfig = true; # use xkbOptions in tty.
-	# };
+	console = {
+			font = "Lat2-Terminus16";
+			keyMap = "us";
+	};
 
 	environment.variables.EDITOR = "nvim";
 
@@ -221,7 +217,7 @@ in
 	# xdg-desktop-portal works by exposing a series of D-Bus interfaces
 	# known as portals under a well-known name
 	# (org.freedesktop.portal.Desktop) and object path
-	# (/org/freedesktop/portal/desktop).  The portal interfaces include
+	# (/org/freedesktop/portal/desktop). The portal interfaces include
 	# APIs for file access, opening URIs, printing and others.
 	services.dbus.enable = true;
 	xdg.portal = {
@@ -271,26 +267,6 @@ in
 	};
 
     programs.kdeconnect.enable = true;
-
-	services.grafana = {
-		enable = true;
-		port = 3000;
-		addr = "127.0.0.1";
-		analytics.reporting.enable = false;
-	};
-
-	services.nginx = {
-		enable = true;
-		virtualHosts.localhost = {
-			listen = [{ 
-				addr = "127.0.0.1"; 
-			}];
-			locations."/shared/" = {
-				alias = "/srv/www/shared/";
-			};
-		};
-	};
-
 
 	nix = {
 		settings.auto-optimise-store = true;
