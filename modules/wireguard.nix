@@ -47,64 +47,64 @@
 			listenPort = 51820;
 
             # Configure killswitch
-            # postSetup = ''
-            #   # Mark packets on the wg0 interface
-            #   wg set wg0 fwmark 51820
+            postSetup = ''
+              # Mark packets on the wg0 interface
+              wg set wg0 fwmark 51820
 
-            #   ${pkgs.iptables}/bin/iptables -I OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
-            #     --mark $(wg show wg0 fwmark) -m addrtype ! \
-            #     --dst-type LOCAL -j REJECT
-            #   ${pkgs.iptables}/bin/iptables -I OUTPUT ! -d 100.75.148.70/24 ! -o wg0 -m mark ! \
-            #     --mark $(wg show wg0 fwmark) -m addrtype ! \
-            #     --dst-type LOCAL -j REJECT
-            #   ${pkgs.iptables}/bin/ip6tables -I OUTPUT ! -o wg0 -m mark ! \
-            #     --mark $(wg show wg0 fwmark) -m addrtype ! \
-            #     --dst-type LOCAL -j REJECT
+              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
+              ${pkgs.iptables}/bin/iptables -I OUTPUT ! -d 100.75.148.70/24 ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
+              ${pkgs.iptables}/bin/ip6tables -I OUTPUT ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
 
-            #   # Exclude deluge web gui from firewall rules
-            #   ${pkgs.iptables}/bin/iptables -I OUTPUT -p tcp --dport 8112 \
-            #     -j ACCEPT
+              # Exclude deluge web gui from firewall rules
+              ${pkgs.iptables}/bin/iptables -I OUTPUT -p tcp --dport 8112 \
+                -j ACCEPT
 
-            #   # Exclude KDE-connect ports
-            #   ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p udp \
-            #     --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p tcp \
-            #     --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p udp \
-            #     --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
-            #     --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              # Exclude KDE-connect ports
+              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p udp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p tcp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p udp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 
-            #   ${pkgs.iptables}/bin/iptables -I INPUT -i tailscale0 -p udp \
-            #     -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -I INPUT -i tailscale0 -p tcp \
-            #     -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -A OUTPUT -o tailscale0 -p udp \
-            #     -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -A OUTPUT -o tailscale0 -p tcp \
-            #     -j ACCEPT
-            # '';
+              ${pkgs.iptables}/bin/iptables -I INPUT -i tailscale0 -p udp \
+                -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -I INPUT -i tailscale0 -p tcp \
+                -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -o tailscale0 -p udp \
+                -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -o tailscale0 -p tcp \
+                -j ACCEPT
+            '';
 
-            # postShutdown = ''
-            #   ${pkgs.iptables}/bin/iptables -D OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
-            #     --mark $(wg show wg0 fwmark) -m addrtype ! \
-            #     --dst-type LOCAL -j REJECT
-            #   ${pkgs.iptables}/bin/ip6tables -D OUTPUT ! -o wg0 -m mark ! \
-            #     --mark $(wg show wg0 fwmark) -m addrtype ! \
-            #     --dst-type LOCAL -j REJECT
+            postShutdown = ''
+              ${pkgs.iptables}/bin/iptables -D OUTPUT ! -d 192.168.0.0/16 ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
+              ${pkgs.iptables}/bin/ip6tables -D OUTPUT ! -o wg0 -m mark ! \
+                --mark $(wg show wg0 fwmark) -m addrtype ! \
+                --dst-type LOCAL -j REJECT
 
-            #   ${pkgs.iptables}/bin/iptables -D OUTPUT -p tcp -s --dport 8112 \
-            #     -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -D OUTPUT -p tcp -s --dport 8112 \
+                -j ACCEPT
 
-            #   ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p udp \
-            #     --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p tcp \
-            #     --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p udp \
-            #     --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            #   ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p tcp \
-            #     --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-            # '';
+              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p udp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p tcp \
+                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p udp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p tcp \
+                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+            '';
 
 			# Path to the private key file.
 			privateKeyFile = "/etc/mullvad-vpn.key";

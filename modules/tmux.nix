@@ -3,7 +3,7 @@
 {
   programs.tmux = {
     enable = true;
-    extraTmuxConf = ''
+    extraConfig = ''
 # Set colors
 set -g default-terminal "screen-256color"
 
@@ -19,5 +19,5 @@ bind h select-pane -R
 bind k select-pane -U
 bind j select-pane -D
     '';
-  }
+  };
 }

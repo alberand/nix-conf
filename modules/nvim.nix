@@ -4,8 +4,9 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [ 
-    	nvim-fzf 
     	nvim-treesitter 
+        nvim-fzf
+        telescope-nvim
     	nvim-treesitter-context
 		vim-nix
     	vim-airline 

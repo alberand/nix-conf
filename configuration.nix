@@ -44,9 +44,10 @@ in
 		./hardware-configuration.nix
 		./modules/wireguard.nix
 		./modules/podman-deluge.nix
-		./modules/tailscale.nix
+        # ./modules/tailscale.nix
 		./modules/nginx.nix
 		./modules/grafana.nix
+		./modules/tmux.nix
 	];
 
 	# Use the systemd-boot EFI boot loader.
@@ -92,7 +93,7 @@ in
 
 	systemd = {
 		extraConfig = ''
-			DefaultTimeoutStopSec=30
+			DefaultTimeoutStopSec=30s
 		'';
 	};
 
@@ -126,7 +127,7 @@ in
 	networking.networkmanager.enable = true;
 	networking.networkmanager.dns = "default";
 	networking.defaultGateway = "192.168.0.1";
-    networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    # networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
     networking.interfaces.enp34s0.useDHCP = true;
 	# VPN configuration
 	# Configure the NAT/Firewall
@@ -244,6 +245,7 @@ in
 		startAgent = true;
 		agentTimeout = "24h";
 	};
+
 	programs.gnupg.agent.enable = false;
 	security.rtkit.enable = true;
     services.jellyfin = {

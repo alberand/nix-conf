@@ -52,32 +52,18 @@
 		./modules/zsh.nix
 		./modules/mako.nix
 		./modules/wofi.nix
-		./modules/tmux.nix
 	];
 
-  home.file = {
-    ".ctags" = {
-      source = ./.ctags;
+    home.file = {
+      ".ctags" = { source = ./.ctags; };
+      ".gdbinit" = { source = ./.gdbinit; };
+      ".gitconfig" = { source = ./.gitconfig; };
+      ".gitignore" = { source = ./.gitignore; };
+      ".mbsyncrc" = { source = ./.mbsyncrc; };
+      ".muttrc" = { source = ./.muttrc; };
+      ".shrc.local" = { source = ./.shrc.local; };
+      ".vimrc.local" = { source = ./.vimrc.local; };
     };
-    ".gdbinit" = {
-      source = ./.gdbinit;
-    };
-    ".gitconfig" = {
-      source = ./.gitconfig;
-    };
-    ".gitignore" = {
-      source = ./.gitignore;
-    };
-    ".mbsyncrc" = {
-      source = ./.mbsyncrc;
-    };
-    ".muttrc" = {
-      source = ./.muttrc;
-    };
-    ".shrc.local" = {
-      source = ./.shrc.local;
-    };
-  };
 
 	services.gpg-agent = {
   		enable = true;
