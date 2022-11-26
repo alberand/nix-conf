@@ -195,6 +195,7 @@ in
 		gdb
 		tmux
 		mc
+        fzf
 
 		# utils
 		lshw

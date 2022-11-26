@@ -6,6 +6,7 @@
     plugins = with pkgs.vimPlugins; [ 
     	nvim-treesitter 
         nvim-fzf
+        fzf-vim
         telescope-nvim
     	nvim-treesitter-context
 		vim-nix
