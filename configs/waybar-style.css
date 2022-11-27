@@ -242,3 +242,18 @@ label:focus {
     min-width: 16px;
 }
 
+#custom-vpn {
+    color: white;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#custom-vpn.connected {
+    background-color: #0a275c;
+}
+
+#custom-vpn.disconnected {
+    background-color: #f53c3c;
+}
+

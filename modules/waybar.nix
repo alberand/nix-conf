@@ -27,6 +27,7 @@
 				modules-right = [
 					"pulseaudio"
 					"network"
+                    "custom/vpn"
 					"sway/language"
 					"tray"
 				];
@@ -53,12 +54,32 @@
     				};
 
 				"network" = {
+                        interface = "wg0";
           				format-wifi = "{essid} ({signalStrength}%) ";
           				format-ethernet = "online";
           				format-linked = "{ifname} (No IP)";
           				format-disconnected = "offline";
-					tooltip = false;
+					    tooltip = false;
         			};
+
+                "custom/vpn" = {
+                  interval = 5;
+                  tooltip = false;
+                  format = "{}";
+                  return-type = "json";
+                  exec = ''
+                    template='{"text": "$text", "tooltip": "", "class": "$class", "percentage": 0 }'
+                    country=$(curl https://am.i.mullvad.net/country 2>/dev/null)
+                    if [[ ! $country ]]; then 
+                      template=$(echo $template | sed 's/$text/No VPN/' | \
+                          sed 's/$class/disconnected/'); 
+                    else 
+                      template=$(echo $template | sed 's/$text/VPN/' | \
+                          sed 's/$class/connected/'); 
+                    fi
+                    echo $template;
+                  '';
+                };
 			
 				"pulseaudio" = {
         				"reverse-scrolling" = false;
