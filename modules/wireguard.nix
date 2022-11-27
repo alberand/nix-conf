@@ -59,9 +59,9 @@
               wg set wg0 fwmark 51820
 
               # Accept kdeconnect connections
-              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p udp \
+              ${pkgs.iptables}/bin/iptables -A INPUT -i wg0 -p udp \
                 --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -I INPUT -i wg0 -p tcp \
+              ${pkgs.iptables}/bin/iptables -A INPUT -i wg0 -p tcp \
                 --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
               ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p udp \
                 --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
