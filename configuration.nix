@@ -214,6 +214,14 @@ in
 		#jack.enable = true;
 	};
 
+    users.groups.wireshark.gid = 500;
+    security.wrappers.dumpcap = {
+      source = "${pkgs.wireshark}/bin/dumpcap";
+      permissions = "u+xs,g+x";
+      owner = "root";
+      group = "wireshark";
+    };
+
 	# xdg-desktop-portal works by exposing a series of D-Bus interfaces
 	# known as portals under a well-known name
 	# (org.freedesktop.portal.Desktop) and object path

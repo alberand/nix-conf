@@ -10,7 +10,7 @@
             image = "binhex/arch-delugevpn";
             autoStart = true;
             ports = [ 
-	            "127.0.0.1:8112:8112" 
+	            "8112:8112" 
 	            "8118:8118" 
 	            "58846:58846" 
 	            "58946:58946" 
