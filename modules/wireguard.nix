@@ -70,7 +70,7 @@
 
               # Allow deluge web gui
               ${pkgs.iptables}/bin/iptables -A OUTPUT -o lo -p tcp \
-                --dport 8112 -j ACCEPT
+                 --dport 8112 -m state --state NEW,ESTABLISHED -j ACCEPT
 
               # Allow Tailscale connection
               ${pkgs.iptables}/bin/iptables -A OUTPUT -d 100.75.148.70/32 \
@@ -92,37 +92,10 @@
             '';
 
             postShutdown = ''
-              # Accept kdeconnect connections
-              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p udp \
-                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -D INPUT -i wg0 -p tcp \
-                --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p udp \
-                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -o wg0 -p tcp \
-                --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
-
-              # Allow deluge web gui
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -o lo -p tcp \
-                --dport 8112 -j ACCEPT
-
-              # Allow Tailscale connection
-              ${pkgs.iptables}/bin/iptables -D OUTPUT -d 100.75.148.70/32 \
-                -j ACCEPT
-
-              # Forbid anything else which doesn't go through wireguard VPN on
-              # ipV4 and ipV6
-              ${pkgs.iptables}/bin/iptables -D OUTPUT \
-                ! -d 192.168.0.0/16 \
-                ! -o wg0 \
-                -m mark ! --mark $(wg show wg0 fwmark) \
-                -m addrtype ! --dst-type LOCAL \
-                -j REJECT
-              ${pkgs.iptables}/bin/ip6tables -D OUTPUT \
-                ! -o wg0 \
-                -m mark ! --mark $(wg show wg0 fwmark) \
-                -m addrtype ! --dst-type LOCAL \
-                -j REJECT
+              ${pkgs.iptables}/bin/iptables -F INPUT
+              ${pkgs.iptables}/bin/ip6tables -F INPUT
+              ${pkgs.iptables}/bin/iptables -F OUTPUT
+              ${pkgs.iptables}/bin/ip6tables -F OUTPUT
             '';
 
 			# Path to the private key file.
