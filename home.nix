@@ -42,6 +42,7 @@
 		foot
 		jellyfin
         wireshark
+        vlc
 	];
 
 	imports =

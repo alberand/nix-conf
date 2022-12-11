@@ -174,7 +174,14 @@ in
 	users.users.alberand = {
 		isNormalUser = true;
 		description = "Andrey Albershteyn";
-		extraGroups = [ "wheel" "sudo" "libvirt" "networkmanager" "wireshark" ];
+        extraGroups = [ 
+          "wheel" 
+          "sudo" 
+          "libvirt" 
+          "networkmanager" 
+          "wireshark" 
+          "disk" 
+        ];
 		uid = 1000;
 		shell = pkgs.zsh;
 	};

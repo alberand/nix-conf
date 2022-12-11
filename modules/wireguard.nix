@@ -68,13 +68,19 @@
               ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
                 --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 
+              ${pkgs.iptables}/bin/iptables -I INPUT -p tcp --dport 55686 \
+                -j ACCEPT
               # Allow deluge web gui
               ${pkgs.iptables}/bin/iptables -A OUTPUT -o lo -p tcp \
                  --dport 8112 -m state --state NEW,ESTABLISHED -j ACCEPT
 
               # Allow Tailscale connection
-              ${pkgs.iptables}/bin/iptables -A OUTPUT -d 100.75.148.70/32 \
-                -j ACCEPT
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -d 100.0.0.0/10 \
+                -p udp --dport 53 -j DROP
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -d 100.0.0.0/10 \
+                -p tcp --dport 53 -j DROP
+              ${pkgs.iptables}/bin/iptables -A OUTPUT -d 100.0.0.0/10 \
+                -m state --state NEW,ESTABLISHED -j ACCEPT
 
               # Forbid anything else which doesn't go through wireguard VPN on
               # ipV4 and ipV6
