@@ -208,6 +208,13 @@ in
 		lshw
 		pciutils
         ntfs3g
+
+        # video
+        mesa
+        mesa-demos
+        vulkan-tools
+        radeontop
+        libgdiplus
 	];
 
 	# Enable sound.
