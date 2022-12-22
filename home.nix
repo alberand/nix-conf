@@ -43,6 +43,8 @@
 		jellyfin
         wireshark
         vlc
+        minecraft
+        prismlauncher
 	];
 
 	imports =
