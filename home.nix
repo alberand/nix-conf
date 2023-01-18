@@ -47,6 +47,7 @@
 
         # work
         xfstests
+        b4
 
         # Games
 		steam
