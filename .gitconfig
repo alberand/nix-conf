@@ -2,9 +2,9 @@
     path =  ~/.gitconfig.local
 [core]
     excludesfile = ~/.gitignore
-    editor = vim
+    editor = nvim
     # Make tabs 8 chars wide
-    pager = less -x8
+    pager = less -x8 -FX
 [creo]
     autocrlf = true
 [color]
@@ -28,6 +28,10 @@
     b4 = "!f() { b4 am -t -o - $1 | git am; }; f"
     # Shortcut for backporting in RH (/tmp file is used by hook)
     bp = "!echo $1 > /tmp/.git-backport-$(git rev-parse --abbrev-ref HEAD) && git cherry-pick -x $1"
+    # Add worktree branch
+    wta = "!f() { git worktree add -b $1 ../$1 $2; }; f"
+    # Current branch with upstream
+    cb = "!git rev-parse --abbrev-ref $(git rev-parse --abbrev-ref HEAD)@{u}"
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
