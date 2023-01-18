@@ -167,3 +167,4 @@ mm() {
 }
 
 alias bkr-reboot="bkr system-power --action=reboot"
+alias feh="feh --auto-zoom --scale-down"
