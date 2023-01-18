@@ -12,12 +12,13 @@
 	# You can update Home Manager without changing this value. See
 	# the Home Manager release notes for a list of state version
 	# changes in each release.
-	home.stateVersion = "22.05";
+	home.stateVersion = "22.11";
 
 	# Let Home Manager install and manage itself.
 	programs.home-manager.enable = true;
 
 	home.packages = with pkgs; [ 
+        # System
 		neomutt
 		flameshot
 		firefox
@@ -26,9 +27,6 @@
 		notmuch
 		cmst
 		tdesktop
-		zathura
-		feh
-		steam
 		swaylock
 		wl-clipboard
 		mako
@@ -40,11 +38,26 @@
 		tdesktop
 		alacritty
 		foot
-		jellyfin
-        wireshark
+		zathura
+		feh
+
+        # Media
         vlc
+		jellyfin
+
+        # work
+        xfstests
+
+        # Games
+		steam
         minecraft
         prismlauncher
+
+        # Tools
+        gnumake
+        cmake
+        wireshark
+        gcc
 	];
 
 	imports =
