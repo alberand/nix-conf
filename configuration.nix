@@ -44,7 +44,6 @@ in
 		./hardware-configuration.nix
 		./modules/wireguard.nix
 		./modules/podman-deluge.nix
-        # ./modules/tailscale.nix
 		./modules/nginx.nix
 		./modules/grafana.nix
 		./modules/tmux.nix
@@ -135,9 +134,8 @@ in
     # TODO not sure what it is but Tailscale wants it
     networking.firewall.checkReversePath = "loose";
 	networking.firewall = {
-        trustedInterfaces = [ "tailscale0" ];
-		allowedTCPPorts = [ 53 22 ];
-		allowedUDPPorts = [ 53 51820 config.services.tailscale.port ];
+		allowedTCPPorts = [ 53 22 8384 22000 ];
+		allowedUDPPorts = [ 53 51820 22000 21027];
 	};
 
 	# Set your time zone.
@@ -197,7 +195,6 @@ in
 		git
 		wireguard-tools
 		unzip
-        tailscale
 		zsh
 		gdb
 		tmux
@@ -209,6 +206,9 @@ in
 		pciutils
         ntfs3g
 
+        # work
+        # xfstests
+
         # video
         mesa
         mesa-demos
@@ -217,6 +217,9 @@ in
         libgdiplus
         wine
         wine-wayland
+
+        # Photos
+        # photoprism
 	];
 
 	# Enable sound.
@@ -292,6 +295,44 @@ in
 	};
 
     programs.kdeconnect.enable = true;
+
+    services = {
+        syncthing = {
+          enable = true;
+          dataDir = "/home/alberand/Share";
+          configDir = "/home/alberand/.config/syncthing";
+          # overrides any devices added or deleted through the WebUI
+          overrideDevices = true;
+          # overrides any folders added or deleted through the WebUI
+          overrideFolders = true;
+          user = "alberand";
+          group = "users";
+          devices = {
+            "lonmoun" = {
+              id = "BHZVVJE-BKYAHGR-6ET6T2T-O7SRFSC-AKQEOP3-KYR4JME-ARSWMAB-HQSRBQL";
+            };
+            "nothing-phone" = {
+              id = "74LMGV3-VGBB6J7-CT7LRHY-CANX5WF-UOVYYXG-762UH5M-6HFZKLB-AXNP2QW";
+            };
+          };
+          folders = {
+            "Documents" = {        # Name of folder in Syncthing, also the folder ID
+              path = "/home/alberand/Share/Documents";    # Which folder to add to Syncthing
+              devices = [ "lonmoun" "nothing-phone" ];      # Which devices to share the folder with
+            };
+            "Photos" = {        # Name of folder in Syncthing, also the folder ID
+              path = "/home/alberand/Share/Photos";    # Which folder to add to Syncthing
+              devices = [ "lonmoun" "nothing-phone" ];      # Which devices to share the folder with
+            };
+          };
+        };
+    };
+
+    #services.photoprism = {
+      #enable = true;
+      #port = 8200;
+      #originalsPath = "/home/alberand/Share/Photos";
+    #};
 
 	nix = {
 		settings.auto-optimise-store = true;
