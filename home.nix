@@ -19,38 +19,74 @@
 
 	home.packages = with pkgs; [ 
         # System
-		neomutt
-		flameshot
-		firefox
-		thunderbird
-		isync
-		notmuch
-		cmst
-		tdesktop
-		swaylock
-		wl-clipboard
-		mako
-		kitty
-		waybar
-		font-awesome
-		wofi
-		bemenu
-		tdesktop
-		alacritty
-		foot
-		zathura
-		feh
+	neomutt
+	flameshot
+	firefox
+	cmst
+	tdesktop
+	swaylock
+	wl-clipboard
+	mako
+	kitty
+	waybar
+	font-awesome
+	wofi
+	bemenu
+	tdesktop
+	alacritty
+	foot
+	zathura
+	feh
+
+	# Emails
+	thunderbird
+	isync
+	notmuch
 
         # Media
         vlc
-		jellyfin
+	jellyfin
 
         # work
+        #  linux
         xfstests
         b4
+        getopt
+        flex
+        bison
+        gcc
+        perl
+        gnumake
+        bc
+        pkg-config
+        binutils
+        file
+        gettext
+        libtool
+        automake
+        autoconf
+
+        #   xfstests
+        e2fsprogs
+        attr
+        acl
+        libaio
+        keyutils
+        fsverity-utils
+        ima-evm-utils
+        util-linux
+        stress-ng
+        dbench
+        xfsprogs
+        fio
+        linuxquota
+        nvme-cli
+
+	#   tools
+	cscope
 
         # Games
-		steam
+	steam
         minecraft
         prismlauncher
 
@@ -71,20 +107,20 @@
 		./modules/wofi.nix
 	];
 
-    home.file = {
-      ".ctags" = { source = ./.ctags; };
-      ".gdbinit" = { source = ./.gdbinit; };
-      ".gitconfig" = { source = ./.gitconfig; };
-      ".gitignore" = { source = ./.gitignore; };
-      ".mbsyncrc" = { source = ./.mbsyncrc; };
-      ".muttrc" = { source = ./.muttrc; };
-      ".shrc.local" = { source = ./.shrc.local; };
-      ".vimrc.local" = { source = ./.vimrc.local; };
-    };
+	home.file = {
+		".ctags" = { source = ./.ctags; };
+		".gdbinit" = { source = ./.gdbinit; };
+		".gitconfig" = { source = ./.gitconfig; };
+		".gitignore" = { source = ./.gitignore; };
+		".mbsyncrc" = { source = ./.mbsyncrc; };
+		".muttrc" = { source = ./.muttrc; };
+		".shrc.local" = { source = ./.shrc.local; };
+		".vimrc.local" = { source = ./.vimrc.local; };
+	};
 
 	services.gpg-agent = {
-  		enable = true;
-  		enableSshSupport = true;
-  		defaultCacheTtl = 1800;
+		enable = true;
+		enableSshSupport = true;
+		defaultCacheTtl = 1800;
 	};
 }

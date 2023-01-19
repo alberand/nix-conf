@@ -118,7 +118,8 @@ in
 		inconsolata
 		dina-font
 		proggyfonts
-		(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Inconsolata" ]; })
+		(nerdfonts.override {
+			fonts = ["FiraCode" "DroidSansMono" "Inconsolata" ]; })
 	];
 
 	networking.hostName = "nixxy";
@@ -126,13 +127,13 @@ in
 	networking.networkmanager.enable = true;
 	networking.networkmanager.dns = "default";
 	networking.defaultGateway = "192.168.0.1";
-    # networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
-    networking.interfaces.enp34s0.useDHCP = true;
+	# networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
+	networking.interfaces.enp34s0.useDHCP = true;
 	# VPN configuration
 	# Configure the NAT/Firewall
 	networking.firewall.enable = true;
-    # TODO not sure what it is but Tailscale wants it
-    networking.firewall.checkReversePath = "loose";
+	# TODO not sure what it is but Tailscale wants it
+	networking.firewall.checkReversePath = "loose";
 	networking.firewall = {
 		allowedTCPPorts = [ 53 22 8384 22000 ];
 		allowedUDPPorts = [ 53 51820 22000 21027];
@@ -207,6 +208,8 @@ in
         ntfs3g
 
         # work
+        qemu_full
+        qemu-utils
         # xfstests
 
         # video
@@ -288,9 +291,6 @@ in
 			# Create a `docker` alias for podman, to use it as a
 			# drop-in replacement
 			dockerCompat = true;
-			# Required for containers under podman-compose to be
-			# able to talk to each other.
-			defaultNetwork.dnsname.enable = true;
 		};
 	};
 
