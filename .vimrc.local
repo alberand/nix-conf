@@ -1,3 +1,19 @@
+" Highlight trailing white-spaces even with molokai color scheme
+autocmd ColorScheme * highlight RedundantSpaces ctermbg=red guibg=red
+autocmd ColorScheme * match RedundantSpaces /\s\+$\| \+\ze\t/
+
+" Linux kernel tab style
+set tabstop=8
+set smarttab
+set autoindent
+set noexpandtab
+set shiftwidth=8
+set list
+
+" Spell checking
+set spell
+autocmd BufRead,BufNewFile *.c,*.h setlocal nospell
+
 " fzf configuration
 map <C-p> :FZF<CR>
 map <C-i> :Tags<CR>
