@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 let 
-	 nvim-cscope = pkgs.vimUtils.buildVimPluginFrom2Nix {
+	nvim-cscope = pkgs.vimUtils.buildVimPluginFrom2Nix {
 		name = "nvim-cscope";
 		src = pkgs.fetchFromGitHub {
 			owner = "alberand";
@@ -12,6 +12,7 @@ let
 	};
 in
 {
+	xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
 	programs.neovim = {
 		enable = true;
 		plugins = with pkgs.vimPlugins; [ 
@@ -27,8 +28,21 @@ in
 			vim-plug 
 			zephyr-nvim
 			nvim-cscope
-    ];
-    extraConfig = ''
+
+			# lsp-zero deps
+			nvim-lspconfig
+			nvim-cmp
+			luasnip
+			cmp-nvim-lsp
+			nvim-lspconfig
+			cmp-buffer
+			cmp-path
+			cmp_luasnip
+			cmp-nvim-lua
+			friendly-snippets
+	];
+
+	extraConfig = ''
 " This my configuration for the Vim. Some of the pieces of configurations I took
 " from different places on the internet some of them I write myself.
 "
@@ -70,7 +84,7 @@ map <C-l> <C-W>l
 " imap <C-h> <Left>
 " imap <C-l> <Right>
 
-" Set Splits more natural (vsplit open new window to the right...)
+" Set Splits more natural ()
 set splitbelow
 set splitright
 
@@ -171,7 +185,7 @@ endif
 " Move .viminfo to ~/.vim
 set viminfo+=n~/.vim/viminfo
 if has('nvim')
-	let &viminfo .= '.nvim'
+    let &viminfo .= '.nvim'
 endif
     '';
   };
