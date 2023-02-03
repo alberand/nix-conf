@@ -330,8 +330,15 @@ in
       #originalsPath = "/home/alberand/Share/Photos";
     #};
 
+	programs.ccache.enable = true;
+	programs.ccache.cacheDir = "/var/cache/ccache";
+	programs.ccache.packageNames = [ "kernel-cache" ];
+
 	nix = {
 		settings.auto-optimise-store = true;
+		settings.extra-sandbox-paths = [ 
+			config.programs.ccache.cacheDir 
+		];
 		gc = {
 			automatic = true;
 			dates = "weekly";
