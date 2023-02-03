@@ -304,7 +304,7 @@ in
           # overrides any devices added or deleted through the WebUI
           overrideDevices = true;
           # overrides any folders added or deleted through the WebUI
-          overrideFolders = true;
+          overrideFolders = false;
           user = "alberand";
           group = "users";
           devices = {
@@ -318,10 +318,6 @@ in
           folders = {
             "Documents" = {        # Name of folder in Syncthing, also the folder ID
               path = "/home/alberand/Share/Documents";    # Which folder to add to Syncthing
-              devices = [ "lonmoun" "nothing-phone" ];      # Which devices to share the folder with
-            };
-            "Photos" = {        # Name of folder in Syncthing, also the folder ID
-              path = "/home/alberand/Share/Photos";    # Which folder to add to Syncthing
               devices = [ "lonmoun" "nothing-phone" ];      # Which devices to share the folder with
             };
           };
