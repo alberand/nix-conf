@@ -37,6 +37,11 @@
 	foot
 	zathura
 	feh
+	cargo
+	glibc
+	# clang
+	# clang-tools
+	python3
 
 	# Emails
 	thunderbird
@@ -54,17 +59,24 @@
         getopt
         flex
         bison
-        gcc
+	# Cannot be used together with clang
+	gcc
+	binutils
         perl
         gnumake
         bc
         pkg-config
-        binutils
         file
         gettext
         libtool
         automake
         autoconf
+	libelf
+	elfutils
+	ncurses
+	openssl
+	zlib
+	m4
 
         #   xfstests
         e2fsprogs
@@ -84,6 +96,7 @@
 
 	#   tools
 	cscope
+	patchutils_0_4_2
 
         # Games
 	steam
@@ -95,6 +108,8 @@
         cmake
         wireshark
         gcc
+	lsof
+	rust-analyzer
 	];
 
 	imports =
