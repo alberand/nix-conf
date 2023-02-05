@@ -1,5 +1,7 @@
 vim.cmd [[source /nix/store/yiqb3gmbmcgx2vhghsabcbb3qbcrwi8d-nvim-init-home-manager.vim]]
 
+vim.opt.signcolumn = "yes"
+
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
