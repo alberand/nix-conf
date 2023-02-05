@@ -39,6 +39,8 @@
 	feh
 	cargo
 	glibc
+	gimp
+	inkscape
 	# clang
 	# clang-tools
 	python3
