@@ -2,12 +2,13 @@
 
 {
 	programs.zsh = {
-  		enable = true;
-  		oh-my-zsh = {
-    			enable = true;
-     			plugins = [ "git" ];
-     			theme = "robbyrussell";
-    		};
+		enable = true;
+		oh-my-zsh = {
+			enable = true;
+			plugins = [ "git" ];
+			theme = "robbyrussell";
+		};
+		enableAutosuggestions = true;
 
 		initExtra = ''
 # Uncomment the following line to enable command auto-correction.

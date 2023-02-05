@@ -12,10 +12,10 @@ let
 		executable = true;
 
 		text = ''
-	dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-	systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-	systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
-			'';
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+systemctl --user start pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr
+		'';
 	};
 
 	# currently, there is some friction between sway and gtk:
@@ -25,21 +25,20 @@ let
 	# using the XDG_DATA_DIR environment variable
 	# run at the end of sway config
 	configure-gtk = pkgs.writeTextFile {
-			name = "configure-gtk";
-			destination = "/bin/configure-gtk";
-			executable = true;
-			text = let
-	schema = pkgs.gsettings-desktop-schemas;
-	datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-			in ''
-	export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
-	gnome_schema=org.gnome.desktop.interface
-	gsettings set $gnome_schema gtk-theme 'Dracula'
-	'';
+		name = "configure-gtk";
+		destination = "/bin/configure-gtk";
+		executable = true;
+		text = let
+			schema = pkgs.gsettings-desktop-schemas;
+			datadir = "${schema}/share/gsettings-schemas/${schema.name}";
+		in ''
+export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
+gnome_schema=org.gnome.desktop.interface
+gsettings set $gnome_schema gtk-theme 'Dracula'
+		'';
 	};
 
-in
-{
+in {
 	imports = [
 		./hardware-configuration.nix
 		./modules/wireguard.nix
@@ -50,9 +49,9 @@ in
 	];
 
 	# Use the systemd-boot EFI boot loader.
-	boot.loader.systemd-boot.enable = false;
-	boot.loader.efi.canTouchEfiVariables = true;
 	boot.loader = {
+		systemd-boot.enable = false;
+		efi.canTouchEfiVariables = true;
 		grub = {
 			enable = true;
 			version = 2;
@@ -61,6 +60,7 @@ in
 			device = "nodev";
 		};
 	};
+
 	boot.initrd.luks.devices = {
 		crypted = {
 			device = "/dev/disk/by-uuid/4e62f0f4-6b77-4947-b031-c7d5652a8eb3";
@@ -70,14 +70,16 @@ in
 	boot.initrd.kernelModules = [ "amdgpu" ];
 
 	# Vulkan API/OpenCL API/Modern AMD Graphics Core Next (GCN) GPUs
-	hardware.opengl.enable = true;
-	hardware.opengl.driSupport = true;
-	hardware.opengl.driSupport32Bit = true;
-	hardware.opengl.extraPackages = with pkgs; [
-		rocm-opencl-icd
-		rocm-opencl-runtime
-		amdvlk
-	];
+	hardware.opengl = {
+		enable = true;
+		driSupport = true;
+		driSupport32Bit = true;
+		extraPackages = with pkgs; [
+			rocm-opencl-icd
+			rocm-opencl-runtime
+			amdvlk
+		];
+	};
 
 	environment.sessionVariables = rec {
 		XDG_CACHE_HOME	= "\${HOME}/.cache";
@@ -99,15 +101,15 @@ in
 	security.polkit.enable = true;
 	systemd.user.services.waybar.enable = true;
 	systemd.user.services.swayidle.enable = true;
-    systemd.user.services.kanshi = {
-        description = "kanshi daemon";
-        serviceConfig = {
-            Type = "simple";
-            ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
-            RestartSec = 5;
-            Restart = "always";
-        };
-    };
+	systemd.user.services.kanshi = {
+		description = "kanshi daemon";
+		serviceConfig = {
+			Type = "simple";
+			ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
+			RestartSec = 5;
+			Restart = "always";
+		};
+	};
 
 	fonts.fonts = with pkgs; [
 		noto-fonts
@@ -122,21 +124,23 @@ in
 			fonts = ["FiraCode" "DroidSansMono" "Inconsolata" ]; })
 	];
 
-	networking.hostName = "nixxy";
-	# Pick only one of the below networking options.
-	networking.networkmanager.enable = true;
-	networking.networkmanager.dns = "default";
-	networking.defaultGateway = "192.168.0.1";
-	# networking.nameservers = [ "8.8.8.8" "1.1.1.1" ];
-	networking.interfaces.enp34s0.useDHCP = true;
-	# VPN configuration
-	# Configure the NAT/Firewall
-	networking.firewall.enable = true;
-	# TODO not sure what it is but Tailscale wants it
-	networking.firewall.checkReversePath = "loose";
-	networking.firewall = {
-		allowedTCPPorts = [ 53 22 8384 22000 ];
-		allowedUDPPorts = [ 53 51820 22000 21027];
+	networking = {
+		hostName = "nixxy";
+		# Pick only one of the below networking options.
+		networkmanager.enable = true;
+		networkmanager.dns = "default";
+		defaultGateway = "192.168.0.1";
+		# nameservers = [ "8.8.8.8" "1.1.1.1" ];
+		interfaces.enp34s0.useDHCP = true;
+		# VPN configuration
+		# Configure the NAT/Firewall
+		firewall.enable = true;
+		# TODO not sure what it is but Tailscale wants it
+		firewall.checkReversePath = "loose";
+		firewall = {
+			allowedTCPPorts = [ 53 22 8384 22000 ];
+			allowedUDPPorts = [ 53 51820 22000 21027];
+		};
 	};
 
 	# Set your time zone.
@@ -145,8 +149,8 @@ in
 	# Select internationalisation properties.
 	i18n.defaultLocale = "en_US.UTF-8";
 	console = {
-			font = "Lat2-Terminus16";
-			keyMap = "us";
+		font = "Lat2-Terminus16";
+		keyMap = "us";
 	};
 
 	environment.variables.EDITOR = "nvim";
@@ -155,11 +159,7 @@ in
 	users.groups.media = {
 		name = "media";
 		gid = 8096;
-		members = [
-			"alberand"
-			"jellyfin"
-            "deluge"
-		];
+		members = [ "alberand" "jellyfin" "deluge" ];
 	};
 
 	users.users.deluge = {
@@ -173,16 +173,16 @@ in
 	users.users.alberand = {
 		isNormalUser = true;
 		description = "Andrey Albershteyn";
-        extraGroups = [ 
-          "wheel" 
-          "sudo" 
-          "libvirt" 
-          "networkmanager" 
-          "wireshark" 
-          "disk" 
-        ];
 		uid = 1000;
 		shell = pkgs.zsh;
+		extraGroups = [ 
+			"wheel" 
+			"sudo" 
+			"libvirt" 
+			"networkmanager" 
+			"wireshark" 
+			"disk" 
+		];
 	};
 
 	# List packages installed in system profile. To search, run:
@@ -200,29 +200,29 @@ in
 		gdb
 		tmux
 		mc
-        fzf
+		fzf
 
 		# utils
 		lshw
 		pciutils
-        ntfs3g
+		ntfs3g
+		wine
+		wine-wayland
 
-        # work
-        qemu_full
-        qemu-utils
-        # xfstests
+		# work
+		qemu_full
+		qemu-utils
+		# xfstests
 
-        # video
-        mesa
-        mesa-demos
-        vulkan-tools
-        radeontop
-        libgdiplus
-        wine
-        wine-wayland
+		# video
+		mesa
+		mesa-demos
+		vulkan-tools
+		radeontop
+		libgdiplus
 
-        # Photos
-        # photoprism
+		# Photos
+		# photoprism
 	];
 
 	# Enable sound.
@@ -236,13 +236,14 @@ in
 		#jack.enable = true;
 	};
 
-    users.groups.wireshark.gid = 500;
-    security.wrappers.dumpcap = {
-      source = "${pkgs.wireshark}/bin/dumpcap";
-      permissions = "u+xs,g+x";
-      owner = "root";
-      group = "wireshark";
-    };
+	# Wireshark permissions
+	users.groups.wireshark.gid = 500;
+	security.wrappers.dumpcap = {
+		source = "${pkgs.wireshark}/bin/dumpcap";
+		permissions = "u+xs,g+x";
+		owner = "root";
+		group = "wireshark";
+	};
 
 	# xdg-desktop-portal works by exposing a series of D-Bus interfaces
 	# known as portals under a well-known name
@@ -279,13 +280,13 @@ in
 
 	programs.gnupg.agent.enable = false;
 	security.rtkit.enable = true;
-    services.jellyfin = {
-      enable = true;
-      openFirewall = true;
-    };
+	services.jellyfin = {
+		enable = true;
+		openFirewall = true;
+	};
 
 	virtualisation = {
-        oci-containers.backend = "podman";
+		oci-containers.backend = "podman";
 		podman = {
 			enable = true;
 			# Create a `docker` alias for podman, to use it as a
@@ -294,41 +295,34 @@ in
 		};
 	};
 
-    programs.kdeconnect.enable = true;
+	programs.kdeconnect.enable = true;
 
-    services = {
-        syncthing = {
-          enable = true;
-          dataDir = "/home/alberand/Share";
-          configDir = "/home/alberand/.config/syncthing";
-          # overrides any devices added or deleted through the WebUI
-          overrideDevices = true;
-          # overrides any folders added or deleted through the WebUI
-          overrideFolders = false;
-          user = "alberand";
-          group = "users";
-          devices = {
-            "lonmoun" = {
-              id = "BHZVVJE-BKYAHGR-6ET6T2T-O7SRFSC-AKQEOP3-KYR4JME-ARSWMAB-HQSRBQL";
-            };
-            "nothing-phone" = {
-              id = "74LMGV3-VGBB6J7-CT7LRHY-CANX5WF-UOVYYXG-762UH5M-6HFZKLB-AXNP2QW";
-            };
-          };
-          folders = {
-            "Documents" = {        # Name of folder in Syncthing, also the folder ID
-              path = "/home/alberand/Share/Documents";    # Which folder to add to Syncthing
-              devices = [ "lonmoun" "nothing-phone" ];      # Which devices to share the folder with
-            };
-          };
-        };
-    };
+	services.syncthing = {
+		enable = true;
+		dataDir = "/home/alberand/Share";
+		configDir = "/home/alberand/.config/syncthing";
+		# overrides any devices added or deleted through the WebUI
+		overrideDevices = true;
+		# overrides any folders added or deleted through the WebUI
+		overrideFolders = false;
+		user = "alberand";
+		group = "users";
+		devices = {
+			"lonmoun" = {
+				id = "BHZVVJE-BKYAHGR-6ET6T2T-O7SRFSC-AKQEOP3-KYR4JME-ARSWMAB-HQSRBQL";
+			};
+			"nothing-phone" = {
+				id = "74LMGV3-VGBB6J7-CT7LRHY-CANX5WF-UOVYYXG-762UH5M-6HFZKLB-AXNP2QW";
+			};
+		};
 
-    #services.photoprism = {
-      #enable = true;
-      #port = 8200;
-      #originalsPath = "/home/alberand/Share/Photos";
-    #};
+		folders = {
+			"Documents" = {
+				path = "/home/alberand/Share/Documents";
+				devices = [ "lonmoun" "nothing-phone" ];
+			};
+		};
+	};
 
 	programs.ccache.enable = true;
 	programs.ccache.cacheDir = "/var/cache/ccache";

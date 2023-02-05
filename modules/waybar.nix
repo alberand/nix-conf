@@ -1,6 +1,21 @@
 { pkgs, ... }:
 
-{
+let
+
+	vpn-script = ''
+template='{"text": "$text", "tooltip": "", "class": "$class", "percentage": 0 }'
+country=$(curl https://am.i.mullvad.net/country 2>/dev/null)
+if [[ ! $country ]]; then 
+  template=$(echo $template | sed 's/$text/No VPN/' | \
+      sed 's/$class/disconnected/'); 
+else 
+  template=$(echo $template | sed 's/$text/VPN/' | \
+      sed 's/$class/connected/'); 
+fi
+echo $template;
+	'';
+
+in {
 	programs.waybar = {
 		enable = true;
 		style = "${builtins.readFile ../configs/waybar-style.css}";
@@ -27,7 +42,7 @@
 				modules-right = [
 					"pulseaudio"
 					"network"
-                    "custom/vpn"
+					"custom/vpn"
 					"sway/language"
 					"tray"
 				];
@@ -54,53 +69,42 @@
     				};
 
 				"network" = {
-                        interface = "wg0";
-          				format-wifi = "{essid} ({signalStrength}%) ";
-          				format-ethernet = "online";
-          				format-linked = "{ifname} (No IP)";
-          				format-disconnected = "offline";
-					    tooltip = false;
-        			};
+					interface = "wg0";
+					format-wifi = "{essid} ({signalStrength}%) ";
+					format-ethernet = "online";
+					format-linked = "{ifname} (No IP)";
+					format-disconnected = "offline";
+					tooltip = false;
+				};
 
-                "custom/vpn" = {
-                  interval = 5;
-                  tooltip = false;
-                  format = "{}";
-                  return-type = "json";
-                  exec = ''
-                    template='{"text": "$text", "tooltip": "", "class": "$class", "percentage": 0 }'
-                    country=$(curl https://am.i.mullvad.net/country 2>/dev/null)
-                    if [[ ! $country ]]; then 
-                      template=$(echo $template | sed 's/$text/No VPN/' | \
-                          sed 's/$class/disconnected/'); 
-                    else 
-                      template=$(echo $template | sed 's/$text/VPN/' | \
-                          sed 's/$class/connected/'); 
-                    fi
-                    echo $template;
-                  '';
-                };
+				"custom/vpn" = {
+					interval = 5;
+					tooltip = false;
+					format = "{}";
+					return-type = "json";
+					exec = vpn-script;
+				};
 			
 				"pulseaudio" = {
-        				"reverse-scrolling" = false;
-        				"format" = "{volume}% {icon} {format_source}";
-        				"format-bluetooth" = "{volume}% {icon} {format_source}";
-        				"format-bluetooth-muted" = " {icon} {format_source}";
-        				"format-muted" = "婢 {format_source}";
-        				"format-source" = "{volume}% ";
-        				"format-source-muted" = "";
-        				"format-icons" = {
-            					"default" = ["奄" "奔" "墳"];
-        				};
-        				"on-click" = "pavucontrol";
-        				"min-length" = 13;
-    				};
+					reverse-scrolling = false;
+					format = "{volume}% {icon} {format_source}";
+					format-bluetooth = "{volume}% {icon} {format_source}";
+					format-bluetooth-muted = " {icon} {format_source}";
+					format-muted = "婢 {format_source}";
+					format-source = "{volume}% ";
+					format-source-muted = "";
+					format-icons = {
+						default = ["奄" "奔" "墳"];
+					};
+					on-click = "pavucontrol";
+					min-length = 13;
+				};
 
 				"tray" = {
-    					"icon-size" = 21;
-    					"spacing" = 10;
+					icon-size = 21;
+					spacing = 10;
 				};
-				
+
 				"custom/hello-from-waybar" = {
 					format = "hello {}";
 					max-length = 40;

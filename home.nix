@@ -18,104 +18,103 @@
 	programs.home-manager.enable = true;
 
 	home.packages = with pkgs; [ 
-        # System
-	neomutt
-	flameshot
-	firefox
-	cmst
-	tdesktop
-	swaylock
-	wl-clipboard
-	mako
-	kitty
-	waybar
-	font-awesome
-	wofi
-	bemenu
-	tdesktop
-	alacritty
-	foot
-	zathura
-	feh
-	cargo
-	glibc
-	gimp
-	inkscape
-	# clang
-	# clang-tools
-	python3
+		# System
+		neomutt
+		flameshot
+		firefox
+		cmst
+		tdesktop
+		swaylock
+		wl-clipboard
+		mako
+		kitty
+		waybar
+		font-awesome
+		wofi
+		bemenu
+		tdesktop
+		alacritty
+		foot
+		zathura
+		feh
+		cargo
+		glibc
+		gimp
+		inkscape
+		# clang
+		# clang-tools
+		python3
 
-	# Emails
-	thunderbird
-	isync
-	notmuch
+		# Emails
+		thunderbird
+		isync
+		notmuch
 
-        # Media
-        vlc
-	jellyfin
+		# Media
+		vlc
+		jellyfin
 
-        # work
-        #  linux
-        xfstests
-        b4
-        getopt
-        flex
-        bison
-	# Cannot be used together with clang
-	gcc
-	binutils
-        perl
-        gnumake
-        bc
-        pkg-config
-        file
-        gettext
-        libtool
-        automake
-        autoconf
-	libelf
-	elfutils
-	ncurses
-	openssl
-	zlib
-	m4
+		# work
+		#  linux
+		xfstests
+		b4
+		getopt
+		flex
+		bison
+		# Cannot be used together with clang
+		gcc
+		binutils
+		perl
+		gnumake
+		bc
+		pkg-config
+		file
+		gettext
+		libtool
+		automake
+		autoconf
+		libelf
+		elfutils
+		ncurses
+		openssl
+		zlib
+		m4
 
-        #   xfstests
-        e2fsprogs
-        attr
-        acl
-        libaio
-        keyutils
-        fsverity-utils
-        ima-evm-utils
-        util-linux
-        stress-ng
-        dbench
-        xfsprogs
-        fio
-        linuxquota
-        nvme-cli
+		#   xfstests
+		e2fsprogs
+		attr
+		acl
+		libaio
+		keyutils
+		fsverity-utils
+		ima-evm-utils
+		util-linux
+		stress-ng
+		dbench
+		xfsprogs
+		fio
+		linuxquota
+		nvme-cli
 
-	#   tools
-	cscope
-	patchutils_0_4_2
+		#   tools
+		cscope
+		patchutils_0_4_2
 
-        # Games
-	steam
-        minecraft
-        prismlauncher
+		# Games
+		steam
+		minecraft
+		prismlauncher
 
-        # Tools
-        gnumake
-        cmake
-        wireshark
-        gcc
-	lsof
-	rust-analyzer
+		# Tools
+		gnumake
+		cmake
+		wireshark
+		gcc
+		lsof
+		rust-analyzer
 	];
 
-	imports =
-	[
+	imports = [
 		./modules/nvim.nix
 		./modules/sway.nix
 		./modules/waybar.nix
