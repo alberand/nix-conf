@@ -44,6 +44,7 @@
 		# clang
 		# clang-tools
 		python3
+		python310Packages.pelican
 
 		# Emails
 		thunderbird
