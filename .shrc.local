@@ -48,6 +48,7 @@ alias viml="/usr/bin/vim --servername vimlatex"
 alias cal="cal -ym"
 alias mc='. /usr/lib/mc/mc-wrapper.sh'
 alias ipy='ipython3'
+alias eng="cd ~/Documents/English"
 
 # Blog
 BLOG_ROOT=$HOME/Projects/blog
@@ -168,3 +169,9 @@ mm() {
 
 alias bkr-reboot="bkr system-power --action=reboot"
 alias feh="feh --auto-zoom --scale-down"
+
+# from i8ramin - http://getintothis.com/blog/2012/04/02/git-grep-and-blame-bash-function/
+# runs git grep on a pattern, and then uses git blame to who did it
+ggb() {
+    git grep -n $@ | while IFS=: read i j k; do git blame -L $j,$j $i | cat; done
+}
