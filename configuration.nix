@@ -185,6 +185,18 @@ in {
 		];
 	};
 
+	system.activationScripts = {
+		text = ''
+mkdir -p /export
+		'';
+	};
+
+	# https://github.com/NixOS/nixpkgs/issues/24570
+	fileSystems."/export/alberand" = {
+		device = "/home/alberand/Share/local";
+		options = [ "bind" ];
+	};
+
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget
 	environment.systemPackages = with pkgs; [
@@ -328,6 +340,13 @@ in {
 	programs.ccache.enable = true;
 	programs.ccache.cacheDir = "/var/cache/ccache";
 	programs.ccache.packageNames = [ "kernel-cache" ];
+
+	services.nfs.server.enable = true;
+	# TODO probably need to make it more safe regarding the permission
+	services.nfs.server.exports = ''
+/export          192.168.0.144(rw,fsid=0,no_subtree_check)
+/export/alberand 192.168.0.144(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+	'';
 
 	nix = {
 		settings.auto-optimise-store = true;
