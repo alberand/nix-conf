@@ -1,0 +1,4 @@
+*.o
+Documentation
+tools
+LICENSES

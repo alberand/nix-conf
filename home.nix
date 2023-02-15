@@ -133,6 +133,7 @@
 		".muttrc" = { source = ./.muttrc; };
 		".shrc.local" = { source = ./.shrc.local; };
 		".vimrc.local" = { source = ./.vimrc.local; };
+		".fdignore" = { source = ./configs/.fdignore; };
 	};
 
 	services.gpg-agent = {
