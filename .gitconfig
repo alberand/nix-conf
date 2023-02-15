@@ -12,7 +12,7 @@
 [alias]
     co = checkout
     cm = commit
-    st = status
+    st = "!git lg -n3 ; git status"
     br = branch
     wt = worktree
     sm = send-email
