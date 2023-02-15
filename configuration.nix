@@ -201,6 +201,7 @@ in {
 		tmux
 		mc
 		fzf
+		fd
 
 		# utils
 		lshw

@@ -175,3 +175,6 @@ alias feh="feh --auto-zoom --scale-down"
 ggb() {
     git grep -n $@ | while IFS=: read i j k; do git blame -L $j,$j $i | cat; done
 }
+
+# FZF with fd (make it possible to ignore files)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
