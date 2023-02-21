@@ -1,16 +1,5 @@
 { pkgs, ... }:
 
-let 
-	nvim-cscope = pkgs.vimUtils.buildVimPluginFrom2Nix {
-		name = "nvim-cscope";
-		src = pkgs.fetchFromGitHub {
-			owner = "alberand";
-			repo = "cscope.vim";
-			rev = "100e1f1b7b735fdea8654aa27a0b7d02b5acf7d8";
-			hash = "sha256-I0fs1+qJnkxP3qib2xFRd0pN0GoYMyIAnKommAbp5Kc=";
-		};
-	};
-in
 {
 	xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
 	programs.neovim = {
@@ -27,7 +16,6 @@ in
 			vim-numbertoggle
 			vim-plug 
 			zephyr-nvim
-			nvim-cscope
 
 			# lsp-zero deps
 			nvim-lspconfig
