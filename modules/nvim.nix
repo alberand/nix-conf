@@ -29,5 +29,9 @@
 			cmp-nvim-lua
 			friendly-snippets
 		];
+		extraConfig = ''
+		set noexpandtab
+		'';
+		  
 	};
 }

@@ -20,6 +20,22 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 20
 vim.opt.pastetoggle = "<F5>"
 
+vim.opt.tabstop = 8
+vim.opt.autoindent = true
+-- Doesn't work somehow
+vim.opt.expandtab = false
+--vim.cmd[[ set noexpandtab ]]
+vim.opt.shiftwidth = 8
+vim.opt.softtabstop = 0
+
+vim.opt.listchars = {
+	--eol = '↵',
+	space = ' ',
+	tab = '> '
+}
+vim.opt.list = true
+
+
 -- Search highlight
 vim.opt.hlsearch = true
 vim.opt.incsearch = true

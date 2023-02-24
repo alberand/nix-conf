@@ -1,7 +1,6 @@
 { pkgs, ... }:
 
 let
-
 	vpn-script = ''
 template='{"text": "$text", "tooltip": "", "class": "$class", "percentage": 0 }'
 country=$(curl https://am.i.mullvad.net/country 2>/dev/null)
@@ -15,6 +14,10 @@ fi
 echo $template;
 	'';
 
+	chlang-script = ''
+swaymsg input '16700:8467:Dell_KB216_Wired_Keyboard_Consumer_Control' xkb_switch_layout next
+	'';
+
 in {
 	programs.waybar = {
 		enable = true;
@@ -24,9 +27,6 @@ in {
 				layer = "top";
 				position = "top";
 				height = 25;
-				# output = [
-					# "Virtual-1"
-				# ];
 
 				modules-left = [ 
 					"sway/workspaces" 
@@ -34,9 +34,8 @@ in {
 				];
 
 				modules-center = [
-        				"clock#time"
+					"clock#time"
 					"clock#date"
-					#"custom/hello-from-waybar"
 				];
 
 				modules-right = [
@@ -53,20 +52,20 @@ in {
 
 				"sway/language" = {
 					all-outputs = true;
-					on-click = "swaymsg input '16700:8467:Dell_KB216_Wired_Keyboard_Consumer_Control' xkb_switch_layout next";
+					on-click = chlang-script;
 				};
 
 				"clock#time" = {
 					interval = 1;
-        				format = "{:%H:%M}";
-        				tooltip = false;
-    				};
+					format = "{:%H:%M}";
+					tooltip = false;
+				};
 
-    				"clock#date" = {
-      					interval = 10;
-      					format = "{:%a, %e %b %Y}";
-      					tooltip-format = "{:%a, %e %B %Y}";
-    				};
+				"clock#date" = {
+					interval = 10;
+					format = "{:%a, %e %b %Y}";
+					tooltip-format = "{:%a, %e %B %Y}";
+				};
 
 				"network" = {
 					interface = "wg0";
@@ -84,7 +83,7 @@ in {
 					return-type = "json";
 					exec = vpn-script;
 				};
-			
+
 				"pulseaudio" = {
 					reverse-scrolling = false;
 					format = "{volume}% {icon} {format_source}";
@@ -110,7 +109,7 @@ in {
 					max-length = 40;
 					interval = "once";
 					exec = pkgs.writeShellScript "hello-from-waybar" ''
-						echo "from within waybar"
+					echo "from within waybar"
 					'';
 				};
 			};

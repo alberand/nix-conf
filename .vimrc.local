@@ -4,7 +4,7 @@ autocmd ColorScheme * match RedundantSpaces /\s\+$\| \+\ze\t/
 " C sources
 autocmd BufRead,BufNewFile *.c,*.h setlocal nospell
 " nix configs
-autocmd BufRead,BufNewFile *.nix setlocal nospell
+"autocmd BufRead,BufNewFile *.nix setlocal nospell
 " Turn spelling on for Markdown, text, Latex files
 autocmd BufRead,BufNewFile *.md,*.txt,*.tex setlocal spell
 " Set the textwidth to 68 characters for guilt commit messages
@@ -12,18 +12,3 @@ au BufEnter,BufNewFile,BufRead guilt.msg.*,.gitsendemail.*,git.*,*/.git/* set tw
 " highlight whitespace damage
 autocmd ColorScheme * highlight RedundantSpaces ctermbg=red guibg=red
 autocmd ColorScheme * match RedundantSpaces /\s\+$\| \+\ze\t/
-
-" Tabs to spaces
-" set tabstop=4
-" set shiftwidth=4
-" set softtabstop=4
-" Tabs for makefiles
-" autocmd FileType make   set noexpandtab
-
-" Linux kernel tab style
-set tabstop=8
-set smarttab
-set autoindent
-set noexpandtab
-set shiftwidth=8
-set list
