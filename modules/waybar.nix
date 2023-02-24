@@ -39,6 +39,7 @@ in {
 				];
 
 				modules-right = [
+					"custom/suspend"
 					"pulseaudio"
 					"network"
 					"custom/vpn"
@@ -97,6 +98,12 @@ in {
 					};
 					on-click = "pavucontrol";
 					min-length = 13;
+				};
+
+				"custom/suspend" = {
+					format = "  ";
+					tooltip = false;
+					on-click = "systemctl suspend";
 				};
 
 				"tray" = {

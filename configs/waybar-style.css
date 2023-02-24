@@ -257,3 +257,10 @@ label:focus {
     background-color: #f53c3c;
 }
 
+#custom-suspend {
+    background-color: #ffa9a3;
+    color: black;
+    font-size: 20px;
+    margin: 0 5px;
+}
+
