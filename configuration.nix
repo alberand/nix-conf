@@ -217,6 +217,7 @@ mkdir -p /export
 		fd
 
 		# utils
+                usbutils
 		lshw
 		pciutils
 		ntfs3g
