@@ -46,6 +46,7 @@ in {
 		./modules/nginx.nix
 		./modules/grafana.nix
 		./modules/tmux.nix
+		./modules/qemu-guest-network.nix
 	];
 
 	# Use the systemd-boot EFI boot loader.
