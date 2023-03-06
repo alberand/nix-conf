@@ -64,8 +64,8 @@ in {
 
 				"clock#date" = {
 					interval = 10;
-					format = "{:%a, %e %b %Y}";
-					tooltip-format = "{:%a, %e %B %Y}";
+					format = "{:%e %b %Y, %a}";
+					tooltip-format = "{:%e %B %Y, %a}";
 				};
 
 				"network" = {
