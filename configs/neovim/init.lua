@@ -63,9 +63,9 @@ vim.opt.splitright = true
 
 -- Undo history
 vim.opt.undofile = true
-vim.opt.undodir = "~/.nvim/undo//"
-vim.opt.backupdir = "~/.nvim/backup//"
-vim.opt.directory = "~/.nvim/swp//"
+-- vim.opt.undodir = '~/.nvim/undo//'
+-- vim.opt.backupdir = '~/.nvim/backup//'
+-- vim.opt.directory = '~/.nvim/swp//'
 
 if (os.execute('test -f ~/.vimrc.local') == 0)
 then
