@@ -35,7 +35,6 @@ vim.opt.listchars = {
 }
 vim.opt.list = true
 
-
 -- Search highlight
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
@@ -66,6 +65,11 @@ vim.opt.undofile = true
 -- vim.opt.undodir = '~/.nvim/undo//'
 -- vim.opt.backupdir = '~/.nvim/backup//'
 -- vim.opt.directory = '~/.nvim/swp//'
+
+-- Linux dev related
+-- Whitespace damage
+vim.cmd[[ highlight RedundantSpaces ctermbg=red guibg=red ]]
+vim.cmd[[ match RedundantSpaces /\s\+$\| \+\ze\t/ ]]
 
 if (os.execute('test -f ~/.vimrc.local') == 0)
 then
