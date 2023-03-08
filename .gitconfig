@@ -5,6 +5,8 @@
     editor = nvim
     # Make tabs 8 chars wide
     pager = less -x8 -FX
+[diff]
+    algorithm = patience
 [creo]
     autocrlf = true
 [color]
