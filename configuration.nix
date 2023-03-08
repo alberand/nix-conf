@@ -155,6 +155,7 @@ in {
 	};
 
 	environment.variables.EDITOR = "nvim";
+	documentation.dev.enable = true;
 
 	# Media group to access media storage
 	users.groups.media = {
@@ -223,10 +224,13 @@ mkdir -p /export
 		ntfs3g
 		wine
 		wine-wayland
+		man-pages 
+		man-pages-posix
 
 		# work
 		qemu_full
 		qemu-utils
+                trace-cmd
 		# xfstests
 
 		# video
