@@ -4,3 +4,9 @@ venv
 __pycache__
 *.pyc
 .vscode
+
+# Linux
+tools
+Documentation
+samples
+sound
