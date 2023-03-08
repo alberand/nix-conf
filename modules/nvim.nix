@@ -16,6 +16,7 @@
 			vim-numbertoggle
 			vim-plug 
 			zephyr-nvim
+                        telescope-file-browser-nvim
 
 			# lsp-zero deps
 			nvim-lspconfig

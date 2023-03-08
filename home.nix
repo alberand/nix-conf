@@ -113,6 +113,7 @@
 		gcc
 		lsof
 		rust-analyzer
+                ripgrep
 	];
 
 	imports = [

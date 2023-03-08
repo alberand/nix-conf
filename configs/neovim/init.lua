@@ -143,8 +143,67 @@ local on_attach = function(client, bufnr)
 end
 
 -- fzf configuration
-vim.keymap.set('n', '<C-p>', ':FZF<CR>')
-vim.keymap.set('n', '<C-i>', ':Tags<CR>')
+-- vim.keymap.set('n', '<C-p>', ':FZF<CR>')
+-- vim.keymap.set('n', '<C-i>', ':Tags<CR>')
+--
+-- Telescope configuration
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<C-i>', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+
+local ts_select_dir_for_grep = function(prompt_bufnr)
+  local action_state = require("telescope.actions.state")
+  local fb = require("telescope").extensions.file_browser
+  local live_grep = require("telescope.builtin").live_grep
+  local current_line = action_state.get_current_line()
+
+  fb.file_browser({
+    files = false,
+    depth = false,
+    attach_mappings = function(prompt_bufnr)
+      require("telescope.actions").select_default:replace(function()
+        local entry_path = action_state.get_selected_entry().Path
+        local dir = entry_path:is_dir() and entry_path or entry_path:parent()
+        local relative = dir:make_relative(vim.fn.getcwd())
+        local absolute = dir:absolute()
+
+        live_grep({
+          results_title = relative .. "/",
+          cwd = absolute,
+          default_text = current_line,
+        })
+      end)
+
+      return true
+    end,
+  })
+end
+
+local actions = require("telescope.actions")
+require("telescope").setup({
+    defaults = {
+        mappings = {
+            i = {
+		-- Exit with single <esc>
+                ["<esc>"] = actions.close,
+            },
+        },
+    },
+    pickers = {
+     live_grep = {
+      mappings = {
+        i = {
+          ["<C-f>"] = ts_select_dir_for_grep,
+        },
+        n = {
+          ["<C-f>"] = ts_select_dir_for_grep,
+        },
+      },
+    },
+  }
+})
 
 local lsp_flags = {
   -- This is the default in Nvim 0.7+
