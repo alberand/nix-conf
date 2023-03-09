@@ -224,8 +224,9 @@ mkdir -p /export
 		ntfs3g
 		wine
 		wine-wayland
-		man-pages 
+		man-pages
 		man-pages-posix
+		pinentry
 
 		# work
 		qemu_full
@@ -293,11 +294,16 @@ mkdir -p /export
 	};
 
 	programs.ssh = {
-		startAgent = true;
+		startAgent = false;
 		agentTimeout = "24h";
 	};
 
-	programs.gnupg.agent.enable = false;
+	programs.gnupg.agent = {
+		enable = true;
+		pinentryFlavor = "tty";
+		enableSSHSupport = true;
+	};
+
 	security.rtkit.enable = true;
 	services.jellyfin = {
 		enable = true;
