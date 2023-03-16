@@ -1,4 +1,4 @@
-vim.g.leader = ","
+vim.g.mapleader = ","
 vim.cmd[[ colorscheme zephyr ]]
 vim.g.nobomb = true
 -- Fat cursor
