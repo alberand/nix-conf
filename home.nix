@@ -135,6 +135,7 @@
 		".shrc.local" = { source = ./.shrc.local; };
 		".vimrc.local" = { source = ./.vimrc.local; };
 		".fdignore" = { source = ./configs/.fdignore; };
+		".config/kitty/kitty.conf" = { source = ./configs/.kitty; };
 	};
 
 	services.gpg-agent = {
