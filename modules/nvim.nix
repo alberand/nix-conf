@@ -2,19 +2,20 @@
 
 {
 	xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
+	xdg.configFile."nvim/syntax/nix.vim".source = ../configs/neovim/nix.vim;
 	programs.neovim = {
 		enable = true;
-		plugins = with pkgs.vimPlugins; [ 
-			nvim-treesitter 
+		plugins = with pkgs.vimPlugins; [
+			nvim-treesitter
 			nvim-fzf
 			fzf-vim
 			telescope-nvim
 			nvim-treesitter-context
-			vim-nix
-			vim-airline 
+                        #vim-nix
+			vim-airline
 			vim-airline-themes
 			vim-numbertoggle
-			vim-plug 
+			vim-plug
 			zephyr-nvim
                         telescope-file-browser-nvim
 
@@ -33,6 +34,5 @@
 		extraConfig = ''
 		set noexpandtab
 		'';
-		  
 	};
 }
