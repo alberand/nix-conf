@@ -13,3 +13,7 @@ sound
 
 # My common files
 todo
+# vmtest configs
+.vmtest
+# xfstests config for vmtest
+xfstests-config
