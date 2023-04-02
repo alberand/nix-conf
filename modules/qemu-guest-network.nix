@@ -8,17 +8,11 @@
 		virtualOwner = "alberand";
 	};
 
-	networking.bridges = {
-		br0 = {
-			interfaces = [ "enp32s0" ];
-		};
-	};
-
-	networking.interfaces.br0 = {
+	networking.interfaces.tap0 = {
 		ipv4 = {
 			addresses = [{
-				address = "11.11.11.11";
-				prefixLength = 32;
+				address = "192.168.10.1";
+				prefixLength = 16;
 			}];
 		};
 	};

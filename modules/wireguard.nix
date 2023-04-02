@@ -73,6 +73,9 @@ ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
 ${pkgs.iptables}/bin/iptables -I INPUT -p tcp --dport 55686 \
   -j ACCEPT
 
+${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 192.168.10.0/24 \
+	-j MASQUERADE
+
 # Allow deluge web gui
 ${pkgs.iptables}/bin/iptables -A OUTPUT -o lo -p tcp \
    --dport 8112 -m state --state NEW,ESTABLISHED -j ACCEPT
