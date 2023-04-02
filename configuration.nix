@@ -110,6 +110,11 @@
 	environment.variables.EDITOR = "nvim";
 	documentation.dev.enable = true;
 
+	services.udev.extraRules = ''
+# 32G flash drive
+SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"
+	'';
+
 	# Media group to access media storage
 	users.groups.media = {
 		name = "media";
