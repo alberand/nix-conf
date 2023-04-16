@@ -4,12 +4,12 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-	imports = [ 
+	imports = [
 		(modulesPath + "/installer/scan/not-detected.nix")
 	];
 
 	boot.initrd.availableKernelModules = [
-		"nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" 
+		"nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"
 	];
 	boot.initrd.kernelModules = [ "dm-snapshot" ];
 	boot.kernelModules = [ "kvm-amd" ];
@@ -34,6 +34,12 @@
 	fileSystems."/media" = {
 		device = "/dev/disk/by-uuid/ffb3f478-5faa-439e-a488-eb1155957f59";
 		label = "storage";
+		fsType = "xfs";
+	};
+
+	fileSystems."/media/bmedia" = {
+		device = "/dev/disk/by-uuid/abf485b7-69f9-461e-beae-e68f0f26e1ff";
+		label = "bstorage";
 		fsType = "xfs";
 	};
 
