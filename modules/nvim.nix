@@ -2,7 +2,6 @@
 
 {
 	xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
-	xdg.configFile."nvim/syntax/nix.vim".source = ../configs/neovim/nix.vim;
 	programs.neovim = {
 		enable = true;
 		plugins = with pkgs.vimPlugins; [
@@ -11,7 +10,7 @@
 			fzf-vim
 			telescope-nvim
 			nvim-treesitter-context
-                        #vim-nix
+                        vim-nix
 			vim-airline
 			vim-airline-themes
 			vim-numbertoggle
