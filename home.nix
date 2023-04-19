@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 	home.username = "alberand";
@@ -17,13 +17,12 @@
 	# Let Home Manager install and manage itself.
 	programs.home-manager.enable = true;
 
-	home.packages = with pkgs; [ 
+	home.packages = with pkgs; [
 		# System
 		neomutt
 		flameshot
 		firefox
 		cmst
-		tdesktop
 		swaylock
 		wl-clipboard
 		mako
@@ -45,6 +44,10 @@
 		# clang-tools
 		python3
 		python310Packages.pelican
+
+		# Communication
+		(discord.override { nss = pkgs.nss_latest; })
+		tdesktop
 
 		# Emails
 		thunderbird
@@ -142,5 +145,9 @@
 		enable = true;
 		enableSshSupport = true;
 		defaultCacheTtl = 1800;
+	};
+
+	services.flameshot = {
+		enable = true;
 	};
 }
