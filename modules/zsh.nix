@@ -1,17 +1,17 @@
 { pkgs, ... }:
 
 {
-	programs.zsh = {
-		enable = true;
-		oh-my-zsh = {
-			enable = true;
-			plugins = [ "git" ];
-			theme = "robbyrussell";
-		};
-		enableAutosuggestions = true;
-		plugins = [ ];
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" ];
+      theme = "robbyrussell";
+    };
+    enableAutosuggestions = true;
+    plugins = [ ];
 
-		initExtra = ''
+    initExtra = ''
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
 
@@ -38,6 +38,6 @@ fi
 if [[ "$(tty)" == /dev/tty1 ]]; then
     exec sway
 fi
-		'';
-  	};
+    '';
+  };
 }
