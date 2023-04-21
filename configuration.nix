@@ -329,10 +329,15 @@
   '';
 
   nix = {
-    settings.auto-optimise-store = true;
-    settings.extra-sandbox-paths = [
-      config.programs.ccache.cacheDir
-    ];
+    settings = {
+      # needed by direnv so shell don't get garbage collected
+      keep-outputs = true;
+      keep-derivations = true;
+      auto-optimise-store = true;
+      extra-sandbox-paths = [
+        config.programs.ccache.cacheDir
+      ];
+    };
     gc = {
       automatic = true;
       dates = "weekly";
