@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, unstable, home-manager }@inputs:
+  outputs = { self, nixpkgs, unstable, home-manager }:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -18,7 +18,7 @@
       config.allowUnfree = true;
       overlays = [(final: prev: {
         # Example of bringing in an unstable package:
-        photoprism = inputs.unstable.legacyPackages.${prev.system}.photoprism;
+        photoprism = unstable.legacyPackages.${prev.system}.photoprism;
       })];
     };
 
