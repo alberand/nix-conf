@@ -129,6 +129,11 @@
     uid = 1002;
   };
 
+  users.users.jellyfin = {
+    description = "JellyFin";
+    extraGroups = [ "media" "render" "video" ];
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alberand = {
     isNormalUser = true;
@@ -185,6 +190,7 @@
     man-pages
     man-pages-posix
     pinentry
+    libva-utils
 
     # work
     qemu_full
@@ -196,8 +202,13 @@
     mesa
     mesa-demos
     vulkan-tools
+    vulkan-headers
+    vulkan-loader
     radeontop
     libgdiplus
+    jellyfin-ffmpeg
+    rocm-opencl-runtime
+    libva
   ];
 
   security.polkit.enable = true;
