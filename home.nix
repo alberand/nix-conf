@@ -142,7 +142,7 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    defaultCacheTtl = 1800;
+    defaultCacheTtl = 86400;
   };
 
   services.flameshot = {
