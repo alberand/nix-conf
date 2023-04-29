@@ -233,3 +233,6 @@ require('lspconfig')['clangd'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
+
+-- Rainbow Parentheses
+vim.cmd [[ au VimEnter * RainbowParenthesesToggleAll ]]

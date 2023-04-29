@@ -15,6 +15,7 @@
       vim-plug
       zephyr-nvim
       telescope-file-browser-nvim
+      rainbow_parentheses-vim
 
       nvim-lspconfig
       nvim-cmp
