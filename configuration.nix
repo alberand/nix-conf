@@ -7,6 +7,7 @@
     ./modules/grafana.nix
     ./modules/tmux.nix
     ./modules/qemu-guest-network.nix
+    ./modules/home-assistant.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
