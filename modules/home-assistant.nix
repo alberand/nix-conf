@@ -4,6 +4,9 @@
     extraComponents = [
       "met"
       "radio_browser"
+      "backup"
+      "jellyfin"
+      "google_assistant"
     ];
     config = {
       # Includes dependencies for a basic setup
