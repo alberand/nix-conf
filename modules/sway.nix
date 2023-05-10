@@ -1,5 +1,7 @@
 { pkgs, ... }: {
-  wayland.windowManager.sway = {
+  wayland.windowManager.sway = let
+      mod = "Mod1";
+  in {
     enable = true;
     wrapperFeatures.gtk = true;
     config = rec {
@@ -57,7 +59,6 @@
         ];
 
         keybindings = let
-          mod = "Mod1";
           left = "h";
           down = "j";
           up = "k";
@@ -146,6 +147,14 @@
             export GDK_DPI_SCALE=1
             export MOZ_ENABLE_WAYLAND=1
             export _JAVA_AWT_WM_NONREPARENTING=1
+          '';
+
+          extraConfig = ''
+          mode "passthrough" {
+            bindsym ${mod}+Alt_L mode "default"
+          }
+
+          bindsym ${mod}+Alt_L mode "passthrough"
           '';
   };
 }
