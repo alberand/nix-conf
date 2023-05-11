@@ -15,6 +15,7 @@
       vim-plug
       zephyr-nvim
       telescope-file-browser-nvim
+      harpoon
 
       nvim-lspconfig
       nvim-cmp
