@@ -336,8 +336,8 @@
   services.nfs.server.enable = true;
   # TODO probably need to make it more safe regarding the permission
   services.nfs.server.exports = ''
-    /export          192.168.0.144(rw,fsid=0,no_subtree_check)
-    /export/alberand 192.168.0.144(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+    /export          192.168.0.101(rw,fsid=0,no_subtree_check)
+    /export/alberand 192.168.0.101(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
   '';
 
   nix = {
