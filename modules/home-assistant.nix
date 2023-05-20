@@ -7,6 +7,7 @@
       "backup"
       "jellyfin"
       "google_assistant"
+      "openweathermap"
     ];
     config = {
       # Includes dependencies for a basic setup
