@@ -113,6 +113,17 @@ vim.keymap.set('v', '<Space>', 'za')
 vim.keymap.set('n', '<F5>', ':set invpaste paste?<Enter>')
 vim.keymap.set('i', '<F5>', '<C-O><F5>')
 
+-- Filetypes
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "html",
+	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "javascript",
+	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
+})
+
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
