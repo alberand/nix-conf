@@ -38,6 +38,7 @@
     glibc
     gimp
     inkscape
+    radeontop
     # clang
     # clang-tools
     python3
