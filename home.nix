@@ -118,6 +118,7 @@
     lsof
     rust-analyzer
     ripgrep
+    kicad
   ];
 
   imports = [
