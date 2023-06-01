@@ -43,6 +43,8 @@
     # clang-tools
     python3
     python310Packages.pelican
+    # For example, helps kitty to open links in browser
+    xdg-utils
 
     # Communication
     (discord.override { nss = pkgs.nss_latest; })
