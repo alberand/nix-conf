@@ -16,7 +16,6 @@
     efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
-      version = 2;
       efiSupport = true;
       enableCryptodisk = true;
       device = "nodev";
@@ -151,6 +150,8 @@
     ];
   };
 
+  programs.zsh.enable = true;
+
   system.activationScripts = {
     text = ''
       mkdir -p /export
@@ -270,7 +271,9 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    forwardX11 = true;
+    settings = {
+      X11Forwarding = true;
+    };
   };
 
   programs.ssh = {
@@ -375,5 +378,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 }
