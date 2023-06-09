@@ -119,6 +119,7 @@
     rust-analyzer
     ripgrep
     kicad
+    freecad
   ];
 
   imports = [
