@@ -119,7 +119,7 @@
   users.groups.media = {
     name = "media";
     gid = 8096;
-    members = [ "alberand" "jellyfin" "deluge" ];
+    members = [ "alberand" "jellyfin" "deluge" "photoprism" ];
   };
 
   users.users.deluge = {
@@ -330,6 +330,17 @@
         devices = [ "lonmoun" "nothing-phone" ];
       };
     };
+  };
+
+  services.photoprism = {
+    enable = true;
+    port = 8113;
+    originalsPath = "/media/photos";
+    settings = {
+      PHOTOPRISM_ADMIN_USER = "alberand";
+      PHOTOPRISM_ADMIN_PASSWORD = "123456";
+    };
+
   };
 
   programs.ccache.enable = true;
