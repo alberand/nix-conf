@@ -27,7 +27,7 @@
     # Skip cover letter emails
     am = am --empty=keep --allow-empty
     # Combine b4 and am into one git b4 command
-    b4 = "!f() { b4 am -t -o - $1 | git am; }; f"
+    b4 = "!f() { b4 am -t -o - $1 | git am -3; }; f"
     # Shortcut for backporting in RH (/tmp file is used by hook)
     bp = "!echo $1 > /tmp/.git-backport-$(git rev-parse --abbrev-ref HEAD) && git cherry-pick -x $1"
     # Add worktree branch
