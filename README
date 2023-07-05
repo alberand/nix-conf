@@ -1,4 +1,13 @@
 
+Build & Switch to this system.
+sudo nixos-rebuild switch -v --flake ".#nixxy"
+
+The things which aren't yet reproducible:
+- Firefox configuration
+- Deluge configuration
+- Thunderbird accounts and configuration
+- Podman images registry
+
 secretes
 - /etc/mullvad-vpn.key & /mullvad-vpn.conf
 - ~/.deluge/wireguard/wg0.conf
