@@ -68,8 +68,8 @@
     inconsolata
     dina-font
     proggyfonts
-    (nerdfonts.override {
-      fonts = ["FiraCode" "DroidSansMono" "Inconsolata" ]; })
+    nerdfonts
+    font-awesome
   ];
 
   networking = {
