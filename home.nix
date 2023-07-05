@@ -39,6 +39,7 @@
     gimp
     inkscape
     radeontop
+    ripgrep
     # clang
     # clang-tools
     python3
