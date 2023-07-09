@@ -8,6 +8,7 @@
     ./modules/tmux.nix
     ./modules/qemu-guest-network.nix
     ./modules/home-assistant.nix
+    ./modules/mysql.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
