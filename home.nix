@@ -121,6 +121,7 @@
     ripgrep
     kicad
     freecad
+    nmap
   ];
 
   imports = [
