@@ -68,11 +68,11 @@ ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
 --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Jellyfin port forwarding for Mullvad VPN
-${pkgs.iptables}/bin/iptables -I INPUT -p tcp --dport 55686 \
+${pkgs.iptables}/bin/iptables -A INPUT -p tcp --dport 55686 \
 -j ACCEPT
 
-${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 192.168.10.0/24 \
--j MASQUERADE
+${pkgs.iptables}/bin/iptables -A INPUT -s 192.168.0.0/24 -j ACCEPT
+${pkgs.iptables}/bin/iptables -A INPUT -s 10.233.1.0/24 -j ACCEPT
 
 # Allow deluge web gui
 ${pkgs.iptables}/bin/iptables -A OUTPUT -o lo -p tcp \
