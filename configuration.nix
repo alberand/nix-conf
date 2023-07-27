@@ -355,6 +355,10 @@
     /export/alberand 192.168.0.101(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
   '';
 
+  services.journald.extraConfig = ''
+    SystemMaxUse=20M
+  '';
+
   nix = {
     settings = {
       # needed by direnv so shell don't get garbage collected
