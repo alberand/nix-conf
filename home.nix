@@ -153,7 +153,7 @@
   };
 
   services.flameshot = {
-    enable = true;
+    enable = false;
   };
 
   programs.direnv.enable = true;
