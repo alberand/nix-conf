@@ -84,21 +84,22 @@ in {
 
         "pulseaudio" = {
           reverse-scrolling = false;
-          format = "{volume}% {icon} {format_source}";
+          format = "{volume}% {icon}  {format_source}";
           format-bluetooth = "{volume}% {icon} {format_source}";
-          format-bluetooth-muted = " {icon} {format_source}";
-          format-muted = "婢 {format_source}";
+          format-bluetooth-muted = " {icon} {format_source}";
+          format-muted = " {format_source}";
           format-source = "{volume}% ";
           format-source-muted = "";
           format-icons = {
-            default = ["奄" "奔" "墳"];
+            default = ["" "" ""];
           };
           on-click = "pavucontrol";
           min-length = 13;
         };
 
         "custom/suspend" = {
-          format = "  ";
+          format = "";
+          min-length = 2;
           tooltip = false;
           on-click = "systemctl suspend";
         };

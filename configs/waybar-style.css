@@ -86,6 +86,11 @@ window#waybar.chromium {
     color: #ffffff;
 }
 
+#custom-suspend {
+    padding: 0 3px 0 0;
+    font-size: 12pt;
+}
+
 #window,
 #workspaces {
     margin: 0 4px;
