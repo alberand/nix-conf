@@ -68,6 +68,7 @@
           "${mod}+Return" = "exec ${terminal}";
           "${mod}+Shift+q" = "kill";
           "${mod}+p" = "exec ${menu}";
+          "Print" = "exec flameshot gui";
 
           "${mod}+${left}" = "focus left";
           "${mod}+${down}" = "focus down";
