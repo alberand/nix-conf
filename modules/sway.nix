@@ -10,6 +10,8 @@
       menu = "wofi --show run";
       modifier = "Mod1";
 
+      window.titlebar = false;
+
       fonts = {
         names = [ "Fira Code" ];
         size = 9.0;
