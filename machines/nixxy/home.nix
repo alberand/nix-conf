@@ -4,7 +4,7 @@
   ];
 
   home.username = "alberand";
-  home.homeDirectory = "/home/alberand";
+  #home.homeDirectory = "/home/alberand";
 
   home.packages = with pkgs; [
     cargo

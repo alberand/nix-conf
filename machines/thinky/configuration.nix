@@ -6,15 +6,21 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot.enable = false;
-    efi.canTouchEfiVariables = true;
-    grub = {
-      enable = true;
-      efiSupport = true;
-      enableCryptodisk = true;
-      device = "nodev";
-    };
+  #boot.loader = {
+  #  systemd-boot.enable = false;
+  #  efi.canTouchEfiVariables = true;
+  #  grub = {
+  #    enable = true;
+  #    efiSupport = true;
+  #    enableCryptodisk = true;
+  #    device = "nodev";
+  #  };
+  #};
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   #boot.initrd.luks.devices = {
@@ -24,31 +30,32 @@
   #  };
   #};
 
-  networking = {
-    hostName = "thinky";
-    # Pick only one of the below networking options.
-    networkmanager.enable = true;
-    networkmanager.dns = "default";
-    defaultGateway = "192.168.0.1";
-    # nameservers = [ "8.8.8.8" "1.1.1.1" ];
-    interfaces.enp34s0.useDHCP = true;
-    # VPN configuration
-    # Configure the NAT/Firewall
-    firewall.enable = true;
-    # TODO not sure what it is but Tailscale wants it
-    firewall.checkReversePath = "loose";
-    firewall = {
-      allowedTCPPorts = [ 53 22 ];
-      allowedUDPPorts = [ 53 ];
-    };
-  };
+  #networking = {
+  #  hostName = "thinky";
+  #  # Pick only one of the below networking options.
+  #  networkmanager.enable = true;
+  #  networkmanager.dns = "default";
+  #  defaultGateway = "192.168.0.1";
+  #  # nameservers = [ "8.8.8.8" "1.1.1.1" ];
+  #  interfaces.enp34s0.useDHCP = true;
+  #  # VPN configuration
+  #  # Configure the NAT/Firewall
+  #  firewall.enable = true;
+  #  # TODO not sure what it is but Tailscale wants it
+  #  firewall.checkReversePath = "loose";
+  #  firewall = {
+  #    allowedTCPPorts = [ 53 22 ];
+  #    allowedUDPPorts = [ 53 ];
+  #  };
+  #};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.aalbersh = {
+  users.users.alberand = {
     isNormalUser = true;
     description = "Andrey Albershteyn";
     uid = 1000;
     shell = pkgs.zsh;
+    group = "users";
     extraGroups = [
       "wheel"
       "sudo"
@@ -61,6 +68,14 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    wayland
+    xdg-utils # for opening default programs when clicking links
+    swaylock
+    swayidle
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    bemenu # wayland clone of dmenu
+    mako # notification system developed by swaywm maintainer
+    wdisplays # tool to configure displays
   ];
 
   # Enable sound.
