@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+
   wayland.windowManager.sway = let
       mod = "Mod1";
   in {

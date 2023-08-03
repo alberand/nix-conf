@@ -30,7 +30,21 @@
         inherit system;
 
         modules = [
-          ./configuration.nix
+          ./machines/nixxy/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.alberand = import ./home.nix;
+          }
+        ];
+      };
+      thinky = lib.nixosSystem {
+        inherit pkgs;
+        inherit system;
+
+        modules = [
+          ./machines/thinky/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

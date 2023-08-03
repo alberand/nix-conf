@@ -1,14 +1,15 @@
 { config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    ./modules/wireguard.nix
-    ./modules/podman-deluge.nix
-    ./modules/nginx.nix
-    ./modules/grafana.nix
-    ./modules/tmux.nix
-    ./modules/qemu-guest-network.nix
-    ./modules/home-assistant.nix
-    ./modules/mysql.nix
+    ../../modules/common.nix
+    ../../modules/wireguard.nix
+    ../../modules/podman-deluge.nix
+    ../../modules/nginx.nix
+    ../../modules/grafana.nix
+    ../../modules/tmux.nix
+    ../../modules/qemu-guest-network.nix
+    ../../modules/home-assistant.nix
+    ../../modules/mysql.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -43,36 +44,6 @@
     ];
   };
 
-  environment.sessionVariables = rec {
-    XDG_CACHE_HOME	= "\${HOME}/.cache";
-    XDG_CONFIG_HOME = "\${HOME}/.config";
-    XDG_BIN_HOME = "\${HOME}/.local/bin";
-    XDG_DATA_HOME = "\${HOME}/.local/share";
-
-    PATH = [
-      "\${XDG_BIN_HOME}"
-    ];
-  };
-
-  systemd = {
-    extraConfig = ''
-      DefaultTimeoutStopSec=10s
-    '';
-  };
-
-  fonts.fonts = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    fira-code
-    fira-code-symbols
-    inconsolata
-    dina-font
-    proggyfonts
-    nerdfonts
-    font-awesome
-  ];
-
   networking = {
     hostName = "nixxy";
     # Pick only one of the below networking options.
@@ -92,27 +63,8 @@
     };
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Prague";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocaleSettings = {
-    LANGUAGE = "en_US.UTF-8";
-    LC_ALL = "en_US.UTF-8";
-    LANG = "en_US.UTF-8";
-    LC_TYPE = "en_US.UTF-8";
-  };
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = "us";
-  };
-
-  environment.variables.EDITOR = "nvim";
-  documentation.dev.enable = true;
-
-  services.udev.extraRules = ''
     # ash drive
+  services.udev.extraRules = ''
     SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"
   '';
 
@@ -151,8 +103,6 @@
     ];
   };
 
-  programs.zsh.enable = true;
-
   system.activationScripts = {
     text = ''
       mkdir -p /export
@@ -168,39 +118,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    htop
-    vim
-    neovim
-    wget
-    kitty
-    git
-    wireguard-tools
-    unzip
-    zsh
-    gdb
-    tmux
-    mc
-    fzf
-    fd
-
-    # utils
-    usbutils
-    lshw
-    pciutils
-    ntfs3g
     wine
     wine-wayland
-    man-pages
-    man-pages-posix
-    pinentry
-    libva-utils
-
-    # work
-    qemu_full
-    qemu-utils
-    trace-cmd
-    # xfstests
-
     # video
     mesa
     mesa-demos
@@ -212,22 +131,8 @@
     jellyfin-ffmpeg
     rocm-opencl-runtime
     libva
+    radeontop
   ];
-
-  security.polkit.enable = true;
-  systemd.user.services.waybar.enable = true;
-  systemd.user.services.swayidle.enable = true;
-
-  # Dynamic display configuration
-  systemd.user.services.kanshi = {
-    description = "kanshi daemon";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
-      RestartSec = 5;
-      Restart = "always";
-    };
-  };
 
   # Enable sound.
   sound.enable = true;
@@ -268,25 +173,6 @@
           multiuser on
           acladd normal_user
   '';
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings = {
-      X11Forwarding = true;
-    };
-  };
-
-  programs.ssh = {
-    startAgent = false;
-    agentTimeout = "24h";
-  };
-
-  programs.gnupg.agent = {
-    enable = true;
-    pinentryFlavor = "tty";
-    enableSSHSupport = true;
-  };
 
   security.rtkit.enable = true;
   services.jellyfin = {
@@ -344,6 +230,17 @@
 
   };
 
+  # Dynamic display configuration
+  systemd.user.services.kanshi = {
+    description = "kanshi daemon";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
+      RestartSec = 5;
+      Restart = "always";
+    };
+  };
+
   programs.ccache.enable = true;
   programs.ccache.cacheDir = "/var/cache/ccache";
   programs.ccache.packageNames = [ "kernel-cache" ];
@@ -354,39 +251,6 @@
     /export          192.168.0.101(rw,fsid=0,no_subtree_check)
     /export/alberand 192.168.0.101(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
   '';
-
-  services.journald.extraConfig = ''
-    SystemMaxUse=20M
-  '';
-
-  nix = {
-    settings = {
-      # needed by direnv so shell don't get garbage collected
-      keep-outputs = true;
-      keep-derivations = true;
-      auto-optimise-store = true;
-      extra-sandbox-paths = [
-        config.programs.ccache.cacheDir
-      ];
-    };
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-    package = pkgs.nixVersions.unstable;
-    extraOptions = ''
-                  experimental-features = nix-command flakes
-                  keep-outputs = true
-                  keep-derivations = true
-    '';
-  };
-
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = false;
-    channel = https://nixos.org/channels/nixos-unstable;
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

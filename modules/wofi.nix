@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+  programs.wofi.enable = true;
   xdg.configFile."wofi/config".text = ''
       width=800
   '';
