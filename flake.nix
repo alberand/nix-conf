@@ -35,7 +35,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.alberand = import ./home.nix;
+            home-manager.users.alberand = import ./machines/nixxy/home.nix;
           }
         ];
       };

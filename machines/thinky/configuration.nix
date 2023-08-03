@@ -2,6 +2,7 @@
   imports = [
     ../../modules/common.nix
     ../../modules/tmux.nix
+    ../../modules/work-vpn.nix
   ];
 
   # Use the systemd-boot EFI boot loader.

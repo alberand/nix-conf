@@ -1,0 +1,61 @@
+# REQUIRED MANUAL ACTION:
+#
+# You need to create "./openvpn" directory and put there:
+# - client.up - shell script called by OpenVPN while establishing connection
+# - client.down - shell script called by OpenVPN while closing connection
+# - ovpn-ams2-tcp.conf - OpenVPN configuration files. Need modifications!!!
+#
+# All those files are private! You can obtain them from help portal.
+#
+# Modification to OpenVPN configuration file:
+# 1. Replace
+#     "ca /etc/pki/tls/certs/2015-RH-IT-Root-CA.pem"
+#    with
+#     "ca /etc/pki/tls/certs/ca-bundle.crt"
+# 2. Replace:
+#     plugin /usr/lib64/openvpn/plugins/openvpn-plugin-down-root.so /etc/openvpn/client.down
+#    with:
+#     plugin openvpn-plugin-down-root.so /etc/openvpn/client.down
+# This can be any close to you server. I'm here using Amsterdam. If you use
+# different .conf file change it below in client configuration
+# services.openvpn.servers.vpn.config.
+#
+# See logs:
+#   journalctl -u openvpn-vpn.service | tail -n20
+# Start (ask for user and password):
+#   systemctl start openvpn-vpn.service
+# Check that everything works:
+#   curl <beaker url>
+{config, pkgs, ...}: {
+  users.users = {
+    openvpn = {
+      name = "openvpn";
+      group = "openvpn";
+      isNormalUser = true;
+      uid = 1100;
+    };
+  };
+
+  users.groups.openvpn = {
+    name = "openvpn";
+    members = ["openvpn"];
+    gid = 1100;
+  };
+
+  security.pki.certificates = let
+    certfile = builtins.readFile ../2015-RH-IT-Root-CA.pem;
+  in [
+    certfile
+  ];
+
+  environment.etc = {
+    "openvpn".source = ../openvpn;
+  };
+
+  # Configure our OpenVPN client
+  services.openvpn.servers = {
+    vpn = {
+      config = ''config /etc/openvpn/ovpn-ams2-tcp.conf'';
+    };
+  };
+}

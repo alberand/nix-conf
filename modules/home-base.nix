@@ -1,11 +1,11 @@
 { config, pkgs, ... }: {
   imports = [
-    ./modules/nvim.nix
-    ./modules/zsh.nix
-    ./modules/waybar.nix
-    ./modules/wofi.nix
-    ./modules/mako.nix
-    ./modules/sway.nix
+    ./nvim.nix
+    ./zsh.nix
+    ./waybar.nix
+    ./wofi.nix
+    ./mako.nix
+    ./sway.nix
   ];
 
   home.packages = with pkgs; [
@@ -81,16 +81,16 @@
   ];
 
   home.file = {
-    ".ctags" = { source = ./.ctags; };
-    ".gdbinit" = { source = ./.gdbinit; };
-    ".gitconfig" = { source = ./.gitconfig; };
-    ".gitignore" = { source = ./.gitignore; };
-    ".mbsyncrc" = { source = ./.mbsyncrc; };
-    ".muttrc" = { source = ./.muttrc; };
-    ".shrc.local" = { source = ./.shrc.local; };
-    ".vimrc.local" = { source = ./.vimrc.local; };
-    ".fdignore" = { source = ./configs/.fdignore; };
-    ".config/kitty/kitty.conf" = { source = ./configs/.kitty; };
+    ".ctags" = { source = ../.ctags; };
+    ".gdbinit" = { source = ../.gdbinit; };
+    ".gitconfig" = { source = ../.gitconfig; };
+    ".gitignore" = { source = ../.gitignore; };
+    ".mbsyncrc" = { source = ../.mbsyncrc; };
+    ".muttrc" = { source = ../.muttrc; };
+    ".shrc.local" = { source = ../.shrc.local; };
+    ".vimrc.local" = { source = ../.vimrc.local; };
+    ".fdignore" = { source = ../configs/.fdignore; };
+    ".config/kitty/kitty.conf" = { source = ../configs/.kitty; };
   };
 
   services.gpg-agent = {
