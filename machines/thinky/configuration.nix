@@ -54,7 +54,7 @@
   #};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.alberand = {
+  users.users.aalbersh = {
     isNormalUser = true;
     description = "Andrey Albershteyn";
     uid = 1000;
