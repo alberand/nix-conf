@@ -6,21 +6,25 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  #boot.loader = {
-  #  systemd-boot.enable = false;
-  #  efi.canTouchEfiVariables = true;
-  #  grub = {
-  #    enable = true;
-  #    efiSupport = true;
-  #    enableCryptodisk = true;
-  #    device = "nodev";
-  #  };
-  #};
+  boot.loader = {
+    systemd-boot.enable = false;
+    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      efiSupport = true;
+      #enableCryptodisk = true;
+      device = "nodev";
+    };
+  };
 
   hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    #enable = true;
+    #driSupport = true;
+    #driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      rocm-opencl-icd
+      rocm-opencl-runtime
+    ];
   };
 
   #boot.initrd.luks.devices = {
@@ -109,6 +113,7 @@
           acladd normal_user
   '';
 
+  # pipewire needs it
   security.rtkit.enable = true;
 
   # This value determines the NixOS release from which the default
