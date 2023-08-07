@@ -132,6 +132,7 @@
     rocm-opencl-runtime
     libva
     radeontop
+    jdk17
   ];
 
   # Enable sound.
