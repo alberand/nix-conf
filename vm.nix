@@ -29,7 +29,17 @@ with lib; {
       writableStoreUseTmpfs = false;
       useDefaultFilesystems = true;
 
+      sharedDirectories = {
+        results = {
+          source = "/home/alberand/nix-conf/openvpn";
+          target = "/etc/openvpn";
+        };
+      };
+
       qemu = {
+        options = [
+          "-vga qxl"
+        ];
         networkingOptions = [
           "-device e1000,netdev=network0,mac=00:00:00:00:00:00"
           "-netdev tap,id=network0,ifname=tap0,script=no,downscript=no"
