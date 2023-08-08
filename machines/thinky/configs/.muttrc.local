@@ -1,0 +1,32 @@
+# About me
+set realname = "Andrey Albershteyn"
+set from = "aalbersh@redhat.com"
+alternates "(andrey.albershteyn@redhat\.com)"
+
+# Credentials
+set smtp_url = "smtps://aalbersh@redhat.com@smtp.gmail.com/"
+set imap_user = "aalbersh@redhat.com"
+
+# People
+alias me Andrey Albershteyn <aalbersh@redhat.com>
+alias eric Eric Sandeen <esandeen@redhat.com>
+alias cem Carlos Maiolino <cmaiolino@redhat.com>
+
+# Highlight the boss =)
+color index blue default "~f esandeen@redhat.com"
+color index blue default "~f sandeen@redhat.com"
+# Highlight mailing list announces
+color index cyan default "~s ANNOUNCE"
+# Highlight reminders from Workday
+color index blue default "~f timetracking@redhat.com"
+
+# Mailboxes
+virtual-mailboxes "fstests" "notmuch://?query=tag:fstests"
+virtual-mailboxes "xfs" "notmuch://?query=tag:linux-xfs"
+virtual-mailboxes "fsdevel" "notmuch://?query=tag:linux-fsdevel"
+virtual-mailboxes "kernel-info" "notmuch://?query=tag:kernel-info"
+virtual-mailboxes "bugzilla" "notmuch://?query=tag:bugzilla"
+virtual-mailboxes "gitlab" "notmuch://?query=tag:gitlab"
+virtual-mailboxes "memos" "notmuch://?query=tag:memos"
+virtual-mailboxes "brew" "notmuch://?query=tag:brew"
+virtual-mailboxes "beaker" "notmuch://?query=tag:beaker"

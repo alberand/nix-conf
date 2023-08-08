@@ -1,0 +1,37 @@
+IMAPAccount gmail
+# Address to connect to
+Host imap.gmail.com
+User aalbersh@redhat.com
+PassCmd "gpg --no-tty -qd ~/.secrets/.passwords.template.gpg | awk -F\\\" '/MUTT_PASS/ {print $2}'"
+# Use SSL
+# The following line should work. If you get certificate errors, uncomment the
+# two following lines and read the "Troubleshooting" section.
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+SSLType IMAPS
+CertificateFile ~/.secrets/imap.gmail.com.pem
+CertificateFile ~/.secrets/Equifax_Secure_CA.pem
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+SubFolders Verbatim
+# The trailing "/" is important
+Path ~/.mail/gmail/
+Inbox ~/.mail/gmail/Inbox
+
+Channel gmail
+Far :gmail-remote:"[Gmail]/All Mail"
+Near :gmail-local:inbox
+# Exclude everything under the internal [Gmail] folder, except the interesting
+# folders
+Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+# Or include everything
+#Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Sync the movement of messages between folders and deletions, add after making
+# sure the sync works
+Expunge Both
+# Save the synchronization state files in the relevant directory
+SyncState *

@@ -43,14 +43,10 @@
   };
 
   security.pki.certificates = let
-    certfile = builtins.readFile ../2015-RH-IT-Root-CA.pem;
+    certfile = builtins.readFile ../openvpn/2015-RH-IT-Root-CA.pem;
   in [
     certfile
   ];
-
-  environment.etc = {
-    "openvpn".source = ../openvpn;
-  };
 
   # Configure our OpenVPN client
   services.openvpn.servers = {

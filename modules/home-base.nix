@@ -85,9 +85,6 @@
     ".gdbinit" = { source = ../.gdbinit; };
     ".gitconfig" = { source = ../.gitconfig; };
     ".gitignore" = { source = ../.gitignore; };
-    ".mbsyncrc" = { source = ../.mbsyncrc; };
-    ".muttrc" = { source = ../.muttrc; };
-    ".shrc.local" = { source = ../.shrc.local; };
     ".vimrc.local" = { source = ../.vimrc.local; };
     ".fdignore" = { source = ../configs/.fdignore; };
     ".config/kitty/kitty.conf" = { source = ../configs/.kitty; };

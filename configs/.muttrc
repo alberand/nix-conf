@@ -1,0 +1,126 @@
+# vi ~/.muttrc
+# About Me
+source ~/.muttrc.local
+set signature="~/.mutt/signature"
+
+set editor = "nvim -c 'set spell spelllang=en'"
+set mark_old = no
+
+# My credentials (loaded by shell wrapper)
+set smtp_pass = $MUTT_PASS
+set imap_pass = $MUTT_PASS
+
+set index_format = "%4C %Z [%{%d %b}] %-15.15L %s"
+set date_format="%F %T"
+
+# Sidebar
+set sidebar_visible
+set sidebar_short_path = yes
+set sidebar_format = "%D%> %S%?N?[%N]?"
+set sidebar_width = 20
+set mail_check_stats
+set pipe_decode
+# Sidebar navigation
+bind index,pager "\Cp" "sidebar-prev"
+bind index,pager "\Cn" "sidebar-next"
+bind index,pager "\Co" "sidebar-open"
+
+# View HTML emails and mailcap configuration
+set mailcap_path=~/.mailcap
+auto_view text/html         # Automatically parse html messages through w3m
+auto_view text/x-vcard      # vcard attachments viewed through mutt.vcard.filter
+set implicit_autoview=yes # Load in pager if setting in .mailcap says 'copiousoutput'.
+
+# My mailboxes
+set virtual_spoolfile=yes
+set nm_default_uri="notmuch:///home/aalbersh/.mail/gmail/inbox"
+set nm_unread_tag = unread
+set folder = "~/.mail/gmail/inbox"
+# set spoolfile = "+INBOX"
+
+#
+virtual-mailboxes "inbox" "notmuch://?query=tag:inbox"
+virtual-mailboxes "bookmarks" "notmuch://?query=tag:bookmark"
+virtual-mailboxes "sent" "notmuch://?query=tag:sent"
+virtual-mailboxes "newsletters" "notmuch://?query=tag:newsletters"
+virtual-mailboxes "index" "notmuch://?query=*"
+
+macro index,pager b "<tag-thread><tag-prefix><modify-labels>!bookmark\n<previous-entry><tag-thread>" "Toggle the 'bookmark' tag"
+
+# Where to put the stuff
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+# set postponed = "+Drafts"
+# Gmail automatically saves sent e-mail to +[Gmail]/Sent
+#unset record
+#mailboxes -label inbox =INBOX
+#mailboxes =Memos =fstests =xfs =outage =Sent
+
+# Etc
+#set mail_check = 30
+#set move = no
+#set imap_keepalive = 900
+set sort = threads
+set editor="nvim -c 'set ft=mail tw=68'"
+set pager_index_lines=10
+
+# Read all in mailbox
+macro index \CA "T ~O | ~N\n;N\n"
+# Limit view to current thread
+bind index \Cl limit-current-thread
+
+bind index - collapse-thread
+bind index _ collapse-all
+
+# Show Message-ID in the header by default
+ignore *
+unignore Subject: From: Date: To: Cc: Reply-To: Message-ID: In-Reply-To:
+hdr_order Subject: From: Date: To: Cc: Reply-To: Message-ID: In-Reply-To:
+
+# Add some colors (theme)
+source ~/.mutt/dracula.muttrc
+
+color header cyan black .
+color header yellow black ^From
+color header yellow black ^Subject
+color header yellow black ^Date
+color header color102 black ^To
+color header color102 black ^CC
+color header color102 black ^Message-ID
+color header color102 black ^Reply-To
+color header color102 black ^In-Reply-To
+color body yellow black [_a-z\.\$A-Z0-9-]+@[a-zA-Z0-9\./\-]+
+color body yellow black (http|ftp)://[_a-zA-Z0-9\?\=\&\@\%\#\:\,\./~\-]+
+color quoted green black
+color signature cyan black
+color attachment yellow black
+
+# Patch syntax highlighting
+#color  normal  white           default
+color   body    brightwhite     default         ^[[:space:]].*
+color   body    yellow          default         ^(diff).*
+#color   body    white           default         ^[\-\-\-].*
+#color   body    white           default         ^[\+\+\+].*
+color   body    green           default         ^[\+].*
+color   body    red             default         ^[\-].*
+#color   body    brightblue      default         [@@].*
+color   body    brightwhite     default         ^(\s).*
+color   body    cyan            default         ^(Signed-off-by).*
+color   body    cyan            default         ^(Docker-DCO-1.1-Signed-off-by).*
+color   body    brightwhite     default         ^(Cc)
+color   body    yellow          default         "^diff \-.*"
+color   body    brightwhite     default         "^index [a-f0-9].*"
+color   body    brightblue      default         "^---$"
+color   body    white           default         "^\-\-\- .*"
+color   body    white           default         "^[\+]{3} .*"
+color   body    green           default         "^[\+][^\+]+.*"
+color   body    red             default         "^\-[^\-]+.*"
+color   body    brightblue      default         "^@@ .*"
+color   body    green           default         "LGTM"
+color   body    brightmagenta   default         "-- Commit Summary --"
+color   body    brightmagenta   default         "-- File Changes --"
+color   body    brightmagenta   default         "-- Patch Links --"
+color   body    green           default         "^Merged #.*"
+color   body    red             default         "^Closed #.*"
+color   body    brightblue      default         "^Reply to this email.*"

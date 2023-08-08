@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# Shell configuration
+#
+# @author: Andrey Albershteyn
+# @date: 2018
+
+# Linux Dev
+KERNEL=$HOME/Projects/kernel/linux
+alias kernel="cd $KERNEL"
+fm() {
+	git --no-pager -C $KERNEL log --no-merges -n 1 --oneline --grep "$1" | \
+		cut -d' ' -f1
+}
+
+mm() {
+	parse-lore.py $@
+}
+
+alias bkr-reset="bkr system-power --action=reboot"

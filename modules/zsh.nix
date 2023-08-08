@@ -29,11 +29,149 @@ HIST_STAMPS="dd.mm.yyyy"
 # User configuration
 export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH"
 
+# Locale
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+# Include secrets
+if [ -f ~/.secrets/.sh.secrets ]; then
+    . ~/.secrets/.sh.secrets
+else
+    echo "[Warning] Can not find secrets. Will not be able to connect"
+fi
+
+# Some settings for tmux.
+alias tmux="TERM=screen-256color tmux"
+export TERM=screen-256color
+
+alias vim="nvim"
+export VISUAL="nvim"
+export EDITOR="nvim"
+
+# Minicom colors
+export MINICOM="-m -c on"
+
+# Add local scripts
+export PATH=$PATH:$HOME/.local/bin
+
+# Editor for cscope (by default it's vi)
+export CSCOPE_EDITOR=nvim
+
+alias cal="cal -ym"
+alias ipy='ipython3'
+
+# Allows to passthrough user's aliases to sudo
+alias sudo='sudo '
+
+# Better zooming when feh is opened
+alias feh="feh --auto-zoom --scale-down"
+
+# FZF with fd (make it possible to ignore files)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
+# Decrypt password for email apps
+alias mutt="with_passwords mutt"
+alias neomutt="with_passwords neomutt"
+alias mbsync="with_passwords mbsync"
+
+#==============================================================================
+# Commands
+#==============================================================================
+# PDF Reader
+function pdfreader(){
+	zathura "$1" >/dev/null 2>&1 &
+}
+alias pdf=pdfreader
+
+# Image viewver
+function show_image(){
+	feh "$1" >/dev/null 2>&1 &
+}
+alias img=show_image
+
+# Run application wihout standart output
+function quiet_runner(){
+	"$1" "$2" >/dev/null 2>&1 &
+}
+alias mute=quiet_runner
+
+# ex - archive extractor
+# usage: ex <file>
+function ex() {
+    if [ -f $1 ] ; then
+    case $1 in
+        *.tar.bz2) tar xjf $1 ;;
+        *.tar.gz) tar xzf $1 ;;
+        *.tar.xz) tar xf $1 ;;
+        *.bz2) bunzip2 $1 ;;
+        *.rar) unrar x $1 ;;
+        *.gz) gunzip $1 ;;
+        *.tar) tar xf $1 ;;
+        *.tbz2) tar xjf $1 ;;
+        *.tgz) tar xzf $1 ;;
+        *.zip) unzip $1 ;;
+        *.Z) uncompress $1;;
+        *.7z) 7z x $1 ;;
+        *) echo "'$1' cannot be extracted via ex()" ;;
+    esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# pack - archive packager
+# usage: pack <file_1> <file_2> ...
+function pack() {
+    bad=0
+
+    for var in "$@"
+    do
+        # If argument is file or directory.
+        if ! $( [ -f "$var" ] || [ -d "$var" ] ) ; then
+            echo "'$var' is not a valid file or directory."
+            bad=1
+        fi
+    done
+
+    # If all entities are valid pack it.
+    echo "Packed files:"
+    if [ $bad -eq 0 ] ; then
+        name=$(echo "$1" | cut -d'.' -f1)
+        tar -cvzf "$name".tar "$@"
+    fi
+}
+
+# pdfsearch - search in all pdf's for pattern (in current directory)
+# Usage: pdfsearch "pattern"
+function pdfsearch(){
+      find . -name '*.pdf' -exec sh -c "pdftotext \"{}\" - | \
+        grep --with-filename --label=\"{}\" --color \"$1\"" \;
+}
+
+# Colored man pages
+function man() {
+	env \
+		LESS_TERMCAP_md=$'\e[1;36m' \
+		LESS_TERMCAP_me=$'\e[0m' \
+		LESS_TERMCAP_se=$'\e[0m' \
+		LESS_TERMCAP_so=$'\e[1;40;92m' \
+		LESS_TERMCAP_ue=$'\e[0m' \
+		LESS_TERMCAP_us=$'\e[1;32m' \
+			man "$@"
+}
+
+# from i8ramin - http://getintothis.com/blog/2012/04/02/git-grep-and-blame-bash-function/
+# runs git grep on a pattern, and then uses git blame to who did it
+ggb() {
+    git grep -n $@ | while IFS=: read i j k; do git blame -L $j,$j $i | cat; done
+}
+
 if [ -f ~/.shrc.local ]; then
     . ~/.shrc.local
 fi
 
-# Run Xorg on tty0 automatically
+# Run Wayland/Xorg on tty0 automatically
 # if [ -z "\$\{DISPLAY\}" ] && [ "\$\{XDG_VTNR\}" -eq 1 ]; then
 if [[ "$(tty)" == /dev/tty1 ]]; then
     exec sway

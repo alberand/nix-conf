@@ -24,7 +24,7 @@
   ];
 
   home.file = {
-    ".shrc.local" = { source = ../../.shrc.local; };
+    ".shrc.local" = { source = ./configs/.shrc.local; };
   };
 
   wayland.windowManager.sway.config = {

@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../../modules/home-base.nix
+    ../../modules/neomutt.nix
   ];
 
   home.username = "aalbersh";
@@ -11,7 +12,30 @@
     rust-analyzer
     wireshark
     terminator
+    pinentry
   ];
+
+  home.file = {
+    ".muttrc.local" = {
+      source = ./configs/.muttrc.local;
+    };
+    ".notmuch-config" = {
+      source = ./configs/.notmuch-config;
+    };
+    ".mbsyncrc" = {
+      source = ./configs/.mbsyncrc;
+    };
+    ".shrc.local" = {
+      source = ./configs/.shrc.local;
+    };
+    ".redhat" = {
+      source = ./configs/.redhat;
+    };
+  };
+
+  programs.gpg = {
+    enable = true;
+  };
 
   wayland.windowManager.sway.config = {
     startup = [
