@@ -58,8 +58,8 @@
     # TODO not sure what it is but Tailscale wants it
     firewall.checkReversePath = "loose";
     firewall = {
-      allowedTCPPorts = [ 53 22 8384 22000 ];
-      allowedUDPPorts = [ 53 51820 22000 21027];
+      allowedTCPPorts = [ 53 22 5555 8384 22000 ];
+      allowedUDPPorts = [ 53 5555 51820 22000 21027];
     };
   };
 
