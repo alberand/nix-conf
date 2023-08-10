@@ -23,6 +23,10 @@
     wireshark
   ];
 
+  home.file = {
+    ".shrc.local" = { source = ../../.shrc.local; };
+  };
+
   wayland.windowManager.sway.config = {
     startup = [
       { command = "swaymsg 'workspace 1; exec firefox'"; }
