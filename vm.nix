@@ -31,8 +31,16 @@ with lib; {
 
       sharedDirectories = {
         results = {
-          source = "/home/alberand/nix-conf/openvpn";
+          source = "/home/alberand/Projects/work-machine/secrets/etc/openvpn";
           target = "/etc/openvpn";
+        };
+        results = {
+          source = "/home/alberand/Projects/work-machine/secrets/.secrets";
+          target = "/home/aalbersh/.secrets";
+        };
+        results = {
+          source = "/home/alberand/Projects/work-machine/secrets/.ssh";
+          target = "/home/aalbersh/.ssh";
         };
       };
 
