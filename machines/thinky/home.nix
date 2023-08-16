@@ -28,9 +28,6 @@
     ".shrc.local" = {
       source = ./configs/.shrc.local;
     };
-    ".redhat" = {
-      source = ./configs/.redhat;
-    };
   };
 
   programs.gpg = {
