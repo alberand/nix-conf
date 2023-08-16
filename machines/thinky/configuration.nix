@@ -1,5 +1,6 @@
 { config, pkgs, ... }: {
   imports = [
+    ./hardware-configuration.nix
     ../../modules/common.nix
     ../../modules/tmux.nix
     ../../modules/work-vpn.nix
@@ -18,40 +19,46 @@
   };
 
   hardware.opengl = {
-    #enable = true;
-    #driSupport = true;
-    #driSupport32Bit = true;
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
     extraPackages = with pkgs; [
-      rocm-opencl-icd
-      rocm-opencl-runtime
+      #rocm-opencl-icd
+      #rocm-opencl-runtime
+      intel-media-driver
+	vaapiIntel
+	vaapiVdpau
+	libvdpau-va-gl
     ];
   };
 
-  #boot.initrd.luks.devices = {
-  #  crypted = {
-  #    device = "/dev/disk/by-uuid/4e62f0f4-6b77-4947-b031-c7d5652a8eb3";
-  #    preLVM = true;
-  #  };
-  #};
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ vaapiIntel];
 
-  #networking = {
-  #  hostName = "thinky";
-  #  # Pick only one of the below networking options.
-  #  networkmanager.enable = true;
-  #  networkmanager.dns = "default";
-  #  defaultGateway = "192.168.0.1";
-  #  # nameservers = [ "8.8.8.8" "1.1.1.1" ];
-  #  interfaces.enp34s0.useDHCP = true;
-  #  # VPN configuration
-  #  # Configure the NAT/Firewall
-  #  firewall.enable = true;
-  #  # TODO not sure what it is but Tailscale wants it
-  #  firewall.checkReversePath = "loose";
-  #  firewall = {
-  #    allowedTCPPorts = [ 53 22 ];
-  #    allowedUDPPorts = [ 53 ];
-  #  };
-  #};
+  boot.initrd.luks.devices = {
+    nixos = {
+      device = "/dev/disk/by-uuid/f5f202c5-f8e5-47cd-8768-b719e339e241";
+      preLVM = true;
+    };
+  };
+
+  networking = {
+    hostName = "thinky";
+    # Pick only one of the below networking options.
+    networkmanager.enable = true;
+    networkmanager.dns = "default";
+    defaultGateway = "192.168.0.1";
+    # nameservers = [ "8.8.8.8" "1.1.1.1" ];
+    interfaces.enp0s20f0u3.useDHCP = true;
+    # VPN configuration
+    # Configure the NAT/Firewall
+    firewall.enable = true;
+    # TODO not sure what it is but Tailscale wants it
+    firewall.checkReversePath = "loose";
+    firewall = {
+      allowedTCPPorts = [ 53 22 ];
+      allowedUDPPorts = [ 53 ];
+    };
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.aalbersh = {
