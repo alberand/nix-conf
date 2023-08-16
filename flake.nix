@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, unstable, home-manager }:
+  outputs = { self, nixpkgs, unstable, home-manager, nixos-hardware }:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -45,6 +46,7 @@
 
         modules = [
           ./machines/thinky/configuration.nix
+          nixos-hardware.nixosModules.lenovo-thinkpad-t14s
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
