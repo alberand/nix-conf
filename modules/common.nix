@@ -115,9 +115,6 @@
       keep-outputs = true;
       keep-derivations = true;
       auto-optimise-store = true;
-      extra-sandbox-paths = [
-        config.programs.ccache.cacheDir
-      ];
     };
     gc = {
       automatic = true;
