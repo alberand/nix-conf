@@ -231,17 +231,6 @@
 
   };
 
-  # Dynamic display configuration
-  systemd.user.services.kanshi = {
-    description = "kanshi daemon";
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''${pkgs.kanshi}/bin/kanshi'';
-      RestartSec = 5;
-      Restart = "always";
-    };
-  };
-
   programs.ccache.enable = true;
   programs.ccache.cacheDir = "/var/cache/ccache";
   programs.ccache.packageNames = [ "kernel-cache" ];

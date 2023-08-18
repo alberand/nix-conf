@@ -2,6 +2,7 @@
   imports = [
     ../../modules/home-base.nix
     ../../modules/neomutt.nix
+    ../../modules/kanshi.nix
   ];
 
   home.username = "aalbersh";
