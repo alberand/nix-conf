@@ -66,7 +66,6 @@ in {
         };
 
         "network" = {
-          interface = "wg0";
           format-wifi = "{essid} ({signalStrength}%) ";
           format-ethernet = "online";
           format-linked = "{ifname} (No IP)";
