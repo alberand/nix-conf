@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     # Email client
@@ -26,4 +26,14 @@
       source = ../configs/signature;
     };
   };
+
+  services.mbsync = {
+    enable = true;
+    frequency = "*-*-* *:*:00";
+  };
+
+  systemd.user.services.mbsync.Service.Environment = [
+    "HOME=${config.home.homeDirectory}"
+    "PATH=${pkgs.gawk}/bin:${pkgs.gnupg}/bin:${pkgs.notmuch}/bin:/run/wrappers/bin/:$PATH"
+  ];
 }

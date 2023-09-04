@@ -22,13 +22,12 @@
     ".notmuch-config" = {
       source = ./configs/.notmuch-config;
     };
-    ".mbsyncrc" = {
-      source = ./configs/.mbsyncrc;
-    };
     ".shrc.local" = {
       source = ./configs/.shrc.local;
     };
   };
+  services.mbsync.configFile = ./configs/.mbsyncrc;
+  services.mbsync.postExec = "${pkgs.bash}/bin/sh ${config.home.homeDirectory}/.redhat/notmuch-hook.sh";
 
   programs.gpg = {
     enable = true;
