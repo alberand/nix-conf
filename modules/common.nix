@@ -95,14 +95,14 @@
   };
 
   programs.ssh = {
-    startAgent = false;
+    startAgent = true;
     agentTimeout = "24h";
   };
 
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "tty";
-    enableSSHSupport = true;
+    enableSSHSupport = false;
   };
 
   security.polkit.enable = true;
