@@ -30,15 +30,15 @@ with lib; {
       useDefaultFilesystems = true;
 
       sharedDirectories = {
-        results = {
+        openvpn = {
           source = "/home/alberand/Projects/work-machine/secrets/etc/openvpn";
           target = "/etc/openvpn";
         };
-        results = {
+        secrets = {
           source = "/home/alberand/Projects/work-machine/secrets/.secrets";
           target = "/home/aalbersh/.secrets";
         };
-        results = {
+        ssh = {
           source = "/home/alberand/Projects/work-machine/secrets/.ssh";
           target = "/home/aalbersh/.ssh";
         };
