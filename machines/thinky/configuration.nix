@@ -46,7 +46,7 @@
     # Pick only one of the below networking options.
     networkmanager.enable = true;
     networkmanager.dns = "default";
-    defaultGateway = "192.168.0.1";
+    #defaultGateway = "192.168.0.1";
     # nameservers = [ "8.8.8.8" "1.1.1.1" ];
     interfaces.enp0s20f0u3.useDHCP = true;
     # VPN configuration
