@@ -130,7 +130,7 @@
   };
 
   system.autoUpgrade = {
-    enable = true;
+    enable = false;
     allowReboot = false;
     channel = https://nixos.org/channels/nixos-unstable;
   };
