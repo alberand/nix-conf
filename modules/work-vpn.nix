@@ -52,6 +52,8 @@
   services.openvpn.servers = {
     vpn = {
       config = ''config /etc/openvpn/ovpn-ams2-tcp.conf'';
+      # Don't autostart as VPN needs credentials
+      autoStart = false;
     };
   };
 }
