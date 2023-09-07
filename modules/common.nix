@@ -77,6 +77,7 @@
     man-pages-posix
     pinentry
     libva-utils
+    traceroute
 
     # work
     qemu_full
