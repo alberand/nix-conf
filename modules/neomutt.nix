@@ -9,6 +9,8 @@
     isync
     # Console browser to see HTML emails
     w3m
+    # Open HTML emails in w3m
+    mailcap
   ];
 
   # Configs to add:
@@ -24,6 +26,9 @@
     };
     ".mutt/signature" = {
       source = ../configs/signature;
+    };
+    ".mailcap" = {
+      source = ../configs/mailcap;
     };
   };
 
