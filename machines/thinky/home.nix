@@ -22,6 +22,9 @@
     ".notmuch-config" = {
       source = ./configs/.notmuch-config;
     };
+    ".redhat/notmuch-hook.sh" = {
+      source = ./configs/notmuch-hook.sh;
+    };
     ".shrc.local" = {
       source = ./configs/.shrc.local;
     };

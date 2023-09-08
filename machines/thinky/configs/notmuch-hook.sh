@@ -9,6 +9,8 @@ notmuch tag -new -unread +sent -- from:aalbersh@redhat.com or from:andrey.albers
 # tag newsletters, but dont show them in inbox
 notmuch tag +newsletters -inbox -new -- subject:'newsletter*'
 notmuch tag +newsletters -inbox -new -- to:'/.*announce@redhat.com/'
+notmuch tag +newsletters -inbox -new -- to:announce-list@redhat.com
+notmuch tag +newsletters -inbox -new -- to:czech-announce@redhat.com
 
 # Mailing lists
 notmuch tag +fstests -inbox -new -- to:fstests@vger.kernel.org
@@ -24,7 +26,12 @@ notmuch tag +memos -inbox -new -newsletters -- to:brno-memo-list@redhat.com
 # bugzilla or beaker.
 notmuch tag +inbox -- to:aalbersh@redhat.com
 
-notmuch tag +bugzilla -inbox -new -- from:bugzilla@redhat.com or from:bugzilla-daemon@kernel.org or to:bugzilla@redhat.com or to:bugzilla-daemon@kernel.org
+notmuch tag +bugzilla -inbox -new -- from:bugzilla@redhat.com
+notmuch tag +bugzilla -inbox -new -- from:bugzilla-daemon@kernel.org
+notmuch tag +bugzilla -inbox -new -- to:bugzilla@redhat.com
+notmuch tag +bugzilla -inbox -new -- to:bugzilla-daemon@kernel.org
+notmuch tag +bugzilla -inbox -new -- from:jira-issues@redhat.com
+
 notmuch tag +beaker -inbox -new -- subject:'\[Beaker*' or from:beaker@redhat.com or from:*@*rdu2.redhat.com or from:*@*bos.redhat.com
 notmuch tag +brew -inbox -new -- from:brew-task-repos@redhat.com
 notmuch tag +outage -inbox -unread -new -newsletters -- to:outage-list@redhat.com
