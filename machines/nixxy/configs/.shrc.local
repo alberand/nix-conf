@@ -11,4 +11,4 @@ alias blog='cd $BLOG_ROOT; cat README.rst'
 
 # Do I need this?
 # Connect to ssh-agent run by systemd
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
