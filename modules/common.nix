@@ -78,6 +78,7 @@
     pinentry
     libva-utils
     traceroute
+    dig
 
     # work
     qemu_full
