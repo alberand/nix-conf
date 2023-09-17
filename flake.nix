@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstablepkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,15 +11,19 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, unstable, home-manager, nixos-hardware }:
+  outputs = { self, nixpkgs, unstablepkgs, home-manager, nixos-hardware }:
   let
     system = "x86_64-linux";
+    unstable = import unstablepkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
       overlays = [(final: prev: {
         # Example of bringing in an unstable package:
-        photoprism = unstable.legacyPackages.${prev.system}.photoprism;
+        minecraft-server = unstable.minecraft-server;
       })];
     };
 

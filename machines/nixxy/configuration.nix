@@ -10,6 +10,7 @@
     ../../modules/qemu-guest-network.nix
     ../../modules/home-assistant.nix
     ../../modules/mysql.nix
+    ../../modules/minecraft.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -55,11 +56,18 @@
     # VPN configuration
     # Configure the NAT/Firewall
     firewall.enable = true;
-    # TODO not sure what it is but Tailscale wants it
-    firewall.checkReversePath = "loose";
     firewall = {
-      allowedTCPPorts = [ 53 22 5555 8384 22000 ];
-      allowedUDPPorts = [ 53 5555 51820 22000 21027];
+      allowedTCPPorts = [
+        53
+        22
+        config.services.minecraft-server.serverProperties.server-port
+        55686 # jellyfin
+      ];
+      allowedUDPPorts = [
+        53
+        config.services.minecraft-server.serverProperties.server-port
+        config.networking.wireguard.interfaces.wg0.listenPort
+      ];
     };
   };
 
