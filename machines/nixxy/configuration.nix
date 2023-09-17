@@ -11,6 +11,7 @@
     ../../modules/home-assistant.nix
     ../../modules/mysql.nix
     ../../modules/minecraft.nix
+    ../../modules/borgbackup.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
