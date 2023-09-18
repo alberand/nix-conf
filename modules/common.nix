@@ -79,6 +79,7 @@
     libva-utils
     traceroute
     dig
+    libvirt
 
     # work
     qemu_full
