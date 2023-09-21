@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }:
 {
+  environment.systemPackages = with pkgs; [
+    mcrcon
+  ];
+
   services.minecraft-server = {
     enable = true;
     eula = true; # https://account.mojang.com/documents/minecraft_eula
