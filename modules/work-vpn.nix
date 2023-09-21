@@ -54,6 +54,8 @@
       config = ''config /etc/openvpn/ovpn-ams2-tcp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
+      up = builtins.readFile ../openvpn/client.up;
+      down = builtins.readFile ../openvpn/client.down;
     };
   };
 }
