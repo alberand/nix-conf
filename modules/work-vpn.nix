@@ -48,20 +48,17 @@
     certfile
   ];
 
-  services.resolved = {
-    enable = true;
-    dnssec = "true";
-    domains = [ "~." ];
-    fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
-    extraConfig = ''
-      DNSOverTLS=yes
-    '';
-  };
-
   # Configure our OpenVPN client
   services.openvpn.servers = {
     vpn = {
-      config = ''config /etc/openvpn/ovpn-brq2-tcp.conf'';
+      config = ''config /etc/openvpn/ovpn-1-rhvpn-tcp.conf'';
+      # Don't autostart as VPN needs credentials
+      autoStart = false;
+      up = builtins.readFile ../openvpn/client.up;
+      down = builtins.readFile ../openvpn/client.down;
+    };
+    vpn-udp = {
+      config = ''config /etc/openvpn/ovpn-1-rhvpn-udp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
       up = builtins.readFile ../openvpn/client.up;
