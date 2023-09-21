@@ -80,6 +80,7 @@
     traceroute
     dig
     libvirt
+    waypipe
 
     # work
     qemu_full
