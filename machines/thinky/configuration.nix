@@ -112,11 +112,24 @@
   # Enable WeeChat to run as service with attached 'screen' session To
   # attach use: screen -x weechat/wc
   services.weechat.enable = true;
-  services.weechat.sessionName = "wc";
   programs.screen.screenrc = ''
-          multiuser on
-          acladd normal_user
+    multiuser on
+    acladd aalbersh
   '';
+  nixpkgs.overlays = [
+    (self: super: {
+      weechat = super.weechat.override {
+        configure = { availablePlugins, ... }: {
+          scripts = with super.weechatScripts; [
+            weechat-autosort
+            weechat-notify-send
+            weechat-go
+            wee-slack
+          ];
+        };
+      };
+    })
+  ];
 
   fileSystems."/mnt/lonmoun" = {
     device = "192.168.0.100:/alberand";
@@ -136,7 +149,6 @@
       ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
     };
   };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
