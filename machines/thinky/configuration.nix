@@ -118,6 +118,11 @@
           acladd normal_user
   '';
 
+  fileSystems."/mnt/lonmoun" = {
+    device = "192.168.0.100:/alberand";
+    fsType = "nfs";
+  };
+
   # pipewire needs it
   security.rtkit.enable = true;
 
