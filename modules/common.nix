@@ -82,6 +82,9 @@
     dig
     libvirt
     waypipe
+    bluez
+    bluez-alsa
+    bluez-tools
 
     # work
     qemu_full
@@ -109,6 +112,9 @@
     pinentryFlavor = "tty";
     enableSSHSupport = false;
   };
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   security.polkit.enable = true;
   systemd.user.services.waybar.enable = true;
