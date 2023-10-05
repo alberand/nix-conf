@@ -10,6 +10,12 @@
     };
     enableAutosuggestions = true;
     plugins = [ ];
+    history = {
+      ignoreDups = true;
+      save = 50000;
+      share = true;
+      size = 50000;
+    };
 
     initExtra = ''
 # Uncomment the following line to enable command auto-correction.
@@ -25,9 +31,6 @@ DISABLE_AUTO_TITLE="true"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="dd.mm.yyyy"
-
-# User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/bin:$PATH"
 
 # Locale
 export LC_ALL=en_US.UTF-8
@@ -172,7 +175,6 @@ if [ -f ~/.shrc.local ]; then
 fi
 
 # Run Wayland/Xorg on tty0 automatically
-# if [ -z "\$\{DISPLAY\}" ] && [ "\$\{XDG_VTNR\}" -eq 1 ]; then
 if [[ "$(tty)" == /dev/tty1 ]]; then
     exec sway
 fi
