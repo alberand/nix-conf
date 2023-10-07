@@ -12,6 +12,7 @@
     ../../modules/mysql.nix
     ../../modules/minecraft.nix
     ../../modules/borgbackup.nix
+    ../../modules/build-machines.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -71,6 +72,10 @@
       ];
     };
   };
+  networking.nat.enable = true;
+  networking.nat.internalInterfaces = ["ve-+"];
+  networking.nat.externalInterface = "enp34s0";
+  networking.networkmanager.unmanaged = [ "interface-name:ve-*" ];
 
     # ash drive
   services.udev.extraRules = ''
