@@ -91,6 +91,7 @@
     qemu_full
     qemu-utils
     trace-cmd
+    nix-tree
   ];
 
   programs.zsh.enable = true;
