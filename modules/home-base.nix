@@ -93,7 +93,9 @@
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    defaultCacheTtl = 86400;
+    # 400 days
+    defaultCacheTtl = 34560000;
+    maxCacheTtl = 34560000;
   };
 
   # So, we can autostart it via sway
