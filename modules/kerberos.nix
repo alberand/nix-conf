@@ -25,8 +25,6 @@
       "IPA.REDHAT.COM" = {
         default_domain = "ipa.redhat.com";
         dns_lookup_kdc = true;
-        #auth_to_local = "RULE:[1:$1@$0](.*@REDHAT\.COM)s/@.*//";
-        #auth_to_local = "DEFAULT";
       };
     };
   };
