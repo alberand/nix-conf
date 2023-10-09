@@ -36,11 +36,10 @@
 
       # Display device configuration
       output = {
-        Virtual-1 = {
-            # Set HIDP scale (pixel integer scaling)
+        "*" = {
             scale = "1";
             bg = "#000000 solid_color";
-            res = "1920x1080";
+            res = "1920x1080@60Hz";
           };
         };
 
