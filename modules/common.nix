@@ -32,6 +32,7 @@
     proggyfonts
     nerdfonts
     font-awesome
+    jetbrains-mono
   ];
 
   # Set your time zone.

@@ -5,6 +5,12 @@ kitty_mod ctrl+shift
 #: Browse scrollback buffer in pager
 map kitty_mod+h show_scrollback
 
+#: JetBrains Mono Font
+#: font_family JetBrains Mono
+font_family Fira Code
+#: I don't like ligatures (those fancy -> -- == one chars)
+disable_ligatures always
+
 #: CTRL+SHIFT+H calls scrollback_pager which is nvim
 #: Allows copying text with keyboard only
 #: See https://github.com/kovidgoyal/kitty/issues/719#issuecomment-952039731
