@@ -1,1 +1,11 @@
+
+# HTML
 text/html; w3m -dump -o -document_charset=%{charset} %s; nametemplate=%s.html; copiousoutput
+text/plain; nvim %s
+
+#PDFs
+application/pdf; zathura %s pdf
+
+#Images
+image/png; feh %s
+image/jpeg; feh %s
