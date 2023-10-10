@@ -13,6 +13,7 @@
     rust-analyzer
     wireshark
     pinentry
+    (writeShellScriptBin "git-bp" (builtins.readFile ./configs/git-bp))
   ];
 
   home.file = {

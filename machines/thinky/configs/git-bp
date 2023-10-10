@@ -1,0 +1,60 @@
+commit="$1"
+SIGNOFF="Signed-off-by: $(git config --get user.name) <$(git config --get user.email)>"
+ISSUE_URL="https://issues.redhat.com/browse/RHEL-"
+DIRNAME=$(basename $(git rev-parse --show-toplevel))
+
+function get_issue_code() {
+	local dirname=$1
+
+	echo $dirname | rev | cut -d"_" -f1 | rev
+}
+
+function is_linux() {
+	local dirname=$1
+	if [[ $dirname == *"rhel7"* || \
+		$dirname == *"rhel8"* || \
+		$dirname == *"rhel9"* ]]; then
+		return 0
+	fi
+
+	return 1
+}
+
+function generate_message() {
+	local output="$1"
+	local commit="$2"
+
+	issue_url="$ISSUE_URL$(get_issue_code $DIRNAME)"
+
+	git show --no-patch --pretty=tformat:"%s" $commit > $output
+	echo "" >> $output
+	echo "JIRA: $issue_url" >> $output
+	echo "" >> $output
+	git show --no-patch --format=medium $commit >> $output
+	echo "" >> $output
+	echo "$SIGNOFF" >> $output
+}
+
+if !is_linux $DIRNAME; then
+	echo "git-bp works only for linux streams"
+	exit 1
+fi
+
+if [ "$1" == "--abort" || "$1" == "--skip" ]; then
+	git cherry-pick $1
+	exit 0
+fi
+
+message="/tmp/.git-bp-$(git rev-parse --abbrev-ref HEAD)"
+if [ "$1" == "--continue" ]; then
+	if git cherry-pick --continue; then
+		git commit --amend --no-edit --reset-author -F $message
+		exit 0
+	fi
+	exit 1
+fi
+
+generate_message $message $commit
+if git cherry-pick $commit; then
+	git commit --amend --no-edit --reset-author -F $message
+fi

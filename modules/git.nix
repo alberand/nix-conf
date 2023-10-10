@@ -44,8 +44,6 @@
       am = "am --empty=keep --allow-empty";
       # Combine b4 and am into one git b4 command
       b4 = "!f() { b4 am -t -o - $1 | git am -3; }; f";
-      # Shortcut for backporting in RH (/tmp file is used by hook)
-      bp = "!echo $1 > /tmp/.git-backport-$(git rev-parse --abbrev-ref HEAD) && git cherry-pick -x $1";
       # Add worktree branch
       wta = "!f() { git worktree add -b $1 ../$1 $2; }; f";
       # Current branch with upstream
@@ -65,17 +63,17 @@
       "__pycache__"
       "*.pyc"
       ".vscode"
-      
+
       # Linux
       "tools"
       "Documentation"
       "samples"
       "sound"
-      
+
       # Nix
       "result"
       ".direnv"
-      
+
       # My common files
       "todo"
       # vmtest configs
