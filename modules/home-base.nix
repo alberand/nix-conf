@@ -6,6 +6,7 @@
     ./wofi.nix
     ./mako.nix
     ./sway.nix
+    ./git.nix
   ];
 
   home.packages = with pkgs; [
@@ -83,8 +84,6 @@
   home.file = {
     ".ctags" = { source = ../.ctags; };
     ".gdbinit" = { source = ../.gdbinit; };
-    ".gitconfig" = { source = ../.gitconfig; };
-    ".gitignore" = { source = ../.gitignore; };
     ".vimrc.local" = { source = ../.vimrc.local; };
     ".fdignore" = { source = ../configs/.fdignore; };
     ".config/kitty/kitty.conf" = { source = ../configs/.kitty; };
