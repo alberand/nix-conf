@@ -40,8 +40,6 @@
       lg = "log --oneline -n10";
       # Fancy tree log
       hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short";
-      # Skip cover letter emails
-      am = "am --empty=keep --allow-empty";
       # Combine b4 and am into one git b4 command
       b4 = "!f() { b4 am -t -o - $1 | git am -3; }; f";
       # Add worktree branch
