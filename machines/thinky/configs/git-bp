@@ -35,12 +35,12 @@ function generate_message() {
 	echo "$SIGNOFF" >> $output
 }
 
-if !is_linux $DIRNAME; then
+if ! is_linux $DIRNAME; then
 	echo "git-bp works only for linux streams"
 	exit 1
 fi
 
-if [ "$1" == "--abort" || "$1" == "--skip" ]; then
+if [ "$1" == "--abort" ] || [ "$1" == "--skip" ]; then
 	git cherry-pick $1
 	exit 0
 fi
