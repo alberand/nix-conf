@@ -1,0 +1,405 @@
+#!/usr/bin/env bash
+
+REPO_ARCHIVE="https://gitlab.com/alberand-rh/rh-dotfiles/-/archive/master/rh-dotfiles-master.zip"
+GIT_CLONE_TASK_URL="$REPO_ARCHIVE#rh-dotfiles-master/git-clone-task"
+FSTEST_TASK_URL="$REPO_ARCHIVE#rh-dotfiles-master/fstests-task"
+KERNEL_TASK_URL="$REPO_ARCHIVE#rh-dotfiles-master/kernel-fetch-task"
+
+help (){
+	echo "Usage:"
+	echo "$(basename $0) [OPTIONS] name"
+	echo ""
+	echo "name must be in following format: dist_bugzilla"
+	echo "where dist is: rhel6 rhel7 rhel8 rhel9 cs8 cs9 fedora34 fedora35"
+	echo "where bugzilla is BZ ticket number"
+	echo ""
+	echo "OPTIONS"
+	echo -e "\t-t\n\t\tdon't run fstests"
+	echo -e "\t-f\n\t\tdon't fetch the kernel (includes -c)"
+	echo -e "\t-c\n\t\tdon't compile the kernel"
+}
+
+get_system(){
+	echo "$1" | cut -d'_' -f1
+}
+
+is_ssh_link(){
+	grep -F "git@" $1
+}
+
+get_full_system_name(){
+	name=$(get_system $1)
+
+	if [[ "rhel6 rhel7 rhel8" == *$name* ]]; then
+		echo "RedHatEnterpriseLinux${name: -1}"
+	fi
+
+	if [[ "cs7" == $name ]]; then
+		echo "CentOSLinux7"
+	fi
+
+	if [[ "cs8" == $name ]]; then
+		echo "CentOSLinux8"
+	fi
+
+	if [[ "rhel9 cs9" == *$name* ]]; then
+		echo "CentOSStream9"
+	fi
+
+	if [[ $name =~ fedora[0-9]+ ]]; then
+		echo "Fedora${name: -2}"
+	fi
+}
+
+get_variant(){
+	name=$(get_system $1)
+
+	if [[ "rhel6 rhel7" == *$name* ]]; then
+		echo "Workstation"
+	fi
+
+	if [[ "rhel8 rhel9 cs8 cs9" == *$name* ]]; then
+		echo "BaseOS"
+	fi
+
+	if [[ $name =~ fedora[0-9]+ ]]; then
+		echo "Everything"
+	fi
+}
+
+get_arch(){
+	name=$(get_system $1)
+
+	# rhel6/7 doesn't support aarch64; and we have many aarch64 machines in
+	# Beaker. It's quicker to get such for other systems
+	if [[ "rhel6 rhel7" == *$name* ]]; then
+		echo "x86_64"
+	else
+		echo "aarch64"
+	fi
+
+}
+
+get_remote_url(){
+	name=$(get_system $1)
+
+	repo=""
+	case $name in
+		"rhel7")
+			repo="alberand-rh/rhel-7"
+			;;
+		"rhel8")
+			repo="alberand-rh/rhel-8"
+			;;
+		"rhel9")
+			repo="alberand-rh/centos-stream-9"
+			;;
+		"cs8")
+			repo="alberand-rh/centos-stream-8"
+			;;
+		"cs9")
+			repo="alberand-rh/centos-stream-9"
+			;;
+		"linux")
+			repo="alberand-rh/linux"
+			;;
+		*)
+			repo="alberand-rh/linux"
+			;;
+	esac
+
+	echo "https://oauth2:$GITLAB_RO_TOKEN@gitlab.com/$repo.git"
+}
+
+if [ "$#" -lt 1 ]; then
+	echo "Illegal number of parameters"
+	help
+fi
+
+if [ -z $GITLAB_RO_TOKEN ]; then
+	echo "\$GITLAB_RO_TOKEN need to be set"
+	exit 1
+fi
+
+# Run fstests on non-fixed kernel
+pretest='true'
+
+# Fetch kernel from branch (branch name is identical to machine name e.g.
+# rhel9_2107324 or from branch specified with $kernel_branch)
+fetchkernel='true'
+# Compile kernel with config copied from /boot and 'yes "" | make'
+compilekernel='true'
+# Set specific remote for kernel
+kernel_remote=''
+# Set specific kernel branch
+kernel_branch=''
+
+# System architecture
+architecture=""
+# Test branch with fix
+testfix='false'
+
+while getopts 'tfcra:k:b:' flag; do
+  case "${flag}" in
+    t) pretest='false'
+	;;
+    f) fetchkernel='false'
+	;;
+    c) compilekernel='false'
+	;;
+    r) testfix='true'
+	;;
+    a) architecture="${OPTARG}"
+	;;
+    k)
+	kernel_remote="${OPTARG}"
+	if [ is_ssh_link "$kernel_remote" ]; then
+		echo "Use https:// link (found $kernel_remote)"
+	fi
+	;;
+    b) kernel_branch="${OPTARG}"
+	;;
+    *) help
+       exit 1 ;;
+  esac
+done
+
+name=${@:$OPTIND:1}
+system=$(get_full_system_name $name)
+variant=$(get_variant $name)
+# repo=""
+
+PRETEST_TASK_PARAMS=""
+if [ "$testfix" == "true" ]; then
+IFS='' read -r -d '' PRETEST_TASK_PARAMS <<EOF
+		<params>
+			<param name="RETEST" value="" />
+			<param name="BRANCH" value="$name"/>
+		</params>
+EOF
+fi
+
+arch=$(get_arch $name)
+if [ -n "$architecture" ]; then
+	arch="$architecture"
+fi
+
+fetch_fstests="true"
+FETCH_FSTESTS_TASK=""
+if [ "$fetch_fstests" == "true" ]; then
+IFS='' read -r -d '' FETCH_FSTESTS_TASK <<EOF
+	<task name="Fetch fstests">
+		<fetch url="$GIT_CLONE_TASK_URL" />
+		<params>
+			<param name="WORKDIR" value="/root"/>
+			<param name="REPOSITORY" value="git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git" />
+			<param name="DIRECTORY" value="xfstests"/>
+		</params>
+	</task>
+EOF
+fi
+
+fetch_kernel="true"
+FETCH_KERNEL_TASK=""
+if [ "$fetch_kernel" == "true" ]; then
+	if [ -z "$remote_url" ]; then
+		remote_url=$(get_remote_url $name)
+	fi
+
+IFS='' read -r -d '' FETCH_KERNEL_TASK <<EOF
+	<task name="Fetch kernel">
+		<fetch url="$GIT_CLONE_TASK_URL" />
+		<params>
+			<param name="WORKDIR" value="/root"/>
+			<param name="REPOSITORY" value="$remote_url" />
+			<param name="DIRECTORY" value="kernel"/>
+		</params>
+	</task>
+EOF
+fi
+
+fetch_ltp="true"
+FETCH_LTP_TASK=""
+if [ "$fetch_ltp" == "true" ]; then
+IFS='' read -r -d '' FETCH_LTP_TASK <<EOF
+	<task name="Fetch LTP">
+		<fetch url="$GIT_CLONE_TASK_URL" />
+		<params>
+			<param name="WORKDIR" value="/root"/>
+			<param name="REPOSITORY" value="https://github.com/linux-test-project/ltp.git" />
+			<param name="DIRECTORY" value="ltp"/>
+		</params>
+	</task>
+EOF
+fi
+
+PRETEST_TASK=""
+if [ "$pretest" == "true" ]; then
+IFS='' read -r -d '' PRETEST_TASK <<EOF
+	<task name="Run fstests">
+		<fetch url="$FSTEST_TASK_URL" />
+		$PRETEST_TASK_PARAMS
+	</task>
+EOF
+fi
+
+COMPILE_KERNEL_TASK=""
+if [ "$fetchkernel" == "true" ]; then
+	branch="$kernel_branch"
+
+	if [ -z "$branch" ]; then
+		branch="$name"
+	fi
+IFS='' read -r -d '' COMPILE_KERNEL_TASK <<EOF
+	<task name="Compile kernel">
+		<fetch url="$KERNEL_TASK_URL" />
+		<params>
+			<param name="BRANCH" value="$branch"/>
+			<param name="BUILD" value="$compilekernel"/>
+		</params>
+	</task>
+EOF
+fi
+
+output=$(mktemp)
+
+cat << EOF > $output
+<job retention_tag="scratch">
+  <whiteboard>Machine for $name</whiteboard>
+  <recipeSet priority="Normal">
+    <recipe whiteboard="" role="RECIPE_MEMBERS" ks_meta="method=http harness='restraint-rhts beakerlib-redhat'" kernel_options="" kernel_options_post="">
+      <autopick random="false"/>
+      <watchdog panic="ignore"/>
+      <packages>
+          <package name="acl"/>
+          <package name="attr"/>
+          <package name="automake"/>
+          <package name="bc"/>
+          <package name="dbench"/>
+          <package name="dump"/>
+          <package name="e2fsprogs"/>
+          <package name="fio"/>
+          <package name="gawk"/>
+          <package name="gcc"/>
+          <package name="gdbm-devel"/>
+          <package name="git"/>
+          <package name="kernel-devel"/>
+          <package name="indent"/>
+          <package name="libacl-devel"/>
+          <package name="libaio-devel"/>
+          <package name="libcap-devel"/>
+          <package name="libtool"/>
+          <package name="liburing-devel"/>
+          <package name="libuuid-devel"/>
+          <package name="lvm2"/>
+          <package name="make"/>
+          <package name="psmisc"/>
+          <package name="python3"/>
+          <package name="quota"/>
+          <package name="sed"/>
+          <package name="sqlite"/>
+          <package name="udftools"/>
+          <package name="xfsprogs"/>
+          <package name="btrfs-progs"/>
+          <package name="exfatprogs"/>
+          <package name="f2fs-tools"/>
+          <package name="ocfs2-tools"/>
+          <package name="openssl"/>
+          <package name="xfsdump"/>
+          <package name="xfsprogs-devel"/>
+          <package name="inih"/>
+          <package name="inih-devel"/>
+          <package name="userspace-rcu"/>
+          <package name="userspace-rcu-devel"/>
+          <package name="libblkid"/>
+          <package name="libblkid-devel"/>
+          <package name="wget"/>
+          <package name="rsync"/>
+          <package name="bison"/>
+          <package name="flex"/>
+          <package name="ncurses-devel"/>
+          <package name="openssl-devel"/>
+          <package name="dwarves"/>
+          <package name="cscope"/>
+          <package name="trace-cmd"/>
+          <package name="indent"/>
+          <package name="fsverity-utils"/>
+      </packages>
+      <ks_appends/>
+      <repos/>
+      <distroRequires>
+        <and>
+          <distro_family op="=" value="$system"/>
+          <distro_variant op="=" value="$variant"/>
+          <distro_arch op="=" value="$arch"/>
+        </and>
+      </distroRequires>
+      <hostRequires>
+        <and>
+          <system_type value="Machine"/>
+        </and>
+      </hostRequires>
+      <partitions>
+        <partition type="part" name="/mnt/test" size="15" fs="xfs"/>
+        <partition type="part" name="/mnt/scratch" size="15" fs="xfs"/>
+      </partitions>
+
+	<task name="/distribution/check-install" role="STANDALONE"/>
+
+	<task name="/distribution/command">
+		<params>
+			<param name="CMDS_TO_RUN" value="touch ~/$name" />
+		</params>
+	</task>
+
+$FETCH_FSTESTS_TASK
+$FETCH_KERNEL_TASK
+$FETCH_LTP_TASK
+$PRETEST_TASK
+$COMPILE_KERNEL_TASK
+
+
+	<task name="/distribution/reservesys" role="STANDALONE">
+		<params>
+			<param name="RESERVETIME" value="356400"/>
+		</params>
+	</task>
+
+    </recipe>
+  </recipeSet>
+</job>
+EOF
+
+
+#        <task name="/kernel/distribution/upstream-kernel/install" role="STANDALONE">
+#        <params>
+#          <param name="KERNEL_GIT_REPO" value="https://oauth2:$GITLAB_RO_TOKEN@gitlab.com/alberand-rh/linux.git"/>
+#          <param name="KERNEL_GIT_COMMIT" value="HEAD"/>
+#          <param name="KERNEL_GIT_BRANCH" value="xfs-verity"/>
+#          <param name="GIT_CLONE_OPTION" value="--depth=1"/>
+#          <param name="ABORT_IF_FAIL" value="1"/>
+#          <param name="KERNEL_PMEM_DAX" value="1"/>
+#          <param name="KERNEL_FS_FEATURES" value="1"/>
+#        </params>
+#      </task>
+#
+#      <task name="/kernel/filesystems/xfstests" role="STANDALONE">
+#        <params>
+#          <param name="E2FSPROGS_REPO" value="git://git.kernel.org/pub/scm/fs/ext2/e2fsprogs.git"/>
+#          <param name="FSTYP" value="xfs"/>
+#          <param name="MKFS_OPTS" value="-m crc=1,finobt=1,rmapbt=0,reflink=1,bigtime=1,inobtcount=1"/>
+#          <param name="NFS_UTILS_REPO" value="git://git.linux-nfs.org/projects/steved/nfs-utils.git"/>
+#          <param name="SCRATCH_MNT" value="/mnt/scratch"/>
+#          <param name="TEST_MNT" value="/mnt/test"/>
+#          <param name="XFSPROGS_BRANCH" value="for-next"/>
+#          <param name="XFSPROGS_REPO" value="git://git.kernel.org/pub/scm/fs/xfs/xfsprogs-dev.git"/>
+#          <param name="XFSTESTS_BRANCH" value="for-next"/>
+#          <param name="XFSTESTS_REPO" value="git://git.kernel.org/pub/scm/fs/xfs/xfstests-dev.git"/>
+#        </params>
+#      </task>
+      #<repos>
+          #<repo name="brew-repo" url="$repo"/>
+      #</repos>
+
+#cat $output
+bkr job-submit $output
