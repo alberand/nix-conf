@@ -80,6 +80,7 @@
     xfstests
     zathura
     zlib
+    qpwgraph
   ];
 
   home.file = {
