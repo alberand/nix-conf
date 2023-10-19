@@ -34,6 +34,10 @@
         position = "top";
       }];
 
+      startup = [
+        { command = "exec blueman-applet"; }
+      ];
+
       # Display device configuration
       output = {
         "*" = {
@@ -48,6 +52,7 @@
           { class = "Pavucontrol"; }
           { app_id = "org.prismlauncher.PrismLauncher"; }
           { app_id = "org.kde.kdeconnect.sms"; }
+          { app_id = ".blueman-manager-wrapped"; }
         ];
 
         keybindings = let
