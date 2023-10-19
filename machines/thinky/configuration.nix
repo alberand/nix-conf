@@ -86,6 +86,7 @@
     bemenu # wayland clone of dmenu
     mako # notification system developed by swaywm maintainer
     wdisplays # tool to configure displays
+    revumatic
   ];
 
   # Enable sound.

@@ -9,9 +9,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    revumatic.url = "gitlab:alberand-rh/revumatic";
+    revumatic.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, unstablepkgs, home-manager, nixos-hardware }:
+  outputs = { self, nixpkgs, unstablepkgs, home-manager, nixos-hardware,
+    revumatic }:
   let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -24,6 +27,7 @@
       overlays = [(final: prev: {
         # Example of bringing in an unstable package:
         minecraft-server = unstable.minecraft-server;
+        revumatic = revumatic.packages."${system}".revumatic;
       })];
     };
 
