@@ -1,17 +1,4 @@
 { pkgs, ... }: let
-  vpn-script = ''
-    template='{"text": "$text", "tooltip": "", "class": "$class", "percentage": 0 }'
-    country=$(curl https://am.i.mullvad.net/country 2>/dev/null)
-    if [[ ! $country ]]; then 
-    template=$(echo $template | sed 's/$text/No VPN/' | \
-      sed 's/$class/disconnected/'); 
-    else 
-    template=$(echo $template | sed 's/$text/VPN/' | \
-      sed 's/$class/connected/'); 
-    fi
-    echo $template;
-  '';
-
   chlang-script = ''
     swaymsg input '16700:8467:Dell_KB216_Wired_Keyboard_Consumer_Control' xkb_switch_layout next
   '';
@@ -78,7 +65,8 @@ in {
           tooltip = false;
           format = "{}";
           return-type = "json";
-          exec = vpn-script;
+          # This requires VPN script to check connectivity
+          # exec = vpn-script;
         };
 
         "pulseaudio" = {

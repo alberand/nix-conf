@@ -27,6 +27,10 @@
     ".shrc.local" = { source = ./configs/.shrc.local; };
   };
 
+  # Script to check work VPN connectivity
+  programs.waybar.settings.mainBar."custom/vpn".exec =
+    (builtins.readFile ./configs/vpn-check.sh);
+
   wayland.windowManager.sway.config = {
     startup = [
       { command = "swaymsg 'workspace 1; exec firefox'"; }

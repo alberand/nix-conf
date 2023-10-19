@@ -65,6 +65,7 @@
     perl
     pkg-config
     python3
+    jq
     ripgrep
     ripgrep
     stress-ng
