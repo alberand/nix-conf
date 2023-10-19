@@ -46,7 +46,6 @@
         floating.criteria = [
           { title = "Steam - Update News"; }
           { class = "Pavucontrol"; }
-          { class = "minecraft-launcher"; }
           { app_id = "org.prismlauncher.PrismLauncher"; }
           { app_id = "org.kde.kdeconnect.sms"; }
         ];
