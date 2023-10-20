@@ -35,6 +35,7 @@
         DEBUG = "true";
         UMASK = "000";
         TZ = "Europe/London";
+        DELUGE_ENABLE_WEBUI_PASSWORD = "no";
       };
 
       extraOptions = [
