@@ -28,6 +28,7 @@
         # Example of bringing in an unstable package:
         minecraft-server = unstable.minecraft-server;
         revumatic = revumatic.packages."${system}".revumatic;
+        photoprism = unstable.photoprism;
       })];
     };
 

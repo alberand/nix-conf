@@ -13,6 +13,7 @@
     ../../modules/minecraft.nix
     ../../modules/borgbackup.nix
     ../../modules/build-machines.nix
+    ../../modules/photoprism.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -231,17 +232,6 @@
         devices = [ "lonmoun" "nothing-phone" ];
       };
     };
-  };
-
-  services.photoprism = {
-    enable = true;
-    port = 8113;
-    originalsPath = "/media/photos";
-    settings = {
-      PHOTOPRISM_ADMIN_USER = "alberand";
-      PHOTOPRISM_ADMIN_PASSWORD = "123456";
-    };
-
   };
 
   programs.ccache.enable = true;
