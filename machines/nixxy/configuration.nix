@@ -60,13 +60,13 @@
         53
         22
         config.services.minecraft-server.serverProperties.server-port
-        config.networking.wireguard.interfaces.wg0.listenPort
+        config.networking.wg-quick.interfaces.wg0.listenPort
         55686 # jellyfin
       ];
       allowedUDPPorts = [
         53
         config.services.minecraft-server.serverProperties.server-port
-        config.networking.wireguard.interfaces.wg0.listenPort
+        config.networking.wg-quick.interfaces.wg0.listenPort
       ];
     };
   };
