@@ -14,6 +14,7 @@
     ../../modules/borgbackup.nix
     ../../modules/build-machines.nix
     ../../modules/photoprism.nix
+    ../../modules/tailscale.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
