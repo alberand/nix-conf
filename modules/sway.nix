@@ -121,6 +121,7 @@
           "${mod}+slash" = "layout toggle split";
           "${mod}+a" = "focus parent";
           "${mod}+s" = "focus child";
+          "${mod}+e" = "floating enable, sticky enable";
 
           "${mod}+Shift+c" = "reload";
           "${mod}+Shift+r" = "restart";
