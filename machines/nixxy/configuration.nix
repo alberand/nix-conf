@@ -63,12 +63,16 @@
         22
         config.services.minecraft-server.serverProperties.server-port
         config.networking.wg-quick.interfaces.wg0.listenPort
+        config.services.tailscale.port
         55686 # jellyfin
+        443 # https
       ];
       allowedUDPPorts = [
         53
         config.services.minecraft-server.serverProperties.server-port
         config.networking.wg-quick.interfaces.wg0.listenPort
+        config.services.tailscale.port
+        443 # https
       ];
     };
   };

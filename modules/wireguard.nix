@@ -9,7 +9,7 @@
         "fc00:bbbb:bbbb:bb01::1:9c3b/128"
       ];
 
-      dns = [ "100.64.0.23" ];
+      dns = [ "1.1.1.1" ];
 
       # to match firewall allowedUDPPorts (without this wg
       # uses random port numbers)
