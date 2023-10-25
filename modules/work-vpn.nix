@@ -26,7 +26,7 @@
 #   systemctl start openvpn-vpn.service
 # Check that everything works:
 #   curl <beaker url>
-{config, pkgs, ...}: {
+{ config, pkgs, lib, ...}: {
   users.users = {
     openvpn = {
       name = "openvpn";
@@ -42,7 +42,7 @@
     gid = 1100;
   };
 
-  networking.nameservers = [ "10.45.248.15" ];
+  networking.nameservers = lib.mkBefore [ "10.45.248.15" ];
 
   security.pki.certificates = let
     certfile = builtins.readFile ../openvpn/2015-RH-IT-Root-CA.pem;
