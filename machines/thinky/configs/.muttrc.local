@@ -20,6 +20,9 @@ color index cyan default "~s ANNOUNCE"
 # Highlight reminders from Workday
 color index blue default "~f timetracking@redhat.com"
 
+# Remove crap in Jira emails
+folder-hook bugzilla "set display_filter='~/.redhat/neomutt-jira.sh'"
+
 # Mailboxes
 virtual-mailboxes "fstests" "notmuch://?query=tag:fstests"
 virtual-mailboxes "xfs" "notmuch://?query=tag:linux-xfs"

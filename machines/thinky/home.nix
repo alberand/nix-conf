@@ -27,6 +27,9 @@
     ".redhat/notmuch-hook.sh" = {
       source = ./configs/notmuch-hook.sh;
     };
+    ".redhat/neomutt-jira.sh" = {
+      source = ./configs/neomutt-jira.sh;
+    };
     ".shrc.local" = {
       source = ./configs/.shrc.local;
     };
