@@ -1,4 +1,8 @@
 config * {
     master conserver-01.host.prod.eng.brq2.redhat.com;
-    port 782
+    port 782;
+}
+terminal xterm {
+        attach "^[]0;conserver: U@C^G";
+        attachsubst U=us,C=cs;
 }
