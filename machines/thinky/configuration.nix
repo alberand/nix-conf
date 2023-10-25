@@ -54,8 +54,17 @@
     # Configure the NAT/Firewall
     firewall.enable = true;
     firewall = {
-      allowedTCPPorts = [ 53 22 ];
-      allowedUDPPorts = [ 53 ];
+      allowedTCPPorts = [
+        53 # dns
+        22 # ssh
+        782 # conserver
+        443 # https
+      ];
+      allowedUDPPorts = [
+        53 # dns
+        782 # conserver
+        443 # https
+      ];
     };
   };
 

@@ -13,6 +13,7 @@
     cargo
     rust-analyzer
     pinentry
+    conserver
     (writeShellScriptBin "git-bp" (builtins.readFile ./configs/git-bp))
     (writeShellScriptBin "machine" (builtins.readFile ./configs/machine))
   ];
@@ -32,6 +33,9 @@
     };
     ".shrc.local" = {
       source = ./configs/.shrc.local;
+    };
+    ".consolerc" = {
+      source = ./configs/.consolerc;
     };
   };
   services.mbsync.configFile = ./configs/.mbsyncrc;

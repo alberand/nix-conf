@@ -1,0 +1,4 @@
+config * {
+    master conserver-01.host.prod.eng.brq2.redhat.com;
+    port 782
+}
