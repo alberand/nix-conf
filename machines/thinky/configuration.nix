@@ -72,6 +72,7 @@
       "libvirt"
       "networkmanager"
       "disk"
+      "wireshark"
     ];
   };
 

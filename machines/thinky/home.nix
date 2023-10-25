@@ -12,7 +12,6 @@
   home.packages = with pkgs; [
     cargo
     rust-analyzer
-    wireshark
     pinentry
     (writeShellScriptBin "git-bp" (builtins.readFile ./configs/git-bp))
     (writeShellScriptBin "machine" (builtins.readFile ./configs/machine))

@@ -20,7 +20,6 @@
     steam
     tdesktop # telegram
     thunderbird
-    wireshark
   ];
 
   home.file = {
