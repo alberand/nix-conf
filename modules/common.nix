@@ -87,6 +87,7 @@
     bluez-alsa
     bluez-tools
     wireshark
+    parted
 
     # work
     qemu_full
