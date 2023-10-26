@@ -40,6 +40,11 @@ ${pkgs.iptables}/bin/iptables -I OUTPUT -s 192.168.0.0/24 -d 192.168.0.0/24 \
 # kvart nix container
 ${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.233.1.0/24 -d 10.233.1.0/24 \
         -j ACCEPT
+# Exclude OpenVPN tunnel to wedos
+${pkgs.iptables}/bin/iptables -A INPUT -s 10.8.0.1/24 -d 10.8.0.14/24 \
+        -m state --state NEW,ESTABLISHED -j ACCEPT
+${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.8.0.14/24 -d 10.8.0.1/24 \
+        -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Allow deluge web gui
 ${pkgs.iptables}/bin/iptables -I OUTPUT -o lo -p tcp \
