@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   nix = {
-    distributedBuilds = true;
+    distributedBuilds = false;
     buildMachines = [
       {
         hostName = "fedora-vm";
