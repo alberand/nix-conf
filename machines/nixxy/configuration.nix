@@ -14,7 +14,6 @@
     ../../modules/borgbackup.nix
     ../../modules/build-machines.nix
     ../../modules/photoprism.nix
-    ../../modules/tailscale.nix
     ../../modules/jellyfin-tunnel.nix
   ];
 
@@ -60,8 +59,8 @@
     firewall.enable = true;
     firewall = {
       allowedTCPPorts = [
-        53
-        22
+        53 # dns
+        22 # ssh
         config.services.minecraft-server.serverProperties.server-port
         config.networking.wg-quick.interfaces.wg0.listenPort
         config.services.tailscale.port
@@ -69,7 +68,7 @@
         443 # https
       ];
       allowedUDPPorts = [
-        53
+        53 # dns
         config.services.minecraft-server.serverProperties.server-port
         config.networking.wg-quick.interfaces.wg0.listenPort
         config.services.tailscale.port
