@@ -57,11 +57,13 @@
       allowedTCPPorts = [
         53 # dns
         22 # ssh
+        88 # kerberos
         782 # conserver
         443 # https
       ];
       allowedUDPPorts = [
         53 # dns
+        88 # kerberos
         782 # conserver
         443 # https
       ];
