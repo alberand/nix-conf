@@ -1,8 +1,5 @@
-{ pkgs, ... }: let
-  chlang-script = ''
-    swaymsg input '16700:8467:Dell_KB216_Wired_Keyboard_Consumer_Control' xkb_switch_layout next
-  '';
-in {
+{ pkgs, ... }:
+{
   programs.waybar = {
     enable = true;
     style = "${builtins.readFile ../configs/waybar-style.css}";
@@ -37,7 +34,7 @@ in {
 
         "sway/language" = {
           all-outputs = true;
-          on-click = chlang-script;
+          on-click = "swaymsg input type:keyboard xkb_switch_layout next";
         };
 
         "clock#time" = {
