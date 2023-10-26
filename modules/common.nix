@@ -88,6 +88,7 @@
     bluez-tools
     wireshark
     parted
+    iptables
 
     # work
     qemu_full
