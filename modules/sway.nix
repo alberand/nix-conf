@@ -50,7 +50,6 @@
         floating.criteria = [
           { title = "Steam - Update News"; }
           { class = "Pavucontrol"; }
-          { app_id = "org.prismlauncher.PrismLauncher"; }
           { app_id = "org.kde.kdeconnect.sms"; }
           { app_id = ".blueman-manager-wrapped"; }
         ];
