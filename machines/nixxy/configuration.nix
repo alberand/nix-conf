@@ -66,6 +66,7 @@
         config.services.tailscale.port
         55686 # jellyfin
         443 # https
+        1194 # OpenVPN
       ];
       allowedUDPPorts = [
         53 # dns
@@ -73,6 +74,7 @@
         config.networking.wg-quick.interfaces.wg0.listenPort
         config.services.tailscale.port
         443 # https
+        1194 # OpenVPN
       ];
     };
   };
