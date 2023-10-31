@@ -3,6 +3,10 @@
 # It also needs:
 # pull-filter ignore redirect-gateway
 { config, pkgs, lib, ...}: {
+  networking.dhcpcd.runHook = ''
+    ${pkgs.iproute2}/bin/ip route add 89.221.217.209 via 192.168.0.1 dev enp34s0
+  '';
+
   users.users = {
     openvpn = {
       name = "openvpn";
