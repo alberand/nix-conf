@@ -42,8 +42,6 @@
     gid = 1100;
   };
 
-  networking.nameservers = lib.mkBefore [ "10.45.248.15" ];
-
   security.pki.certificates = let
     certfile = builtins.readFile ../openvpn/2015-RH-IT-Root-CA.pem;
   in [
