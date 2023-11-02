@@ -66,5 +66,33 @@
       up = builtins.readFile ../openvpn/client.up;
       down = builtins.readFile ../openvpn/client.down;
     };
+    ams = {
+      config = ''config /etc/openvpn/ovpn-ams2-tcp.conf'';
+      # Don't autostart as VPN needs credentials
+      autoStart = false;
+      up = builtins.readFile ../openvpn/client.up;
+      down = builtins.readFile ../openvpn/client.down;
+    };
+    ams-udp = {
+      config = ''config /etc/openvpn/ovpn-ams2-udp.conf'';
+      # Don't autostart as VPN needs credentials
+      autoStart = false;
+      up = builtins.readFile ../openvpn/client.up;
+      down = builtins.readFile ../openvpn/client.down;
+    };
+    brq2 = {
+      config = ''config /etc/openvpn/ovpn-brq2-tcp.conf'';
+      # Don't autostart as VPN needs credentials
+      autoStart = false;
+      up = builtins.readFile ../openvpn/client.up;
+      down = builtins.readFile ../openvpn/client.down;
+    };
+    brq2-udp = {
+      config = ''config /etc/openvpn/ovpn-brq2-udp.conf'';
+      # Don't autostart as VPN needs credentials
+      autoStart = false;
+      up = builtins.readFile ../openvpn/client.up;
+      down = builtins.readFile ../openvpn/client.down;
+    };
   };
 }
