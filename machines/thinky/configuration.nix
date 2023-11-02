@@ -70,6 +70,7 @@
         88 # kerberos
         782 # conserver
         443 # https
+        853 # DNS over TLS
         1194 # openvpn
       ];
       allowedUDPPorts = [
@@ -77,6 +78,7 @@
         88 # kerberos
         782 # conserver
         443 # https
+        853 # DNS over TLS
         1194 # openvpn
       ];
     };
