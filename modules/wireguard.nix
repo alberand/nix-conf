@@ -41,6 +41,11 @@ ${pkgs.iptables}/bin/iptables -I OUTPUT -s 192.168.0.0/24 -d 192.168.0.0/24 \
 ${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.233.1.0/24 -d 10.233.1.0/24 \
         -j ACCEPT
 
+${pkgs.iptables}/bin/iptables -A INPUT -s 10.88.0.1/16 -d 10.88.0.1/16 \
+        -m state --state NEW,ESTABLISHED -j ACCEPT
+${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.88.0.1/16 -d 10.88.0.1/16 \
+        -m state --state NEW,ESTABLISHED -j ACCEPT
+
 # Exclude OpenVPN tunnel to wedos
 ${pkgs.iptables}/bin/iptables -A INPUT -s 10.8.0.1/24 -d 10.8.0.14/24 \
         -m state --state NEW,ESTABLISHED -j ACCEPT
