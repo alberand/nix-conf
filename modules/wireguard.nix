@@ -22,58 +22,58 @@ wg set wg0 fwmark 51820
 
 # Accept kdeconnect connections
 ${pkgs.iptables}/bin/iptables -A INPUT -i wg0 -p udp \
---dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+  --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 ${pkgs.iptables}/bin/iptables -A INPUT -i wg0 -p tcp \
---dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+  --dport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p udp \
---sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+  --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 ${pkgs.iptables}/bin/iptables -A OUTPUT -o wg0 -p tcp \
---sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
+  --sport 1714:1764 -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Jellyfin port forwarding for Mullvad VPN
 ${pkgs.iptables}/bin/iptables -I INPUT -p tcp --dport 55686 \
--j ACCEPT
+  -j ACCEPT
 
 # lan
 ${pkgs.iptables}/bin/iptables -I OUTPUT -s 192.168.0.0/24 -d 192.168.0.0/24 \
-        -m state --state NEW,ESTABLISHED -j ACCEPT
+  -m state --state NEW,ESTABLISHED -j ACCEPT
 # kvart nix container
 ${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.233.1.0/24 -d 10.233.1.0/24 \
-        -j ACCEPT
+  -j ACCEPT
 
 ${pkgs.iptables}/bin/iptables -A INPUT -s 10.88.0.1/16 -d 10.88.0.1/16 \
-        -m state --state NEW,ESTABLISHED -j ACCEPT
+  -m state --state NEW,ESTABLISHED -j ACCEPT
 ${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.88.0.1/16 -d 10.88.0.1/16 \
-        -m state --state NEW,ESTABLISHED -j ACCEPT
+  -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Exclude OpenVPN tunnel to wedos
 ${pkgs.iptables}/bin/iptables -A INPUT -s 10.8.0.1/24 -d 10.8.0.14/24 \
-        -m state --state NEW,ESTABLISHED -j ACCEPT
+  -m state --state NEW,ESTABLISHED -j ACCEPT
 ${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.8.0.14/24 -d 10.8.0.1/24 \
-        -m state --state NEW,ESTABLISHED -j ACCEPT
+  -m state --state NEW,ESTABLISHED -j ACCEPT
 
 ${pkgs.iptables}/bin/iptables -A INPUT -s 89.221.217.209 -d 192.168.0.100 \
-        -m state --state NEW,ESTABLISHED -j ACCEPT
+  -m state --state NEW,ESTABLISHED -j ACCEPT
 ${pkgs.iptables}/bin/iptables -I OUTPUT -s 192.168.0.100 -d 89.221.217.209 \
-        -m state --state NEW,ESTABLISHED -j ACCEPT
+  -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Allow deluge web gui
-${pkgs.iptables}/bin/iptables -I OUTPUT -o lo -p tcp \
---dport 8112 -m state --state NEW,ESTABLISHED -j ACCEPT
+${pkgs.iptables}/bin/iptables -I INPUT -p tcp \
+  --dport 8112 -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Forbid anything else which doesn't go through wireguard VPN on
 # ipV4 and ipV6
 ${pkgs.iptables}/bin/iptables -A OUTPUT \
-! -d 192.168.0.0/16 \
-! -o wg0 \
--m mark ! --mark $(wg show wg0 fwmark) \
--m addrtype ! --dst-type LOCAL \
--j REJECT
+  ! -d 192.168.0.0/16 \
+  ! -o wg0 \
+  -m mark ! --mark $(wg show wg0 fwmark) \
+  -m addrtype ! --dst-type LOCAL \
+  -j REJECT
 ${pkgs.iptables}/bin/ip6tables -A OUTPUT \
-! -o wg0 \
--m mark ! --mark $(wg show wg0 fwmark) \
--m addrtype ! --dst-type LOCAL \
--j REJECT
+  ! -o wg0 \
+  -m mark ! --mark $(wg show wg0 fwmark) \
+  -m addrtype ! --dst-type LOCAL \
+  -j REJECT
 '';
 
       postDown = ''
