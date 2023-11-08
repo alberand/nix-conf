@@ -25,6 +25,9 @@
       pull = {
         rebase = true;
       };
+      merge = {
+        conflictStyle = "diff3";
+      };
     };
 
     aliases = {
