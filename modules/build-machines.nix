@@ -1,13 +1,13 @@
 { config, pkgs, ... }:
 {
   nix = {
-    distributedBuilds = false;
+    distributedBuilds = true;
     buildMachines = [
       {
-        hostName = "fedora-vm";
+        hostName = "builder";
         protocol = "ssh-ng";
-        sshKey = "/home/alberand/.ssh/id_rsa";
-        sshUser = "root";
+        sshKey = "/home/alberand/.ssh/nixremote";
+        sshUser = "nixremote";
         system = "x86_64-linux";
         supportedFeatures = [
           "kvm"
