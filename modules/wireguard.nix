@@ -58,8 +58,12 @@ ${pkgs.iptables}/bin/iptables -I OUTPUT -s 192.168.0.100 -d 89.221.217.209 \
   -m state --state NEW,ESTABLISHED -j ACCEPT
 
 # Allow deluge web gui
-${pkgs.iptables}/bin/iptables -I INPUT -p tcp \
-  --dport 8112 -m state --state NEW,ESTABLISHED -j ACCEPT
+${pkgs.iptables}/bin/iptables -I OUTPUT \
+  -p tcp \
+  -s localhost \
+  --dport 8112 \
+  -m state --state NEW,ESTABLISHED \
+  -j ACCEPT
 
 # Forbid anything else which doesn't go through wireguard VPN on
 # ipV4 and ipV6
