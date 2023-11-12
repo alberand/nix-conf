@@ -15,6 +15,7 @@
     ../../modules/build-machines.nix
     ../../modules/photoprism.nix
     ../../modules/jellyfin-tunnel.nix
+    ../../modules/tandoor.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
