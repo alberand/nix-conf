@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   programs.git = {
     enable = true;
@@ -8,10 +8,14 @@
       core = {
         editor = "nvim";
         # Make tabs 8 chars wide
-        pager = "less -x8 -FX";
+        pager = lib.mkOptionDefault "less -x8 -FX";
+        #pager = "delta";
       };
       diff = {
         algorithm = "patience";
+      };
+      diff = {
+        colorMoved = "default";
       };
       creo = {
         autocrlf = true;
