@@ -95,6 +95,7 @@
     qemu-utils
     trace-cmd
     nix-tree
+    podman
   ];
 
   programs.zsh.enable = true;
