@@ -1,5 +1,21 @@
 { config, pkgs, ... }:
 {
+  users.users = {
+    photoprism = {
+      name = "photoprism";
+      group = "photoprism";
+      isNormalUser = true;
+      uid = 1110;
+      extraGroups = [ "media" ];
+    };
+  };
+
+  users.groups.photoprism = {
+    name = "photoprism";
+    members = ["photoprism"];
+    gid = 1110;
+  };
+
   services.photoprism = {
     enable = true;
     address = "localhost";

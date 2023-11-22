@@ -94,7 +94,7 @@
   users.groups.media = {
     name = "media";
     gid = 8096;
-    members = [ "alberand" "jellyfin" "deluge" "photoprism" ];
+    members = [ "alberand" "jellyfin" "deluge" ];
   };
 
   users.users.deluge = {
