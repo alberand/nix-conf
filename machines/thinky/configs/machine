@@ -324,6 +324,7 @@ cat << EOF > $output
           <package name="trace-cmd"/>
           <package name="indent"/>
           <package name="fsverity-utils"/>
+          <package name="tmux"/>
       </packages>
       <ks_appends/>
       <repos/>
