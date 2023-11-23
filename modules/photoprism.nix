@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   users.users = {
     photoprism = {
@@ -27,6 +27,12 @@
     };
   };
 
+  systemd.services.photoprism = {
+    serviceConfig = {
+      DynamicUser = lib.mkForce false;
+    };
+  };
+
   # Unfortunately, symlinks doesn't work somehow, even though Photoprism docs
   # says they should
   fileSystems."/media/photos/phone" = {
@@ -35,8 +41,8 @@
   };
 
   # TODO copy & remove
-  fileSystems."/media/photos/julia" = {
-    device = "/media/stuff/BUP/Pictures/jpg";
-    options = [ "bind" ];
-  };
+  #fileSystems."/media/photos/julia" = {
+    #device = "/media/stuff/BUP/Pictures/jpg";
+    #options = [ "bind" ];
+  #};
 }
