@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   systemd.services.podman-deluge = {
-    after = [ "wireguard-wg0.service" ];
+    after = [ "wg-quick-wg0.service" ];
   };
 
   virtualisation.oci-containers.containers = {
