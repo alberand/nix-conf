@@ -1,5 +1,9 @@
 { pkgs, lib, ... }:
 {
+  home.packages = with pkgs; [
+    bfg-repo-cleaner
+  ];
+
   programs.git = {
     enable = true;
     lfs.enable = true;
