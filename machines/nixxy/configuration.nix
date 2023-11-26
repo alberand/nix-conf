@@ -68,6 +68,7 @@
         55686 # jellyfin
         443 # https
         1194 # OpenVPN
+        8123 # home-assistant
       ];
       allowedUDPPorts = [
         53 # dns
