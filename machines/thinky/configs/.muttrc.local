@@ -32,4 +32,4 @@ virtual-mailboxes "brew" "notmuch://?query=tag:brew"
 virtual-mailboxes "beaker" "notmuch://?query=tag:beaker"
 
 # Remove crap in Jira emails
-folder-hook bugzilla "set display_filter='~/.redhat/neomutt-jira.sh'"
+# folder-hook bugzilla "set display_filter='~/.redhat/neomutt-jira.sh'"
