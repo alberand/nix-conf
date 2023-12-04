@@ -97,6 +97,7 @@
     trace-cmd
     nix-tree
     podman
+    ccache
   ];
 
   programs.zsh.enable = true;
@@ -119,6 +120,8 @@
     pinentryFlavor = "tty";
     enableSSHSupport = false;
   };
+
+  programs.ccache.enable = true;
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
