@@ -89,6 +89,7 @@
     wireshark
     parted
     iptables
+    tldr
 
     # work
     qemu_full
