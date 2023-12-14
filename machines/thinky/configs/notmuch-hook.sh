@@ -15,6 +15,7 @@ notmuch tag +newsletters -inbox -new -- to:czech-announce@redhat.com
 notmuch tag +newsletters -inbox -new -- from:*@cpucommunications.com
 notmuch tag +newsletters -inbox -new -- from:rhl-noreply@redhat.com
 notmuch tag +newsletters -inbox -new -- from:ahanakov@redhat.com
+notmuch tag +newsletters -inbox -new -- from:academic@redhat.com
 
 # Mailing lists
 notmuch tag +fstests -inbox -new -- to:fstests@vger.kernel.org
