@@ -21,6 +21,7 @@
     steam
     tdesktop # telegram
     thunderbird
+    libreoffice
   ];
 
   home.file = {
