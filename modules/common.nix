@@ -98,6 +98,9 @@
     nix-tree
     podman
     ccache
+    vulkan-headers
+    vulkan-loader
+    vulkan-tools
   ];
 
   programs.zsh.enable = true;
