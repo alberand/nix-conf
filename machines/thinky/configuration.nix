@@ -162,6 +162,7 @@
   fileSystems."/mnt/lonmoun" = {
     device = "192.168.0.100:/alberand";
     fsType = "nfs";
+    options = [ "soft" "timeo=30" "retrans=0"];
   };
 
   # pipewire needs it
