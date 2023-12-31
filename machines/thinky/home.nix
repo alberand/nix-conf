@@ -56,4 +56,30 @@
       { command = "swaymsg 'exec \"sleep 1; flameshot\"'"; }
     ];
   };
+
+  programs.waybar.settings.mainBar = {
+    modules-right = [
+      "custom/suspend"
+      "battery"
+      "pulseaudio"
+      "network"
+      "custom/vpn"
+      "sway/language"
+      "tray"
+    ];
+
+    "battery" = {
+      bat = "BAT0";
+      interval = 60;
+      states = {
+        warning = 30;
+        critical = 15;
+      };
+      format = "{capacity}% {icon}";
+      #format-icons = {
+        #default = ["", "", "", "", "", "", ""];
+      #};
+      max-length = 25;
+    };
+  };
 }
