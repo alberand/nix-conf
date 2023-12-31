@@ -21,6 +21,7 @@
     SystemMaxUse=20M
   '';
 
+  fonts.fontconfig.enable = true;
   fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk
