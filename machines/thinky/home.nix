@@ -67,7 +67,7 @@
   };
 
   programs.waybar.settings.mainBar = {
-    modules-right = [
+    modules-right = lib.mkForce [
       "custom/suspend"
       "battery"
       "pulseaudio"
