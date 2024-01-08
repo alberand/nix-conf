@@ -1,5 +1,6 @@
 config * {
-    master conserver-01.host.prod.eng.brq2.redhat.com;
+    #master conserver-01.host.prod.eng.brq2.redhat.com;
+    master conserver-02.hosts.prod.psi.bos.redhat.com;
     port 782;
 }
 terminal xterm {

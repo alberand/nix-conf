@@ -14,6 +14,15 @@
     rust-analyzer
     pinentry
     conserver
+    (let
+        wrapper = (writeShellScriptBin "con" (builtins.readFile ./configs/console.sh));
+    in pkgs.symlinkJoin {
+      name = "conserver";
+      paths = [
+        conserver
+        wrapper
+      ];
+    })
     (writeShellScriptBin "git-bp" (builtins.readFile ./configs/git-bp))
     (writeShellScriptBin "machine" (builtins.readFile ./configs/machine))
   ];
