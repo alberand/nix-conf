@@ -36,6 +36,7 @@ set virtual_spoolfile=yes
 set nm_default_uri="notmuch:///home/aalbersh/.mail/gmail/inbox"
 set nm_unread_tag = unread
 set folder = "~/.mail/gmail/inbox"
+set record = "~/.mail/sent"
 # set spoolfile = "+INBOX"
 
 #
