@@ -5,6 +5,7 @@
     ../../modules/tmux.nix
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
+    ../../modules/ldap.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -89,6 +90,22 @@
     isNormalUser = true;
     description = "Andrey Albershteyn";
     uid = 1000;
+    shell = pkgs.zsh;
+    group = "users";
+    extraGroups = [
+      "wheel"
+      "sudo"
+      "libvirt"
+      "networkmanager"
+      "disk"
+      "wireshark"
+    ];
+  };
+
+  users.users.ktest = {
+    isNormalUser = true;
+    description = "Andrey Albershteyn";
+    uid = 4207372;
     shell = pkgs.zsh;
     group = "users";
     extraGroups = [
