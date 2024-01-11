@@ -102,6 +102,7 @@
     vulkan-headers
     vulkan-loader
     vulkan-tools
+    gimp
   ];
 
   programs.zsh.enable = true;
