@@ -103,9 +103,16 @@
     vulkan-loader
     vulkan-tools
     gimp
+    easyeffects
+    gnome.adwaita-icon-theme
+    gnomeExtensions.appindicator
   ];
 
   programs.zsh.enable = true;
+  programs.dconf.enable = true;
+  services.udev.packages = with pkgs; [
+    gnome.gnome-settings-daemon
+  ];
 
   # Enable the OpenSSH daemon.
   services.openssh = {

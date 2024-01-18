@@ -107,6 +107,8 @@
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 
+  services.easyeffects.enable = true;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
