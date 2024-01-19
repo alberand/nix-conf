@@ -5,7 +5,6 @@
     ../../modules/tmux.nix
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
-    ../../modules/ldap.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
