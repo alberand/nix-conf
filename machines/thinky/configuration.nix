@@ -59,7 +59,7 @@
     networkmanager.dns = "systemd-resolved";
     #defaultGateway = "192.168.0.1";
     #nameservers = [ "8.8.8.8" "1.1.1.1" ];
-    interfaces.enp0s20f0u3.useDHCP = true;
+    # interfaces.enp0s20f0u3.useDHCP = true;
     # VPN configuration
     # Configure the NAT/Firewall
     firewall.enable = true;
