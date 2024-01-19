@@ -179,7 +179,7 @@
   fileSystems."/mnt/lonmoun" = {
     device = "192.168.0.100:/alberand";
     fsType = "nfs";
-    options = [ "soft" "timeo=30" "retrans=5"];
+    options = [ "x-systemd.mount-timeout=5s" ];
   };
 
   # pipewire needs it
