@@ -263,9 +263,13 @@ label:focus {
 }
 
 #custom-suspend {
-    background-color: #ffa9a3;
-    color: black;
+    background-color: #5b5b5b;
     font-size: 18px;
     margin: 0 5px;
 }
 
+#custom-access {
+    background-color: #5c0160;
+    margin: 0 5px;
+    padding: 0 5px;
+}

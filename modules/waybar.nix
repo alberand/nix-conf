@@ -20,6 +20,7 @@
         ];
 
         modules-right = [
+          "custom/access"
           "custom/suspend"
           "pulseaudio"
           "network"
@@ -86,6 +87,14 @@
           min-length = 2;
           tooltip = false;
           on-click = "systemctl suspend";
+        };
+
+        "custom/access" = {
+          interval = 2;
+          format = "{}";
+          min-length = 2;
+          tooltip = false;
+          return-type = "json";
         };
 
         "tray" = {

@@ -58,6 +58,9 @@
   programs.waybar.settings.mainBar."custom/vpn".exec =
     (builtins.readFile ./configs/vpn-check.sh);
 
+  programs.waybar.settings.mainBar."custom/access".exec =
+    (pkgs.writeShellScriptBin "access" (builtins.readFile ./configs/access.sh)) + "/bin/access";
+
   wayland.windowManager.sway.config = {
     startup = [
       { command = "swaymsg 'workspace 1; exec firefox'"; }
@@ -68,12 +71,13 @@
 
   programs.waybar.settings.mainBar = {
     modules-right = lib.mkForce [
-      "custom/suspend"
+      "custom/access"
       "battery"
       "pulseaudio"
       "network"
       "custom/vpn"
       "sway/language"
+      "custom/suspend"
       "tray"
     ];
 
