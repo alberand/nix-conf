@@ -81,6 +81,7 @@
     zathura
     zlib
     qpwgraph
+    droidcam
   ];
 
   home.file = {
