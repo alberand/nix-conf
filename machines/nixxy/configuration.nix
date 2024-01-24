@@ -69,6 +69,8 @@
         443 # https
         1194 # OpenVPN
         8123 # home-assistant
+        111 # NFS
+        2049 # NFS
       ];
       allowedUDPPorts = [
         53 # dns
@@ -77,6 +79,8 @@
         config.services.tailscale.port
         443 # https
         1194 # OpenVPN
+        111 # NFS
+        2049 # NFS
       ];
     };
   };
