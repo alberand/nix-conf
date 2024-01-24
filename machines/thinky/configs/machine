@@ -121,6 +121,12 @@ if [ -z $GITLAB_RO_TOKEN ]; then
 	exit 1
 fi
 
+if ! klist > /dev/null 2>&1; then
+	echo "No Kerberos ticket. Run: kinit -f $USER"
+	exit 1
+fi
+
+
 # Run fstests on non-fixed kernel
 pretest='true'
 
