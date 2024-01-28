@@ -153,6 +153,8 @@
           }
 
           bindsym ${mod}+Alt_L mode "passthrough"
+
+          for_window [app_id="org.telegram.desktop"] border pixel 0
           '';
   };
 }
