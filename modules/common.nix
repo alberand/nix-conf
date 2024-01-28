@@ -83,6 +83,7 @@
     traceroute
     dig
     libvirt
+    wayland
     waypipe
     bluez
     bluez-alsa
