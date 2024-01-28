@@ -107,6 +107,8 @@
     easyeffects
     gnome.adwaita-icon-theme
     gnomeExtensions.appindicator
+    rustc
+    cargo
   ];
 
   programs.zsh.enable = true;
