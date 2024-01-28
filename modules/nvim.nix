@@ -29,6 +29,7 @@
       cmp_luasnip
       cmp-nvim-lua
       friendly-snippets
+      nvim-web-devicons
     ];
     extraConfig = ''
     set noexpandtab
