@@ -3,7 +3,15 @@
 # Add "set display_filter='/path/to/this/script'" to your .muttrc
 # You can also set it for your Jira mail folder with folder hook
 #
-# folder_hook Jira "set display_filter='/path/to/this/script'"
+# If you are using virtual-mailboxes, then, folder-hook will need a special tag
+# (bugzilla-hook-filter) in the query to match this mailbox. This is because
+# folder-hook doesn't match on the label ("bugzilla")
+# virtual-mailboxes "bugzilla" "notmuch://?query=tag:bugzilla-hook-filter or (tag:bugzilla)"
+#
+# # Reset display filter for all
+# folder-hook . "set display_filter=''"
+# # Set filter for Jira/Bugzilla folder
+# folder-hook bugzilla-hook-filter "set display_filter='/path/to/this/script'"
 
 awk '
 BEGIN {header=1; flag=1}
