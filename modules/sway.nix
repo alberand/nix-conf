@@ -52,6 +52,7 @@
           { class = "Pavucontrol"; }
           { app_id = "org.kde.kdeconnect.sms"; }
           { app_id = ".blueman-manager-wrapped"; }
+          { app_id = "calc"; }
         ];
 
         keybindings = let
@@ -155,6 +156,7 @@
           bindsym ${mod}+Alt_L mode "passthrough"
 
           for_window [app_id="org.telegram.desktop"] border pixel 0
+          for_window [app_id="calc"] border normal 1
           '';
   };
 }

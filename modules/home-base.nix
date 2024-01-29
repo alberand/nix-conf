@@ -82,6 +82,7 @@
     zlib
     qpwgraph
     droidcam
+    (writeShellScriptBin "calc" "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
   ];
 
   home.file = {

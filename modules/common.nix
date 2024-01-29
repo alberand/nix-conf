@@ -109,6 +109,7 @@
     gnomeExtensions.appindicator
     rustc
     cargo
+    qalculate-gtk
   ];
 
   programs.zsh.enable = true;
