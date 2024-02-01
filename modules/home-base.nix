@@ -83,6 +83,7 @@
     qpwgraph
     droidcam
     (writeShellScriptBin "calc" "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
+    (writeShellScriptBin "tmux-sessionizer" (builtins.readFile ../configs/tmux-sessionizer))
   ];
 
   home.file = {
@@ -91,6 +92,7 @@
     ".vimrc.local" = { source = ../.vimrc.local; };
     ".fdignore" = { source = ../configs/.fdignore; };
     ".config/kitty/kitty.conf" = { source = ../configs/.kitty; };
+    ".tmux.conf" = { source = ../configs/tmux.conf; };
   };
 
   services.gpg-agent = {
