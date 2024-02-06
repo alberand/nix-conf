@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   services.nginx = {
-    enable = true;
+    enable = false;
     virtualHosts.localhost = {
       listen = [{
         addr = "127.0.0.1";
