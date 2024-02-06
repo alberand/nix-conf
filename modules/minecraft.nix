@@ -5,7 +5,7 @@
   ];
 
   services.minecraft-server = {
-    enable = true;
+    enable = false;
     eula = true; # https://account.mojang.com/documents/minecraft_eula
     declarative = true;
 
