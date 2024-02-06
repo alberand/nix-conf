@@ -61,7 +61,7 @@ export PATH=$PATH:$HOME/.local/bin
 # Editor for cscope (by default it's vi)
 export CSCOPE_EDITOR=nvim
 
-alias cal="cal -ym"
+alias cal='cal -m | grep --color -EC6 "\b$(date +%e | sed "s/ //g")"'
 alias ipy='ipython3'
 
 # Allows to passthrough user's aliases to sudo
