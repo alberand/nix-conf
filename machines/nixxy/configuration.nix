@@ -221,19 +221,21 @@
     overrideFolders = false;
     user = "alberand";
     group = "users";
-    devices = {
-      "lonmoun" = {
-        id = "BHZVVJE-BKYAHGR-6ET6T2T-O7SRFSC-AKQEOP3-KYR4JME-ARSWMAB-HQSRBQL";
+    settings = {
+      devices = {
+        "lonmoun" = {
+          id = "BHZVVJE-BKYAHGR-6ET6T2T-O7SRFSC-AKQEOP3-KYR4JME-ARSWMAB-HQSRBQL";
+        };
+        "nothing-phone" = {
+          id = "74LMGV3-VGBB6J7-CT7LRHY-CANX5WF-UOVYYXG-762UH5M-6HFZKLB-AXNP2QW";
+        };
       };
-      "nothing-phone" = {
-        id = "74LMGV3-VGBB6J7-CT7LRHY-CANX5WF-UOVYYXG-762UH5M-6HFZKLB-AXNP2QW";
-      };
-    };
 
-    folders = {
-      "Documents" = {
-        path = "/home/alberand/Share/Documents";
-        devices = [ "lonmoun" "nothing-phone" ];
+      folders = {
+        "Documents" = {
+          path = "/home/alberand/Share/Documents";
+          devices = [ "lonmoun" "nothing-phone" ];
+        };
       };
     };
   };
@@ -255,5 +257,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 }
