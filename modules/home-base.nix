@@ -69,7 +69,6 @@
     ripgrep
     ripgrep
     stress-ng
-    swaylock
     tdesktop
     util-linux
     vlc

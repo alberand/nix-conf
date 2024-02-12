@@ -110,6 +110,7 @@
     rustc
     cargo
     qalculate-gtk
+    swayidle
   ];
 
   programs.zsh.enable = true;
@@ -143,6 +144,7 @@
   services.blueman.enable = true;
 
   security.polkit.enable = true;
+  security.pam.services.swaylock = {};
   systemd.user.services.waybar.enable = true;
   systemd.user.services.swayidle.enable = true;
 
