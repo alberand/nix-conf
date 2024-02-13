@@ -110,6 +110,7 @@
     rustc
     cargo
     qalculate-gtk
+    weechat
     swayidle
   ];
 

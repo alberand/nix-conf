@@ -153,11 +153,6 @@
 
   # Enable WeeChat to run as service with attached 'screen' session To
   # attach use: screen -x weechat/wc
-  services.weechat.enable = true;
-  programs.screen.screenrc = ''
-    multiuser on
-    acladd aalbersh
-  '';
   nixpkgs.overlays = [
     (self: super: {
       weechat = super.weechat.override {
@@ -167,6 +162,7 @@
             weechat-notify-send
             weechat-go
             wee-slack
+            weechat-matrix
           ];
         };
       };
