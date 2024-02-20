@@ -28,6 +28,7 @@ in {
       telescope-file-browser-nvim
       harpoon
       rust-vim
+      vim-fugitive
 
       nvim-lspconfig
       nvim-cmp
