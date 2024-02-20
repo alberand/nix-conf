@@ -182,6 +182,13 @@
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config = {
+      common = {
+        default = [
+          "gtk"
+        ];
+      };
+    };
   };
 
   # Enable WeeChat to run as service with attached 'screen' session To
