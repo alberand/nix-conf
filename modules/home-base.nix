@@ -1,6 +1,6 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
-    ./nvim.nix
+    ./neovim.nix
     ./zsh.nix
     ./waybar.nix
     ./wofi.nix
