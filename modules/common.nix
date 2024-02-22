@@ -113,6 +113,9 @@
     weechat
     swayidle
     wayland-protocols
+    nil
+    alejandra
+    deadnix
   ];
 
   programs.zsh.enable = true;

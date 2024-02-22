@@ -245,8 +245,9 @@ require('lspconfig')['clangd'].setup{
     flags = lsp_flags,
 }
 
-require("harpoon").setup({
-})
+require('lspconfig')['nil_ls'].setup({ })
+
+require("harpoon").setup({ })
 
 vim.keymap.set('n', "<leader>a", function() require("harpoon.mark").add_file() end, silent)
 vim.keymap.set('n', "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, silent)
@@ -256,3 +257,14 @@ vim.keymap.set('n', "<leader>t", function() require("harpoon.ui").nav_file(1) en
 vim.keymap.set('n', "<leader>r", function() require("harpoon.ui").nav_file(2) end, silent)
 vim.keymap.set('n', "<leader>e", function() require("harpoon.ui").nav_file(3) end, silent)
 vim.keymap.set('n', "<leader>w", function() require("harpoon.ui").nav_file(4) end, silent)
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.code_actions.statix,
+        null_ls.builtins.diagnostics.deadnix,
+        null_ls.builtins.formatting.alejandra,
+    },
+})
+vim.keymap.set('n', '<C-a>', ':lua vim.lsp.buf.format()<CR>')

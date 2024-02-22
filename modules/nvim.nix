@@ -29,6 +29,8 @@ in {
       harpoon
       rust-vim
       vim-fugitive
+      null-ls-nvim
+      statix
 
       nvim-lspconfig
       nvim-cmp
