@@ -60,6 +60,9 @@ vim.opt.secure = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- Wrapping doesn't always work good with really long lines (break theme)
+vim.opt.wrap = false
+
 -- Undo history
 vim.opt.undofile = true
 -- vim.opt.undodir = '~/.nvim/undo//'
