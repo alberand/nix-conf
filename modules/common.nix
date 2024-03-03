@@ -116,6 +116,7 @@
     nil
     alejandra
     deadnix
+    chromium
   ];
 
   programs.zsh.enable = true;
