@@ -78,6 +78,8 @@
       "Documentation"
       "samples"
       "sound"
+      "drivers"
+      "arch"
 
       # Nix
       "result"
