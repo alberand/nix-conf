@@ -31,7 +31,6 @@ in {
       vim-fugitive
       null-ls-nvim
       statix
-
       nvim-lspconfig
       nvim-cmp
       luasnip
@@ -43,6 +42,7 @@ in {
       cmp-nvim-lua
       friendly-snippets
       nvim-web-devicons
+      trouble-nvim
     ];
     extraConfig = ''
     set noexpandtab
