@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   programs.tmux = {
     enable = true;
     clock24 = true;
@@ -14,6 +14,13 @@
       bind h select-pane -R
       bind k select-pane -U
       bind j select-pane -D
+    '';
+  };
+
+  programs.zsh = {
+    initExtra = ''
+      # export TERM=screen-256color
+      alias tmux="TERM=screen-256color tmux new-session -A -s main"
     '';
   };
 }

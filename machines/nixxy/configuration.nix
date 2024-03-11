@@ -6,7 +6,6 @@
     ../../modules/podman-deluge.nix
     ../../modules/nginx.nix
     ../../modules/grafana.nix
-    ../../modules/tmux.nix
     ../../modules/qemu-guest-network.nix
     ../../modules/home-assistant.nix
     ../../modules/mysql.nix

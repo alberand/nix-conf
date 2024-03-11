@@ -44,9 +44,6 @@ else
     echo "[Warning] Can not find secrets. Will not be able to connect"
 fi
 
-# Some settings for tmux.
-alias tmux="TERM=screen-256color tmux"
-export TERM=screen-256color
 
 alias vim="nvim"
 export VISUAL="nvim"

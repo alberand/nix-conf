@@ -7,6 +7,7 @@
     ./mako.nix
     ./sway.nix
     ./git.nix
+    ./tmux.nix
   ];
 
   home.packages = with pkgs; [

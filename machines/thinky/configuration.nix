@@ -2,7 +2,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/common.nix
-    ../../modules/tmux.nix
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
   ];
