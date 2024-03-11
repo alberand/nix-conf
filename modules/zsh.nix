@@ -44,6 +44,7 @@ else
     echo "[Warning] Can not find secrets. Will not be able to connect"
 fi
 
+export TERM=screen-256color
 
 alias vim="nvim"
 export VISUAL="nvim"

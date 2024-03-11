@@ -19,7 +19,6 @@
 
   programs.zsh = {
     initExtra = ''
-      # export TERM=screen-256color
       alias tmux="TERM=screen-256color tmux new-session -A -s main"
     '';
   };
