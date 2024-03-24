@@ -82,6 +82,8 @@
     zlib
     qpwgraph
     droidcam
+    zeal
+
     (writeShellScriptBin "calc" "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
     (writeShellScriptBin "tmux-sessionizer" (builtins.readFile ../configs/tmux-sessionizer))
     (writeShellScriptBin "todo" (builtins.readFile ../configs/todo.sh))
