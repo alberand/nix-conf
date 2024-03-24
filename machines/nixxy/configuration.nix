@@ -248,7 +248,7 @@
 
   programs.ccache.enable = true;
   programs.ccache.cacheDir = "/var/cache/ccache";
-  programs.ccache.packageNames = [ "kernel-cache" ];
+  programs.ccache.packageNames = [ "linux" ];
 
   services.nfs.server.enable = true;
   # TODO probably need to make it more safe regarding the permission

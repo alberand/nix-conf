@@ -169,6 +169,7 @@
       keep-outputs = true;
       keep-derivations = true;
       auto-optimise-store = true;
+      extra-sandbox-paths = [ "/var/cache/ccache" ];
     };
     gc = {
       automatic = true;
@@ -186,6 +187,6 @@
   system.autoUpgrade = {
     enable = false;
     allowReboot = false;
-    channel = https://nixos.org/channels/nixos-unstable;
+    channel = "https://nixos.org/channels/nixos-unstable";
   };
 }
