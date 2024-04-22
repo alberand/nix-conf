@@ -14,6 +14,7 @@
         # Make tabs 8 chars wide
         pager = lib.mkOptionDefault "less -x8 -FX";
         #pager = "delta";
+        abbrev = 12;
       };
       diff = {
         algorithm = "patience";
@@ -35,6 +36,9 @@
       };
       merge = {
         conflictStyle = "diff3";
+      };
+      pretty = {
+        fixes = "Fixes: %h (\"%s\")";
       };
     };
 
