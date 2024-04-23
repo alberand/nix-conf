@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }: {
   imports = [
     ../../modules/home-base.nix
-    ../../modules/delta.nix
   ];
 
   home.username = "alberand";
