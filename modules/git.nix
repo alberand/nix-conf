@@ -40,6 +40,9 @@
       pretty = {
         fixes = "Fixes: %h (\"%s\")";
       };
+      am = {
+        threeWay = true;
+      };
     };
 
     aliases = {
