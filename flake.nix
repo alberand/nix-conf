@@ -9,14 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    revumatic.url = "gitlab:alberand-rh/revumatic";
-    revumatic.inputs.nixpkgs.follows = "nixpkgs";
-    koji.url = "gitlab:alberand-rh/koji";
-    koji.inputs.nixpkgs.follows = "nixpkgs";
+    redhat.url = "gitlab:alberand-rh/redhat-nixos-workstation";
   };
 
   outputs = { self, nixpkgs, unstablepkgs, home-manager, nixos-hardware,
-    revumatic, koji }:
+    redhat }:
   let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -29,8 +26,10 @@
       overlays = [(final: prev: {
         # Example of bringing in an unstable package:
         minecraft-server = unstable.minecraft-server;
-        revumatic = revumatic.packages."${system}".revumatic;
-        koji = koji.packages."${system}".koji;
+        revumatic = redhat.packages."${system}".revumatic;
+        koji = redhat.packages."${system}".koji;
+        kerneloscope = redhat.packages."${system}".kerneloscope;
+        beaker-client = redhat.packages."${system}".beaker-client;
         photoprism = unstable.photoprism;
       })];
     };

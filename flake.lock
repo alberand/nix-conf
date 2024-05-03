@@ -5,11 +5,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1694529238,
-        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
         "type": "github"
       },
       "original": {
@@ -71,24 +71,38 @@
         "type": "github"
       }
     },
-    "revumatic": {
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1714635257,
+        "narHash": "sha256-4cPymbty65RvF1DWQfc+Bc8B233A1BWxJnNULJKQ1EY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "63c3a29ca82437c87573e4c6919b09a24ea61b0f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "redhat": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1697734232,
-        "narHash": "sha256-4FKL1ewfc8j8jUM14VJGaNn3SQp8Q822RxwxQWUA0Fo=",
+        "lastModified": 1714762046,
+        "narHash": "sha256-aGoAINxQFOjsCgeTPYb72s9PN3UtuOybr91LkZR2L/s=",
         "owner": "alberand-rh",
-        "repo": "revumatic",
-        "rev": "2a4e0843a6ee26b0a0ac363e875d5373f8fb4a28",
+        "repo": "redhat-nixos-workstation",
+        "rev": "3da483dc6ee2ece0b5fa0179a4bcf098b351dfee",
         "type": "gitlab"
       },
       "original": {
         "owner": "alberand-rh",
-        "repo": "revumatic",
+        "repo": "redhat-nixos-workstation",
         "type": "gitlab"
       }
     },
@@ -97,7 +111,7 @@
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "revumatic": "revumatic",
+        "redhat": "redhat",
         "unstablepkgs": "unstablepkgs"
       }
     },
