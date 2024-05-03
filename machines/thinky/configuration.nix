@@ -126,6 +126,7 @@
     mako # notification system developed by swaywm maintainer
     wdisplays # tool to configure displays
     revumatic
+    koji
   ];
 
   # Enable sound.

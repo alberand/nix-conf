@@ -11,10 +11,12 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     revumatic.url = "gitlab:alberand-rh/revumatic";
     revumatic.inputs.nixpkgs.follows = "nixpkgs";
+    koji.url = "gitlab:alberand-rh/koji";
+    koji.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, unstablepkgs, home-manager, nixos-hardware,
-    revumatic }:
+    revumatic, koji }:
   let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -28,6 +30,7 @@
         # Example of bringing in an unstable package:
         minecraft-server = unstable.minecraft-server;
         revumatic = revumatic.packages."${system}".revumatic;
+        koji = koji.packages."${system}".koji;
         photoprism = unstable.photoprism;
       })];
     };
