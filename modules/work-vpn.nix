@@ -42,11 +42,17 @@
     gid = 1100;
   };
 
-  security.pki.certificates = let
-    certfile = builtins.readFile ../openvpn/2015-RH-IT-Root-CA.pem;
-  in [
-    certfile
-  ];
+  security.pki = {
+    certificateFiles = [
+      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+    ];
+
+    certificates = let
+      certfile = builtins.readFile ../openvpn/2015-RH-IT-Root-CA.pem;
+    in [
+      certfile
+    ];
+  };
 
   # Configure our OpenVPN client
   services.openvpn.servers = {
