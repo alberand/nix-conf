@@ -29,14 +29,8 @@
   };
 
   fileSystems."/media" = {
-    device = "/dev/disk/by-uuid/ffb3f478-5faa-439e-a488-eb1155957f59";
+    device = "/dev/disk/by-uuid/44712d0a-dab1-4c5f-9bc8-5f29df1c1e6e";
     label = "storage";
-    fsType = "xfs";
-  };
-
-  fileSystems."/media/bmedia" = {
-    device = "/dev/disk/by-uuid/abf485b7-69f9-461e-beae-e68f0f26e1ff";
-    label = "bstorage";
     fsType = "xfs";
   };
 
