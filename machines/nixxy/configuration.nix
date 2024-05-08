@@ -58,6 +58,7 @@
     interfaces.enp34s0.useDHCP = true;
     firewall.enable = true;
     firewall = {
+      # Syncthing opens ports by itself
       allowedTCPPorts = [
         53 # dns
         22 # ssh
@@ -225,6 +226,8 @@
     overrideDevices = true;
     # overrides any folders added or deleted through the WebUI
     overrideFolders = false;
+    # Open firewall ports
+    openDefaultPorts = true;
     user = "alberand";
     group = "users";
     settings = {
