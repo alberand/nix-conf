@@ -117,6 +117,7 @@
     alejandra
     deadnix
     chromium
+    bat
   ];
 
   programs.zsh.enable = true;
