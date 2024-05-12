@@ -71,6 +71,7 @@
         8123 # home-assistant
         111 # NFS
         2049 # NFS
+        5000 # testing my pet-projects
       ];
       allowedUDPPorts = [
         53 # dns
