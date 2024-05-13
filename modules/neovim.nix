@@ -11,6 +11,10 @@ in {
   xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
   xdg.configFile."nvim/ftplugin".source = ../configs/ftplugin;
 
+  home.packages = with pkgs; [
+    vscode-langservers-extracted
+  ];
+
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
