@@ -43,6 +43,10 @@
       am = {
         threeWay = true;
       };
+      rebase = {
+        autostash = true;
+        autosquash = true;
+      };
     };
 
     aliases = {
