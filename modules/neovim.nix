@@ -13,6 +13,7 @@ in {
 
   home.packages = with pkgs; [
     vscode-langservers-extracted
+    lua-language-server
   ];
 
   programs.neovim = {
@@ -23,6 +24,7 @@ in {
       fzf-vim
       telescope-nvim
       nvim-treesitter-context
+      nvim-treesitter.withAllGrammars
       vim-nix
       vim-airline
       vim-airline-themes
@@ -34,7 +36,6 @@ in {
       rust-vim
       vim-fugitive
       null-ls-nvim
-      statix
       nvim-lspconfig
       nvim-cmp
       luasnip
