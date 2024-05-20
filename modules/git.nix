@@ -47,6 +47,9 @@
         autostash = true;
         autosquash = true;
       };
+      format = {
+        notes = true;
+      };
     };
 
     aliases = {
