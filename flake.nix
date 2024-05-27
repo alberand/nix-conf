@@ -9,7 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    redhat.url = "gitlab:alberand-rh/redhat-nixos-workstation";
+    redhat = {
+      url = "gitlab:alberand-rh/redhat-nixos-workstation";
+      inputs.nixpkgs.follows = "unstablepkgs";
+    };
   };
 
   outputs = { self, nixpkgs, unstablepkgs, home-manager, nixos-hardware,
