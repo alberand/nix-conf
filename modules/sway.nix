@@ -122,7 +122,7 @@
           "${mod}+a" = "focus parent";
           "${mod}+s" = "focus child";
           "${mod}+e" = "floating enable, sticky enable";
-          "Mod4+l" = "exec swaylock -f"; # left alt
+          "Mod4+l" = "exec swaylock -f -F -l -c ee000033"; # win key
 
           "${mod}+Shift+c" = "reload";
           "${mod}+Shift+r" = "restart";

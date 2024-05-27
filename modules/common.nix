@@ -118,6 +118,7 @@
     deadnix
     chromium
     bat
+    swaylock
   ];
 
   programs.zsh.enable = true;
