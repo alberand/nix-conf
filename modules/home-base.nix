@@ -8,6 +8,7 @@
     ./sway.nix
     ./git.nix
     ./tmux.nix
+    ./eww.nix
   ];
 
   home.packages = with pkgs; [
