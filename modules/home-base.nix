@@ -91,11 +91,11 @@
   ];
 
   home.file = {
-    ".ctags" = { source = ../.ctags; };
-    ".gdbinit" = { source = ../.gdbinit; };
-    ".vimrc.local" = { source = ../.vimrc.local; };
-    ".fdignore" = { source = ../configs/.fdignore; };
-    ".config/kitty/kitty.conf" = { source = ../configs/.kitty; };
+    ".ctags" = { source = ../configs/ctags; };
+    ".gdbinit" = { source = ../configs/gdbinit; };
+    ".vimrc.local" = { source = ../configs/vimrc.local; };
+    ".fdignore" = { source = ../configs/fdignore; };
+    ".config/kitty/kitty.conf" = { source = ../configs/kitty; };
     ".tmux.conf" = { source = ../configs/tmux.conf; };
   };
 

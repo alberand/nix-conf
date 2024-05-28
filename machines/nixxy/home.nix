@@ -24,7 +24,7 @@
   ];
 
   home.file = {
-    ".shrc.local" = { source = ./configs/.shrc.local; };
+    ".shrc.local" = { source = ./configs/shrc.local; };
   };
 
   # Script to check work VPN connectivity

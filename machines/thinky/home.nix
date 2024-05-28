@@ -39,10 +39,10 @@
 
   home.file = {
     ".muttrc.local" = {
-      source = ./configs/.muttrc.local;
+      source = ./configs/muttrc.local;
     };
     ".notmuch-config" = {
-      source = ./configs/.notmuch-config;
+      source = ./configs/notmuch-config;
     };
     ".redhat/notmuch-hook.sh" = {
       source = ./configs/notmuch-hook.sh;
@@ -51,13 +51,13 @@
       source = ./configs/neomutt-jira.sh;
     };
     ".shrc.local" = {
-      source = ./configs/.shrc.local;
+      source = ./configs/shrc.local;
     };
     ".consolerc" = {
-      source = ./configs/.consolerc;
+      source = ./configs/consolerc;
     };
   };
-  services.mbsync.configFile = ./configs/.mbsyncrc;
+  services.mbsync.configFile = ./configs/mbsyncrc;
   services.mbsync.postExec = "${pkgs.bash}/bin/sh ${config.home.homeDirectory}/.redhat/notmuch-hook.sh";
 
   programs.gpg = {

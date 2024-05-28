@@ -19,7 +19,7 @@
   # - .mbsyncrc
   home.file = {
     ".muttrc" = {
-      source = ../configs/.muttrc;
+      source = ../configs/muttrc;
     };
     ".mutt/dracula.muttrc" = {
       source = ../configs/dracula.muttrc;
