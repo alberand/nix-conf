@@ -96,6 +96,7 @@ function quiet_runner(){
 	"$1" "$2" >/dev/null 2>&1 &
 }
 alias mute=quiet_runner
+alias htop=btop
 
 # ex - archive extractor
 # usage: ex <file>
