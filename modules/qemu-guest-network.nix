@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{ config, ... }: {
   networking.interfaces.tap0 = {
     name = "tap0";
     virtual = true;
     virtualType = "tap";
-    virtualOwner = "alberand";
+    virtualOwner = config.user;
   };
 
   networking.interfaces.tap0 = {
