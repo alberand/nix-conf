@@ -48,6 +48,7 @@ other_email=andrey.albershteyn@redhat.com
 #
 [new]
 tags=new
+ignore=.mbsyncstate; .uidvalidity;
 
 # Search configuration
 #
