@@ -4,6 +4,7 @@
     ../../modules/common.nix
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
+    ../../modules/qemu-guest-network.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
