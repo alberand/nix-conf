@@ -14,7 +14,6 @@
     inkscape
     jellyfin
     kicad
-    minecraft
     prismlauncher # Minecraft launcher
     rust-analyzer
     steam

@@ -8,7 +8,7 @@
       plugins = [ "git" ];
       theme = "robbyrussell";
     };
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     plugins = [ ];
     history = {
       ignoreDups = true;

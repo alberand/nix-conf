@@ -203,10 +203,6 @@
     # attach use: screen -x weechat/wc
     services.weechat.enable = true;
     services.weechat.sessionName = "wc";
-    programs.screen.screenrc = ''
-      multiuser on
-      acladd normal_user
-    '';
 
     security.rtkit.enable = true;
     services.jellyfin = {
@@ -274,6 +270,6 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "23.11"; # Did you read the comment?
+    system.stateVersion = "24.05"; # Did you read the comment?
   };
 }
