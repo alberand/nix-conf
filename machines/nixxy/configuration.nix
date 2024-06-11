@@ -264,6 +264,17 @@
       /export/alberand 192.168.0.101(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
 
+    systemd.user.services.kanshi = {
+      enable = true;
+      description = "Kanshi daemon (monitor configurator)";
+      wantedBy = [];
+      after = [];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
+      };
+    };
+
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave
