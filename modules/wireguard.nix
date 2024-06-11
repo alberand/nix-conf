@@ -1,4 +1,9 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
+  # Disable wait-online as it doesn't seem to work with iptables rules when
+  # system is already running. The systemd just can not reach network
+  # TODO read this https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
+
   # Enable WireGuard
   networking.wg-quick.interfaces = let
     server_ip = "185.195.233.66";
