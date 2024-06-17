@@ -168,8 +168,7 @@ end
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<C-i>', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+vim.keymap.set('n', '<leader>f', builtin.lsp_implementations, {})
 
 local ts_select_dir_for_grep = function(prompt_bufnr)
   local action_state = require("telescope.actions.state")
