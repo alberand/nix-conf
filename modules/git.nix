@@ -105,6 +105,8 @@
       ".vmtest"
       # xfstests config for vmtest
       "xfstests-config"
+      # kernel environment shell
+      "kernel-shell.nix"
     ];
   };
 }
