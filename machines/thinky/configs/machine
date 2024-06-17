@@ -17,9 +17,15 @@ help (){
 	echo "rhel9_33111 corresponds to RHEL9 issue at https://issues.redhat.com/browse/RHEL-33111"
 	echo ""
 	echo "OPTIONS"
-	echo -e "\t-t\n\t\tdon't run fstests"
-	echo -e "\t-f\n\t\tdon't fetch the kernel (includes -c)"
-	echo -e "\t-c\n\t\tdon't compile the kernel"
+	echo -e "\t-t | --no-tests\n\t\tdon't run fstests"
+	echo -e "\t-f | --no-kernel\n\t\tdon't fetch the kernel (includes -c)"
+	echo -e "\t-c | --no-build\n\t\tdon't compile the kernel"
+	echo -e "\t-r | --remote\n\t\tkernel remote to fetch from"
+	echo -e "\t-b | --branch\n\t\tkernel branch to fetch"
+	echo -e "\t-a | --arch\n\t\tspecify machine architecture"
+	echo -e "\t-t\n\t\trun xfstests on kernel with fix"
+	echo -e "\t-d | --no-partitions\n\t\t don't add test/scratch partitions to the system"
+	echo -e "\t--partition-size\n\t\t size of added partitions"
 }
 
 get_system(){
@@ -147,29 +153,42 @@ kernel_branch=''
 architecture=""
 # Test branch with fix
 testfix='false'
+# Will this machine have two partitions (/mnt/test and /mnt/scratch for xfstests)
+wantparts='true'
+partsize=15
 
-while getopts 'tfcra:k:b:' flag; do
-  case "${flag}" in
-    t) pretest='false'
+params="$(getopt -o tfcra:k:b:d -l no-tests,no-kernel,no-build,arch:,remote:,branch:,no-partitions,partition-size: --name "$(basename "$0")" -- "$@")"
+if [ $? != 0 ] ; then
+	help
+	exit 1
+fi
+eval set -- "$params"
+while true; do
+  case "$1" in
+    t | --no-tests) pretest='false'; shift
 	;;
-    f) fetchkernel='false'
+    f | --no-kernel) fetchkernel='false'; shift
 	;;
-    c) compilekernel='false'
+    c | --no-build) compilekernel='false'; shift
 	;;
-    r) testfix='true'
+    r) testfix='true'; shift
 	;;
-    a) architecture="${OPTARG}"
+    a | --arch) architecture="${OPTARG}"; shift
 	;;
-    k)
+    k | --remote)
 	kernel_remote="${OPTARG}"
 	if [ is_ssh_link "$kernel_remote" ]; then
 		echo "Use https:// link (found $kernel_remote)"
 	fi
 	;;
-    b) kernel_branch="${OPTARG}"
+    b | --branch) kernel_branch="${OPTARG}"
 	;;
-    *) help
-       exit 1 ;;
+    d | --no-partitions) wantparts='false'; shift
+	;;
+    --partition-size) partsize="${OPTARG}"; shift
+	;;
+    -- ) shift; break ;;
+    * ) break ;;
   esac
 done
 
@@ -270,6 +289,16 @@ IFS='' read -r -d '' COMPILE_KERNEL_TASK <<EOF
 EOF
 fi
 
+ADD_PARTITIONS_TASK=""
+if [ "$wantparts" == "true" ]; then
+IFS='' read -r -d '' ADD_PARTITIONS_TASK <<EOF
+      <partitions>
+        <partition type="part" name="/mnt/test" size="$partsize" fs="xfs"/>
+        <partition type="part" name="/mnt/scratch" size="$partsize" fs="xfs"/>
+      </partitions>
+EOF
+fi
+
 output=$(mktemp)
 
 cat << EOF > $output
@@ -349,10 +378,7 @@ cat << EOF > $output
           <system_type value="Machine"/>
         </and>
       </hostRequires>
-      <partitions>
-        <partition type="part" name="/mnt/test" size="15" fs="xfs"/>
-        <partition type="part" name="/mnt/scratch" size="15" fs="xfs"/>
-      </partitions>
+$ADD_PARTITIONS_TASK
 
 	<task name="/distribution/check-install" role="STANDALONE"/>
 
