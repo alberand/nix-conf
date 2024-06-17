@@ -18,7 +18,7 @@ MaildirStore gmail-local
 SubFolders Verbatim
 # The trailing "/" is important
 Path ~/.mail/gmail/
-Inbox ~/.mail/gmail/inbox
+Inbox ~/.mail/gmail/inbox/
 
 Channel gmail
 Far :gmail-remote:"[Gmail]/All Mail"
