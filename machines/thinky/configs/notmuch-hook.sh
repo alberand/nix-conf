@@ -26,6 +26,7 @@ notmuch tag +list +kernel-info -inbox -new -- to:kernel-info@redhat.com
 notmuch tag +list +memos -inbox -new -newsletters -- to:memo-list@redhat.com
 notmuch tag +list +memos -inbox -new -newsletters -- to:brno-memo-list@redhat.com
 notmuch tag +list +outage -inbox -unread -new -newsletters -- to:outage-list@redhat.com
+notmuch tag +list +outage -inbox -unread -new -newsletters -- to:windows-systems@redhat.com
 
 notmuch tag +bot +bugzilla -inbox -new -- from:bugzilla@redhat.com
 notmuch tag +bot +bugzilla -inbox -new -- from:bugzilla-daemon@kernel.org
