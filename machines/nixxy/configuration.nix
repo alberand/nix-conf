@@ -107,7 +107,7 @@
     users.groups.media = {
       name = "media";
       gid = 8096;
-      members = ["alberand" "jellyfin" "deluge"];
+      members = ["alberand" "jellyfin" "deluge" "radarr" "jackett"];
     };
 
     users.users.deluge = {
@@ -273,6 +273,14 @@
         Type = "simple";
         ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
       };
+    };
+
+    services.radarr = {
+      enable = true;
+    };
+
+    services.jackett = {
+      enable = true;
     };
 
     # This value determines the NixOS release from which the default
