@@ -16,7 +16,7 @@ vim.opt.smartindent = true
 vim.opt.synmaxcol = 128
 vim.opt.syntax = "enable"
 vim.opt.cc = "+1"
-vim.opt.foldmethod = "indent"
+vim.opt.foldmethod = "syntax"
 vim.opt.foldlevel = 20
 vim.opt.pastetoggle = "<F5>"
 
