@@ -119,7 +119,6 @@
     chromium
     bat
     swaylock
-    btop
   ];
 
   programs.zsh.enable = true;
