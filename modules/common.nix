@@ -119,6 +119,7 @@
     chromium
     bat
     swaylock
+    sublime
   ];
 
   programs.zsh.enable = true;
