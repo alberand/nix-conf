@@ -56,6 +56,7 @@
           format-linked = "{ifname} (No IP)";
           format-disconnected = "offline";
           tooltip = false;
+          on-click = "swaymsg 'workspace 5; exec \"kitty nmtui\"'";
         };
 
         "custom/vpn" = {
