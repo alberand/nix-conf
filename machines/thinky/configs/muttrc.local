@@ -13,6 +13,7 @@ alias eric Eric Sandeen <esandeen@redhat.com>
 alias cem Carlos Maiolino <cmaiolino@redhat.com>
 alias bill Bill O'Donnel <bodonnel@redhat.com>
 alias dave Dave Chinner <dchinner@redhat.com>
+alias djwong Darrick J. Wong <djwong@kernel.org>
 
 # Highlight the boss =)
 color index blue default "~f esandeen@redhat.com"
