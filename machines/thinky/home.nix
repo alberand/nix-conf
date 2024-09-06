@@ -38,8 +38,8 @@
   ];
 
   home.file = {
-    ".muttrc.local" = {
-      source = ./configs/muttrc.local;
+    ".muttrc.redhat" = {
+      source = ./configs/muttrc.redhat;
     };
     ".notmuch-config" = {
       source = ./configs/notmuch-config;

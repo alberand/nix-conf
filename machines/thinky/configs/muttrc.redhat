@@ -1,11 +1,22 @@
+# Red Hat account
 # About me
-set realname = "Andrey Albershteyn"
 set from = "aalbersh@redhat.com"
+set realname = "Andrey Albershteyn"
 alternates "(andrey.albershteyn@redhat\.com)"
+
+set signature="~/.mutt/signature"
 
 # Credentials
 set smtp_url = "smtps://aalbersh@redhat.com@smtp.gmail.com/"
 set imap_user = "aalbersh@redhat.com"
+# My credentials (loaded by shell wrapper)
+set smtp_pass = $MUTT_PASS
+set imap_pass = $MUTT_PASS
+
+set nm_default_uri="notmuch:///home/aalbersh/.mail/gmail/inbox"
+set nm_unread_tag = unread
+set folder = "~/.mail/gmail/inbox"
+set record = "~/.mail/sent"
 
 # People
 alias me Andrey Albershteyn <aalbersh@redhat.com>
@@ -22,6 +33,13 @@ color index blue default "~f sandeen@redhat.com"
 color index cyan default "~s ANNOUNCE"
 # Highlight reminders from Workday
 color index blue default "~f timetracking@redhat.com"
+
+#
+virtual-mailboxes "inbox" "notmuch://?query=tag:inbox"
+virtual-mailboxes "bookmarks" "notmuch://?query=tag:bookmark"
+virtual-mailboxes "sent" "notmuch://?query=tag:sent"
+virtual-mailboxes "newsletters" "notmuch://?query=tag:newsletters"
+virtual-mailboxes "index" "notmuch://?query=*"
 
 # Mailboxes
 virtual-mailboxes "fstests" "notmuch://?query=tag:fstests"

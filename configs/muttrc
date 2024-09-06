@@ -1,13 +1,8 @@
 # vi ~/.muttrc
 # About Me
-set signature="~/.mutt/signature"
 
 set editor = "nvim -c 'set spell spelllang=en'"
 set mark_old = no
-
-# My credentials (loaded by shell wrapper)
-set smtp_pass = $MUTT_PASS
-set imap_pass = $MUTT_PASS
 
 set index_format = "%4C %Z [%{%d %b}] %-15.15L %s"
 set date_format="%F %T"
@@ -32,21 +27,8 @@ set implicit_autoview=yes # Load in pager if setting in .mailcap says 'copiousou
 
 # My mailboxes
 set virtual_spoolfile=yes
-set nm_default_uri="notmuch:///home/aalbersh/.mail/gmail/inbox"
-set nm_unread_tag = unread
-set folder = "~/.mail/gmail/inbox"
-set record = "~/.mail/sent"
-# set spoolfile = "+INBOX"
-
-#
-virtual-mailboxes "inbox" "notmuch://?query=tag:inbox"
-virtual-mailboxes "bookmarks" "notmuch://?query=tag:bookmark"
-virtual-mailboxes "sent" "notmuch://?query=tag:sent"
-virtual-mailboxes "newsletters" "notmuch://?query=tag:newsletters"
-virtual-mailboxes "index" "notmuch://?query=*"
-
 # Include it here to save order of the mailboxes
-source ~/.muttrc.local
+source ~/.muttrc.redhat
 
 macro index,pager b "<tag-thread><tag-prefix><modify-labels>!bookmark\n<previous-entry><tag-thread>" "Toggle the 'bookmark' tag"
 
