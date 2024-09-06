@@ -38,8 +38,8 @@
   ];
 
   home.file = {
-    ".muttrc.redhat" = {
-      source = ./configs/muttrc.redhat;
+    ".neomutt/profile.redhat" = {
+      source = ./configs/profile.redhat;
     };
     ".notmuch-config" = {
       source = ./configs/notmuch-config;
