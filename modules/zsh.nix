@@ -38,11 +38,19 @@ export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
 # Include secrets
-if [ -f ~/.secrets/.sh.secrets ]; then
-    . ~/.secrets/.sh.secrets
-else
-    echo "[Warning] Can not find secrets. Will not be able to connect"
+if [ $(hostname) = "thinky" ]; then
+  if [ -f ~/.secrets/.sh.secrets ]; then
+      . ~/.secrets/.sh.secrets
+  else
+      echo "[Warning] Can not find secrets. Will not be able to connect"
+  fi
 fi
+
+with_passwords(){
+    pwds=`gpg  --no-tty -qd ~/.secrets/email-passwords.sh.gpg`
+    eval "$pwds"
+    $@
+}
 
 export TERM=screen-256color
 
