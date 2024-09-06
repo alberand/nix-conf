@@ -41,6 +41,9 @@
     ".neomutt/profile.redhat" = {
       source = ./configs/profile.redhat;
     };
+    ".neomutt/profile.korg" = {
+      source = ./configs/profile.korg;
+    };
     ".notmuch-config" = {
       source = ./configs/notmuch-config;
     };

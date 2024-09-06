@@ -18,30 +18,13 @@ set nm_unread_tag = unread
 set folder = "~/.mail/gmail/inbox"
 set record = "~/.mail/sent"
 
-# People
-alias me Andrey Albershteyn <aalbersh@redhat.com>
-alias eric Eric Sandeen <esandeen@redhat.com>
-alias cem Carlos Maiolino <cmaiolino@redhat.com>
-alias bill Bill O'Donnel <bodonnel@redhat.com>
-alias dave Dave Chinner <dchinner@redhat.com>
-alias djwong Darrick J. Wong <djwong@kernel.org>
-
-# Highlight the boss =)
-color index blue default "~f esandeen@redhat.com"
-color index blue default "~f sandeen@redhat.com"
-# Highlight mailing list announces
-color index cyan default "~s ANNOUNCE"
-# Highlight reminders from Workday
-color index blue default "~f timetracking@redhat.com"
-
-#
+# Mailboxes
 virtual-mailboxes "inbox" "notmuch://?query=tag:inbox"
 virtual-mailboxes "bookmarks" "notmuch://?query=tag:bookmark"
 virtual-mailboxes "sent" "notmuch://?query=tag:sent"
 virtual-mailboxes "newsletters" "notmuch://?query=tag:newsletters"
 virtual-mailboxes "index" "notmuch://?query=*"
 
-# Mailboxes
 virtual-mailboxes "fstests" "notmuch://?query=tag:fstests"
 virtual-mailboxes "xfs" "notmuch://?query=tag:linux-xfs"
 virtual-mailboxes "fsdevel" "notmuch://?query=tag:linux-fsdevel"
@@ -57,3 +40,5 @@ virtual-mailboxes "beaker" "notmuch://?query=tag:beaker"
 folder-hook . "set display_filter=''"
 # Set filter for Jira/Bugzilla folder
 folder-hook "bugzilla-hook-filter" "set display_filter='~/.redhat/neomutt-jira.sh'"
+
+color status     brightgreen    red	# redhat

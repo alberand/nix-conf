@@ -1,0 +1,12 @@
+# Red Hat account
+# About me
+set from         = "aalbersh@kernel.org"
+set realname     = "Andrey Albershteyn"
+
+set smtp_url     = "smtps://aalbersh@mail.kernel.org:465/"
+set smtp_pass    = "$KORG_PASS"
+set ssl_starttls = yes
+
+set signature    = "~/.neomutt/signature.korg"
+
+color status     brightgreen    blue	# korg

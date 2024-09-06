@@ -28,7 +28,12 @@ set implicit_autoview=yes # Load in pager if setting in .mailcap says 'copiousou
 # My mailboxes
 set virtual_spoolfile=yes
 # Include it here to save order of the mailboxes
-source ~/.muttrc.redhat
+source ~/.neomutt/profile.redhat
+folder-hook "Inbox"	'source ~/.neomutt/profile.redhat'
+source ~/.neomutt/profile.korg
+folder-hook "Korg"	'source ~/.neomutt/profile.krog'
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.neomutt/profile.redhat<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.neomutt/profile.korg<enter><change-folder>!<enter>'
 
 macro index,pager b "<tag-thread><tag-prefix><modify-labels>!bookmark\n<previous-entry><tag-thread>" "Toggle the 'bookmark' tag"
 
@@ -62,6 +67,22 @@ bind index _ collapse-all
 ignore *
 unignore Subject: From: Date: To: Cc: Reply-To: Message-ID: In-Reply-To:
 hdr_order Subject: From: Date: To: Cc: Reply-To: Message-ID: In-Reply-To:
+
+# People
+alias me Andrey Albershteyn <aalbersh@redhat.com>
+alias eric Eric Sandeen <esandeen@redhat.com>
+alias cem Carlos Maiolino <cmaiolino@redhat.com>
+alias bill Bill O'Donnel <bodonnel@redhat.com>
+alias dave Dave Chinner <dchinner@redhat.com>
+alias djwong Darrick J. Wong <djwong@kernel.org>
+
+# Highlight the boss =)
+color index blue default "~f esandeen@redhat.com"
+color index blue default "~f sandeen@redhat.com"
+# Highlight mailing list announces
+color index cyan default "~s ANNOUNCE"
+# Highlight reminders from Workday
+color index blue default "~f timetracking@redhat.com"
 
 # Add some colors (theme)
 source ~/.mutt/dracula.muttrc
