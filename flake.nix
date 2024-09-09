@@ -46,7 +46,7 @@
         inherit system;
 
         modules = [
-          ./machines/nixxy/configuration.nix 
+          ./machines/nixxy/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;

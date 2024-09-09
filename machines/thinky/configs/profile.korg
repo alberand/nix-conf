@@ -1,5 +1,4 @@
-# Red Hat account
-# About me
+# kernel.org account
 set from         = "aalbersh@kernel.org"
 set realname     = "Andrey Albershteyn"
 
@@ -8,5 +7,6 @@ set smtp_pass    = "$KORG_PASS"
 set ssl_starttls = yes
 
 set signature    = "~/.neomutt/signature.korg"
+set folder       = "~/.mail/korg/inbox"
 
 color status     brightgreen    blue	# korg

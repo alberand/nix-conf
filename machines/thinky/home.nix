@@ -9,6 +9,7 @@
     ../../modules/neomutt.nix
     ../../modules/kanshi.nix
     ../../modules/redhat-beaker.nix
+    ./modules/redhat-kup.nix
   ];
 
   home.username = "aalbersh";
@@ -58,9 +59,6 @@
     };
     ".consolerc" = {
       source = ./configs/consolerc;
-    };
-    ".kuprc" = {
-      source = ./configs/kuprc;
     };
   };
   services.mbsync.configFile = ./configs/mbsyncrc;

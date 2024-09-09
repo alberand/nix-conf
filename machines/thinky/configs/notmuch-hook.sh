@@ -5,7 +5,7 @@ notmuch new
 # retag all "new" messages "inbox" and "unread"
 notmuch tag +inbox +unread -new -- tag:new
 # tag all messages from "me" as sent and remove tags inbox and unread
-notmuch tag -unread +sent -- from:aalbersh@redhat.com or from:andrey.albershteyn@redhat.com
+notmuch tag -unread +sent -- from:aalbersh@redhat.com or from:andrey.albershteyn@redhat.com or from:aalbersh@kernel.org
 
 # Newsletters and Misc
 notmuch tag +newsletters -inbox -new -- subject:'newsletter*'
@@ -42,4 +42,6 @@ notmuch tag +bot +cron -inbox -new -- subject:'Cron*'
 notmuch tag +bot +gitlab -inbox -new -- from:*@mg.gitlab.com or from:*@gitlab.com
 
 notmuch tag +inbox -- tag:list and to:aalbersh@redhat.com
+notmuch tag +inbox -- tag:list and to:aalbersh@kernel.org
 notmuch tag +inbox -- tag:list and from:aalbersh@redhat.com or tag:list and from:andrey.albershteyn@redhat.com
+notmuch tag +inbox -- tag:list and from:aalbersh@kernel.org or tag:list and from:andrey.albershteyn@redhat.com
