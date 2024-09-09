@@ -1,0 +1,2 @@
+host = git@gitolite.kernel.org
+subcmd = kup-server

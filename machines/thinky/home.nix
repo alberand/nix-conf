@@ -59,6 +59,9 @@
     ".consolerc" = {
       source = ./configs/consolerc;
     };
+    ".kuprc" = {
+      source = ./configs/kuprc;
+    };
   };
   services.mbsync.configFile = ./configs/mbsyncrc;
   services.mbsync.postExec = "${pkgs.bash}/bin/sh ${config.home.homeDirectory}/.redhat/notmuch-hook.sh";

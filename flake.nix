@@ -33,6 +33,7 @@
         koji = redhat.packages."${system}".koji;
         kerneloscope = redhat.packages."${system}".kerneloscope;
         beaker-client = redhat.packages."${system}".beaker-client;
+        kup = redhat.packages."${system}".kup;
         photoprism = unstable.photoprism;
       })];
     };
