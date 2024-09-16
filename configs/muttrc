@@ -28,10 +28,10 @@ set implicit_autoview=yes # Load in pager if setting in .mailcap says 'copiousou
 # My mailboxes
 set virtual_spoolfile=yes
 # Include it here to save order of the mailboxes
-source ~/.neomutt/profile.redhat
-folder-hook "Inbox"	'source ~/.neomutt/profile.redhat'
 source ~/.neomutt/profile.korg
 folder-hook "Korg"	'source ~/.neomutt/profile.krog'
+source ~/.neomutt/profile.redhat
+folder-hook "Inbox"	'source ~/.neomutt/profile.redhat'
 macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.neomutt/profile.redhat<enter><change-folder>!<enter>'
 macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.neomutt/profile.korg<enter><change-folder>!<enter>'
 
