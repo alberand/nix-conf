@@ -9,4 +9,6 @@ set ssl_starttls = yes
 set signature    = "~/.neomutt/signature.korg"
 set folder       = "~/.mail/korg/inbox"
 
+virtual-mailboxes "inbox" "notmuch://?query=tag:korg"
+
 color status     brightgreen    blue	# korg

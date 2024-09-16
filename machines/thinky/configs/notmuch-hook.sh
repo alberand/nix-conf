@@ -6,6 +6,7 @@ notmuch new
 notmuch tag +inbox +unread -new -- tag:new
 # tag all messages from "me" as sent and remove tags inbox and unread
 notmuch tag -unread +sent -- from:aalbersh@redhat.com or from:andrey.albershteyn@redhat.com or from:aalbersh@kernel.org
+notmuch tag +korg -- to:aalbersh@kernel.org
 
 # Newsletters and Misc
 notmuch tag +newsletters -inbox -new -- subject:'newsletter*'
