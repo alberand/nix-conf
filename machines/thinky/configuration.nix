@@ -11,6 +11,7 @@
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
     ../../modules/qemu-guest-network.nix
+    ../../modules/mysql.nix
   ];
 
   config = {
