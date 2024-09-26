@@ -21,6 +21,7 @@
     pinentry
     conserver
     rpm
+    quilt
     # Script to open serial console to Beaker machine
     (let
       wrapper = writeShellScriptBin "con" (builtins.readFile ./configs/console.sh);
