@@ -9,7 +9,7 @@
     ../../modules/neomutt.nix
     ../../modules/kanshi.nix
     ../../modules/redhat-beaker.nix
-    ./modules/redhat-kup.nix
+    ./modules/maintainer.nix
   ];
 
   home.username = "aalbersh";
