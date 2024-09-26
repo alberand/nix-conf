@@ -180,7 +180,6 @@
               weechat-notify-send
               weechat-go
               wee-slack
-              weechat-matrix
             ];
           };
         };
