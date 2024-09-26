@@ -79,11 +79,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1725885194,
-        "narHash": "sha256-viEo8bn3FE9hfFCTBtGcvWR8cMLlu0co1F1rZuCH5Lc=",
+        "lastModified": 1727364179,
+        "narHash": "sha256-09E/grq36cvMCgAI0yR3qhW7xTazIrf1kwCvsCw1W/g=",
         "owner": "alberand-rh",
         "repo": "redhat-nixos-workstation",
-        "rev": "2f397eb516a5c38ffc062ea302d88b967989b88d",
+        "rev": "547455fdf6fe782b2e4a4e027d3fd58d3bfc2a5e",
         "type": "gitlab"
       },
       "original": {
