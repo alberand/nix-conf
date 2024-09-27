@@ -6,7 +6,7 @@ notmuch new
 notmuch tag +inbox +unread -new -- tag:new
 # tag all messages from "me" as sent and remove tags inbox and unread
 notmuch tag -unread +sent -- from:aalbersh@redhat.com or from:andrey.albershteyn@redhat.com or from:aalbersh@kernel.org
-notmuch tag +korg -- to:aalbersh@kernel.org
+notmuch tag +korg -- to:aalbersh@kernel.org or cc:aalbersh@kernel.org
 
 # Newsletters and Misc
 notmuch tag +newsletters -inbox -new -- subject:'newsletter*'
@@ -21,13 +21,14 @@ notmuch tag +newsletters -inbox -new -- from:ahanakov@redhat.com
 
 # Mailing lists
 notmuch tag +list +fstests -inbox -new -- to:fstests@vger.kernel.org
-notmuch tag +list +linux-xfs -inbox -new -- to:linux-xfs@vger.kernel.org
+notmuch tag +list +linux-xfs -inbox -new -- to:linux-xfs@vger.kernel.org or cc:linux-xfs@vger.kernel.org
 notmuch tag +list +linux-fsdevel -inbox -new -- to:linux-fsdevel@vger.kernel.org
 notmuch tag +list +kernel-info -inbox -new -- to:kernel-info@redhat.com
 notmuch tag +list +memos -inbox -new -newsletters -- to:memo-list@redhat.com
 notmuch tag +list +memos -inbox -new -newsletters -- to:brno-memo-list@redhat.com
 notmuch tag +list +outage -inbox -unread -new -newsletters -- to:outage-list@redhat.com
 notmuch tag +list +outage -inbox -unread -new -newsletters -- to:windows-systems@redhat.com
+notmuch tag +xfsprogs-list -- tag:korg and tag:linux-xfs
 
 notmuch tag +bot +bugzilla -inbox -new -- from:bugzilla@redhat.com
 notmuch tag +bot +bugzilla -inbox -new -- from:bugzilla-daemon@kernel.org
