@@ -11,7 +11,7 @@
 # 1. Replace
 #     "ca /etc/pki/tls/certs/2015-RH-IT-Root-CA.pem"
 #    with
-#     "ca /etc/pki/tls/certs/ca-bundle.crt"
+#     "ca /etc/pki/tls/certs/redhat-root-ca.crt"
 # 2. Replace:
 #     plugin /usr/lib64/openvpn/plugins/openvpn-plugin-down-root.so /etc/openvpn/client.down
 #    with:
@@ -42,15 +42,14 @@
     gid = 1100;
   };
 
+  age.secrets.root-ca = {
+    file = ../secrets/root-ca.age;
+    path = "/etc/pki/tls/certs/redhat-root-ca.crt";
+  };
+
   security.pki = {
     certificateFiles = [
       "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-    ];
-
-    certificates = let
-      certfile = builtins.readFile ../openvpn/2015-RH-IT-Root-CA.pem;
-    in [
-      certfile
     ];
   };
 
