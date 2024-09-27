@@ -13,11 +13,18 @@
       url = "gitlab:alberand-rh/redhat-nixos-workstation";
       inputs.nixpkgs.follows = "unstablepkgs";
     };
+    agenix.url = "github:ryantm/agenix";
   };
 
-  outputs = { self, nixpkgs, unstablepkgs, home-manager, nixos-hardware,
-    redhat }:
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    unstablepkgs,
+    home-manager,
+    nixos-hardware,
+    redhat,
+    agenix,
+  }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
       inherit system;
@@ -26,17 +33,19 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      overlays = [(final: prev: {
-        # Example of bringing in an unstable package:
-        minecraft-server = unstable.minecraft-server;
-        revumatic = redhat.packages."${system}".revumatic;
-        koji = redhat.packages."${system}".koji;
-        kerneloscope = redhat.packages."${system}".kerneloscope;
-        beaker-client = redhat.packages."${system}".beaker-client;
-        kup = redhat.packages."${system}".kup;
-        xfsprogs-release = redhat.packages."${system}".xfsprogs-release;
-        photoprism = unstable.photoprism;
-      })];
+      overlays = [
+        (final: prev: {
+          # Example of bringing in an unstable package:
+          minecraft-server = unstable.minecraft-server;
+          revumatic = redhat.packages."${system}".revumatic;
+          koji = redhat.packages."${system}".koji;
+          kerneloscope = redhat.packages."${system}".kerneloscope;
+          beaker-client = redhat.packages."${system}".beaker-client;
+          kup = redhat.packages."${system}".kup;
+          xfsprogs-release = redhat.packages."${system}".xfsprogs-release;
+          photoprism = unstable.photoprism;
+        })
+      ];
     };
 
     lib = nixpkgs.lib;
@@ -54,6 +63,10 @@
             home-manager.useUserPackages = true;
             home-manager.users.alberand = import ./machines/nixxy/home.nix;
           }
+          agenix.nixosModules.default
+          {
+            environment.systemPackages = [agenix.packages.${system}.default];
+          }
         ];
       };
       thinky = lib.nixosSystem {
@@ -68,6 +81,10 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.aalbersh = import ./machines/thinky/home.nix;
+          }
+          agenix.nixosModules.default
+          {
+            environment.systemPackages = [agenix.packages.${system}.default];
           }
         ];
       };
