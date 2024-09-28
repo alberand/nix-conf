@@ -120,6 +120,7 @@
     bat
     swaylock
     sublime
+    yt-dlp
   ];
 
   programs.zsh.enable = true;
