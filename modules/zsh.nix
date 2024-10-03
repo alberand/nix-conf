@@ -84,6 +84,8 @@ alias mutt="with_passwords mutt"
 alias neomutt="with_passwords neomutt"
 alias mbsync="with_passwords mbsync"
 
+alias q="quilt"
+
 # Fix slow tab completion for git
 __git_files () {
     _wanted files expl 'local files' _files
