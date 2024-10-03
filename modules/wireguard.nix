@@ -57,8 +57,18 @@ ${pkgs.iptables}/bin/iptables \
         -j ACCEPT
 
 # kvart nix container
-${pkgs.iptables}/bin/iptables -I OUTPUT -s 10.233.1.0/24 -d 10.233.1.0/24 \
-  -j ACCEPT
+${pkgs.iptables}/bin/iptables \
+        -A INPUT \
+        -s 10.233.1.1/16 \
+        -d 10.233.1.1/16 \
+        -m state --state NEW,ESTABLISHED \
+        -j ACCEPT
+${pkgs.iptables}/bin/iptables \
+        -I OUTPUT \
+        -s 10.233.1.0/24 \
+        -d 10.233.1.0/24 \
+        -m state --state NEW,ESTABLISHED \
+        -j ACCEPT
 
 ${pkgs.iptables}/bin/iptables -A INPUT -s 10.88.0.1/16 -d 10.88.0.1/16 \
   -m state --state NEW,ESTABLISHED -j ACCEPT
