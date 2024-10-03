@@ -60,7 +60,9 @@ macro index \CA "T ~O | ~N\n;N\n"
 # Limit view to current thread
 bind index \Cl limit-current-thread
 
-bind index - collapse-thread
+bind index <space> collapse-thread
+bind pager j next-line
+bind pager k previous-line
 bind index _ collapse-all
 
 # Show Message-ID in the header by default
