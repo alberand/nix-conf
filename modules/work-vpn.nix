@@ -45,6 +45,9 @@
   age.secrets.root-ca = {
     file = ../secrets/root-ca.age;
     path = "/etc/pki/tls/certs/redhat-root-ca.crt";
+    mode = "770";
+    owner = "aalbersh";
+    group = "users";
   };
 
   security.pki = {
