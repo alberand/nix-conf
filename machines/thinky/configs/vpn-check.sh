@@ -1,6 +1,6 @@
 template='{"text": "$text", "tooltip": "", "class": "$class", "percentage": 0 }'
 
-if curl -s https://beaker.engineering.redhat.com > /dev/null; then
+if ip -f inet addr show redhat0 > /dev/null; then
 	template=$(echo $template | sed 's/$text/VPN/' | \
 		sed 's/$class/connected/');
 else
