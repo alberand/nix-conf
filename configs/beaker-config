@@ -28,7 +28,7 @@ KRB_REALM = "IPA.REDHAT.COM"
 
 # SSL CA certificate to verify the Beaker server's SSL certificate.
 # By default, uses the system-wide CA certificate bundle.
-CA_CERT = "/etc/pki/tls/certs/redhat-root-ca.crt"
+CA_CERT = "/etc/pki/tls/certs/ca-bundle.crt"
 
 # By default the command will fail if the Beaker server's SSL certificate is
 # invalid or not signed by a trusted CA. Set this to False to disable validity

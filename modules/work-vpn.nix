@@ -42,17 +42,10 @@
     gid = 1100;
   };
 
-  age.secrets.root-ca = {
-    file = ../secrets/root-ca.age;
-    path = "/etc/pki/tls/certs/redhat-root-ca.crt";
-    mode = "770";
-    owner = "aalbersh";
-    group = "users";
-  };
-
   security.pki = {
     certificateFiles = [
       "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+      ../secrets/redhat.crt
     ];
   };
 
@@ -62,43 +55,43 @@
       config = ''config /etc/openvpn/ovpn-1-rhvpn-tcp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
-      up = builtins.readFile ../openvpn/client.up;
-      down = builtins.readFile ../openvpn/client.down;
+      up = builtins.readFile ../configs/client.up;
+      down = builtins.readFile ../configs/client.down;
     };
     vpn-udp = {
       config = ''config /etc/openvpn/ovpn-1-rhvpn-udp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
-      up = builtins.readFile ../openvpn/client.up;
-      down = builtins.readFile ../openvpn/client.down;
+      up = builtins.readFile ../configs/client.up;
+      down = builtins.readFile ../configs/client.down;
     };
     ams = {
       config = ''config /etc/openvpn/ovpn-ams2-tcp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
-      up = builtins.readFile ../openvpn/client.up;
-      down = builtins.readFile ../openvpn/client.down;
+      up = builtins.readFile ../configs/client.up;
+      down = builtins.readFile ../configs/client.down;
     };
     ams-udp = {
       config = ''config /etc/openvpn/ovpn-ams2-udp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
-      up = builtins.readFile ../openvpn/client.up;
-      down = builtins.readFile ../openvpn/client.down;
+      up = builtins.readFile ../configs/client.up;
+      down = builtins.readFile ../configs/client.down;
     };
     brq2 = {
       config = ''config /etc/openvpn/ovpn-brq2-tcp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
-      up = builtins.readFile ../openvpn/client.up;
-      down = builtins.readFile ../openvpn/client.down;
+      up = builtins.readFile ../configs/client.up;
+      down = builtins.readFile ../configs/client.down;
     };
     brq2-udp = {
       config = ''config /etc/openvpn/ovpn-brq2-udp.conf'';
       # Don't autostart as VPN needs credentials
       autoStart = false;
-      up = builtins.readFile ../openvpn/client.up;
-      down = builtins.readFile ../openvpn/client.down;
+      up = builtins.readFile ../configs/client.up;
+      down = builtins.readFile ../configs/client.down;
     };
   };
 }
