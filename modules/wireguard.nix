@@ -94,6 +94,20 @@ ${pkgs.iptables}/bin/iptables -I OUTPUT \
   -m state --state NEW,ESTABLISHED \
   -j ACCEPT
 
+# Tailscale
+${pkgs.iptables}/bin/iptables \
+        -A INPUT \
+        -s 100.69.0.1/32 \
+        -d 100.69.0.1/32 \
+        -m state --state NEW,ESTABLISHED \
+        -j ACCEPT
+${pkgs.iptables}/bin/iptables \
+        -I OUTPUT \
+        -s 100.69.0.1/32 \
+        -d 100.69.0.1/32 \
+        -m state --state NEW,ESTABLISHED \
+        -j ACCEPT
+
 # Forbid anything else which doesn't go through wireguard VPN on
 # ipV4 and ipV6
 ${pkgs.iptables}/bin/iptables -A OUTPUT \

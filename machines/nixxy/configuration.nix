@@ -20,6 +20,7 @@
     ../../modules/photoprism.nix
     ../../modules/jellyfin-tunnel.nix
     ../../modules/tandoor.nix
+    ../../modules/tailscale.nix
   ];
 
   config = {
@@ -71,7 +72,6 @@
           22 # ssh
           config.services.minecraft-server.serverProperties.server-port
           config.networking.wg-quick.interfaces.wg0.listenPort
-          config.services.tailscale.port
           55686 # jellyfin
           443 # https
           1194 # OpenVPN
@@ -84,7 +84,6 @@
           53 # dns
           config.services.minecraft-server.serverProperties.server-port
           config.networking.wg-quick.interfaces.wg0.listenPort
-          config.services.tailscale.port
           443 # https
           1194 # OpenVPN
           111 # NFS
