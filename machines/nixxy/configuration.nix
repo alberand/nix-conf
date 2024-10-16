@@ -21,6 +21,7 @@
     ../../modules/jellyfin-tunnel.nix
     ../../modules/tandoor.nix
     ../../modules/tailscale.nix
+    ../../modules/caddy.nix
   ];
 
   config = {
