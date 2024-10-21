@@ -24,6 +24,7 @@
     settings = {
       PHOTOPRISM_ADMIN_USER = "alberand";
       PHOTOPRISM_ADMIN_PASSWORD = "123456";
+      PHOTOPRISM_INDEX_SCHEDULE = "@every 1h";
     };
   };
 
