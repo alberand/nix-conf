@@ -77,6 +77,8 @@ alias cem Carlos Maiolino <cmaiolino@redhat.com>
 alias bill Bill O'Donnel <bodonnel@redhat.com>
 alias dave Dave Chinner <dchinner@redhat.com>
 alias djwong Darrick J. Wong <djwong@kernel.org>
+alias xfs linux-xfs <linux-xfs@vger.kernel.org>
+alias fstests fstests <fstests@vger.kernel.org>
 
 # Highlight the boss =)
 color index blue default "~f esandeen@redhat.com"
