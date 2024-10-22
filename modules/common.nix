@@ -92,6 +92,7 @@
     parted
     iptables
     tldr
+    nss
 
     # work
     qemu_full
