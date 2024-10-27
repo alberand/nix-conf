@@ -1,32 +1,17 @@
-# MANUAL ACTION IS REQUIRED!
-# Copy your VPN configuration to /etc/openvpn/jellyfin-tunnel.ovpn
-# It also needs:
-# pull-filter ignore redirect-gateway
-{ config, pkgs, lib, ...}: {
-  networking.dhcpcd.runHook = ''
-    ${pkgs.iproute2}/bin/ip route add 89.221.217.209 via 192.168.0.1 dev enp34s0
-  '';
+{...}: {
+  networking.wg-quick.interfaces = {
+    wg0 = {
+      address = ["10.10.10.2/32"];
+      privateKeyFile = "/etc/jfwg/client.private";
 
-  users.users = {
-    openvpn = {
-      name = "openvpn";
-      group = "openvpn";
-      isNormalUser = true;
-      uid = 1100;
-    };
-  };
-
-  users.groups.openvpn = {
-    name = "openvpn";
-    members = ["openvpn"];
-    gid = 1100;
-  };
-
-  # Configure our OpenVPN client
-  services.openvpn.servers = {
-    jellyfin = {
-      config = ''config /etc/openvpn/jellyfin-tunnel.ovpn'';
-      autoStart = true;
+      peers = [
+        {
+          publicKey = "MKrNqXfz4sMtRekE44eHLdS/epD0MRZDd/PslJilr1A=";
+          allowedIPs = ["0.0.0.0/0"];
+          endpoint = "89.221.212.102:51820";
+          persistentKeepalive = 25;
+        }
+      ];
     };
   };
 }

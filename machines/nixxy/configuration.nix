@@ -81,6 +81,7 @@
           111 # NFS
           2049 # NFS
           5000 # testing my pet-projects
+          51820
         ];
         allowedUDPPorts = [
           53 # dns
@@ -90,6 +91,7 @@
           1194 # OpenVPN
           111 # NFS
           2049 # NFS
+          51820
         ];
       };
     };
