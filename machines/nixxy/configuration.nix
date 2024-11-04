@@ -23,6 +23,7 @@
     ../../modules/tailscale.nix
     ../../modules/caddy.nix
     ../../modules/bind.nix
+    ../../modules/forgejo.nix
   ];
 
   config = {

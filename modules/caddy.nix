@@ -15,6 +15,7 @@
         "food.whereisiss.com"
         "movies.whereisiss.com"
         "photos.whereisiss.com"
+        "git.whereisiss.com"
       ];
       dnsProvider = "wedos";
       dnsResolver = "ns.wedos.net:53";
@@ -74,6 +75,11 @@
         tls internal
         encode gzip
         reverse_proxy 127.0.0.1:8114
+      '';
+      "git.lan".extraConfig = ''
+        tls internal
+        encode gzip
+        reverse_proxy 127.0.0.1:3000
       '';
       "home.whereisiss.com".extraConfig = ''
         encode gzip
