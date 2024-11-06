@@ -8,7 +8,6 @@ let
   systems = [ thinky ];
 in
 {
-  "root-ca.age".publicKeys = [ aalbersh thinky ];
   "thinky-env.age".publicKeys = [ aalbersh thinky ];
   "acme-env.age".publicKeys = [ alberand alberand-rsa ];
 }
