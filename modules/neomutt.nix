@@ -18,8 +18,8 @@
   # - .muttrc.local (optional)
   # - .mbsyncrc
   home.file = {
-    ".muttrc" = {
-      source = ../configs/muttrc;
+    "${config.xdg.configHome}/neomutt/neomuttrc" = {
+      source = ../configs/neomuttrc;
     };
     ".mutt/dracula.muttrc" = {
       source = ../configs/dracula.muttrc;
