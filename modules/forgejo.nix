@@ -35,6 +35,9 @@ in {
         FROM = "noreply@${srv.DOMAIN}";
         USER = "noreply@${srv.DOMAIN}";
       };
+      "git.timeout" = {
+        MIGRATE = 3600; # 1 hour for huge repos
+      };
     };
   };
 }
