@@ -19,7 +19,6 @@
     cargo
     rust-analyzer
     pinentry
-    conserver
     rpm
     quilt
     # Script to open serial console to Beaker machine
@@ -27,9 +26,9 @@
       wrapper = writeShellScriptBin "con" (builtins.readFile ./configs/console.sh);
     in
       pkgs.symlinkJoin {
-        name = "conserver";
+        name = "conserver-bkr";
         paths = [
-          conserver
+          (conserver.override {gssapiSupport = true;})
           wrapper
         ];
       })

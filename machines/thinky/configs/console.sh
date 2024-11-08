@@ -17,8 +17,8 @@ function _console()
 
 	case ${HOST} in
 	# from https://docs.engineering.redhat.com/x/dWMqAw
-	*bos2*) CONSERVER="conserver-02.hosts.prod.psi.bos.redhat.com";;
-	*bos*) CONSERVER="conserver-02.hosts.prod.psi.bos.redhat.com";;
+	*bos2*) CONSERVER="conserver-01.cons-001.eng.bos2.dc.redhat.com";;
+	*bos*) CONSERVER="conserver-01.cons-001.eng.bos2.dc.redhat.com";;
 	*rdu2*) CONSERVER="conserver-02.eng.rdu2.redhat.com";;
 	*rdu*) CONSERVER="console.eng.rdu.redhat.com";;
 	*brq*) CONSERVER="conserver-01.host.prod.eng.brq2.redhat.com";;
@@ -27,7 +27,7 @@ function _console()
 	*pnq*) CONSERVER="console.lab.eng.pnq.redhat.com";;
 	*nay*) CONSERVER="console.lab.eng.nay.redhat.com";;
 	*tlv*) CONSERVER="conserver-01.eng.tlv.redhat.com";;
-	*)     CONSERVER="conserver-02.hosts.prod.psi.bos.redhat.com";;
+	*)     CONSERVER="conserver-01.cons-001.eng.bos2.dc.redhat.com";;
 	esac
 
 	console -M ${CONSERVER} ${HOST}

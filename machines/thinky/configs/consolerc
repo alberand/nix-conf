@@ -1,6 +1,5 @@
 config * {
-    #master conserver-01.host.prod.eng.brq2.redhat.com;
-    master conserver-02.hosts.prod.psi.bos.redhat.com;
+    master conserver-01.host.prod.eng.brq2.redhat.com;
     username aalbersh;
     port 782;
 }
