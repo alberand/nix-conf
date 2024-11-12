@@ -135,7 +135,7 @@
       extraGroups = [
         "wheel"
         "sudo"
-        "libvirt"
+        "libvirtd"
         "networkmanager"
         "wireshark"
         "disk"
