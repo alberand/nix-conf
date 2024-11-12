@@ -7,6 +7,23 @@
   cfg = config.services.forgejo;
   srv = cfg.settings.server;
 in {
+  environment.systemPackages = let
+    forgejo-cli = pkgs.writeScriptBin "forgejo-cli" ''
+      #!${pkgs.runtimeShell}
+      cd ${cfg.stateDir}
+      sudo=exec
+      if [[ "$USER" != forgejo ]]; then
+        sudo='exec /run/wrappers/bin/sudo -u ${cfg.user} -g ${cfg.group} --preserve-env=GITEA_WORK_DIR --preserve-env=GITEA_CUSTOM'
+      fi
+      # Note that these variable names will change
+      export GITEA_WORK_DIR=${cfg.stateDir}
+      export GITEA_CUSTOM=${cfg.customDir}
+      $sudo ${lib.getExe cfg.package} "$@"
+    '';
+  in [
+    forgejo-cli
+  ];
+
   services.forgejo = {
     enable = true;
     database.type = "postgres";
