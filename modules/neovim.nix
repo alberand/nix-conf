@@ -20,11 +20,13 @@ in {
     enable = true;
     plugins = with pkgs.vimPlugins; [
       nvim-treesitter
-      nvim-fzf
-      fzf-vim
-      telescope-nvim
       nvim-treesitter-context
       nvim-treesitter.withAllGrammars
+      nvim-fzf
+      nvim-lspconfig
+      nvim-cmp
+      fzf-vim
+      telescope-nvim
       vim-nix
       vim-airline
       vim-airline-themes
@@ -36,8 +38,6 @@ in {
       rust-vim
       vim-fugitive
       null-ls-nvim
-      nvim-lspconfig
-      nvim-cmp
       luasnip
       cmp-nvim-lsp
       nvim-lspconfig
@@ -48,6 +48,8 @@ in {
       friendly-snippets
       nvim-web-devicons
       trouble-nvim
+      # Indent line highlights
+      indent-blankline-nvim
     ];
     extraConfig = ''
     set noexpandtab

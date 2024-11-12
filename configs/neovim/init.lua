@@ -20,6 +20,29 @@ vim.opt.foldmethod = "syntax"
 vim.opt.foldlevel = 20
 vim.opt.pastetoggle = "<F5>"
 
+-- Enable mouse mode, can be useful for resizing splits for example!
+vim.opt.mouse = 'a'
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the
+-- search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+-- Keep signcolumn on by default
+vim.opt.signcolumn = 'yes'
+-- Decrease update time
+vim.opt.updatetime = 250
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = false
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = 'split'
+
 vim.opt.tabstop = 8
 vim.opt.autoindent = true
 -- Doesn't work somehow
@@ -27,13 +50,8 @@ vim.opt.expandtab = false
 --vim.cmd[[ set noexpandtab ]]
 vim.opt.shiftwidth = 8
 vim.opt.softtabstop = 0
-
-vim.opt.listchars = {
-	--eol = '↵',
-	space = ' ',
-	tab = '> '
-}
-vim.opt.list = true
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 10
 
 -- Search highlight
 vim.opt.hlsearch = true
@@ -78,6 +96,16 @@ if (os.execute('test -f ~/.vimrc.local') == 0)
 then
      vim.cmd('source ~/.vimrc.local')
 end
+
+-- [[ Basic Keymaps ]]
+--  See `:help vim.keymap.set()`
+
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Mappings.
 -- Split navigation witouh CTRL+W
@@ -174,6 +202,7 @@ end
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<C-i>', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>i', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>f', '<cmd>lua require(\'telescope.builtin\').grep_string({search = vim.fn.expand("<cword>")})<cr>', {})
 
 local ts_select_dir_for_grep = function(prompt_bufnr)
@@ -293,4 +322,11 @@ vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references")
 
 require('treesitter-context').setup{
   max_lines = 2,
+}
+
+require("ibl").setup {
+	scope = {
+		priority = 1000,
+		highlight = {"Function", "Label"},
+	}
 }
