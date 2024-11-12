@@ -66,6 +66,20 @@
 
   programs.gpg = {
     enable = true;
+    settings = {
+      default-key = "46A7EA18AC33E108";
+    };
+  };
+
+  programs.git = {
+    extraConfig = {
+      user = {
+        signingkey = "46A7EA18AC33E108";
+      };
+    };
+    ignores = [
+      ".envrc"
+    ];
   };
 
   # Auto-run applications
@@ -114,4 +128,8 @@
       };
     };
   };
+
+  programs.git.ignores = [
+      ".envrc"
+  ];
 }
