@@ -28,11 +28,9 @@ in {
       fzf-vim
       telescope-nvim
       vim-nix
-      vim-airline
-      vim-airline-themes
+      lualine-nvim
       vim-numbertoggle
       vim-plug
-      zephyr-nvim
       telescope-file-browser-nvim
       harpoon
       rust-vim
@@ -48,6 +46,9 @@ in {
       friendly-snippets
       nvim-web-devicons
       trouble-nvim
+      # Themes
+      zephyr-nvim
+      tokyonight-nvim
       # Indent line highlights
       indent-blankline-nvim
     ];

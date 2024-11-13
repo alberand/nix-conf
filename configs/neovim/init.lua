@@ -1,55 +1,75 @@
+-- Theme
+vim.cmd[[colorscheme tokyonight]]
+
+-- <leader> key
 vim.g.mapleader = ","
-vim.cmd[[ colorscheme zephyr ]]
 vim.g.nobomb = true
+
 -- Fat cursor
 vim.opt.guicursor = ""
 vim.opt.cursorline = true
+
+-- 80 chars column limit
 vim.opt.tw = 80
 vim.opt.textwidth = 80
+
 -- Error column always on
 vim.opt.signcolumn = "yes"
+
 -- Line numbering
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.smartindent = true
+
 -- Syntax coloring lines that are too long just slows down the world
 vim.opt.synmaxcol = 128
-vim.opt.syntax = "enable"
+vim.opt.syntax = "on"
 vim.opt.cc = "+1"
+
+-- Folding
 vim.opt.foldmethod = "syntax"
 vim.opt.foldlevel = 20
-vim.opt.pastetoggle = "<F5>"
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
+
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the
 -- search term
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+
 -- Keep signcolumn on by default
 vim.opt.signcolumn = 'yes'
+
 -- Decrease update time
 vim.opt.updatetime = 250
+
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = false
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.list = true
+vim.opt.listchars = { trail = '·', nbsp = '␣' }
+
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
-vim.opt.tabstop = 8
 vim.opt.autoindent = true
+
+-- TODO this should move to c filetype
+vim.opt.tabstop = 8
 -- Doesn't work somehow
 vim.opt.expandtab = false
 --vim.cmd[[ set noexpandtab ]]
 vim.opt.shiftwidth = 8
 vim.opt.softtabstop = 0
+
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
@@ -60,8 +80,10 @@ vim.opt.incsearch = true
 -- Spell check
 vim.opt.spell = true
 vim.opt.spelllang = "en_us"
+
 -- <leader>s to enable spell
 vim.keymap.set('n', '<silent> <leader>s', ':set spell!<CR>')
+
 -- Auto correct last word in insert mode by CTRL+e
 vim.keymap.set('i', '<C-e>', '<Esc>[s1z=`]a')
 
@@ -70,27 +92,24 @@ vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 vim.opt.termencoding = "utf-8"
 
--- Use .vimrc if it is appear in current folder. !!!DANGER!!!
-vim.opt.exrc = true
-vim.opt.secure = true
-
 -- Splits appear in right place
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Wrapping doesn't always work good with really long lines (break theme)
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- Undo history
 vim.opt.undofile = true
--- vim.opt.undodir = '~/.nvim/undo//'
--- vim.opt.backupdir = '~/.nvim/backup//'
--- vim.opt.directory = '~/.nvim/swp//'
 
 -- Linux dev related
 -- Whitespace damage
 vim.cmd[[ highlight RedundantSpaces ctermbg=red guibg=red ]]
 vim.cmd[[ match RedundantSpaces /\s\+$\| \+\ze\t/ ]]
+
+-- Use .vimrc if it is appear in current folder. !!!DANGER!!!
+vim.opt.exrc = true
+vim.opt.secure = true
 
 if (os.execute('test -f ~/.vimrc.local') == 0)
 then
@@ -107,12 +126,12 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Mappings.
 -- Split navigation witouh CTRL+W
 vim.keymap.set('n', '<C-j>', '<C-W>j')
 vim.keymap.set('n', '<C-k>', '<C-W>k')
 vim.keymap.set('n', '<C-h>', '<C-W>h')
 vim.keymap.set('n', '<C-l>', '<C-W>l')
+
 -- Navigation in insert mode
 vim.keymap.set('i', '<C-j>', '<Down>')
 vim.keymap.set('i', '<C-k>', '<Up>')
@@ -125,9 +144,11 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Smarter J line add
 vim.keymap.set("n", "J", "mzJ`z")
+
 -- Half page jumps are in the middle of the screen
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
 -- Search terms are in the middle
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
@@ -140,21 +161,6 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set('n', '<Space>', 'za')
 vim.keymap.set('v', '<Space>', 'za')
 
--- Set paste to mode to F5
-vim.keymap.set('n', '<F5>', ':set invpaste paste?<Enter>')
-vim.keymap.set('i', '<F5>', '<C-O><F5>')
-
--- Filetypes
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "html",
-	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "javascript",
-	command = "setlocal shiftwidth=2 tabstop=2 expandtab"
-})
-
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap=true, silent=true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -162,11 +168,10 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
--- Airline
--- Disable unnecessary LSP info
-vim.g['airline#extensions#nvimlsp#enabled'] = 0
-vim.g['airline#extensions#quickfix#enabled'] = 0
-vim.g['airline#extensions#whitespace#enabled'] = 0
+-- Plugins
+
+-- Status line
+require('lualine').setup()
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -194,16 +199,13 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
--- fzf configuration
--- vim.keymap.set('n', '<C-p>', ':FZF<CR>')
--- vim.keymap.set('n', '<C-i>', ':Tags<CR>')
---
 -- Telescope configuration
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<C-i>', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>i', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>f', '<cmd>lua require(\'telescope.builtin\').grep_string({search = vim.fn.expand("<cword>")})<cr>', {})
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
 
 local ts_select_dir_for_grep = function(prompt_bufnr)
   local action_state = require("telescope.actions.state")
@@ -238,7 +240,7 @@ require("telescope").setup({
     defaults = {
         mappings = {
             i = {
-		-- Exit with single <esc>
+                -- Exit with single <esc>
                 ["<esc>"] = actions.close,
             },
         },
