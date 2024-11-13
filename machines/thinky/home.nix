@@ -128,8 +128,4 @@
       };
     };
   };
-
-  programs.git.ignores = [
-      ".envrc"
-  ];
 }
