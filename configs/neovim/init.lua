@@ -330,5 +330,5 @@ require("ibl").setup {
 	scope = {
 		priority = 1000,
 		highlight = {"Function", "Label"},
-	}
+	},
 }
