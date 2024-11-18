@@ -122,6 +122,7 @@
     swaylock
     sublime
     yt-dlp
+    pinta
   ];
 
   programs.zsh.enable = true;
