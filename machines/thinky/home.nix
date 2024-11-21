@@ -36,6 +36,7 @@
     (writeShellScriptBin "git-bp" (builtins.readFile ./configs/git-bp))
     # Beaker script to reserve machines for testing
     (writeShellScriptBin "machine" (builtins.readFile ./configs/machine))
+    xfstestsdb
   ];
 
   home.file = {
