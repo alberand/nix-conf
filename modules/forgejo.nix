@@ -55,6 +55,10 @@ in {
       "git.timeout" = {
         MIGRATE = 3600; # 1 hour for huge repos
       };
+
+      indexer = {
+        REPO_INDEXER_ENABLED = true;
+      };
     };
   };
 }
