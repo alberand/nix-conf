@@ -141,7 +141,7 @@
 
   programs.ssh = {
     startAgent = true;
-    agentTimeout = "24h";
+    agentTimeout = null;
   };
 
   programs.gnupg.agent = {
