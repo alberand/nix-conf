@@ -177,6 +177,8 @@ function man() {
 			man "$@"
 }
 
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+
 # from i8ramin - http://getintothis.com/blog/2012/04/02/git-grep-and-blame-bash-function/
 # runs git grep on a pattern, and then uses git blame to who did it
 ggb() {
