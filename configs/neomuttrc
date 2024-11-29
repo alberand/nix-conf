@@ -7,6 +7,9 @@ set mark_old = no
 set index_format = "%4C %Z [%{%d %b}] %-15.15L %s"
 set date_format="%F %T"
 
+# Don't beep on errors (really annoying)
+set beep = no
+
 # Sidebar
 set sidebar_visible
 set sidebar_short_path = yes
