@@ -8,6 +8,10 @@
     enable = true;
     eula = true; # https://account.mojang.com/documents/minecraft_eula
     declarative = true;
+    whitelist = {
+      alberand = "25aba768-3d02-4bd5-803d-e5aa23bdb9df";
+      superbulka2704 = "955fc02f-894a-483d-9df2-f510e8fab8ae";
+    };
 
     # https://minecraft.gamepedia.com/Server.properties#server.properties
     serverProperties = {
@@ -25,6 +29,7 @@
       "rcon.password" = "andreyminecraft";
       level-name = "Our World";
       level-seed = "";
+      white-list = true;
     };
   };
 }
