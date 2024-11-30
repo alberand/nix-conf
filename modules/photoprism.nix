@@ -33,13 +33,6 @@
     };
   };
 
-  # Unfortunately, symlinks doesn't work somehow, even though Photoprism docs
-  # says they should
-  fileSystems."/media/photos/phone" = {
-    device = config.services.syncthing.dataDir + "/Photos";
-    options = [ "bind" ];
-  };
-
   # TODO copy & remove
   #fileSystems."/media/photos/julia" = {
     #device = "/media/stuff/BUP/Pictures/jpg";

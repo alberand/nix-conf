@@ -253,6 +253,10 @@
             path = "/home/alberand/Share/Documents";
             devices = ["lonmoun" "nothing-phone"];
           };
+          "Photos" = {
+            path = "/media/photos/nothing-phone";
+            devices = ["lonmoun" "nothing-phone"];
+          };
         };
       };
     };
