@@ -323,7 +323,8 @@ vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist"
 vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
 
 require('treesitter-context').setup{
-  max_lines = 2,
+    -- Function with hugh header taking too much space
+    max_lines = 2,
 }
 
 require("ibl").setup {
