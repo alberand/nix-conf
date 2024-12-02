@@ -332,3 +332,5 @@ require("ibl").setup {
 		highlight = {"Function", "Label"},
 	},
 }
+
+require('gitsigns').setup()

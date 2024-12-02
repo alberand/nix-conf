@@ -34,7 +34,6 @@ in {
       telescope-file-browser-nvim
       harpoon
       rust-vim
-      vim-fugitive
       null-ls-nvim
       luasnip
       cmp-nvim-lsp
@@ -51,6 +50,9 @@ in {
       tokyonight-nvim
       # Indent line highlights
       indent-blankline-nvim
+      # Git
+      gitsigns-nvim
+      vim-fugitive
     ];
     extraConfig = ''
     set noexpandtab
