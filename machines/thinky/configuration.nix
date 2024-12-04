@@ -29,13 +29,9 @@
       };
     };
 
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
       extraPackages = with pkgs; [
-        #rocm-opencl-icd
-        #rocm-opencl-runtime
         intel-media-driver
         vaapiIntel
         vaapiVdpau
@@ -140,8 +136,6 @@
       koji
     ];
 
-    # Enable sound.
-    sound.enable = true;
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -212,6 +206,6 @@
     # this value at the release version of the first install of this system.
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-    system.stateVersion = "24.05"; # Did you read the comment?
+    system.stateVersion = "24.11"; # Did you read the comment?
   };
 }

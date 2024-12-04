@@ -2,6 +2,7 @@
 {
   environment.systemPackages = with pkgs; [
     mcrcon
+    jdk
   ];
 
   services.minecraft-server = {

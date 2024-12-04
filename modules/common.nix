@@ -24,7 +24,7 @@
   fonts.fontconfig.enable = true;
   fonts.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     fira-code
     fira-code-symbols
@@ -106,7 +106,7 @@
     vulkan-tools
     gimp
     easyeffects
-    gnome.adwaita-icon-theme
+    adwaita-icon-theme
     gnomeExtensions.appindicator
     rustc
     cargo
@@ -128,7 +128,7 @@
   programs.zsh.enable = true;
   programs.dconf.enable = true;
   services.udev.packages = with pkgs; [
-    gnome.gnome-settings-daemon
+    gnome-settings-daemon
   ];
 
   # Enable the OpenSSH daemon.
