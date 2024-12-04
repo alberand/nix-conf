@@ -90,7 +90,6 @@ vim.keymap.set('i', '<C-e>', '<Esc>[s1z=`]a')
 -- File encondings
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
-vim.opt.termencoding = "utf-8"
 
 -- Splits appear in right place
 vim.opt.splitbelow = true
@@ -274,7 +273,7 @@ require('lspconfig')['pyright'].setup{
       }
     }
 }
-require('lspconfig')['tsserver'].setup{
+require('lspconfig')['ts_ls'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
