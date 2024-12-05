@@ -18,3 +18,18 @@ mm() {
 }
 
 alias bkr-reset="bkr system-power --action=reboot"
+
+# Add indication when battery is too low. I often connect to laptop via ssh
+battery() {
+	charge=$(cat /sys/class/power_supply/BAT0/capacity)
+	if [ $((charge)) -lt 10 ]; then
+		bold=$(tput bold)
+		normal=$(tput sgr0)
+		RED='\033[0;31m'
+		NC='\033[0m'
+		echo -e -n "${RED}${bold}Battery too low!${normal}${NC}"
+	fi
+
+	echo -e -n ""
+}
+PROMPT+=' $(battery)'
