@@ -39,7 +39,9 @@
       ];
     };
 
-    hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [vaapiIntel];
+    hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
+      vaapiIntel
+    ];
 
     boot.initrd.luks.devices = {
       nixos = {
