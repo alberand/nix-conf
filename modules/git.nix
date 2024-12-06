@@ -59,6 +59,7 @@
       br = "branch";
       wt = "worktree";
       sm = "send-email";
+      cp = "cherry-pick";
       # Default output for patches + form cover letter from branch description
       fp = "format-patch -o patches --cover-from-description=subject";
       # Fancy short log
