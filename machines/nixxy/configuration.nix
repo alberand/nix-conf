@@ -51,6 +51,7 @@
     # Vulkan API/OpenCL API/Modern AMD Graphics Core Next (GCN) GPUs
     hardware.graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         amdvlk
       ];
