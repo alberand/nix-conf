@@ -1,4 +1,10 @@
-{pkgs, config, ...}: {
+{...}: {
+  networking.firewall = {
+    allowedTCPPorts = [
+      8123 # home-assistant
+    ];
+  };
+
   services.home-assistant = {
     enable = true;
     extraComponents = [
