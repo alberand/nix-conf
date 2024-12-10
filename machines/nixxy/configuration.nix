@@ -7,7 +7,7 @@
     ./hardware-configuration.nix
     ../../options.nix
     ../../modules/common.nix
-    ../../modules/wireguard.nix
+    #../../modules/wireguard.nix
     ../../modules/podman-deluge.nix
     ../../modules/nginx.nix
     ../../modules/grafana.nix
