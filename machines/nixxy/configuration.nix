@@ -210,8 +210,6 @@
       };
     };
 
-    programs.kdeconnect.enable = true;
-
     services.syncthing = {
       enable = true;
       dataDir = "/home/alberand/Share";

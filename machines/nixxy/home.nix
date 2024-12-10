@@ -37,7 +37,6 @@
       { command = "swaymsg 'workspace 2; exec kitty'"; }
       { command = "swaymsg 'workspace 10; exec thunderbird'"; }
       { command = "swaymsg 'exec \"sleep 1; flameshot\"'"; }
-      { command = "kdeconnect-indicator"; }
     ];
   };
 }
