@@ -26,7 +26,15 @@ in {
 
   services.forgejo = {
     enable = true;
-    database.type = "postgres";
+    stateDir = "/media/forgejo";
+    database = {
+      type = "mysql";
+      user = "forgejo";
+      socket = "/run/mysqld/mysqld.sock";
+      host = "127.0.0.1";
+      createDatabase = true;
+    };
+
     # Enable support for Git Large File Storage
     lfs.enable = true;
     settings = {
@@ -43,15 +51,7 @@ in {
         ENABLED = true;
         DEFAULT_ACTIONS_URL = "github";
       };
-      # Sending emails is completely optional
-      # You can send a test email from the web UI at:
-      # Profile Picture > Site Administration > Configuration >  Mailer Configuration
-      mailer = {
-        ENABLED = false;
-        SMTP_ADDR = "mail.example.com";
-        FROM = "noreply@${srv.DOMAIN}";
-        USER = "noreply@${srv.DOMAIN}";
-      };
+
       "git.timeout" = {
         MIGRATE = 3600; # 1 hour for huge repos
       };
