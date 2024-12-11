@@ -1,11 +1,15 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
+  age.secrets.acme-env.file = ../secrets/acme-env.age;
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrey.albershteyn@gmail.com";
     defaults.enableDebugLogs = true;
     #defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
-
-   age.secrets.acme-env.file = ./secrets/acme-env.age;
 
     certs."whereisiss.com" = {
       group = config.services.caddy.group;
@@ -39,21 +43,20 @@
     enable = true;
 
     virtualHosts = let
-      dashboard =
-        pkgs.stdenv.mkDerivation {
-          name = "dashboard";
+      dashboard = pkgs.stdenv.mkDerivation {
+        name = "dashboard";
 
-          src = ../configs/dashboard.html;
+        src = ../configs/dashboard.html;
 
-          phases = [ "installPhase" ];
+        phases = ["installPhase"];
 
-          installPhase = ''
-            mkdir $out
-            cp $src $out/index.html
-          '';
-        };
-        certloc = "/var/lib/acme/whereisiss.com";
-        gitcertloc = "/var/lib/acme/git.alberand.com";
+        installPhase = ''
+          mkdir $out
+          cp $src $out/index.html
+        '';
+      };
+      certloc = "/var/lib/acme/whereisiss.com";
+      gitcertloc = "/var/lib/acme/git.alberand.com";
     in {
       "home.lan".extraConfig = ''
         tls internal
