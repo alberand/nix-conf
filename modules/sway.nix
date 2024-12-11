@@ -52,6 +52,7 @@
           { class = "Pavucontrol"; }
           { app_id = ".blueman-manager-wrapped"; }
           { app_id = "calc"; }
+          { title = "Picture-in-Picture"; }
         ];
 
         keybindings = let
