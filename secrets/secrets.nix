@@ -8,10 +8,11 @@ let
   alberand = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsaaX1d/7zZHiZIsPFhtvmEChTB0p7sKECk7p6UcUqr";
   users = [ aalbersh alberand alberand-rsa ];
 
+  nixxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrvWws1g7nmmEV0hff+49ufO4yM4GCUfHgzPVL5Raw+";
   thinky = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIByn5I88HSu5WM3EIr8GVtbEbxHPpT+JB6m9Su0r3NLY";
   systems = [ thinky ];
 in
 {
   "thinky-env.age".publicKeys = [ aalbersh thinky ];
-  "acme-env.age".publicKeys = [ alberand alberand-rsa ];
+  "acme-env.age".publicKeys = [ nixxy alberand alberand-rsa ];
 }
