@@ -73,6 +73,12 @@ ignore *
 unignore Subject: From: Date: To: Cc: Reply-To: Message-ID: In-Reply-To:
 hdr_order Subject: From: Date: To: Cc: Reply-To: Message-ID: In-Reply-To:
 
+# Swap / and <esc>/ to reverse-search on /
+bind generic / noop
+bind generic <Esc>/ noop
+bind generic / search-reverse
+bind generic <Esc>/ search
+
 # People
 alias me Andrey Albershteyn <aalbersh@redhat.com>
 alias eric Eric Sandeen <esandeen@redhat.com>
