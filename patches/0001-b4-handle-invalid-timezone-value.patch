@@ -1,0 +1,50 @@
+From 0cde82a0e2345d2275b96302f0355a521ea98a50 Mon Sep 17 00:00:00 2001
+From: Andrey Albershteyn <aalbersh@redhat.com>
+Date: Thu, 3 Oct 2024 17:51:53 +0200
+Subject: [PATCH] b4: handle invalid timezone value
+
+If timezone value in "Date:" field is invalid (out of -24h..24h
+range) then b4 fails with following error:
+
+  ...
+
+  File "/nix/store/7sz8qnm7csfyxfj2k8v8p8w3ar5h0b13-b4-0.13.0/lib/python3.11/site-packages/b4/__init__.py", line 1239, in __init__
+    self.date = email.utils.parsedate_to_datetime(str(msgdate))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/h723hb9m43lybmvfxkk6n7j4v664qy7b-python3-3.11.9/lib/python3.11/email/utils.py", line 205, in parsedate_to_datetime
+    tzinfo=datetime.timezone(datetime.timedelta(seconds=tz)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: offset must be a timedelta strictly between -timedelta(hours=24) and timedelta(hours=24), not datetime.timedelta(days=4, seconds=10800).
+
+For example, this patchset will fail due to +9900 timezone which is
+4days 3hours:
+https://lore.kernel.org/all/170405029862.1826032.9120032235595084513.stgit@frogsfrogsfrogs/
+
+Fix this by checking if timezone is in valid range.
+
+Signed-off-by: Andrey Albershteyn <aalbersh@redhat.com>
+---
+ src/b4/__init__.py | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/b4/__init__.py b/src/b4/__init__.py
+index 811bbcaf028d..2555d205966b 100644
+--- a/src/b4/__init__.py
++++ b/src/b4/__init__.py
+@@ -1245,7 +1245,12 @@ class LoreMessage:
+ 
+         msgdate = self.msg.get('Date')
+         if msgdate:
+-            self.date = email.utils.parsedate_to_datetime(str(msgdate))
++            dtuple = email.utils.parsedate_tz(str(msgdate))
++            # Invalid timezone (e.g. -9900)
++            if abs(dtuple[-1]) > 86400:
++                self.date = datetime.datetime(*dtuple[:6])
++            else:
++                self.date = email.utils.parsedate_to_datetime(str(msgdate))
+         else:
+             # An email without a Date: field?
+             self.date = datetime.datetime.now()
+-- 
+2.47.0
+

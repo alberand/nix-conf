@@ -17,7 +17,11 @@
     attr
     autoconf
     automake
-    b4
+    (b4.overrideAttrs(final: prev: {
+      patches = [
+        ../patches/0001-b4-handle-invalid-timezone-value.patch
+      ];
+    }))
     bc
     bemenu
     binutils
