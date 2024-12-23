@@ -57,6 +57,7 @@
       };
       certloc = "/var/lib/acme/whereisiss.com";
       gitcertloc = "/var/lib/acme/git.alberand.com";
+      nbcertloc = "/var/lib/acme/test.nemambyt.com";
     in {
       "home.lan".extraConfig = ''
         tls internal
@@ -126,6 +127,10 @@
         tls ${gitcertloc}/cert.pem ${gitcertloc}/key.pem {
           protocols tls1.3
         }
+      '';
+      "test.nemambyt.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.233.1.2:4242
       '';
     };
   };
