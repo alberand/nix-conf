@@ -37,6 +37,16 @@
       enableDebugLogs = true;
       environmentFile = config.age.secrets.acme-env.path;
     };
+    certs."test.nemambyt.com" = {
+      group = config.services.caddy.group;
+
+      domain = "test.nemambyt.com";
+      dnsProvider = "cloudflare";
+      dnsResolver = "aron.ns.cloudflare.com";
+      dnsPropagationCheck = true;
+      enableDebugLogs = true;
+      environmentFile = config.age.secrets.acme-env.path;
+    };
   };
 
   services.caddy = {
@@ -131,6 +141,9 @@
       "test.nemambyt.com".extraConfig = ''
         encode gzip
         reverse_proxy 10.233.1.2:4242
+        tls ${nbcertloc}/cert.pem ${nbcertloc}/key.pem {
+          protocols tls1.3
+        }
       '';
     };
   };
