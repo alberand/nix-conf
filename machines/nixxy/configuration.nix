@@ -89,7 +89,7 @@
 
     networking.nat.enable = true;
     networking.nat.internalInterfaces = ["ve-+"];
-    networking.nat.externalInterface = "enp34s0";
+    networking.nat.externalInterface = "wlo1";
     networking.networkmanager.unmanaged = ["interface-name:ve-*"];
 
     # ash drive
