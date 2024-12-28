@@ -14,6 +14,8 @@
       bind h select-pane -R
       bind k select-pane -U
       bind j select-pane -D
+
+      set-option -sg escape-time 10
     '';
   };
 
