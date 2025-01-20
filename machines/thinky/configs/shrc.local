@@ -27,7 +27,7 @@ battery() {
 		normal=$(tput sgr0)
 		RED='\033[0;31m'
 		NC='\033[0m'
-		echo -e -n "${RED}${bold}Battery too low!${normal}${NC} "
+		echo -e -n "${RED}${bold}B!${normal}${NC} "
 	fi
 
 	echo -e -n ""
