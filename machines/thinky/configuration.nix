@@ -12,6 +12,7 @@
     ../../modules/kerberos.nix
     ../../modules/qemu-guest-network.nix
     ../../modules/mysql.nix
+    ../../modules/squid.nix
   ];
 
   config = {
@@ -80,6 +81,7 @@
           443 # https
           853 # DNS over TLS
           1194 # openvpn
+          config.services.squid.proxyPort
         ];
         allowedUDPPorts = [
           53 # dns
