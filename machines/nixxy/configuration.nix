@@ -161,6 +161,7 @@
       jellyfin-ffmpeg
       libva
       radeontop
+      (writeShellScriptBin "workfox" "exec -a $0 ${firefox}/bin/firefox -P RedHat $@")
     ];
 
     services.pipewire = {
