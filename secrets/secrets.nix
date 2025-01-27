@@ -15,4 +15,5 @@ in
 {
   "thinky-env.age".publicKeys = [ aalbersh thinky ];
   "acme-env.age".publicKeys = [ nixxy alberand alberand-rsa ];
+  "paperless.age".publicKeys = [ nixxy alberand alberand-rsa ];
 }

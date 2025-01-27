@@ -24,6 +24,7 @@
     ../../modules/caddy.nix
     ../../modules/bind.nix
     ../../modules/forgejo.nix
+    ../../modules/paperless.nix
   ];
 
   config = {
