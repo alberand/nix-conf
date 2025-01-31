@@ -48,6 +48,7 @@
           xfsprogs-release = redhat.packages."${system}".xfsprogs-release;
           xfstestsdb = redhat.packages."${system}".xfstestsdb;
           photoprism = unstable.photoprism;
+          jackett = unstable.jackett;
         })
       ];
     };
