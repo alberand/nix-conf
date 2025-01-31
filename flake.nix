@@ -47,7 +47,7 @@
           kup = redhat.packages."${system}".kup;
           xfsprogs-release = redhat.packages."${system}".xfsprogs-release;
           xfstestsdb = redhat.packages."${system}".xfstestsdb;
-          photoprism = unstable.photoprism;
+          # Can be removed soon https://github.com/NixOS/nixpkgs/issues/371837
           jackett = unstable.jackett;
         })
       ];
