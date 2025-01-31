@@ -123,6 +123,7 @@
     sublime
     yt-dlp
     pinta
+    xournalpp
   ];
 
   programs.zsh.enable = true;
