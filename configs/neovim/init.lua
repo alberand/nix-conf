@@ -111,6 +111,11 @@ then
      vim.cmd('source ~/.vimrc.local')
 end
 
+-- Disable LSP log as it can grew pretty big
+-- When needed enable with
+-- vim.lsp.set_log_level("debug")
+vim.lsp.set_log_level("off")
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
