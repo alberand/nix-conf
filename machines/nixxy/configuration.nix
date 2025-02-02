@@ -162,6 +162,7 @@
       jellyfin-ffmpeg
       libva
       radeontop
+      docker-compose
       (writeShellScriptBin "workfox" "exec -a $0 ${firefox}/bin/firefox -P RedHat $@")
     ];
 
