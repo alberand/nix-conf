@@ -108,7 +108,6 @@
         "networkmanager"
         "disk"
         "wireshark"
-        "nixbld"
       ];
     };
 
