@@ -124,6 +124,7 @@
     yt-dlp
     pinta
     xournalpp
+    nix-prefetch-git
   ];
 
   programs.zsh.enable = true;
