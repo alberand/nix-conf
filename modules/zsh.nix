@@ -108,6 +108,8 @@ function quiet_runner(){
 }
 alias mute=quiet_runner
 
+alias vimdiff="nvim -d"
+
 # ex - archive extractor
 # usage: ex <file>
 function ex() {
