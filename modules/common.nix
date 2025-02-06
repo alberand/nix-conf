@@ -125,6 +125,7 @@
     pinta
     xournalpp
     nix-prefetch-git
+    tomlq
   ];
 
   programs.zsh.enable = true;
