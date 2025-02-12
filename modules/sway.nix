@@ -53,6 +53,7 @@
           { app_id = ".blueman-manager-wrapped"; }
           { app_id = "calc"; }
           { title = "Picture-in-Picture"; }
+          { title = "TelegramDesktop"; app_id = "org.telegram.desktop"; }
         ];
 
         keybindings = let
