@@ -21,6 +21,7 @@
     tdesktop # telegram
     thunderbird
     libreoffice
+    rustfmt
   ];
 
   home.file = {
