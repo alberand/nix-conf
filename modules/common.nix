@@ -124,6 +124,7 @@
     yt-dlp
     pinta
     xournalpp
+    nix-prefetch
     nix-prefetch-git
     tomlq
   ];
