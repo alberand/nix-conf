@@ -296,16 +296,16 @@ require('lspconfig')['clangd'].setup{
 
 require('lspconfig')['nil_ls'].setup({ })
 
-require("harpoon").setup({ })
-
-vim.keymap.set('n', "<leader>a", function() require("harpoon.mark").add_file() end, silent)
-vim.keymap.set('n', "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, silent)
-vim.keymap.set('n', "<leader>tc", function() require("harpoon.cmd-ui").toggle_quick_menu() end, silent)
-
-vim.keymap.set('n', "<leader>t", function() require("harpoon.ui").nav_file(1) end, silent)
-vim.keymap.set('n', "<leader>r", function() require("harpoon.ui").nav_file(2) end, silent)
-vim.keymap.set('n', "<leader>e", function() require("harpoon.ui").nav_file(3) end, silent)
-vim.keymap.set('n', "<leader>w", function() require("harpoon.ui").nav_file(4) end, silent)
+--require("harpoon").setup({ })
+--
+--vim.keymap.set('n', "<leader>a", function() require("harpoon.mark").add_file() end, silent)
+--vim.keymap.set('n', "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, silent)
+--vim.keymap.set('n', "<leader>tc", function() require("harpoon.cmd-ui").toggle_quick_menu() end, silent)
+--
+--vim.keymap.set('n', "<leader>t", function() require("harpoon.ui").nav_file(1) end, silent)
+--vim.keymap.set('n', "<leader>r", function() require("harpoon.ui").nav_file(2) end, silent)
+--vim.keymap.set('n', "<leader>e", function() require("harpoon.ui").nav_file(3) end, silent)
+--vim.keymap.set('n', "<leader>w", function() require("harpoon.ui").nav_file(4) end, silent)
 
 local null_ls = require("null-ls")
 
@@ -318,12 +318,11 @@ null_ls.setup({
 vim.keymap.set('n', '<C-a>', ':lua vim.lsp.buf.format()<CR>')
 
 -- Trouble
-vim.keymap.set("n", "<leader>x", function() require("trouble").toggle() end)
-vim.keymap.set("n", "<leader>xw", function() require("trouble").toggle("workspace_diagnostics") end)
-vim.keymap.set("n", "<leader>xd", function() require("trouble").toggle("document_diagnostics") end)
-vim.keymap.set("n", "<leader>xq", function() require("trouble").toggle("quickfix") end)
-vim.keymap.set("n", "<leader>xl", function() require("trouble").toggle("loclist") end)
-vim.keymap.set("n", "gR", function() require("trouble").toggle("lsp_references") end)
+vim.keymap.set("n", "<leader>t", function() require("trouble").toggle("diagnostics") end)
+require('trouble').setup {
+  auto_preview = false;
+  focus = true;
+}
 
 require('treesitter-context').setup{
     -- Function with hugh header taking too much space
