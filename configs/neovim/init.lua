@@ -262,13 +262,12 @@ require("telescope").setup({
   }
 })
 
-local lsp_flags = {
-  -- This is the default in Nvim 0.7+
-  debounce_text_changes = 150,
-}
-require('lspconfig')['pyright'].setup{
+-- Language server configurations
+local lspconfig = require('lspconfig')
+
+-- Python
+lspconfig['pyright'].setup{
     on_attach = on_attach,
-    flags = lsp_flags,
     settings = {
       python = {
         analysis = {
@@ -277,35 +276,42 @@ require('lspconfig')['pyright'].setup{
       }
     }
 }
-require('lspconfig')['ts_ls'].setup{
+
+-- Javascript/HTML/CSS/typescript
+lspconfig['ts_ls'].setup{
     on_attach = on_attach,
-    flags = lsp_flags,
 }
-require('lspconfig')['rust_analyzer'].setup{
+
+lspconfig['jsonls'].setup{
     on_attach = on_attach,
-    flags = lsp_flags,
-    -- Server-specific settings...
+}
+
+lspconfig['eslint'].setup{
+    on_attach = on_attach,
+}
+
+lspconfig['cssls'].setup{
+    on_attach = on_attach,
+}
+
+lspconfig['html'].setup{
+    on_attach = on_attach,
+}
+
+-- Rust
+lspconfig['rust_analyzer'].setup{
+    on_attach = on_attach,
     settings = {
       ["rust-analyzer"] = {}
     }
 }
-require('lspconfig')['clangd'].setup{
+
+-- C
+lspconfig['clangd'].setup{
     on_attach = on_attach,
-    flags = lsp_flags,
 }
 
-require('lspconfig')['nil_ls'].setup({ })
-
---require("harpoon").setup({ })
---
---vim.keymap.set('n', "<leader>a", function() require("harpoon.mark").add_file() end, silent)
---vim.keymap.set('n', "<C-e>", function() require("harpoon.ui").toggle_quick_menu() end, silent)
---vim.keymap.set('n', "<leader>tc", function() require("harpoon.cmd-ui").toggle_quick_menu() end, silent)
---
---vim.keymap.set('n', "<leader>t", function() require("harpoon.ui").nav_file(1) end, silent)
---vim.keymap.set('n', "<leader>r", function() require("harpoon.ui").nav_file(2) end, silent)
---vim.keymap.set('n', "<leader>e", function() require("harpoon.ui").nav_file(3) end, silent)
---vim.keymap.set('n', "<leader>w", function() require("harpoon.ui").nav_file(4) end, silent)
+lspconfig['nil_ls'].setup{}
 
 local null_ls = require("null-ls")
 
