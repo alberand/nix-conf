@@ -164,6 +164,7 @@
       radeontop
       docker-compose
       (writeShellScriptBin "workfox" "exec -a $0 ${firefox}/bin/firefox -P RedHat $@")
+      virt-manager
     ];
 
     services.pipewire = {
@@ -277,6 +278,8 @@
     services.jackett = {
       enable = true;
     };
+
+    virtualisation.libvirtd.enable = true;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
