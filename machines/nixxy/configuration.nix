@@ -25,6 +25,7 @@
     ../../modules/bind.nix
     ../../modules/forgejo.nix
     ../../modules/paperless.nix
+    ../../modules/binary-cache.nix
   ];
 
   config = {

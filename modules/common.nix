@@ -179,6 +179,7 @@
       keep-derivations = true;
       auto-optimise-store = true;
       extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+      trusted-users = [ "alberand" "aalbersh" ];
     };
     gc = {
       automatic = true;
