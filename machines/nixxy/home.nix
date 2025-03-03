@@ -22,6 +22,7 @@
     thunderbird
     libreoffice
     rustfmt
+    openrgb
   ];
 
   home.file = {

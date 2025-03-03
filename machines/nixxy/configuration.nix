@@ -166,6 +166,7 @@
       docker-compose
       (writeShellScriptBin "workfox" "exec -a $0 ${firefox}/bin/firefox -P RedHat $@")
       virt-manager
+      openrgb-plugin-effects
     ];
 
     services.pipewire = {
@@ -278,6 +279,15 @@
     };
 
     virtualisation.libvirtd.enable = true;
+
+    services.hardware.openrgb = {
+      enable = true;
+      package = pkgs.openrgb-with-all-plugins;
+      motherboard = "amd";
+      server = {
+        port = 6742;
+      };
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
