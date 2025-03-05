@@ -251,9 +251,6 @@
       };
     };
 
-    programs.ccache.enable = true;
-    programs.ccache.cacheDir = "/var/cache/ccache";
-
     services.nfs.server.enable = true;
     # TODO probably need to make it more safe regarding the permission
     services.nfs.server.exports = ''

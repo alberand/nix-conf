@@ -153,7 +153,11 @@
     enableSSHSupport = false;
   };
 
-  programs.ccache.enable = true;
+  programs.ccache = {
+    enable = true;
+    cacheDir = "/var/cache/ccache";
+    group = "users";
+  };
 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
