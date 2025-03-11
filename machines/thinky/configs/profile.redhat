@@ -22,6 +22,7 @@ set record = "~/.mail/sent"
 unmailboxes *
 virtual-mailboxes "inbox" "notmuch://?query=tag:inbox"
 virtual-mailboxes "bookmarks" "notmuch://?query=tag:bookmark"
+virtual-mailboxes "xfsprogs" "notmuch://?query=tag:xfsprogs-next"
 virtual-mailboxes "sent" "notmuch://?query=tag:sent"
 virtual-mailboxes "newsletters" "notmuch://?query=tag:newsletters"
 virtual-mailboxes "index" "notmuch://?query=*"

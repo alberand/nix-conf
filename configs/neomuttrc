@@ -40,6 +40,9 @@ macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.neomutt/profile.k
 
 macro index,pager b "<tag-thread><tag-prefix><modify-labels>!bookmark\n<previous-entry><tag-thread>" "Toggle the 'bookmark' tag"
 
+# xfsprogs maintainer
+macro index,pager "\Cf" "<tag-thread><tag-prefix><modify-labels>!xfsprogs-next\n<previous-entry><tag-thread>" "Toggle the 'xfsprogs-next' tag"
+
 # Where to put the stuff
 set header_cache = "~/.mutt/cache/headers"
 set message_cachedir = "~/.mutt/cache/bodies"
