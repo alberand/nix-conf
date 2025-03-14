@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.waybar = {
     enable = true;
     style = "${builtins.readFile ../configs/waybar-style.css}";
@@ -9,15 +8,9 @@
         position = "top";
         height = 25;
 
-        modules-left = [
-          "sway/workspaces"
-          "sway/mode"
-        ];
+        modules-left = ["sway/workspaces" "sway/mode"];
 
-        modules-center = [
-          "clock#time"
-          "clock#date"
-        ];
+        modules-center = ["clock#time" "clock#date"];
 
         modules-right = [
           "custom/access"
@@ -29,9 +22,7 @@
           "tray"
         ];
 
-        "sway/workspaces" = {
-          all-outputs = true;
-        };
+        "sway/workspaces" = {all-outputs = true;};
 
         "sway/language" = {
           all-outputs = true;
@@ -76,9 +67,7 @@
           format-muted = " {format_source}";
           format-source = "{volume}% ";
           format-source-muted = "";
-          format-icons = {
-            default = ["" "" ""];
-          };
+          format-icons = {default = ["" "" ""];};
           on-click = "pavucontrol";
           min-length = 13;
         };
@@ -108,7 +97,7 @@
           max-length = 40;
           interval = "once";
           exec = pkgs.writeShellScript "hello-from-waybar" ''
-                                        echo "from within waybar"
+            echo "from within waybar"
           '';
         };
       };

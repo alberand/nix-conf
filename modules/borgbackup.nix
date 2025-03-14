@@ -6,14 +6,15 @@
 #     ├── passphrase
 #     ├── ssh_key
 #     └── ssh_key.pub
-{ config, pkgs, ...}:
 {
+  config,
+  pkgs,
+  ...
+}: {
   services.borgbackup.jobs."borgbase" = {
-    paths = [
-      "/var/lib/minecraft/Our World"
-    ];
+    paths = ["/var/lib/minecraft/Our World"];
 
-    exclude = [ ];
+    exclude = [];
     repo = "w7r073yg@w7r073yg.repo.borgbase.com:repo";
     encryption = {
       mode = "repokey-blake2";

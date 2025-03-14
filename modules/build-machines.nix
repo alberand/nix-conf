@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   nix = {
     distributedBuilds = false;
     buildMachines = [
@@ -9,10 +12,7 @@
         sshKey = "/home/alberand/.ssh/nixremote";
         sshUser = "nixremote";
         system = "x86_64-linux";
-        supportedFeatures = [
-          "kvm"
-          "big-parallel"
-        ];
+        supportedFeatures = ["kvm" "big-parallel"];
       }
     ];
     extraOptions = ''

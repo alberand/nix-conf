@@ -1,11 +1,11 @@
-{ pkgs, ... }: let
+{pkgs, ...}: let
   rust-vim = pkgs.vimUtils.buildVimPlugin {
-      name = "rust.vim";
-      src = pkgs.fetchgit {
-        url = "https://github.com/rust-lang/rust.vim.git";
-        rev = "889b9a7515db477f4cb6808bef1769e53493c578";
-        sha256 = "70kp644jOtJ4wguty/SUFX+YEsoxW12LGg3vZh7BdPY=";
-      };
+    name = "rust.vim";
+    src = pkgs.fetchgit {
+      url = "https://github.com/rust-lang/rust.vim.git";
+      rev = "889b9a7515db477f4cb6808bef1769e53493c578";
+      sha256 = "70kp644jOtJ4wguty/SUFX+YEsoxW12LGg3vZh7BdPY=";
+    };
   };
 in {
   xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
@@ -56,7 +56,7 @@ in {
       vim-fugitive
     ];
     extraConfig = ''
-    set noexpandtab
+      set noexpandtab
     '';
   };
 }

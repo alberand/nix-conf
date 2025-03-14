@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs; [
     # Email client
     neomutt
@@ -21,15 +24,9 @@
     "${config.xdg.configHome}/neomutt/neomuttrc" = {
       source = ../configs/neomuttrc;
     };
-    ".mutt/dracula.muttrc" = {
-      source = ../configs/dracula.muttrc;
-    };
-    ".mutt/signature" = {
-      source = ../configs/signature;
-    };
-    ".mailcap" = {
-      source = ../configs/mailcap;
-    };
+    ".mutt/dracula.muttrc" = {source = ../configs/dracula.muttrc;};
+    ".mutt/signature" = {source = ../configs/signature;};
+    ".mailcap" = {source = ../configs/mailcap;};
   };
 
   services.mbsync = {

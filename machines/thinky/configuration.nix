@@ -40,9 +40,7 @@
       ];
     };
 
-    hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
-      vaapiIntel
-    ];
+    hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [vaapiIntel];
 
     boot.initrd.luks.devices = {
       nixos = {
@@ -101,14 +99,7 @@
       uid = 1000;
       shell = pkgs.zsh;
       group = "users";
-      extraGroups = [
-        "wheel"
-        "sudo"
-        "libvirt"
-        "networkmanager"
-        "disk"
-        "wireshark"
-      ];
+      extraGroups = ["wheel" "sudo" "libvirt" "networkmanager" "disk" "wireshark"];
     };
 
     users.users.ktest = {
@@ -117,14 +108,7 @@
       uid = 4207372;
       shell = pkgs.zsh;
       group = "users";
-      extraGroups = [
-        "wheel"
-        "sudo"
-        "libvirt"
-        "networkmanager"
-        "disk"
-        "wireshark"
-      ];
+      extraGroups = ["wheel" "sudo" "libvirt" "networkmanager" "disk" "wireshark"];
     };
 
     # List packages installed in system profile. To search, run:
@@ -156,13 +140,7 @@
     xdg.portal = {
       enable = true;
       wlr.enable = true;
-      config = {
-        common = {
-          default = [
-            "gtk"
-          ];
-        };
-      };
+      config = {common = {default = ["gtk"];};};
       # gtk portal needed to make gtk apps happy
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
     };
@@ -200,7 +178,7 @@
       after = [];
       serviceConfig = {
         Type = "simple";
-        ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
+        ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
       };
     };
 

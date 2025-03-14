@@ -3,15 +3,10 @@
   pkgs,
   ...
 }: {
-  environment.systemPackages = with pkgs; [
-    mcrcon
-    jdk
-  ];
+  environment.systemPackages = with pkgs; [mcrcon jdk];
 
   networking.firewall = {
-    allowedTCPPorts = [
-      config.services.minecraft-server.serverProperties.server-port
-    ];
+    allowedTCPPorts = [config.services.minecraft-server.serverProperties.server-port];
   };
 
   services.minecraft-server = {

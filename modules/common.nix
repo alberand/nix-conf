@@ -1,22 +1,24 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   boot = {
-      kernelPackages = pkgs.linuxPackages_latest;
-      kernelParams = ["mitigations=off"];
-      tmp.cleanOnBoot = true;
-      loader.systemd-boot.configurationLimit = 5;
-      loader.grub.configurationLimit = 5;
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernelParams = ["mitigations=off"];
+    tmp.cleanOnBoot = true;
+    loader.systemd-boot.configurationLimit = 5;
+    loader.grub.configurationLimit = 5;
   };
 
   environment.sessionVariables = {
-    XDG_CACHE_HOME	= "\${HOME}/.cache";
+    XDG_CACHE_HOME = "\${HOME}/.cache";
     XDG_CONFIG_HOME = "\${HOME}/.config";
     XDG_BIN_HOME = "\${HOME}/.local/bin";
     XDG_DATA_HOME = "\${HOME}/.local/share";
     HOSTNAME = "${config.networking.hostName}";
 
-    PATH = [
-      "\${XDG_BIN_HOME}"
-    ];
+    PATH = ["\${XDG_BIN_HOME}"];
   };
 
   systemd = {
@@ -155,16 +157,12 @@
 
   programs.zsh.enable = true;
   programs.dconf.enable = true;
-  services.udev.packages = with pkgs; [
-    gnome-settings-daemon
-  ];
+  services.udev.packages = with pkgs; [gnome-settings-daemon];
 
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    settings = {
-      X11Forwarding = true;
-    };
+    settings = {X11Forwarding = true;};
   };
 
   programs.ssh = {
@@ -206,8 +204,8 @@
       keep-outputs = true;
       keep-derivations = true;
       auto-optimise-store = true;
-      extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
-      trusted-users = [ "alberand" "aalbersh" ];
+      extra-sandbox-paths = [config.programs.ccache.cacheDir];
+      trusted-users = ["alberand" "aalbersh"];
     };
     gc = {
       automatic = true;
@@ -216,9 +214,9 @@
     };
     package = pkgs.nixVersions.git;
     extraOptions = ''
-                  experimental-features = nix-command flakes
-                  keep-outputs = true
-                  keep-derivations = true
+      experimental-features = nix-command flakes
+      keep-outputs = true
+      keep-derivations = true
     '';
     optimise.automatic = true;
   };

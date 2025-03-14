@@ -1,8 +1,9 @@
-{ pkgs, lib, ... }:
 {
-  home.packages = with pkgs; [
-    bfg-repo-cleaner
-  ];
+  pkgs,
+  lib,
+  ...
+}: {
+  home.packages = with pkgs; [bfg-repo-cleaner];
 
   programs.git = {
     enable = true;
@@ -16,40 +17,20 @@
         #pager = "delta";
         abbrev = 12;
       };
-      diff = {
-        algorithm = "patience";
-      };
-      diff = {
-        colorMoved = "default";
-      };
-      creo = {
-        autocrlf = true;
-      };
-      color = {
-        ui = "auto";
-      };
-      grep = {
-        lineNumber = true;
-      };
-      pull = {
-        rebase = true;
-      };
-      merge = {
-        conflictStyle = "diff3";
-      };
-      pretty = {
-        fixes = "Fixes: %h (\"%s\")";
-      };
-      am = {
-        threeWay = true;
-      };
+      diff = {algorithm = "patience";};
+      diff = {colorMoved = "default";};
+      creo = {autocrlf = true;};
+      color = {ui = "auto";};
+      grep = {lineNumber = true;};
+      pull = {rebase = true;};
+      merge = {conflictStyle = "diff3";};
+      pretty = {fixes = ''Fixes: %h ("%s")'';};
+      am = {threeWay = true;};
       rebase = {
         autostash = true;
         autosquash = true;
       };
-      format = {
-        notes = true;
-      };
+      format = {notes = true;};
     };
 
     aliases = {
@@ -65,7 +46,7 @@
       # Fancy short log
       lg = "log --oneline -n10";
       # Fancy tree log
-      hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short";
+      hist = ''log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'';
       # Combine b4 and am into one git b4 command
       b4 = "!f() { b4 am -t -o - $1 | git am -3; }; f";
       # Add worktree branch
@@ -74,11 +55,7 @@
       cb = "!git rev-parse --abbrev-ref $(git rev-parse --abbrev-ref HEAD)@{u}";
     };
 
-    includes = [
-      {
-        path = "~/.gitconfig.local";
-      }
-    ];
+    includes = [{path = "~/.gitconfig.local";}];
 
     ignores = [
       "tmp"

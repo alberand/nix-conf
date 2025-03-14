@@ -56,9 +56,7 @@
     hardware.graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [
-        amdvlk
-      ];
+      extraPackages = with pkgs; [amdvlk];
     };
 
     networking = {
@@ -127,14 +125,7 @@
       description = "Andrey Albershteyn";
       uid = 1000;
       shell = pkgs.zsh;
-      extraGroups = [
-        "wheel"
-        "sudo"
-        "libvirtd"
-        "networkmanager"
-        "wireshark"
-        "disk"
-      ];
+      extraGroups = ["wheel" "sudo" "libvirtd" "networkmanager" "wireshark" "disk"];
     };
 
     system.activationScripts = {
@@ -166,7 +157,8 @@
       libva
       radeontop
       docker-compose
-      (writeShellScriptBin "workfox" "exec -a $0 ${firefox}/bin/firefox -P RedHat $@")
+      (writeShellScriptBin "workfox"
+        "exec -a $0 ${firefox}/bin/firefox -P RedHat $@")
       virt-manager
       openrgb-plugin-effects
     ];
@@ -189,13 +181,7 @@
       wlr.enable = true;
       # gtk portal needed to make gtk apps happy
       extraPortals = [pkgs.xdg-desktop-portal-gtk];
-      config = {
-        common = {
-          default = [
-            "gtk"
-          ];
-        };
-      };
+      config = {common = {default = ["gtk"];};};
     };
 
     # Enable WeeChat to run as service with attached 'screen' session To
@@ -268,17 +254,13 @@
       after = [];
       serviceConfig = {
         Type = "simple";
-        ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
+        ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
       };
     };
 
-    services.radarr = {
-      enable = true;
-    };
+    services.radarr = {enable = true;};
 
-    services.jackett = {
-      enable = true;
-    };
+    services.jackett = {enable = true;};
 
     virtualisation.libvirtd.enable = true;
 
@@ -286,9 +268,7 @@
       enable = true;
       package = pkgs.openrgb-with-all-plugins;
       motherboard = "amd";
-      server = {
-        port = 6742;
-      };
+      server = {port = 6742;};
     };
 
     # This value determines the NixOS release from which the default

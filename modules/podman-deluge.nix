@@ -1,18 +1,11 @@
-{ pkgs, ... }: {
-  systemd.services.podman-deluge = {
-    after = [ "wg-quick-wg0.service" ];
-  };
+{pkgs, ...}: {
+  systemd.services.podman-deluge = {after = ["wg-quick-wg0.service"];};
 
   virtualisation.oci-containers.containers = {
     "deluge" = {
       image = "binhex/arch-delugevpn";
       autoStart = true;
-      ports = [
-        "8112:8112"
-        "8118:8118"
-        "58846:58846"
-        "58946:58946"
-      ];
+      ports = ["8112:8112" "8118:8118" "58846:58846" "58946:58946"];
 
       volumes = [
         "/media:/media"

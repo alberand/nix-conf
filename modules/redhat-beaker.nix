@@ -1,12 +1,8 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    beaker-client
-  ];
+  home.packages = with pkgs; [beaker-client];
 
   home.file = {
-    ".beaker_client/config" = {
-      source = ../configs/beaker-config;
-    };
+    ".beaker_client/config" = {source = ../configs/beaker-config;};
   };
 
   # Already done in work-vpn

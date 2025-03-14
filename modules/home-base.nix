@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./neovim.nix
     ./zsh.nix
@@ -16,10 +16,8 @@
     attr
     autoconf
     automake
-    (b4.overrideAttrs(final: prev: {
-      patches = [
-        ../patches/0001-b4-handle-invalid-timezone-value.patch
-      ];
+    (b4.overrideAttrs (final: prev: {
+      patches = [../patches/0001-b4-handle-invalid-timezone-value.patch];
     }))
     bc
     bemenu
@@ -95,18 +93,20 @@
     tree
     zoxide
 
-    (writeShellScriptBin "calc" "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
-    (writeShellScriptBin "tmux-sessionizer" (builtins.readFile ../configs/tmux-sessionizer))
+    (writeShellScriptBin "calc"
+      "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
+    (writeShellScriptBin "tmux-sessionizer"
+      (builtins.readFile ../configs/tmux-sessionizer))
     (writeShellScriptBin "todo" (builtins.readFile ../configs/todo.sh))
   ];
 
   home.file = {
-    ".ctags" = { source = ../configs/ctags; };
-    ".gdbinit" = { source = ../configs/gdbinit; };
-    ".vimrc.local" = { source = ../configs/vimrc.local; };
-    ".fdignore" = { source = ../configs/fdignore; };
-    ".config/kitty/kitty.conf" = { source = ../configs/kitty; };
-    ".tmux.conf" = { source = ../configs/tmux.conf; };
+    ".ctags" = {source = ../configs/ctags;};
+    ".gdbinit" = {source = ../configs/gdbinit;};
+    ".vimrc.local" = {source = ../configs/vimrc.local;};
+    ".fdignore" = {source = ../configs/fdignore;};
+    ".config/kitty/kitty.conf" = {source = ../configs/kitty;};
+    ".tmux.conf" = {source = ../configs/tmux.conf;};
   };
 
   services.gpg-agent = {
@@ -118,9 +118,7 @@
   };
 
   # So, we can autostart it via sway
-  services.flameshot = {
-    enable = false;
-  };
+  services.flameshot = {enable = false;};
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;

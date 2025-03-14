@@ -1,11 +1,13 @@
 # Test with:
 # -> ldapwhoami
 # -> ldapsearch uid=<username>
-{ lib, config, pkgs, ... }:
 {
-  environment.systemPackages = with pkgs; [
-    openldap
-  ];
+  lib,
+  config,
+  pkgs,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [openldap];
 
   users.ldap = {
     enable = true;
@@ -19,7 +21,5 @@
   };
 
   # evil, horrifying hack for dysfunctional nss_override_attribute_value
-  systemd.tmpfiles.rules = [
-    "L /bin/bash - - - - /run/current-system/sw/bin/bash"
-  ];
+  systemd.tmpfiles.rules = ["L /bin/bash - - - - /run/current-system/sw/bin/bash"];
 }

@@ -20,9 +20,7 @@ in {
       export GITEA_CUSTOM=${cfg.customDir}
       $sudo ${lib.getExe cfg.package} "$@"
     '';
-  in [
-    forgejo-cli
-  ];
+  in [forgejo-cli];
 
   services.forgejo = {
     enable = true;
@@ -56,9 +54,7 @@ in {
         MIGRATE = 3600; # 1 hour for huge repos
       };
 
-      indexer = {
-        REPO_INDEXER_ENABLED = true;
-      };
+      indexer = {REPO_INDEXER_ENABLED = true;};
     };
   };
 }

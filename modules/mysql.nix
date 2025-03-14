@@ -5,9 +5,7 @@
     ensureUsers = [
       {
         name = "forgejo";
-        ensurePermissions = {
-          "forgejo.*" = "ALL PRIVILEGES";
-        };
+        ensurePermissions = {"forgejo.*" = "ALL PRIVILEGES";};
       }
     ];
   };

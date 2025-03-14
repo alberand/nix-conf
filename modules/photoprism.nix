@@ -1,12 +1,16 @@
-{ config, pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   users.users = {
     photoprism = {
       name = "photoprism";
       group = "photoprism";
       isNormalUser = true;
       uid = 1110;
-      extraGroups = [ "media" ];
+      extraGroups = ["media"];
     };
   };
 
@@ -28,14 +32,12 @@
   };
 
   systemd.services.photoprism = {
-    serviceConfig = {
-      DynamicUser = lib.mkForce false;
-    };
+    serviceConfig = {DynamicUser = lib.mkForce false;};
   };
 
   # TODO copy & remove
   #fileSystems."/media/photos/julia" = {
-    #device = "/media/stuff/BUP/Pictures/jpg";
-    #options = [ "bind" ];
+  #device = "/media/stuff/BUP/Pictures/jpg";
+  #options = [ "bind" ];
   #};
 }

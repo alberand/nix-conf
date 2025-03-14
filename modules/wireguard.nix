@@ -10,9 +10,7 @@
   systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
 
   networking.firewall = {
-    allowedUDPPorts = [
-      config.networking.wg-quick.interfaces.wg0.listenPort
-    ];
+    allowedUDPPorts = [config.networking.wg-quick.interfaces.wg0.listenPort];
   };
 
   # Enable WireGuard
@@ -20,10 +18,7 @@
     server_ip = "185.195.233.66";
   in {
     wg0 = {
-      address = [
-        "10.64.156.60/32"
-        "fc00:bbbb:bbbb:bb01::1:9c3b/128"
-      ];
+      address = ["10.64.156.60/32" "fc00:bbbb:bbbb:bb01::1:9c3b/128"];
 
       dns = ["100.64.0.23"];
 

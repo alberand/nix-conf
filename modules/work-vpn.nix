@@ -26,7 +26,12 @@
 #   systemctl start openvpn-vpn.service
 # Check that everything works:
 #   curl <beaker url>
-{ config, pkgs, lib, ...}: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: {
   users.users = {
     openvpn = {
       name = "openvpn";
@@ -43,51 +48,48 @@
   };
 
   security.pki = {
-    certificateFiles = [
-      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-      ../secrets/redhat.crt
-    ];
+    certificateFiles = ["${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ../secrets/redhat.crt];
   };
 
   # Configure our OpenVPN client
   services.openvpn.servers = {
     vpn = {
-      config = ''config /etc/openvpn/ovpn-1-rhvpn-tcp.conf'';
+      config = "config /etc/openvpn/ovpn-1-rhvpn-tcp.conf";
       # Don't autostart as VPN needs credentials
       autoStart = false;
       up = builtins.readFile ../configs/client.up;
       down = builtins.readFile ../configs/client.down;
     };
     vpn-udp = {
-      config = ''config /etc/openvpn/ovpn-1-rhvpn-udp.conf'';
+      config = "config /etc/openvpn/ovpn-1-rhvpn-udp.conf";
       # Don't autostart as VPN needs credentials
       autoStart = false;
       up = builtins.readFile ../configs/client.up;
       down = builtins.readFile ../configs/client.down;
     };
     ams = {
-      config = ''config /etc/openvpn/ovpn-ams2-tcp.conf'';
+      config = "config /etc/openvpn/ovpn-ams2-tcp.conf";
       # Don't autostart as VPN needs credentials
       autoStart = false;
       up = builtins.readFile ../configs/client.up;
       down = builtins.readFile ../configs/client.down;
     };
     ams-udp = {
-      config = ''config /etc/openvpn/ovpn-ams2-udp.conf'';
+      config = "config /etc/openvpn/ovpn-ams2-udp.conf";
       # Don't autostart as VPN needs credentials
       autoStart = false;
       up = builtins.readFile ../configs/client.up;
       down = builtins.readFile ../configs/client.down;
     };
     brq2 = {
-      config = ''config /etc/openvpn/ovpn-brq2-tcp.conf'';
+      config = "config /etc/openvpn/ovpn-brq2-tcp.conf";
       # Don't autostart as VPN needs credentials
       autoStart = false;
       up = builtins.readFile ../configs/client.up;
       down = builtins.readFile ../configs/client.down;
     };
     brq2-udp = {
-      config = ''config /etc/openvpn/ovpn-brq2-udp.conf'';
+      config = "config /etc/openvpn/ovpn-brq2-udp.conf";
       # Don't autostart as VPN needs credentials
       autoStart = false;
       up = builtins.readFile ../configs/client.up;

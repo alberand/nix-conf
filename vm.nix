@@ -1,5 +1,9 @@
-{ pkgs, lib, config, ... }:
-
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib; {
   imports = [
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
@@ -45,9 +49,7 @@ with lib; {
       };
 
       qemu = {
-        options = [
-          "-vga qxl"
-        ];
+        options = ["-vga qxl"];
         networkingOptions = [
           "-device e1000,netdev=network0,mac=00:00:00:00:00:00"
           "-netdev tap,id=network0,ifname=tap0,script=no,downscript=no"
@@ -59,10 +61,12 @@ with lib; {
     networking.hostName = "redhat";
     networking.useDHCP = true;
     networking.interfaces.eth1 = {
-      ipv4.addresses = [{
-        address = "192.168.10.3";
-        prefixLength = 24;
-      }];
+      ipv4.addresses = [
+        {
+          address = "192.168.10.3";
+          prefixLength = 24;
+        }
+      ];
     };
 
     services.openssh.enable = true;
