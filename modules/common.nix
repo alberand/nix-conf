@@ -1,5 +1,13 @@
 { config, pkgs, ... }: {
-  environment.sessionVariables = rec {
+  boot = {
+      kernelPackages = pkgs.linuxPackages_latest;
+      kernelParams = ["mitigations=off"];
+      tmp.cleanOnBoot = true;
+      loader.systemd-boot.configurationLimit = 5;
+      loader.grub.configurationLimit = 5;
+  };
+
+  environment.sessionVariables = {
     XDG_CACHE_HOME	= "\${HOME}/.cache";
     XDG_CONFIG_HOME = "\${HOME}/.config";
     XDG_BIN_HOME = "\${HOME}/.local/bin";
@@ -18,8 +26,15 @@
   };
 
   services.journald.extraConfig = ''
-    SystemMaxUse=20M
+    SystemMaxUse=250M
+    SystemMaxFileSize=50M
   '';
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 25;
+  };
 
   fonts.fontconfig.enable = true;
   fonts.packages = with pkgs; [
@@ -38,6 +53,12 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
+  services.chrony.enable = true;
+
+  # Microcode / Firmware Update
+  hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
+  services.fwupd.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -53,7 +74,10 @@
   };
 
   environment.variables.EDITOR = "nvim";
+  documentation.man.enable = true;
   documentation.dev.enable = true;
+  documentation.doc.enable = false;
+  documentation.enable = true;
 
   environment.systemPackages = with pkgs; [
     htop
@@ -187,7 +211,7 @@
     };
     gc = {
       automatic = true;
-      dates = "weekly";
+      dates = "monthly";
       options = "--delete-older-than 7d";
     };
     package = pkgs.nixVersions.git;
@@ -196,6 +220,7 @@
                   keep-outputs = true
                   keep-derivations = true
     '';
+    optimise.automatic = true;
   };
 
   system.autoUpgrade = {

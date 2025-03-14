@@ -31,24 +31,26 @@
   config = {
     user = "alberand";
     # Use the systemd-boot EFI boot loader.
-    boot.loader = {
-      systemd-boot.enable = false;
-      efi.canTouchEfiVariables = true;
-      grub = {
-        enable = true;
-        efiSupport = true;
-        enableCryptodisk = true;
-        device = "nodev";
+    boot = {
+      loader = {
+        systemd-boot.enable = false;
+        efi.canTouchEfiVariables = true;
+        grub = {
+          enable = true;
+          efiSupport = true;
+          enableCryptodisk = true;
+          device = "nodev";
+        };
       };
-    };
 
-    boot.initrd.luks.devices = {
-      crypted = {
-        device = "/dev/disk/by-uuid/4e62f0f4-6b77-4947-b031-c7d5652a8eb3";
-        preLVM = true;
+      initrd.kernelModules = ["amdgpu"];
+      initrd.luks.devices = {
+        crypted = {
+          device = "/dev/disk/by-uuid/4e62f0f4-6b77-4947-b031-c7d5652a8eb3";
+          preLVM = true;
+        };
       };
     };
-    boot.initrd.kernelModules = ["amdgpu"];
 
     # Vulkan API/OpenCL API/Modern AMD Graphics Core Next (GCN) GPUs
     hardware.graphics = {
