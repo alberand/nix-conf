@@ -3,16 +3,17 @@
   pkgs,
   ...
 }: {
-  age.secrets.nixbuilder_ed25519.file = ../secrets/nixbuilder_ed25519.age;
+  age.secrets.nixbuilder_ed25519 = {
+    file = ../secrets/nixbuilder_ed25519.age;
+    path = "/root/.ssh/nixbuilder_ed25519";
+  };
 
   nix = {
     distributedBuilds = true;
     buildMachines = [
       {
         hostName = "builder";
-        protocol = "ssh-ng";
         sshKey = config.age.secrets.nixbuilder_ed25519.path;
-        sshUser = "nixremote";
         system = "x86_64-linux";
         supportedFeatures = ["kvm" "big-parallel"];
       }
