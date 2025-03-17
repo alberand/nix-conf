@@ -16,7 +16,6 @@
     ../../modules/mysql.nix
     ../../modules/minecraft.nix
     ../../modules/borgbackup.nix
-    ../../modules/build-machines.nix
     ../../modules/photoprism.nix
     ../../modules/jellyfin-tunnel.nix
     ../../modules/tandoor.nix
