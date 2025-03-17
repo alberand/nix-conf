@@ -16,4 +16,5 @@ in {
   "acme-env.age".publicKeys = [nixxy alberand alberand-rsa];
   "paperless.age".publicKeys = [nixxy alberand alberand-rsa];
   "binary-cache-key.age".publicKeys = [nixxy alberand];
+  "nixbuilder_ed25519.age".publicKeys = [aalbersh alberand];
 }

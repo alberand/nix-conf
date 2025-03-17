@@ -119,6 +119,15 @@
       extraGroups = ["media" "render" "video"];
     };
 
+    users.users.nixremote = {
+      isNormalUser = true;
+      description = "Nix remote builder";
+      uid = 1003;
+      openssh.authorizedKeys.keyFiles = [
+        ../../secrets/nixbuilder_ed25519.pub
+      ];
+    };
+
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.alberand = {
       isNormalUser = true;

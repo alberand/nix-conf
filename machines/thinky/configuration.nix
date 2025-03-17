@@ -13,6 +13,7 @@
     ../../modules/qemu-guest-network.nix
     ../../modules/mysql.nix
     ../../modules/squid.nix
+    ../../modules/builders.nix
   ];
 
   config = {
