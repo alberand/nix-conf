@@ -153,6 +153,8 @@
     nix-prefetch
     nix-prefetch-git
     tomlq
+    yazi
+    nurl
   ];
 
   programs.zsh.enable = true;
