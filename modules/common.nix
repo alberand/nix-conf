@@ -178,7 +178,6 @@
   programs.ccache = {
     enable = true;
     cacheDir = "/var/cache/ccache";
-    group = "users";
   };
 
   hardware.bluetooth.enable = true;
