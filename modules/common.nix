@@ -55,7 +55,6 @@
 
   # Set your time zone.
   time.timeZone = "Europe/Prague";
-  services.chrony.enable = true;
 
   # Microcode / Firmware Update
   hardware.enableAllFirmware = true;
