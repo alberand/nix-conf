@@ -17,7 +17,6 @@
     ../../modules/minecraft.nix
     ../../modules/borgbackup.nix
     ../../modules/photoprism.nix
-    ../../modules/jellyfin-tunnel.nix
     ../../modules/tandoor.nix
     ../../modules/tailscale.nix
     ../../modules/caddy.nix
@@ -25,6 +24,7 @@
     ../../modules/forgejo.nix
     ../../modules/paperless.nix
     ../../modules/binary-cache.nix
+    ../../modules/jellyfin.nix
   ];
 
   config = {
@@ -71,7 +71,6 @@
         allowedTCPPorts = [
           53 # dns
           22 # ssh
-          55686 # jellyfin
           443 # https
           1194 # OpenVPN
           111 # NFS
@@ -112,11 +111,6 @@
       description = "Deluge";
       extraGroups = ["media"];
       uid = 1002;
-    };
-
-    users.users.jellyfin = {
-      description = "JellyFin";
-      extraGroups = ["media" "render" "video"];
     };
 
     users.users.nixremote = {
@@ -162,7 +156,6 @@
       vulkan-loader
       radeontop
       libgdiplus
-      jellyfin-ffmpeg
       libva
       radeontop
       docker-compose
@@ -199,10 +192,6 @@
     services.weechat.sessionName = "wc";
 
     security.rtkit.enable = true;
-    services.jellyfin = {
-      enable = true;
-      openFirewall = true;
-    };
 
     virtualisation = {
       oci-containers.backend = "podman";

@@ -15,7 +15,6 @@
     freecad
     gimp
     inkscape
-    jellyfin
     kicad
     prismlauncher # Minecraft launcher
     rust-analyzer
