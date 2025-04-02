@@ -36,7 +36,7 @@
     aliases = {
       co = "checkout";
       cm = "commit";
-      st = "!git lg -n3 ; git status";
+      st = "!git lg -n10 ; git status";
       br = "branch";
       wt = "worktree";
       sm = "send-email";
@@ -44,7 +44,7 @@
       # Default output for patches + form cover letter from branch description
       fp = "format-patch -o patches --cover-from-description=subject";
       # Fancy short log
-      lg = "log --oneline -n10";
+      lg = "log --oneline -n20";
       # Fancy tree log
       hist = ''log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'';
       # Combine b4 and am into one git b4 command
