@@ -171,6 +171,10 @@ vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 -- Review tag for Kernel work
 vim.keymap.set('i', '<C-s>', 'Reviewed-by: Andrey Albershteyn <aalbersh@kernel.org>')
 
+-- vim-fugitive
+vim.keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>')
+vim.keymap.set('n', '<leader>gl', '<cmd>Git log -p %<CR>')
+
 -- Plugins
 
 -- Status line
