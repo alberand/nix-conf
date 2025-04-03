@@ -103,7 +103,7 @@
     users.groups.media = {
       name = "media";
       gid = 8096;
-      members = ["alberand" "jellyfin" "deluge" "radarr" "jackett"];
+      members = ["alberand" "deluge"];
     };
 
     users.users.deluge = {
@@ -255,10 +255,6 @@
         ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
       };
     };
-
-    services.radarr = {enable = true;};
-
-    services.jackett = {enable = true;};
 
     virtualisation.libvirtd.enable = true;
 

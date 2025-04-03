@@ -1,4 +1,4 @@
-{pkgs}: {
+{pkgs, ...}: {
   networking.wg-quick.interfaces = {
     wg0 = {
       address = ["10.10.10.2"];
@@ -26,6 +26,14 @@
 
   networking.firewall.allowedTCPPorts = [55686];
 
+  services.radarr = {
+    enable = true;
+  };
+
+  services.jackett = {
+    enable = true;
+  };
+
   services.jellyfin = {
     enable = true;
     openFirewall = true;
@@ -35,4 +43,11 @@
     enable = true;
     port = 5055;
   };
+
+  services.sonarr = {
+    enable = true;
+    group = "media";
+  };
+
+  users.groups.media.members = ["jellyfin" "sonarr" "radarr" "jackett"];
 }
