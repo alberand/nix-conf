@@ -33,11 +33,7 @@
           @             IN      NS      ns
           ns            IN      A       ${mainserver}
 
-          home          IN      A       ${mainserver}
-          photos        IN      A       ${mainserver}
-          movies        IN      A       ${mainserver}
-          food          IN      A       ${mainserver}
-          git           IN      A       ${mainserver}
+          *             IN      A       ${mainserver}
           jellyfin      IN      A       89.221.212.102
         '';
       };
