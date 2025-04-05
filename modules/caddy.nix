@@ -27,7 +27,7 @@
       "git.alberand.com" = certfor { name = "git"; };
       "food.alberand.com" = certfor { name = "food"; };
       "photos.alberand.com" = certfor { name = "photos"; };
-      "movies.alberand.com" = certfor { name = "movies"; };
+      "jellyseerr.alberand.com" = certfor { name = "jellyseerr"; };
     };
 
     certs."whereisiss.com" = {
@@ -87,20 +87,6 @@
           protocols tls1.3
         }
       '';
-      "movies.alberand.com".extraConfig = ''
-        encode gzip
-        reverse_proxy 127.0.0.1:55686
-        tls ${certlocname {name = "movies";}}/cert.pem ${certlocname {name = "movies";}}/key.pem {
-          protocols tls1.3
-        }
-      '';
-      "jellyfin.alberand.com".extraConfig = ''
-        encode gzip
-        reverse_proxy 127.0.0.1:55686
-        tls ${certloc}/cert.pem ${certloc}/key.pem {
-          protocols tls1.3
-        }
-      '';
       "photos.alberand.com".extraConfig = ''
         encode gzip
         reverse_proxy 127.0.0.1:8113
@@ -119,6 +105,13 @@
         encode gzip
         reverse_proxy 127.0.0.1:3000
         tls ${certlocname {name = "git";}}/cert.pem ${certlocname {name = "git";}}/key.pem {
+          protocols tls1.3
+        }
+      '';
+      "jellyseerr.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 127.0.0.1:5055
+        tls ${certlocname {name = "jellyseerr";}}/cert.pem ${certlocname {name = "jellyseerr";}}/key.pem {
           protocols tls1.3
         }
       '';
