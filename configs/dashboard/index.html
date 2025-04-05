@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>alberand intranet dashboard</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!-- General metatags -->
+      <meta name="author" content="alberand">
+      <meta name="description" content="alberand's network main dashboard">
+
+      <!-- Open Graph tags -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://home.alberand.com/">
+      <meta property="og:description" content="alberand's network main dashboard">
+      <style>
+        :root {
+          --gap-small: 5px;
+          --gap-medium: 10px;
+        }
+
+        body {
+          background-color: #282c35;
+          font-family: Helvetica, Arial, Sans-Serif;
+        }
+
+        main {
+          width: 100%;
+          max-width: 600px;
+          margin: auto;
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          padding-top: 150px;
+          gap: var(--gap-medium);
+        }
+
+        img {
+          border-radius: 10px;
+        }
+
+        .item {
+          background-color: #343944;
+          height: min-content;
+          padding: var(--gap-small);
+          border-radius: var(--gap-small);
+        }
+
+        .item-link {
+          display: flex;
+          flex-direction: column;
+          color: #c2c9d6;
+          text-align: center;
+        }
+
+        footer {
+          width: 100%;
+          text-align: center;
+          font-size: 12px;
+          color: #5e636e;
+          padding: calc(var(--gap-small)*4) 0;
+        }
+      </style>
+  </head>
+  <body>
+    <main>
+      <div class="item">
+        <a class="item-link" href="https://jellyfin.alberand.com">
+            <img width=150 height=150 src="/static/jellyfin.png">
+            Movies & Shows
+        </a>
+      </div>
+      <div class="item">
+        <a class="item-link" href="https://jellyseerr.alberand.com">
+            <img width=150 height=150 src="/static/jellyseerr.png">
+            Request a movie
+        </a>
+      </div>
+      <div class="item">
+        <a class="item-link" href="https://photos.alberand.com">
+            <img width=150 height=150 src="/static/photoprism.png">
+            Photos
+        </a>
+      </div>
+      <div class="item">
+        <a class="item-link" href="https://food.alberand.com">
+            <img width=150 height=150 src="/static/burger.png">
+            Recipes & Food
+        </a>
+      </div>
+      <div class="item">
+        <a class="item-link" href="https://git.alberand.com">
+            <img width=150 height=150 src="/static/forgejo.png">
+            Git & Code
+        </a>
+      </div>
+    </main>
+    <footer>
+      Done by @alberand
+    </footer>
+  </body>
+</html>
+

@@ -63,25 +63,13 @@
     enable = true;
 
     virtualHosts = let
-      dashboard = pkgs.stdenv.mkDerivation {
-        name = "dashboard";
-
-        src = ../configs/dashboard.html;
-
-        phases = ["installPhase"];
-
-        installPhase = ''
-          mkdir $out
-          cp $src $out/index.html
-        '';
-      };
-      certloc = "/var/lib/acme/whereisiss.com";
+      dashboard = pkgs.callPackage (import ../configs/dashboard/derivation.nix) {};
       certlocname = {name}: "/var/lib/acme/${name}.alberand.com";
       nbcertloc = "/var/lib/acme/test.nemambyt.com";
     in {
       "home.alberand.com".extraConfig = ''
         encode gzip
-        root * ${dashboard}/
+        root * ${dashboard}/dashboard/
         file_server
         tls ${certlocname {name = "home";}}/cert.pem ${certlocname {name = "home";}}/key.pem {
           protocols tls1.3
