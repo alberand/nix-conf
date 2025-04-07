@@ -33,6 +33,7 @@
           @             IN      NS      ns
           ns            IN      A       ${mainserver}
 
+          alberand.com. IN      A       185.199.108.153
           *             IN      A       ${mainserver}
           jellyfin      IN      A       89.221.212.102
         '';
