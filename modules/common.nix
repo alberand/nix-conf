@@ -108,6 +108,7 @@
     traceroute
     dig
     libvirt
+    virt-manager
     wayland
     waypipe
     bluez

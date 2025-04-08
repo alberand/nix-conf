@@ -161,7 +161,6 @@
       docker-compose
       (writeShellScriptBin "workfox"
         "exec -a $0 ${firefox}/bin/firefox -P RedHat $@")
-      virt-manager
       openrgb-plugin-effects
     ];
 
