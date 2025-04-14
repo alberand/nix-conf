@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [kup xfsprogs-release];
+  home.packages = with pkgs; [kup];
 
   home.file = {".kuprc" = {source = ../configs/kuprc;};};
 }

@@ -43,7 +43,6 @@
           kerneloscope = redhat.packages."${system}".kerneloscope;
           beaker-client = redhat.packages."${system}".beaker-client;
           kup = redhat.packages."${system}".kup;
-          xfsprogs-release = redhat.packages."${system}".xfsprogs-release;
           xfstestsdb = redhat.packages."${system}".xfstestsdb;
           # Can be removed soon https://github.com/NixOS/nixpkgs/issues/371837
           jackett = unstable.jackett;
