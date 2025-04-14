@@ -100,7 +100,7 @@
       uid = 1000;
       shell = pkgs.zsh;
       group = "users";
-      extraGroups = ["wheel" "sudo" "libvirt" "networkmanager" "disk" "wireshark"];
+      extraGroups = ["wheel" "sudo" "libvirtd" "networkmanager" "disk" "wireshark"];
     };
 
     users.users.ktest = {
@@ -182,6 +182,8 @@
         ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
       };
     };
+
+    virtualisation.libvirtd.enable = true;
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
