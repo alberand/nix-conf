@@ -35,6 +35,41 @@
     serviceConfig = {DynamicUser = lib.mkForce false;};
   };
 
+  systemd = {
+    timers = {
+      "photoprism-index" = {
+        wantedBy = ["timers.target"];
+        timerConfig = {
+          OnCalendar = "daily";
+          Unit = "photoprism-index.service";
+          Persistent = true;
+        };
+      };
+    };
+  };
+  systemd.services = {
+    "photoprism-index" = {
+      serviceConfig = {
+        Type = "oneshot";
+        User = "photoprism";
+        Group = "photoprism";
+        DynamicUser = false;
+        inherit
+          (config.systemd.services.photoprism.serviceConfig)
+          StateDirectory
+          WorkingDirectory
+          RuntimeDirectory
+          ReadWritePaths
+          ;
+      };
+      environment = config.systemd.services.photoprism.environment;
+      script = ''
+        set -eux
+        ${pkgs.photoprism}/bin/photoprism index
+      '';
+    };
+  };
+
   # TODO copy & remove
   #fileSystems."/media/photos/julia" = {
   #device = "/media/stuff/BUP/Pictures/jpg";
