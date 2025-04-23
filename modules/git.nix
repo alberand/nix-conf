@@ -23,7 +23,10 @@
       color = {ui = "auto";};
       grep = {lineNumber = true;};
       pull = {rebase = true;};
-      merge = {conflictStyle = "diff3";};
+      merge = {
+        tool = "nvimdiff";
+        conflictStyle = "diff3";
+      };
       pretty = {fixes = ''Fixes: %h ("%s")'';};
       am = {threeWay = true;};
       rebase = {
