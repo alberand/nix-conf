@@ -24,8 +24,15 @@
       grep = {lineNumber = true;};
       pull = {rebase = true;};
       merge = {
-        tool = "nvimdiff";
-        conflictStyle = "diff3";
+        tool = "nvim";
+        conflictStyle = lib.mkOptionDefault "diff3";
+      };
+      mergetool = {
+        prompt = false;
+        keepBackup = false;
+        nvim = {
+          cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\" ";
+        };
       };
       pretty = {fixes = ''Fixes: %h ("%s")'';};
       am = {threeWay = true;};
