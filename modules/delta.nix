@@ -5,6 +5,9 @@
     extraConfig = {
       core = {pager = "delta";};
       interactive = {diffFilter = "delta --color-only";};
+      merge = {
+        conflictstyle = "zdiff3";
+      };
       delta = {
         file-style = "bold yellow ul";
         file-decoration-style = "none";
