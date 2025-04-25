@@ -15,6 +15,7 @@ in {
     vscode-langservers-extracted
     typescript-language-server
     lua-language-server
+    pyright
   ];
 
   programs.neovim = {
