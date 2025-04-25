@@ -213,6 +213,7 @@ vim.keymap.set('n', '<C-i>', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>i', builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>f', '<cmd>lua require(\'telescope.builtin\').grep_string({search = vim.fn.expand("<cword>")})<cr>', {})
 vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>d', builtin.lsp_dynamic_workspace_symbols, {})
 
 local ts_select_dir_for_grep = function(prompt_bufnr)
   local action_state = require("telescope.actions.state")
