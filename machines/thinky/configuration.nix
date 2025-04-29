@@ -14,6 +14,7 @@
     ../../modules/mysql.nix
     ../../modules/squid.nix
     ../../modules/builders.nix
+    ../../modules/tailscale.nix
   ];
 
   config = {
