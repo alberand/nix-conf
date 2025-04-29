@@ -17,7 +17,10 @@
     autoconf
     automake
     (b4.overrideAttrs (final: prev: {
-      patches = [../patches/0001-b4-handle-invalid-timezone-value.patch];
+      patches = [
+        ../patches/0001-b4-handle-invalid-timezone-value.patch
+        ../patches/0001-ez-introduce-in-reply-to-for-send.patch
+      ];
     }))
     bc
     bemenu

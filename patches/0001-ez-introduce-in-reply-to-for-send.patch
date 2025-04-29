@@ -1,0 +1,48 @@
+From 5094e107a99f5d308c1cc5ab1075b952dc98d7d0 Mon Sep 17 00:00:00 2001
+From: Andrey Albershteyn <aalbersh@kernel.org>
+Date: Tue, 29 Apr 2025 22:37:34 +0200
+Subject: [PATCH] ez: introduce --in-reply-to for send
+
+When sending a  patchsets touching multiple projects, the structure
+of the email thread could be top-level cover letter with patchsets
+as subthreads (replies).
+
+With --in-reply-to one can send  top-level cover and use it as base
+for sending other b4 managed branches.
+
+Signed-off-by: Andrey Albershteyn <aalbersh@kernel.org>
+---
+ src/b4/command.py | 2 ++
+ src/b4/ez.py      | 3 +++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/src/b4/command.py b/src/b4/command.py
+index 4b71d8a81f7e..41e7121efcf4 100644
+--- a/src/b4/command.py
++++ b/src/b4/command.py
+@@ -378,6 +378,8 @@ def setup_parser() -> argparse.ArgumentParser:
+                          help='Do not add any addresses found in the cover or patch trailers to To: or Cc:')
+     sp_send.add_argument('--to', nargs='+', metavar='ADDR', help='Addresses to add to the To: list')
+     sp_send.add_argument('--cc', nargs='+', metavar='ADDR', help='Addresses to add to the Cc: list')
++    sp_send.add_argument('--in-reply-to', metavar='IDENTIFIER',
++                         help='Send patchset in reply to a message')
+     sp_send.add_argument('--not-me-too', action='store_true', default=False,
+                          help='Remove yourself from the To: or Cc: list')
+     sp_send.add_argument('--resend', metavar='vN', nargs='?', const='latest',
+diff --git a/src/b4/ez.py b/src/b4/ez.py
+index 156926aae33c..ab7b7eab913d 100644
+--- a/src/b4/ez.py
++++ b/src/b4/ez.py
+@@ -1804,6 +1804,9 @@ def cmd_send(cmdargs: argparse.Namespace) -> None:
+ 
+         logger.info('Converted the branch to %s messages', len(patches))
+ 
++    if cmdargs.in_reply_to:
++        patches[0][1].add_header('In-Reply-To', '<%s>' % cmdargs.in_reply_to)
++
+     usercfg = b4.get_user_config()
+     myemail = usercfg.get('email')
+ 
+-- 
+2.47.2
+
