@@ -35,6 +35,11 @@
       export LANG=en_US.UTF-8
       export LANGUAGE=en_US.UTF-8
 
+      # Fix slow tab completion for git
+      __git_files () {
+          _wanted files expl 'local files' _files
+      }
+
       # Include secrets
       if [ $(hostname) = "thinky" ]; then
         if [ -f ~/.secrets/.sh.secrets ]; then
@@ -50,63 +55,15 @@
           $@
       }
 
-      export TERM=screen-256color
-
-      alias vim="nvim"
-      export VISUAL="nvim"
-      export EDITOR="nvim"
-
-      # Minicom colors
-      export MINICOM="-m -c on"
-
-      # Editor for cscope (by default it's vi)
-      export CSCOPE_EDITOR=nvim
-
-      alias cal='cal -m | grep --color -EC6 "\b$(date +%e | sed "s/ //g")"'
-
-      # Allows to passthrough user's aliases to sudo
-      alias sudo='sudo '
-
-      # Better zooming when feh is opened
-      alias feh="feh --auto-zoom --scale-down"
-
-      # FZF with fd (make it possible to ignore files)
-      export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-
-      # Decrypt password for email apps
-      alias mutt="with_passwords mutt"
-      alias neomutt="with_passwords neomutt"
-      alias mbsync="with_passwords mbsync"
-
-      alias q="quilt"
-
-      # Fix slow tab completion for git
-      __git_files () {
-          _wanted files expl 'local files' _files
-      }
-
-      #==============================================================================
-      # Commands
-      #==============================================================================
       # PDF Reader
       function pdfreader(){
-      	zathura "$1" >/dev/null 2>&1 &
+        zathura "$1" >/dev/null 2>&1 &
       }
-      alias pdf=pdfreader
 
       # Image viewver
       function show_image(){
-      	feh "$1" >/dev/null 2>&1 &
+        feh "$1" >/dev/null 2>&1 &
       }
-      alias img=show_image
-
-      # Run application wihout standart output
-      function quiet_runner(){
-      	"$1" "$2" >/dev/null 2>&1 &
-      }
-      alias mute=quiet_runner
-
-      alias vimdiff="nvim -d"
 
       # ex - archive extractor
       # usage: ex <file>
@@ -154,38 +111,37 @@
           fi
       }
 
-      # pdfsearch - search in all pdf's for pattern (in current directory)
-      # Usage: pdfsearch "pattern"
-      function pdfsearch(){
-            find . -name '*.pdf' -exec sh -c "pdftotext \"{}\" - | \
-              grep --with-filename --label=\"{}\" --color \"$1\"" \;
-      }
 
-      # Colored man pages
-      function man() {
-      	env \
-      		LESS_TERMCAP_md=$'\e[1;36m' \
-      		LESS_TERMCAP_me=$'\e[0m' \
-      		LESS_TERMCAP_se=$'\e[0m' \
-      		LESS_TERMCAP_so=$'\e[1;40;92m' \
-      		LESS_TERMCAP_ue=$'\e[0m' \
-      		LESS_TERMCAP_us=$'\e[1;32m' \
-      			man "$@"
-      }
-
+      export TERM=screen-256color
+      export VISUAL="nvim"
+      export EDITOR="nvim"
+      # Minicom colors
+      export MINICOM="-m -c on"
+      # Editor for cscope (by default it's vi)
+      export CSCOPE_EDITOR=nvim
+      # FZF with fd (make it possible to ignore files)
+      export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
       export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
 
-      # from i8ramin - http://getintothis.com/blog/2012/04/02/git-grep-and-blame-bash-function/
-      # runs git grep on a pattern, and then uses git blame to who did it
-      ggb() {
-          git grep -n $@ | while IFS=: read i j k; do git blame -L $j,$j $i | cat; done
-      }
+      alias vim="nvim"
+      alias cal='cal -m | grep --color -EC6 "\b$(date +%e | sed "s/ //g")"'
+      # Better zooming when feh is opened
+      alias feh="feh --auto-zoom --scale-down"
+      # Decrypt password for email apps
+      alias mutt="with_passwords mutt"
+      alias neomutt="with_passwords neomutt"
+      alias mbsync="with_passwords mbsync"
+      # Who thought that it's cool to use number in cli?
+      alias bb=b4
+      alias vimdiff="nvim -d"
+      alias pdf=pdfreader
+      alias img=show_image
 
       if [ -f ~/.shrc.local ]; then
           . ~/.shrc.local
       fi
 
-      # Run Wayland/Xorg on tty0 automatically
+      # Run Sway on tty0 automatically
       if [[ "$(tty)" == /dev/tty1 ]]; then
           exec sway
       fi
