@@ -155,6 +155,7 @@
     tomlq
     yazi
     nurl
+    btop
   ];
 
   programs.zsh.enable = true;
