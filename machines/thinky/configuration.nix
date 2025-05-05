@@ -124,6 +124,7 @@
       wdisplays # tool to configure displays
       revumatic
       koji
+      nbd
     ];
 
     services.pipewire = {
