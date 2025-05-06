@@ -11,7 +11,6 @@
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
     ../../modules/qemu-guest-network.nix
-    ../../modules/mysql.nix
     ../../modules/squid.nix
     ../../modules/builders.nix
     ../../modules/tailscale.nix
