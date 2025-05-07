@@ -24,6 +24,8 @@
     libreoffice
     rustfmt
     openrgb
+    tdesktop
+    vlc
   ];
 
   home.file = {".shrc.local" = {source = ./configs/shrc.local;};};

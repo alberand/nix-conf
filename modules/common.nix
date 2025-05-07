@@ -100,11 +100,8 @@
     usbutils
     lshw
     pciutils
-    ntfs3g
     man-pages
     man-pages-posix
-    pinentry
-    libva-utils
     traceroute
     dig
     libvirt
@@ -117,41 +114,32 @@
     wireshark
     parted
     iptables
-    tldr
     nss
 
+    pinentry
+    libva-utils
+
     # work
-    qemu_full
-    qemu-utils
-    trace-cmd
     nix-tree
     podman
     ccache
     vulkan-headers
     vulkan-loader
     vulkan-tools
-    gimp
     easyeffects
     adwaita-icon-theme
     gnomeExtensions.appindicator
-    rustc
-    cargo
     qalculate-gtk
     weechat
     swayidle
     wayland-protocols
     nil
     alejandra
-    deadnix
     chromium
     bat
     swaylock
     sublime
-    yt-dlp
     pinta
-    xournalpp
-    nix-prefetch
-    nix-prefetch-git
     tomlq
     yazi
     nurl

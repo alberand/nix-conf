@@ -11,90 +11,41 @@
   ];
 
   home.packages = with pkgs; [
-    acl
-    alacritty
-    attr
-    autoconf
-    automake
     (b4.overrideAttrs (final: prev: {
       patches = [
         ../patches/0001-b4-handle-invalid-timezone-value.patch
         ../patches/0001-ez-introduce-in-reply-to-for-send.patch
       ];
     }))
-    bc
-    bemenu
-    binutils
-    bison
-    # Cannot be used together with clang
-    # clang
-    # clang-tools
-    cmake
     cmst
-    cscope
-    dbench
-    e2fsprogs
-    elfutils
     feh
     file
-    fio
     firefox
     flameshot
-    flex
-    font-awesome
     foot
-    fsverity-utils
-    gcc
-    gcc
-    getopt
-    gettext
-    glibc
-    gnumake
-    gnumake
-    ima-evm-utils
     isync
-    keyutils
-    kitty
-    libaio
-    libelf
-    libtool
-    linuxquota
-    lsof
-    m4
-    ncurses
     neomutt
     nmap
     notmuch
-    nvme-cli
     openssl
-    patchutils_0_4_2
-    perl
-    pkg-config
     python3
     jq
     ripgrep
-    ripgrep
-    stress-ng
-    tdesktop
     util-linux
-    vlc
     waybar
     wl-clipboard
     xdg-utils
-    xfsprogs
-    xfstests
     zathura
     zlib
     qpwgraph
-    droidcam
     zeal
     python3
-    spotify-player
     jujutsu
     stgit
     meld
     tree
     zoxide
+    pinentry
 
     (writeShellScriptBin "calc"
       "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")

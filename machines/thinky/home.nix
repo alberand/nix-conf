@@ -16,11 +16,7 @@
   home.homeDirectory = "/home/aalbersh";
 
   home.packages = with pkgs; [
-    cargo
-    rust-analyzer
-    pinentry
-    rpm
-    quilt
+    xfstestsdb
     # Script to open serial console to Beaker machine
     (let
       wrapper =
@@ -34,7 +30,6 @@
     (writeShellScriptBin "git-bp" (builtins.readFile ./configs/git-bp))
     # Beaker script to reserve machines for testing
     (writeShellScriptBin "machine" (builtins.readFile ./configs/machine))
-    xfstestsdb
   ];
 
   home.file = {

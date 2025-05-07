@@ -148,6 +148,7 @@
     environment.systemPackages = with pkgs; [
       wine
       wine-wayland
+      yt-dlp
       # video
       mesa
       mesa-demos
