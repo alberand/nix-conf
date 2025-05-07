@@ -2,8 +2,11 @@
 name = "Andrey Albershteyn"
 email = "aalbersh@kernel.org"
 
+[aliases]
+l = ["log", "-r", "ancestors(reachable(@, mutable()), 2)"]
+
 [ui]
-default-command = "log"
+default-command = "l"
 pager = "bat --plain --tabs 8"
 paginate = "auto"
 
