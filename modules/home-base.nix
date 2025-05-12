@@ -15,6 +15,7 @@
       patches = [
         ../patches/0001-b4-handle-invalid-timezone-value.patch
         ../patches/0001-ez-introduce-in-reply-to-for-send.patch
+        ../patches/0001-ez-introduce-branch-BRANCH-argument-for-send.patch
       ];
     }))
     cmst
