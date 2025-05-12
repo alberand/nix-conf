@@ -12,8 +12,14 @@
 
   home.packages = with pkgs; [
     (b4.overrideAttrs (final: prev: {
+      version = "git";
+      # Latest master as of 12.05.25
+      src = pkgs.fetchgit {
+        url = "git://git.kernel.org/pub/scm/utils/b4/b4.git";
+        rev = "6f78e874e96b0b3bac1767a1743b20af20cb0e2f";
+        hash = "sha256-fPtXfycJfLhHmqVIrrnHB9JNee1Q3VuIi+FXbcy8bOE=";
+      };
       patches = [
-        ../patches/0001-b4-handle-invalid-timezone-value.patch
         ../patches/0001-ez-introduce-in-reply-to-for-send.patch
         ../patches/0001-ez-introduce-branch-BRANCH-argument-for-send.patch
       ];
