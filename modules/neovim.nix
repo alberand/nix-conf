@@ -16,6 +16,7 @@ in {
     typescript-language-server
     lua-language-server
     pyright
+    deadnix
   ];
 
   programs.neovim = {
