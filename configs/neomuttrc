@@ -105,10 +105,10 @@ source ~/.mutt/dracula.muttrc
 
 color header cyan black .
 color header yellow black ^From
-color header yellow black ^Subject
+color header red black ^Subject
 color header yellow black ^Date
 color header color102 black ^To
-color header color102 black ^CC
+color header color102 black ^Cc
 color header color102 black ^Message-ID
 color header color102 black ^Reply-To
 color header color102 black ^In-Reply-To
@@ -130,7 +130,7 @@ color   body    red             default         ^[\-].*
 color   body    brightwhite     default         ^(\s).*
 color   body    cyan            default         ^(Signed-off-by).*
 color   body    cyan            default         ^(Docker-DCO-1.1-Signed-off-by).*
-color   body    brightwhite     default         ^(Cc)
+#color   body    brightwhite     default         ^(Cc)
 color   body    yellow          default         "^diff \-.*"
 color   body    brightwhite     default         "^index [a-f0-9].*"
 color   body    brightblue      default         "^---$"
