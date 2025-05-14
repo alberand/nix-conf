@@ -3,6 +3,15 @@
   pkgs,
   ...
 }: {
+  networking.firewall = {
+    allowedTCPPorts = [
+      88 # kerberos
+    ];
+    allowedUDPPorts = [
+      88 # kerberos
+    ];
+  };
+
   security.krb5 = {
     enable = true;
 

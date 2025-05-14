@@ -27,11 +27,17 @@
 # Check that everything works:
 #   curl <beaker url>
 {
-  config,
   pkgs,
-  lib,
   ...
 }: {
+  networking.firewall = {
+    allowedTCPPorts = [
+      1194 # openvpn
+    ];
+    allowedUDPPorts = [
+      1194 # openvpn
+    ];
+  };
   users.users = {
     openvpn = {
       name = "openvpn";

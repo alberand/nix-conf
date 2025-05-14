@@ -29,7 +29,7 @@
 
   config = {
     user = "alberand";
-    # Use the systemd-boot EFI boot loader.
+
     boot = {
       loader = {
         systemd-boot.enable = false;
@@ -99,20 +99,6 @@
       SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"
     '';
 
-    # Media group to access media storage
-    users.groups.media = {
-      name = "media";
-      gid = 8096;
-      members = ["alberand" "deluge"];
-    };
-
-    users.users.deluge = {
-      isNormalUser = true;
-      description = "Deluge";
-      extraGroups = ["media"];
-      uid = 1002;
-    };
-
     users.users.nixremote = {
       isNormalUser = true;
       description = "Nix remote builder";
@@ -165,34 +151,6 @@
       openrgb-plugin-effects
     ];
 
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-
-    # xdg-desktop-portal works by exposing a series of D-Bus interfaces
-    # known as portals under a well-known name
-    # (org.freedesktop.portal.Desktop) and object path
-    # (/org/freedesktop/portal/desktop). The portal interfaces include
-    # APIs for file access, opening URIs, printing and others.
-    services.dbus.enable = true;
-    xdg.portal = {
-      enable = true;
-      wlr.enable = true;
-      # gtk portal needed to make gtk apps happy
-      extraPortals = [pkgs.xdg-desktop-portal-gtk];
-      config = {common = {default = ["gtk"];};};
-    };
-
-    # Enable WeeChat to run as service with attached 'screen' session To
-    # attach use: screen -x weechat/wc
-    services.weechat.enable = true;
-    services.weechat.sessionName = "wc";
-
-    security.rtkit.enable = true;
-
     virtualisation = {
       oci-containers.backend = "podman";
       podman = {
@@ -213,7 +171,7 @@
       overrideFolders = false;
       # Open firewall ports
       openDefaultPorts = true;
-      user = "alberand";
+      user = config.user;
       group = "users";
       settings = {
         devices = {

@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   networking.wg-quick.interfaces = {
     wg0 = {
       address = ["10.10.10.2"];
@@ -16,6 +20,20 @@
   };
 
   services.home-assistant.extraComponents = ["jellyfin"];
+
+  # Media group to access media storage
+  users.groups.media = {
+    name = "media";
+    gid = 8096;
+    members = [config.user "jellyfin" "sonarr" "radarr" "jackett"];
+  };
+
+  users.users.deluge = {
+    isNormalUser = true;
+    description = "Deluge";
+    extraGroups = ["media"];
+    uid = 1002;
+  };
 
   users.users.jellyfin = {
     description = "JellyFin";
@@ -49,6 +67,4 @@
     enable = true;
     group = "media";
   };
-
-  users.groups.media.members = ["jellyfin" "sonarr" "radarr" "jackett"];
 }
