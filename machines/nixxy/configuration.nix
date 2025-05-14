@@ -245,17 +245,6 @@
       /export/alberand 192.168.0.101(rw,nohide,insecure,no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
 
-    systemd.user.services.kanshi = {
-      enable = true;
-      description = "Kanshi daemon (monitor configurator)";
-      wantedBy = [];
-      after = [];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
-      };
-    };
-
     virtualisation.libvirtd.enable = true;
 
     services.hardware.openrgb = {

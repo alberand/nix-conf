@@ -7,7 +7,6 @@
   imports = [
     ../../modules/home-base.nix
     ../../modules/neomutt.nix
-    ../../modules/kanshi.nix
     ../../modules/redhat-beaker.nix
     ./modules/maintainer.nix
   ];

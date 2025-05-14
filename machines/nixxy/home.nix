@@ -4,7 +4,7 @@
   lib,
   ...
 }: {
-  imports = [../../modules/home-base.nix ../../modules/kanshi.nix];
+  imports = [../../modules/home-base.nix];
 
   home.username = "alberand";
   home.homeDirectory = "/home/alberand";

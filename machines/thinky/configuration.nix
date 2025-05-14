@@ -177,17 +177,6 @@
     # pipewire needs it
     security.rtkit.enable = true;
 
-    systemd.user.services.kanshi = {
-      enable = true;
-      description = "Kanshi daemon (monitor configurator)";
-      wantedBy = [];
-      after = [];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
-      };
-    };
-
     virtualisation.libvirtd.enable = true;
 
     programs.firefox = {

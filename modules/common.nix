@@ -188,6 +188,17 @@
     group = "wireshark";
   };
 
+  systemd.user.services.kanshi = {
+    enable = true;
+    description = "Kanshi daemon (monitor configurator)";
+    wantedBy = [];
+    after = [];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.kanshi}/bin/kanshi -c kanshi_config_file";
+    };
+  };
+
   nix = {
     settings = {
       # needed by direnv so shell don't get garbage collected
