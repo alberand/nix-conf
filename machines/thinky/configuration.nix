@@ -10,7 +10,7 @@
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
     ../../modules/qemu-guest-network.nix
-    ../../modules/squid.nix
+    # ../../modules/squid.nix
     ../../modules/builders.nix
     ../../modules/tailscale.nix
   ];
@@ -61,7 +61,6 @@
           782 # conserver
           443 # https
           853 # DNS over TLS
-          config.services.squid.proxyPort
         ];
         allowedUDPPorts = [
           53 # dns

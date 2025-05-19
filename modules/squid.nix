@@ -1,4 +1,8 @@
-{...}: {
+{config, ...}: {
+  networking.firewall.allowedTCPPorts = [
+    config.services.squid.proxyPort
+  ];
+
   services.squid = {
     enable = true;
     proxyAddress = "192.168.0.101";
