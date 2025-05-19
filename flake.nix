@@ -47,6 +47,7 @@
           # Can be removed soon https://github.com/NixOS/nixpkgs/issues/371837
           jackett = unstable.jackett;
           xournalpp = unstable.xournalpp;
+          jujutsu = unstable.jujutsu;
         })
       ];
     };
