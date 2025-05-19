@@ -8,6 +8,9 @@ fsmonitor = "watchman"
 [core.watchman]
 register-snapshot-trigger = true
 
+[git]
+subprocess = true
+
 [aliases]
 l = ["log", "-r", "ancestors(reachable(@, mutable()), 2)", "--limit", "25"]
 
