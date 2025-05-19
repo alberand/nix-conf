@@ -104,6 +104,18 @@
           ./machines/placeholder/configuration.nix
         ];
       };
+      door = lib.nixosSystem {
+        inherit pkgs;
+        inherit system;
+
+        modules = [
+          ./machines/door/configuration.nix
+          agenix.nixosModules.default
+          {
+            environment.systemPackages = [agenix.packages.${system}.default];
+          }
+        ];
+      };
     };
   };
 }
