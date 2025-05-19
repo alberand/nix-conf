@@ -49,6 +49,7 @@
     zeal
     python3
     jujutsu
+    watchman # needed by jujutsu
     stgit
     meld
     tree
