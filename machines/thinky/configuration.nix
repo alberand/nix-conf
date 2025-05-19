@@ -121,16 +121,16 @@
       })
     ];
 
-    fileSystems."/mnt/lonmoun" = {
-      device = "192.168.0.100:/alberand";
-      fsType = "nfs";
-      options = [
-        "noauto"
-        "x-systemd.automount"
-        "nofail"
-        "x-systemd.mount-timeout=5s"
-      ];
-    };
+    # fileSystems."/mnt/lonmoun" = {
+    #   device = "192.168.0.100:/alberand";
+    #   fsType = "nfs";
+    #   options = [
+    #     "noauto"
+    #     "x-systemd.automount"
+    #     "nofail"
+    #     "x-systemd.mount-timeout=5s"
+    #   ];
+    # };
 
     programs.firefox = {
       enable = true;
