@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHgqEnZ1n9CvRg63DiSQ8SVgeajr6igvZ/81Xxhc1EH0";
+  key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsaaX1d/7zZHiZIsPFhtvmEChTB0p7sKECk7p6UcUqr";
 in rec {
   user = "alberand";
 
