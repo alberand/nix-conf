@@ -14,6 +14,8 @@
       inputs.nixpkgs.follows = "unstablepkgs";
     };
     agenix.url = "github:ryantm/agenix";
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -24,6 +26,7 @@
     nixos-hardware,
     redhat,
     agenix,
+    disko,
   }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -90,6 +93,15 @@
           {
             environment.systemPackages = [agenix.packages.${system}.default];
           }
+        ];
+      };
+      placeholder = lib.nixosSystem {
+        inherit pkgs;
+        inherit system;
+
+        modules = [
+          disko.nixosModules.disko
+          ./machines/placeholder/configuration.nix
         ];
       };
     };
