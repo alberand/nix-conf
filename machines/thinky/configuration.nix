@@ -58,7 +58,6 @@
       firewall = {
         allowedTCPPorts = [
           53 # dns
-          22 # ssh
           782 # conserver
           443 # https
           853 # DNS over TLS
@@ -82,6 +81,8 @@
               DNSOverTLS=no
       '';
     };
+
+    services.openssh.settings.AllowUsers = ["alberand"];
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.aalbersh = {

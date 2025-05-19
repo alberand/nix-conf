@@ -155,7 +155,12 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    settings = {X11Forwarding = true;};
+    openFirewall = true;
+    settings = {
+      PermitRootLogin = "no";
+      PasswordAuthentication = false;
+      X11Forwarding = true;
+    };
   };
 
   programs.ssh = {

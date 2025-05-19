@@ -70,7 +70,6 @@
         # Syncthing opens ports by itself
         allowedTCPPorts = [
           53 # dns
-          22 # ssh
           443 # https
           1194 # OpenVPN
           111 # NFS
@@ -98,6 +97,8 @@
     services.udev.extraRules = ''
       SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"
     '';
+
+    services.openssh.settings.AllowUsers = ["aalbersh"];
 
     users.users.nixremote = {
       isNormalUser = true;
