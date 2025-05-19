@@ -2,12 +2,16 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  domain = "door.alberand.com";
+  # TODO
+  public_ip = "";
+in {
   imports = [
     ./hardware-configuration.nix
     ../../options.nix
-    ./headscale.nix
-    ./dns.nix
+    ((import ./headscale.nix) {inherit domain public_ip;})
+    ((import ./dns.nix) {inherit domain public_ip;})
   ];
 
   config = {

@@ -1,4 +1,7 @@
-{config, ...}: {
+{
+  domain,
+  public_ip,
+}: {config, ...}: {
   containers.headscale = {
     autoStart = true;
     privateNetwork = true;
@@ -11,16 +14,12 @@
       pkgs,
       lib,
       ...
-    }: let
-      # TODO
-      public_ip = "";
-    in {
+    }: {
       services.bind = {
         enable = true;
         forwarders = [
           "1.1.1.1"
-          "8.8.8.8"
-          "8.8.4.4"
+          "194.242.2.2"
         ];
         extraOptions = ''
           dnssec-validation auto;

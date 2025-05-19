@@ -1,4 +1,7 @@
-{config, ...}: {
+{
+  domain,
+  public_ip,
+}: {config, ...}: {
   containers.headscale = {
     autoStart = true;
     privateNetwork = true;
@@ -10,9 +13,7 @@
       config,
       lib,
       ...
-    }: let
-      domain = "door.alberand.com";
-    in {
+    }: {
       age.secrets.acme-env.file = ../secrets/acme-env.age;
 
       services = {
@@ -22,7 +23,8 @@
           port = 8080;
           server_url = "https://${domain}";
           dns.nameservers.global = [
-            "https://${domain}"
+            "${public_ip}"
+            "194.242.2.2"
           ];
           settings = {
             logtail.enabled = false;
