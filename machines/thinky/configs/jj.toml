@@ -10,6 +10,7 @@ register-snapshot-trigger = true
 
 [aliases]
 l = ["log", "-r", "ancestors(reachable(@, mutable()), 2)", "--limit", "25"]
+la = ["log", "-r", "all()"]
 
 [ui]
 default-command = "l"
