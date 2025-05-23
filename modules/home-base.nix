@@ -55,6 +55,7 @@
     tree
     zoxide
     pinentry
+    devenv
 
     (writeShellScriptBin "calc"
       "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
