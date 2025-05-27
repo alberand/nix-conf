@@ -82,6 +82,9 @@
       "sound"
       "drivers"
       "arch"
+      # This is only due to jj snapshotting, this file is bigger
+      # than 1M so it can not be snapshotted by default.
+      "crypto/testmgr.h"
 
       # Nix
       "result"
