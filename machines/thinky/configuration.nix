@@ -13,6 +13,7 @@
     # ../../modules/squid.nix
     ../../modules/builders.nix
     ../../modules/tailscale.nix
+    ../../modules/nitrokey.nix
   ];
 
   config = {

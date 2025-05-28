@@ -63,7 +63,6 @@
   };
 
   # Waybar widgets position and battery
-
   programs.waybar = {
     settings.mainBar = {
       # Waybar widget to show work VPN connectivity
@@ -98,6 +97,17 @@
         #};
         max-length = 25;
       };
+    };
+  };
+
+  # Prevent Firefox from querying Nitrokey
+  #
+  # Firefox is setup to query Smart Cards and for that reason it talks to
+  # Nitrokey every time you open a new tab. It slows down the browser
+  # considerably almost to the point it's unusable.
+  home.file = {
+    ".config/pkcs11/modules/opensc.module" = {
+      source = ./configs/opensc.module;
     };
   };
 }
