@@ -41,6 +41,9 @@
         autosquash = true;
       };
       format = {notes = true;};
+      oh-my-zsh = {
+        hide-info = 1;
+      };
     };
 
     aliases = {
