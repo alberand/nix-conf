@@ -45,12 +45,7 @@
     noto-fonts-emoji
     fira-code
     fira-code-symbols
-    inconsolata
-    dina-font
-    proggyfonts
-    nerdfonts
     font-awesome
-    jetbrains-mono
   ];
 
   # Set your time zone.
