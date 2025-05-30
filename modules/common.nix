@@ -238,7 +238,6 @@
       dates = "monthly";
       options = "--delete-older-than 7d";
     };
-    package = pkgs.nixVersions.git;
     extraOptions = ''
       experimental-features = nix-command flakes
       keep-outputs = true
