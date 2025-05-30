@@ -8,7 +8,6 @@
     ];
     extraOptions = ''
       dnssec-validation auto;
-      allow-query-cache { any; };
     '';
     zones = let
       fqdn = "alberand.com";

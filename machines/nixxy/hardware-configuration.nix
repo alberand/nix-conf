@@ -30,7 +30,6 @@
 
   fileSystems."/media" = {
     device = "/dev/disk/by-uuid/44712d0a-dab1-4c5f-9bc8-5f29df1c1e6e";
-    label = "storage";
     fsType = "xfs";
   };
 

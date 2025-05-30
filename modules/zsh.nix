@@ -14,7 +14,7 @@
       size = 50000;
     };
 
-    initExtra = ''
+    initContent = ''
       # Uncomment the following line to enable command auto-correction.
       ENABLE_CORRECTION="true"
 
