@@ -9,7 +9,7 @@
   };
 
   nix = {
-    distributedBuilds = false;
+    distributedBuilds = true;
     buildMachines = [
       {
         hostName = "builder";
