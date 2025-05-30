@@ -5,13 +5,12 @@
   ...
 }: let
   key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsaaX1d/7zZHiZIsPFhtvmEChTB0p7sKECk7p6UcUqr";
-in rec {
-  user = "alberand";
-
+in {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
+    ./hardware-configuration.nix
   ];
   boot.loader.grub = {
     # no need to set devices, disko will add all devices that have a EF02 partition to the list already
@@ -26,7 +25,7 @@ in rec {
     pkgs.gitMinimal
   ];
 
-  users.users."${user}" = {
+  users.users."alberand" = {
     isNormalUser = true;
     uid = 1000;
     group = "users";
