@@ -37,7 +37,7 @@ in {
       telescope-file-browser-nvim
       harpoon
       rust-vim
-      null-ls-nvim
+      none-ls-nvim
       luasnip
       cmp-nvim-lsp
       nvim-lspconfig
