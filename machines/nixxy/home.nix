@@ -28,7 +28,10 @@
     vlc
   ];
 
-  home.file = {".shrc.local" = {source = ./configs/shrc.local;};};
+  home.file = {
+    ".shrc.local" = {source = ./configs/shrc.local;};
+    ".config/jj/config.toml" = {source = ../../configs/jj.toml;};
+  };
 
   # Script to check work VPN connectivity
   programs.waybar.settings.mainBar."custom/vpn".exec =

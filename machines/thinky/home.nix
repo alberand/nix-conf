@@ -39,6 +39,7 @@
     ".redhat/neomutt-jira.sh" = {source = ./configs/neomutt-jira.sh;};
     ".shrc.local" = {source = ./configs/shrc.local;};
     ".consolerc" = {source = ./configs/consolerc;};
+    ".config/jj/config.toml" = {source = ../../configs/jj.toml;};
   };
   services.mbsync.configFile = ./configs/mbsyncrc;
   services.mbsync.postExec = "${pkgs.bash}/bin/sh ${config.home.homeDirectory}/.redhat/notmuch-hook.sh";
