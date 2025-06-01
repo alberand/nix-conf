@@ -8,16 +8,13 @@
     ];
     extraOptions = ''
       dnssec-validation auto;
+      allow-query-cache { any; };
     '';
     zones = let
       fqdn = "alberand.com";
       mainserver = "100.69.0.100";
     in {
       "${fqdn}" = {
-        allowQuery = [
-          "localhost"
-          "100.69.0.0/24"
-        ];
         master = true;
         file = pkgs.writeText "${fqdn}" ''
           $ORIGIN ${fqdn}.
