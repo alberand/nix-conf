@@ -19,13 +19,135 @@
     };
   };
 
+  # TODO this need to be rootless container
+  containers.jellyfin = {
+    autoStart = true;
+    privateNetwork = true;
+    ephemeral = true;
+    hostAddress = "10.233.1.100";
+    localAddress = "10.233.1.101";
+    bindMounts = {
+      "/media" = {
+        hostPath = "/media";
+        isReadOnly = false;
+      };
+      "/var/lib/jellyfin" = {
+        hostPath = "/media/var/lib/jellyfin";
+        isReadOnly = false;
+      };
+      "/var/lib/jellyseerr" = {
+        hostPath = "/media/var/lib/jellyseerr";
+        isReadOnly = false;
+      };
+      "/var/lib/jackett" = {
+        hostPath = "/media/var/lib/jackett";
+        isReadOnly = false;
+      };
+      "/var/lib/radarr" = {
+        hostPath = "/media/var/lib/radarr";
+        isReadOnly = false;
+      };
+      "/var/lib/sonarr" = {
+        hostPath = "/media/var/lib/sonarr";
+        isReadOnly = false;
+      };
+      "/var/lib/deluge" = {
+        hostPath = "/media/var/lib/deluge";
+        isReadOnly = false;
+      };
+    };
+    config = {
+      config,
+      pkgs,
+      lib,
+      ...
+    }: {
+      users.users.media = {
+        isNormalUser = true;
+        description = "Movies & Shows media user";
+        group = "media";
+        uid = 3000;
+      };
+
+      users.groups.media = {
+        name = "media";
+        gid = 3000;
+        members = ["jellyfin" "sonarr" "radarr" "jackett"];
+      };
+
+      environment.systemPackages = with pkgs; [
+        nmap
+        busybox
+        jellyfin-ffmpeg
+      ];
+
+      services.jellyfin = {
+        enable = true;
+        openFirewall = true;
+        user = "media";
+        group = "media";
+      };
+
+      services.radarr = {
+        enable = true;
+        openFirewall = true;
+        user = "media";
+        group = "media";
+      };
+
+      services.jackett = {
+        enable = true;
+        openFirewall = true;
+        user = "media";
+        group = "media";
+      };
+
+      services.jellyseerr = {
+        enable = true;
+        port = 5055;
+        openFirewall = true;
+      };
+
+      services.sonarr = {
+        enable = true;
+        openFirewall = true;
+        user = "media";
+        group = "media";
+      };
+
+      system.stateVersion = "25.05";
+
+      networking = {
+        firewall = {
+          enable = true;
+          # TODO I have non-standard port for Jellyfin, revert it
+          allowedTCPPorts = [
+            58846
+          ];
+        };
+        # Use systemd-resolved inside the container
+        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
+        useHostResolvConf = lib.mkForce false;
+      };
+
+      services.resolved.enable = true;
+    };
+  };
+
   services.home-assistant.extraComponents = ["jellyfin"];
 
   # Media group to access media storage
+  users.users.media = {
+    isNormalUser = true;
+    description = "Movies & Shows media user";
+    group = "media";
+    uid = 3000;
+  };
+
   users.groups.media = {
     name = "media";
-    gid = 8096;
-    members = [config.user "jellyfin" "sonarr" "radarr" "jackett"];
+    gid = 3000;
+    members = [config.user "media" "jellyfin" "sonarr" "radarr" "jackett"];
   };
 
   users.users.deluge = {
@@ -40,9 +162,13 @@
     extraGroups = ["media" "render" "video"];
   };
 
-  environment.systemPackages = with pkgs; [jellyfin-ffmpeg];
+  environment.systemPackages = with pkgs; [
+    jellyfin-ffmpeg
+  ];
 
-  networking.firewall.allowedTCPPorts = [55686];
+  networking.firewall.allowedTCPPorts = [
+    55686
+  ];
 
   services.radarr = {
     enable = true;
@@ -92,7 +218,7 @@
         VPN_PROV = "custom";
         STRICT_PORT_FORWARD = "yes";
         ENABLE_PRIVOXY = "yes";
-        LAN_NETWORK = "192.168.0.100/32";
+        LAN_NETWORK = "192.168.0.100/32, 10.233.1.100/32";
         NAME_SERVERS = "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
         DELUGE_DAEMON_LOG_LEVEL = "trace";
         DELUGE_WEB_LOG_LEVEL = "trace";
