@@ -8,14 +8,21 @@
     ];
     extraOptions = ''
       dnssec-validation auto;
-      allow-query-cache { any; };
     '';
+    cacheNetworks = [
+      "127.0.0.0/24"
+      "::1/128"
+      "100.69.0.0/24"
+    ];
     zones = let
       fqdn = "alberand.com";
       mainserver = "100.69.0.100";
     in {
       "${fqdn}" = {
         master = true;
+        allowQuery = [
+          "any"
+        ];
         file = pkgs.writeText "${fqdn}" ''
           $ORIGIN ${fqdn}.
           $TTL    604800
