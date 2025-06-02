@@ -82,7 +82,7 @@
       '';
     };
 
-    services.openssh.settings.AllowUsers = ["alberand"];
+    services.openssh.settings.AllowUsers = ["aalbersh"];
 
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.aalbersh = {
