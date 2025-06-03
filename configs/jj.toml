@@ -11,6 +11,9 @@ register-snapshot-trigger = true
 [aliases]
 l = ["log", "-r", "ancestors(reachable(@, mutable()), 2)", "--limit", "25"]
 la = ["log", "-r", "all()"]
+lm = ["log", "-T", "builtin_log_detailed"]
+lp = ["log", "--patch"]
+lg = ["log", "--patch", "-T", "builtin_log_detailed"]
 cm = ["commit"]
 
 [ui]
