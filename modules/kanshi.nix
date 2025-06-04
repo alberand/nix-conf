@@ -9,6 +9,21 @@
     enable = true;
 
     settings = [
+      # The order matter here
+      {
+        profile.name = "home";
+        profile.outputs = [
+          {
+            criteria = "Dell Inc. DELL P2414H KKMMW6451WCS";
+            mode = "1920x1080@60Hz";
+          }
+          {
+            criteria = "eDP-1";
+            status = "disable";
+          }
+        ];
+      }
+
       {
         profile.name = "undocked";
         profile.outputs = [
@@ -65,20 +80,6 @@
             criteria = "*";
             mode = "1920x1080@60Hz";
             position = "1920,0";
-          }
-        ];
-      }
-
-      {
-        profile.name = "home";
-        profile.outputs = [
-          {
-            criteria = "Dell Inc. DELL P2414H KKMMW6451WCS";
-            mode = "1920x1080@60Hz";
-          }
-          {
-            criteria = "eDP-1";
-            status = "disable";
           }
         ];
       }
