@@ -91,7 +91,7 @@
       '';
       "git.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy 127.0.0.1:3000
+        reverse_proxy 10.233.2.102:3000
         tls ${certlocname {name = "git";}}/cert.pem ${certlocname {name = "git";}}/key.pem {
           protocols tls1.3
         }
