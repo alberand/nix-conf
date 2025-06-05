@@ -22,7 +22,10 @@
   # TODO this need to be rootless container
   containers.jellyfin = {
     autoStart = true;
+    privateNetwork = true;
     ephemeral = true;
+    hostAddress = "10.233.1.100";
+    localAddress = "10.233.1.101";
     bindMounts = {
       "/media" = {
         hostPath = "/media";
@@ -131,7 +134,7 @@
     };
   };
 
-  #services.home-assistant.extraComponents = ["jellyfin"];
+  services.home-assistant.extraComponents = ["jellyfin"];
 
   # Media group to access media storage
   users.users.media = {
@@ -154,10 +157,10 @@
     uid = 1002;
   };
 
-  #users.users.jellyfin = {
-  #  description = "JellyFin";
-  #  extraGroups = ["media" "render" "video"];
-  #};
+  users.users.jellyfin = {
+    description = "JellyFin";
+    extraGroups = ["media" "render" "video"];
+  };
 
   environment.systemPackages = with pkgs; [
     jellyfin-ffmpeg
@@ -168,26 +171,26 @@
   ];
 
   services.radarr = {
-    enable = false;
+    enable = true;
   };
 
   services.jackett = {
-    enable = false;
+    enable = true;
   };
 
   services.jellyfin = {
-    enable = false;
+    enable = true;
     openFirewall = true;
   };
 
   services.jellyseerr = {
-    enable = false;
+    enable = true;
     port = 5055;
     openFirewall = true;
   };
 
   services.sonarr = {
-    enable = false;
+    enable = true;
     group = "media";
   };
 
