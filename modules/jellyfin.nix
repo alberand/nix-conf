@@ -22,10 +22,11 @@
   # TODO this need to be rootless container
   containers.jellyfin = {
     autoStart = true;
-    privateNetwork = true;
     ephemeral = true;
-    hostAddress = "10.233.1.100";
-    localAddress = "10.233.1.101";
+    privateNetwork = true;
+    hostBridge = "cbr";
+    hostAddress = "10.10.10.100";
+    localAddress = "10.10.10.30/24";
     bindMounts = {
       "/media" = {
         hostPath = "/media";
@@ -218,7 +219,7 @@
         VPN_PROV = "custom";
         STRICT_PORT_FORWARD = "yes";
         ENABLE_PRIVOXY = "yes";
-        LAN_NETWORK = "192.168.0.100/32, 10.233.1.100/32";
+        LAN_NETWORK = "10.10.10.100/32";
         NAME_SERVERS = "84.200.69.80,37.235.1.174,1.1.1.1,37.235.1.177,84.200.70.40,1.0.0.1";
         DELUGE_DAEMON_LOG_LEVEL = "trace";
         DELUGE_WEB_LOG_LEVEL = "trace";

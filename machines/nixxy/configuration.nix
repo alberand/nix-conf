@@ -24,6 +24,7 @@
     ../../modules/paperless.nix
     ../../modules/binary-cache.nix
     ../../modules/jellyfin.nix
+    ../../modules/containers-network.nix
   ];
 
   config = {
@@ -61,7 +62,6 @@
       hostName = "nixxy";
       # Pick only one of the below networking options.
       networkmanager.enable = true;
-      networkmanager.dns = "default";
       firewall.enable = true;
       firewall = {
         # Syncthing opens ports by itself
@@ -86,9 +86,18 @@
     };
 
     networking.nat.enable = true;
-    networking.nat.internalInterfaces = ["ve-+"];
+    networking.nat.internalInterfaces = ["ve-+" "cbr"];
     networking.nat.externalInterface = "wlo1";
-    networking.networkmanager.unmanaged = ["interface-name:ve-*"];
+    networking.nat.internalIPs = [
+      "10.10.10.100/24"
+    ];
+
+    networking.networkmanager.unmanaged = [
+      "interface-name:ve-*"
+      "interface-name:vb-*"
+      "interface-name:veth*"
+      "interface-name:cbr"
+    ];
 
     # ash drive
     services.udev.extraRules = ''

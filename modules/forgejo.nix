@@ -13,10 +13,11 @@ in {
 
   containers.forgejo = {
     autoStart = true;
-    privateNetwork = true;
     ephemeral = true;
-    hostAddress = "10.233.2.100";
-    localAddress = "10.233.2.102";
+    privateNetwork = true;
+    hostBridge = "cbr";
+    hostAddress = "10.10.10.100";
+    localAddress = "10.10.10.40/24";
     forwardPorts = [
       {
         protocol = "tcp";
@@ -74,7 +75,7 @@ in {
             DOMAIN = "git.alberand.com";
             # You need to specify this to remove the port from URLs in the web UI.
             ROOT_URL = "https://git.alberand.com/";
-            HTTP_ADDR = "10.233.2.102";
+            HTTP_ADDR = "10.10.10.40";
             HTTP_PORT = 3000;
 
             DISABLE_SSH = false;
