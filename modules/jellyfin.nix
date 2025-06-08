@@ -19,6 +19,23 @@
     };
   };
 
+  networking = {
+    firewall.allowedTCPPorts = [
+      55686
+    ];
+    nftables = {
+      enable = true;
+      ruleset = ''
+        table ip nat {
+          chain PREROUTING {
+            type nat hook prerouting priority dstnat; policy accept;
+            iifname "tailscale0" tcp dport 55686 dnat to 10.10.10.30:55686
+          }
+        }
+      '';
+    };
+  };
+
   # TODO this need to be rootless container
   containers.jellyfin = {
     autoStart = true;
@@ -123,7 +140,7 @@
           enable = true;
           # TODO I have non-standard port for Jellyfin, revert it
           allowedTCPPorts = [
-            58846
+            55686
           ];
         };
         # Use systemd-resolved inside the container
