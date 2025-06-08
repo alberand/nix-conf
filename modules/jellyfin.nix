@@ -44,7 +44,29 @@
     hostBridge = "cbr";
     hostAddress = "10.10.10.100";
     localAddress = "10.10.10.30/24";
+    # TODO read how secure this is
+    # https://github.com/systemd/systemd/issues/10960
+    # https://github.com/NixOS/nixpkgs/issues/347056
+    # https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html
+    allowedDevices = [
+      {
+        modifier = "rw";
+        node = "char-drm";
+      }
+      {
+        modifier = "rw";
+        node = "/dev/dri";
+      }
+      {
+        modifier = "rw";
+        node = "/dev/shm";
+      }
+    ];
     bindMounts = {
+      "/dev/dri" = {
+        hostPath = "/dev/dri";
+        isReadOnly = false;
+      };
       "/media" = {
         hostPath = "/media";
         isReadOnly = false;
@@ -80,6 +102,10 @@
       lib,
       ...
     }: {
+      hardware.graphics = {
+        enable = true;
+      };
+
       users.users.media = {
         isNormalUser = true;
         description = "Movies & Shows media user";
@@ -96,6 +122,7 @@
       environment.systemPackages = with pkgs; [
         nmap
         busybox
+        libva-utils
         jellyfin-ffmpeg
       ];
 
