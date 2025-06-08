@@ -120,8 +120,6 @@
       };
 
       environment.systemPackages = with pkgs; [
-        nmap
-        busybox
         libva-utils
         jellyfin-ffmpeg
       ];
@@ -179,8 +177,6 @@
     };
   };
 
-  services.home-assistant.extraComponents = ["jellyfin"];
-
   # Media group to access media storage
   users.users.media = {
     isNormalUser = true;
@@ -192,51 +188,17 @@
   users.groups.media = {
     name = "media";
     gid = 3000;
-    members = [config.user "media" "jellyfin" "sonarr" "radarr" "jackett"];
-  };
-
-  users.users.deluge = {
-    isNormalUser = true;
-    description = "Deluge";
-    extraGroups = ["media"];
-    uid = 1002;
-  };
-
-  users.users.jellyfin = {
-    description = "JellyFin";
-    extraGroups = ["media" "render" "video"];
+    members = [config.user "media"];
   };
 
   environment.systemPackages = with pkgs; [
     jellyfin-ffmpeg
   ];
 
-  networking.firewall.allowedTCPPorts = [
-    55686
-  ];
-
-  services.radarr = {
-    enable = true;
-  };
-
-  services.jackett = {
-    enable = true;
-  };
-
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-  };
-
   services.jellyseerr = {
     enable = true;
     port = 5055;
     openFirewall = true;
-  };
-
-  services.sonarr = {
-    enable = true;
-    group = "media";
   };
 
   systemd.services.podman-deluge = {
