@@ -1,15 +1,23 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
+{config, ...}: let
   cfg = config.services.forgejo;
 in {
-  # Open SSH port on host
-  networking.firewall.allowedTCPPorts = [
-    2222
-  ];
+  networking = {
+    # SSH port on container
+    firewall.allowedTCPPorts = [
+      2222
+    ];
+    nftables = {
+      enable = true;
+      ruleset = ''
+        table ip nat {
+          chain PREROUTING {
+            type nat hook prerouting priority dstnat; policy accept;
+            iifname "lo" tcp dport 2222 dnat to 10.10.10.40:2222
+          }
+        }
+      '';
+    };
+  };
 
   containers.forgejo = {
     autoStart = true;
@@ -18,15 +26,6 @@ in {
     hostBridge = "cbr";
     hostAddress = "10.10.10.100";
     localAddress = "10.10.10.40/24";
-    forwardPorts = [
-      {
-        protocol = "tcp";
-        hostPort = 2222;
-        containerPort = 2222;
-      }
-    ];
-    # TODO
-    # privateUsers = "yes";
     bindMounts = {
       "/media" = {
         hostPath = "/media";
@@ -82,6 +81,7 @@ in {
             START_SSH_SERVER = true;
             SSH_PORT = 2222;
             SSH_LISTEN_HOST = "0.0.0.0";
+            SSH_DOMAIN="https://git.alberand.com/";
           };
           # You can temporarily allow registration to create an admin user.
           service.DISABLE_REGISTRATION = false;
