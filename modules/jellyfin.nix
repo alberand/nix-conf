@@ -40,6 +40,8 @@
   containers.jellyfin = {
     autoStart = true;
     ephemeral = true;
+    # TODO do i need to set this?
+    # privateUsers = "yes";
     privateNetwork = true;
     hostBridge = "cbr";
     hostAddress = "10.10.10.100";
@@ -48,6 +50,7 @@
     # https://github.com/systemd/systemd/issues/10960
     # https://github.com/NixOS/nixpkgs/issues/347056
     # https://www.freedesktop.org/software/systemd/man/latest/systemd.resource-control.html
+    # Not sure what exactly this char-drm does
     allowedDevices = [
       {
         modifier = "rw";
@@ -63,36 +66,27 @@
       }
     ];
     bindMounts = {
+      # Sharing GPU for jellyfin transcoding
       "/dev/dri" = {
         hostPath = "/dev/dri";
         isReadOnly = false;
       };
+      # All the media goes here (Linux ISO, DVD rips)
       "/media" = {
         hostPath = "/media";
         isReadOnly = false;
       };
-      "/var/lib/jellyfin" = {
-        hostPath = "/media/var/lib/jellyfin";
-        isReadOnly = false;
-      };
-      "/var/lib/jellyseerr" = {
-        hostPath = "/media/var/lib/jellyseerr";
-        isReadOnly = false;
-      };
-      "/var/lib/jackett" = {
-        hostPath = "/media/var/lib/jackett";
-        isReadOnly = false;
-      };
-      "/var/lib/radarr" = {
-        hostPath = "/media/var/lib/radarr";
-        isReadOnly = false;
-      };
-      "/var/lib/sonarr" = {
-        hostPath = "/media/var/lib/sonarr";
-        isReadOnly = false;
-      };
-      "/var/lib/deluge" = {
-        hostPath = "/media/var/lib/deluge";
+      # On the host jellyseerr config is stored at
+      # /media/var/lib/jellyseerr/config. On the guest, jellyseerr has
+      # DynamicUser enabled, that's means that service unit will have private
+      # filesystem space for every user connected. This also migrates config
+      # directory to /var/lib/private/jellyseerr
+      #
+      # We can not bind /media/var/lib/jellyseerr directly as systemd then won't
+      # be able to move it to /private. Let's mount the whole directory,
+      # assuming there's no other configs not intended for 'media' container.
+      "/var/lib" = {
+        hostPath = "/media/var/lib";
         isReadOnly = false;
       };
     };

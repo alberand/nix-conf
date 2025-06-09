@@ -98,7 +98,7 @@
       '';
       "jellyseerr.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy 127.0.0.1:5055
+        reverse_proxy 10.10.10.30:5055
         tls ${certlocname {name = "jellyseerr";}}/cert.pem ${certlocname {name = "jellyseerr";}}/key.pem {
           protocols tls1.3
         }
