@@ -3,22 +3,6 @@
   config,
   ...
 }: {
-  networking.wg-quick.interfaces = {
-    wg0 = {
-      address = ["10.10.10.2"];
-      privateKeyFile = "/etc/jfwg/client.private";
-
-      peers = [
-        {
-          publicKey = "MKrNqXfz4sMtRekE44eHLdS/epD0MRZDd/PslJilr1A=";
-          allowedIPs = ["10.10.10.0/30"];
-          endpoint = "89.221.212.102:51820";
-          persistentKeepalive = 25;
-        }
-      ];
-    };
-  };
-
   networking = {
     firewall.allowedTCPPorts = [
       55686
@@ -85,6 +69,9 @@
       # We can not bind /media/var/lib/jellyseerr directly as systemd then won't
       # be able to move it to /private. Let's mount the whole directory,
       # assuming there's no other configs not intended for 'media' container.
+      #
+      # TODO This let container save all the data to /media, which is not
+      # desired for backups
       "/var/lib" = {
         hostPath = "/media/var/lib";
         isReadOnly = false;
@@ -185,14 +172,20 @@
     members = [config.user "media"];
   };
 
-  environment.systemPackages = with pkgs; [
-    jellyfin-ffmpeg
-  ];
+  networking.wg-quick.interfaces = {
+    wg0 = {
+      address = ["10.10.10.2"];
+      privateKeyFile = "/etc/jfwg/client.private";
 
-  services.jellyseerr = {
-    enable = true;
-    port = 5055;
-    openFirewall = true;
+      peers = [
+        {
+          publicKey = "MKrNqXfz4sMtRekE44eHLdS/epD0MRZDd/PslJilr1A=";
+          allowedIPs = ["10.10.10.0/30"];
+          endpoint = "89.221.212.102:51820";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
   };
 
   systemd.services.podman-deluge = {
