@@ -172,32 +172,20 @@
     members = [config.user "media"];
   };
 
-  networking.wg-quick.interfaces = {
-    wg0 = {
-      address = ["10.10.10.2"];
-      privateKeyFile = "/etc/jfwg/client.private";
-
-      peers = [
-        {
-          publicKey = "MKrNqXfz4sMtRekE44eHLdS/epD0MRZDd/PslJilr1A=";
-          allowedIPs = ["10.10.10.0/30"];
-          endpoint = "89.221.212.102:51820";
-          persistentKeepalive = 25;
-        }
-      ];
-    };
-  };
-
-  systemd.services.podman-deluge = {
-    after = ["wg-quick-wg0.service"];
-  };
+  # binhex/arch-delugevpn uses iptables 'filter' table
+  boot.kernelModules = ["iptable_filter"];
 
   virtualisation.oci-containers.containers = {
     "deluge" = {
       image = "binhex/arch-delugevpn";
       autoStart = true;
       networks = ["cnet"];
-      ports = ["8112:8112" "8118:8118" "58846:58846" "58946:58946"];
+      ports = [
+        "8112:8112"
+        "8118:8118"
+        "58846:58846"
+        "58946:58946"
+      ];
 
       extraOptions = [
         "--ip=10.10.10.50"
@@ -213,7 +201,7 @@
       ];
 
       environment = {
-        PUID = toString config.users.users.media.uid;
+        PUID = "0";
         PGID = toString config.users.groups.media.gid;
         VPN_ENABLED = "yes";
         VPN_CLIENT = "wireguard";
@@ -226,7 +214,7 @@
         DELUGE_DAEMON_LOG_LEVEL = "trace";
         DELUGE_WEB_LOG_LEVEL = "trace";
         DEBUG = "true";
-        UMASK = "000";
+        UMASK = "027";
         TZ = "Europe/London";
         DELUGE_ENABLE_WEBUI_PASSWORD = "no";
       };

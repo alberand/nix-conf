@@ -86,7 +86,7 @@
     };
 
     networking.nat.enable = true;
-    networking.nat.internalInterfaces = ["ve-+" "cbr"];
+    networking.nat.internalInterfaces = ["ve-+" "vb-+" "veth+" "cbr"];
     networking.nat.externalInterface = "wlo1";
     networking.nat.internalIPs = [
       "10.10.10.100/24"
