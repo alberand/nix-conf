@@ -121,7 +121,15 @@
       description = "Andrey Albershteyn";
       uid = 1000;
       shell = pkgs.zsh;
-      extraGroups = ["wheel" "sudo" "libvirtd" "networkmanager" "wireshark" "disk"];
+      extraGroups = [
+        "wheel"
+        "sudo"
+        "libvirtd"
+        "networkmanager"
+        "wireshark"
+        "disk"
+        "dialout"
+      ];
     };
 
     system.activationScripts = {
