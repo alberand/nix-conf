@@ -24,27 +24,10 @@
         };
       };
 
-      "30-jellyfin-config" = {
-        matchConfig.Name = "vb-jellyfin";
+      "30-cbr-config" = {
+        matchConfig.Name = "vb-*";
         networkConfig = {
           Bridge = "cbr";
-          Gateway = "10.10.10.100";
-        };
-      };
-
-      "40-forgejo-config" = {
-        matchConfig.Name = "vb-forgejo";
-        networkConfig = {
-          Bridge = "cbr";
-          Gateway = "10.10.10.100";
-        };
-      };
-
-      "50-deluge-config" = {
-        matchConfig.Name = "veth0";
-        networkConfig = {
-          Bridge = "cbr";
-          #Address = "10.10.10.50/24";
           Gateway = "10.10.10.100";
         };
       };
