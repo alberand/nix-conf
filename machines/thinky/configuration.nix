@@ -78,7 +78,7 @@
       domains = ["~."];
       fallbackDns = ["1.1.1.1#one.one.one.one" "1.0.0.1"];
       extraConfig = ''
-              DNSOverTLS=no
+        DNSOverTLS=no
       '';
     };
 
@@ -91,7 +91,15 @@
       uid = 1000;
       shell = pkgs.zsh;
       group = "users";
-      extraGroups = ["wheel" "sudo" "libvirtd" "networkmanager" "disk" "wireshark"];
+      extraGroups = [
+        "wheel"
+        "sudo"
+        "libvirtd"
+        "networkmanager"
+        "disk"
+        "wireshark"
+        "dialout"
+      ];
     };
 
     # List packages installed in system profile. To search, run:
