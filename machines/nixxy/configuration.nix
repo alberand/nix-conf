@@ -11,7 +11,7 @@
     ../../modules/nginx.nix
     ../../modules/grafana.nix
     ../../modules/qemu-guest-network.nix
-    ../../modules/home-assistant.nix
+    #../../modules/home-assistant.nix
     ../../modules/mysql.nix
     ../../modules/minecraft.nix
     ../../modules/borgbackup.nix
