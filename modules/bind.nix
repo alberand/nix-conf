@@ -1,6 +1,11 @@
 {pkgs, ...}: {
   services.bind = {
     enable = true;
+    listenOn = [
+      "100.69.0.100"
+      "192.168.0.100"
+      "10.10.10.100"
+    ];
     forwarders = [
       "1.1.1.1"
       "8.8.8.8"
