@@ -28,14 +28,6 @@
           }
         ];
       };
-
-      "30-cbr-config" = {
-        # systemd-nspawn containers creates vb-<name> virtual ethernets/bridges
-        matchConfig.Name = "vb-*";
-        networkConfig = {
-          Bridge = "cbr";
-        };
-      };
     };
   };
 
