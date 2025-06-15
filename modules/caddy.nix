@@ -85,7 +85,7 @@
       '';
       "food.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy 127.0.0.1:8114
+        reverse_proxy 10.10.10.70:8114
         tls ${certlocname {name = "food";}}/cert.pem ${certlocname {name = "food";}}/key.pem {
           protocols tls1.3
         }
