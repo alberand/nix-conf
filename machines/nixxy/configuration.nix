@@ -222,6 +222,17 @@
       };
     };
 
+    services.postgresql = {
+      enable = true;
+      ensureDatabases = ["kvart"];
+      ensureUsers = [
+        {
+          name = "kvart";
+          ensureDBOwnership = true;
+        }
+      ];
+    };
+
     # services.nfs.server.enable = true;
     # # TODO probably need to make it more safe regarding the permission
     # services.nfs.server.exports = ''
