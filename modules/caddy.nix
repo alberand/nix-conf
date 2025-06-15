@@ -106,7 +106,7 @@
       '';
       "test.nemambyt.com".extraConfig = ''
         encode gzip
-        reverse_proxy 10.233.1.2:4242
+        reverse_proxy 10.10.10.69:4242
         tls ${nbcertloc}/cert.pem ${nbcertloc}/key.pem {
           protocols tls1.3
         }
