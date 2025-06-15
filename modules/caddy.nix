@@ -28,6 +28,7 @@
       "food.alberand.com" = certfor { name = "food"; };
       "photos.alberand.com" = certfor { name = "photos"; };
       "jellyseerr.alberand.com" = certfor { name = "jellyseerr"; };
+      "files.alberand.com" = certfor { name = "files"; };
     };
 
     certs."whereisiss.com" = {
@@ -107,6 +108,13 @@
         encode gzip
         reverse_proxy 10.233.1.2:4242
         tls ${nbcertloc}/cert.pem ${nbcertloc}/key.pem {
+          protocols tls1.3
+        }
+      '';
+      "files.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.10.10.60
+        tls ${certlocname {name = "files";}}/cert.pem ${certlocname {name = "files";}}/key.pem {
           protocols tls1.3
         }
       '';

@@ -15,6 +15,7 @@ in {
   "thinky-env.age".publicKeys = [aalbersh thinky];
   "acme-env.age".publicKeys = [nixxy alberand alberand-rsa];
   "paperless.age".publicKeys = [nixxy alberand alberand-rsa];
+  "nextcloud.age".publicKeys = [nixxy alberand alberand-rsa];
   "binary-cache-key.age".publicKeys = [nixxy alberand];
   "nixbuilder_ed25519.age".publicKeys = [aalbersh alberand thinky];
 }

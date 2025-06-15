@@ -25,6 +25,7 @@
     ../../modules/binary-cache.nix
     ../../modules/jellyfin.nix
     ../../modules/containers-network.nix
+    ../../modules/nextcloud.nix
   ];
 
   config = {
