@@ -86,6 +86,16 @@
       };
     };
 
+    services.resolved = {
+      enable = true;
+      dnssec = "true";
+      domains = ["~."];
+      fallbackDns = ["1.1.1.1#one.one.one.one"];
+      extraConfig = ''
+        DNSOverTLS=no
+      '';
+    };
+
     networking.nat.enable = true;
     networking.nat.internalInterfaces = ["ve-+" "vb-+" "veth+" "cbr"];
     networking.nat.externalInterface = "wlo1";
