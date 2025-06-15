@@ -12,7 +12,11 @@ in {
         table ip nat {
           chain PREROUTING {
             type nat hook prerouting priority dstnat; policy accept;
-            iifname "lo" tcp dport 2222 dnat to 10.10.10.40:2222
+            iifname "tailscale0" tcp dport 2222 dnat to 10.10.10.40
+          }
+          chain POSTROUTING {
+            type nat hook postrouting priority srcnat; policy accept;
+            ip saddr 10.10.10.40 snat to 100.69.0.100
           }
         }
       '';
