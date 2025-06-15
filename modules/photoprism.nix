@@ -22,6 +22,16 @@
       lib,
       ...
     }: {
+      users.users.photoprism = {
+        isNormalUser = true;
+        uid = 3000;
+        group = "photoprism";
+      };
+
+      users.groups.photoprism = {
+        gid = 3000;
+      };
+
       services.photoprism = {
         enable = true;
         address = "10.10.10.80";
@@ -32,6 +42,9 @@
           PHOTOPRISM_ADMIN_USER = "alberand";
           PHOTOPRISM_ADMIN_PASSWORD = "123456";
           PHOTOPRISM_DATABASE_DRIVER = "sqlite";
+
+          PHOTOPRISM_UID = toString config.users.users.photoprism.uid;
+          PHOTOPRISM_GID = toString config.users.groups.photoprism.gid;
         };
       };
 
