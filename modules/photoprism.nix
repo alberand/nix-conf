@@ -1,78 +1,92 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  users.users = {
-    photoprism = {
-      name = "photoprism";
-      group = "photoprism";
-      isNormalUser = true;
-      uid = 1110;
-      extraGroups = ["media"];
+{...}: {
+  containers.photos = {
+    autoStart = true;
+    ephemeral = true;
+    privateNetwork = true;
+    hostBridge = "cbr";
+    hostAddress = "10.10.10.100";
+    localAddress = "10.10.10.80/24";
+    bindMounts = {
+      "/media/photos" = {
+        hostPath = "/media/photos";
+        isReadOnly = false;
+      };
+      "/var/lib" = {
+        hostPath = "/media/var/lib";
+        isReadOnly = false;
+      };
     };
-  };
-
-  users.groups.photoprism = {
-    name = "photoprism";
-    members = ["photoprism"];
-    gid = 1110;
-  };
-
-  services.photoprism = {
-    enable = true;
-    address = "localhost";
-    port = 8113;
-    originalsPath = "/media/photos";
-    settings = {
-      PHOTOPRISM_ADMIN_USER = "alberand";
-      PHOTOPRISM_ADMIN_PASSWORD = "123456";
-    };
-  };
-
-  systemd.services.photoprism = {
-    serviceConfig = {DynamicUser = lib.mkForce false;};
-  };
-
-  systemd = {
-    timers = {
-      "photoprism-index" = {
-        wantedBy = ["timers.target"];
-        timerConfig = {
-          OnCalendar = "daily";
-          Unit = "photoprism-index.service";
-          Persistent = true;
+    config = {
+      config,
+      pkgs,
+      lib,
+      ...
+    }: {
+      services.photoprism = {
+        enable = true;
+        address = "10.10.10.80";
+        port = 8113;
+        originalsPath = "/media/photos";
+        settings = {
+          PHOTOPRISM_HTTP_HOSTNAME = "photos.alberand.com";
+          PHOTOPRISM_ADMIN_USER = "alberand";
+          PHOTOPRISM_ADMIN_PASSWORD = "123456";
+          PHOTOPRISM_DATABASE_DRIVER = "sqlite";
         };
       };
-    };
-  };
-  systemd.services = {
-    "photoprism-index" = {
-      serviceConfig = {
-        Type = "oneshot";
-        User = "photoprism";
-        Group = "photoprism";
-        DynamicUser = false;
-        inherit
-          (config.systemd.services.photoprism.serviceConfig)
-          StateDirectory
-          WorkingDirectory
-          RuntimeDirectory
-          ReadWritePaths
-          ;
-      };
-      environment = config.systemd.services.photoprism.environment;
-      script = ''
-        set -eux
-        ${pkgs.photoprism}/bin/photoprism index
-      '';
-    };
-  };
 
-  # TODO copy & remove
-  #fileSystems."/media/photos/julia" = {
-  #device = "/media/stuff/BUP/Pictures/jpg";
-  #options = [ "bind" ];
-  #};
+      # Some hacks to make photoprism scan /photos daily
+      systemd = {
+        timers = {
+          "photoprism-index" = {
+            wantedBy = ["timers.target"];
+            timerConfig = {
+              OnCalendar = "daily";
+              Unit = "photoprism-index.service";
+              Persistent = true;
+            };
+          };
+        };
+      };
+
+      systemd.services = {
+        "photoprism-index" = {
+          serviceConfig = {
+            Type = "oneshot";
+            User = "photoprism";
+            Group = "photoprism";
+            DynamicUser = false;
+            inherit
+              (config.systemd.services.photoprism.serviceConfig)
+              StateDirectory
+              WorkingDirectory
+              RuntimeDirectory
+              ReadWritePaths
+              ;
+          };
+          environment = config.systemd.services.photoprism.environment;
+          script = ''
+            set -eux
+            ${pkgs.photoprism}/bin/photoprism index
+          '';
+        };
+      };
+
+      system.stateVersion = "25.05";
+
+      networking = {
+        firewall = {
+          enable = true;
+          allowedTCPPorts = [
+            8113
+          ];
+        };
+        # Use systemd-resolved inside the container
+        # Workaround for bug https://github.com/NixOS/nixpkgs/issues/162686
+        useHostResolvConf = lib.mkForce false;
+      };
+
+      services.resolved.enable = true;
+    };
+  };
 }

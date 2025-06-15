@@ -78,7 +78,7 @@
       '';
       "photos.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy 127.0.0.1:8113
+        reverse_proxy 10.10.10.80:8113
         tls ${certlocname {name = "photos";}}/cert.pem ${certlocname {name = "photos";}}/key.pem {
           protocols tls1.3
         }
