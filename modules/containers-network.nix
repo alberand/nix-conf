@@ -15,7 +15,7 @@
     networks = {
       # Assign IP to host end of a bridge (although I suppose all ends of the
       # bridge are on the host side of things)
-      "20-br0-uplink" = {
+      "20-cbr-uplink" = {
         matchConfig.Name = "cbr";
         networkConfig = {
           Address = "10.10.10.100/24";
