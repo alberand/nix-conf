@@ -47,17 +47,6 @@
       enableDebugLogs = true;
       environmentFile = config.age.secrets.acme-env.path;
     };
-
-    certs."test.nemambyt.com" = {
-      group = config.services.caddy.group;
-
-      domain = "test.nemambyt.com";
-      dnsProvider = "cloudflare";
-      dnsResolver = "aron.ns.cloudflare.com";
-      dnsPropagationCheck = true;
-      enableDebugLogs = true;
-      environmentFile = config.age.secrets.acme-env.path;
-    };
   };
 
   services.caddy = {
@@ -66,7 +55,6 @@
     virtualHosts = let
       dashboard = pkgs.callPackage (import ../configs/dashboard/derivation.nix) {};
       certlocname = {name}: "/var/lib/acme/${name}.alberand.com";
-      nbcertloc = "/var/lib/acme/test.nemambyt.com";
     in {
       "home.alberand.com".extraConfig = ''
         encode gzip
@@ -107,9 +95,6 @@
       "test.nemambyt.com".extraConfig = ''
         encode gzip
         reverse_proxy 10.10.10.69:4242
-        tls ${nbcertloc}/cert.pem ${nbcertloc}/key.pem {
-          protocols tls1.3
-        }
       '';
       "files.alberand.com".extraConfig = ''
         encode gzip
