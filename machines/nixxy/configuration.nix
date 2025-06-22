@@ -115,7 +115,7 @@
       SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"
     '';
 
-    services.openssh.settings.AllowUsers = ["aalbersh"];
+    services.openssh.settings.AllowUsers = ["alberand"];
 
     users.users.nixremote = {
       isNormalUser = true;

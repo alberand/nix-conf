@@ -12,16 +12,52 @@ in {
         table ip nat {
           chain PREROUTING {
             type nat hook prerouting priority dstnat; policy accept;
-            iifname "tailscale0" tcp dport 2222 dnat to 10.10.10.40
+            iifname "tailscale0" tcp dport 2222 dnat to 10.10.10.40:2222
           }
           chain POSTROUTING {
             type nat hook postrouting priority srcnat; policy accept;
-            ip saddr 10.10.10.40 snat to 100.69.0.100
+            ip daddr 10.10.10.40 tcp dport 2222 masquerade
           }
         }
       '';
     };
   };
+
+  #services.openssh = {
+  #  hostKeys = [
+  #    {
+  #      bits = 4096;
+  #      path = "/etc/ssh/ssh_host_rsa_key";
+  #      type = "rsa";
+  #    }
+  #    {
+  #      path = "/etc/ssh/ssh_host_ed25519_key";
+  #      type = "ed25519";
+  #    }
+  #    {
+  #      path = "/media/var/lib/forgejo/data/ssh/gitea.rsa";
+  #      type = "rsa";
+  #    }
+  #  ];
+  #  extraConfig = ''
+  #    # Route forgejo user to container
+  #    Match User forgejo
+  #        ForceCommand ssh -T -o StrictHostKeyChecking=no -p 2222 forgejo@10.10.10.40 "$SSH_ORIGINAL_COMMAND"
+  #        PermitTTY no
+  #        X11Forwarding no
+  #        AllowAgentForwarding no
+  #        AllowUsers forgejo
+  #        AuthenticationMethods publickey
+  #  '';
+  #};
+
+  #users.users.forgejo = {
+  #  isNormalUser = true;
+  #  description = "forgejo SSH user";
+  #  uid = 2222;
+  #  home = "/media/var/lib/forgejo";
+  #};
+  #users.groups.forgejo.gid = 2222;
 
   containers.forgejo = {
     autoStart = true;
@@ -30,6 +66,13 @@ in {
     hostBridge = "cbr";
     hostAddress = "10.10.10.100";
     localAddress = "10.10.10.40/24";
+    forwardPorts = [
+      {
+        containerPort = 2222;
+        hostPort = 2222;
+        protocol = "tcp";
+      }
+    ];
     bindMounts = {
       "/media" = {
         hostPath = "/media";
@@ -63,6 +106,12 @@ in {
         forgejo-cli
       ];
 
+      users.users.forgejo = {
+        description = "forgejo SSH user";
+        uid = 2222;
+      };
+      users.groups.forgejo.gid = 2222;
+
       services.forgejo = {
         enable = true;
         database = {
@@ -85,7 +134,7 @@ in {
             START_SSH_SERVER = true;
             SSH_PORT = 2222;
             SSH_LISTEN_HOST = "0.0.0.0";
-            SSH_DOMAIN="https://git.alberand.com/";
+            SSH_DOMAIN = "https://git.alberand.com/";
           };
           # You can temporarily allow registration to create an admin user.
           service.DISABLE_REGISTRATION = false;

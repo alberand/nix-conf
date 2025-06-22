@@ -94,7 +94,7 @@
       '';
       "test.nemambyt.com".extraConfig = ''
         encode gzip
-        reverse_proxy 10.10.10.69:4242
+        reverse_proxy 100.69.0.100:4242
       '';
       "files.alberand.com".extraConfig = ''
         encode gzip
