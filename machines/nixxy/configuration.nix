@@ -222,6 +222,20 @@
       };
     };
 
+    networking = {
+      nftables = {
+        enable = true;
+        ruleset = ''
+          table ip nat {
+            chain PREROUTING {
+              type nat hook prerouting priority dstnat; policy accept;
+              iifname "tailscale0" tcp dport 4242 dnat to 10.10.10.69:4242
+            }
+          }
+        '';
+      };
+    };
+
     services.postgresql = {
       enable = true;
       ensureDatabases = ["kvart"];
