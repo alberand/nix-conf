@@ -41,7 +41,6 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
-      config.permittedInsecurePackages = ["squid-6.10"];
       overlays = [
         (final: prev: {
           # Example of bringing in an unstable package:

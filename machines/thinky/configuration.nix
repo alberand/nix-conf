@@ -10,7 +10,7 @@
     ../../modules/work-vpn.nix
     ../../modules/kerberos.nix
     ../../modules/qemu-guest-network.nix
-    ../../modules/squid.nix
+    ../../modules/proxy.nix
     ../../modules/builders.nix
     ../../modules/tailscale.nix
     ../../modules/nitrokey.nix
