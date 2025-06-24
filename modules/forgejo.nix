@@ -134,7 +134,7 @@ in {
             START_SSH_SERVER = true;
             SSH_PORT = 2222;
             SSH_LISTEN_HOST = "0.0.0.0";
-            SSH_DOMAIN = "https://git.alberand.com/";
+            SSH_DOMAIN = "git.alberand.com";
           };
           # You can temporarily allow registration to create an admin user.
           service.DISABLE_REGISTRATION = false;
