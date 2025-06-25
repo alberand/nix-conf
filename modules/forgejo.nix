@@ -1,5 +1,6 @@
 {config, ...}: let
   cfg = config.services.forgejo;
+  uuid = 3200;
 in {
   networking = {
     # SSH port on container
@@ -22,6 +23,23 @@ in {
       '';
     };
   };
+
+  users.users.forgejo = {
+    isNormalUser = true;
+    description = "forgejo user";
+    uid = uuid;
+    group = "forgejo";
+    # home = "/media/var/lib/forgejo";
+  };
+  users.groups.forgejo.gid = uuid;
+
+  systemd.tmpfiles.rules = [
+    # Ensure git storage exists
+    "d /media/var/lib/forgejo 0755 forgejo forgejo - -"
+    "d /media/forgejo 0755 forgejo forgejo - -"
+    "A+ /media/forgejo - - - - u:forgejo:rwx,g:forgejo:rwx"
+    "A+ /media/forgejo - - - - u:${config.user}:rwx"
+  ];
 
   #services.openssh = {
   #  hostKeys = [
@@ -51,14 +69,6 @@ in {
   #  '';
   #};
 
-  #users.users.forgejo = {
-  #  isNormalUser = true;
-  #  description = "forgejo SSH user";
-  #  uid = 2222;
-  #  home = "/media/var/lib/forgejo";
-  #};
-  #users.groups.forgejo.gid = 2222;
-
   containers.forgejo = {
     autoStart = true;
     ephemeral = true;
@@ -74,8 +84,8 @@ in {
       }
     ];
     bindMounts = {
-      "/media" = {
-        hostPath = "/media";
+      "/media/forgejo" = {
+        hostPath = "/media/forgejo";
         isReadOnly = false;
       };
       "/var/lib/forgejo" = {
@@ -108,9 +118,9 @@ in {
 
       users.users.forgejo = {
         description = "forgejo SSH user";
-        uid = 2222;
+        uid = uuid;
       };
-      users.groups.forgejo.gid = 2222;
+      users.groups.forgejo.gid = uuid;
 
       services.forgejo = {
         enable = true;
@@ -119,6 +129,8 @@ in {
           user = "forgejo";
           createDatabase = true;
         };
+
+        repositoryRoot = "/media/forgejo";
 
         # Enable support for Git Large File Storage
         lfs.enable = true;
