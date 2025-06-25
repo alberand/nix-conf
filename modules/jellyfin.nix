@@ -229,9 +229,9 @@ in {
         LAN_NETWORK = "10.10.10.0/24";
         # DNS Watch #1 #3 Cloudflare #2 #4
         NAME_SERVERS = "84.200.69.80,1.1.1.1,84.200.70.40,1.0.0.1";
-        DELUGE_DAEMON_LOG_LEVEL = "trace";
-        DELUGE_WEB_LOG_LEVEL = "trace";
-        DEBUG = "true";
+        DELUGE_DAEMON_LOG_LEVEL = "error";
+        DELUGE_WEB_LOG_LEVEL = "error";
+        DEBUG = "false";
         UMASK = "027";
         TZ = "Europe/London";
         DELUGE_ENABLE_WEBUI_PASSWORD = "no";
