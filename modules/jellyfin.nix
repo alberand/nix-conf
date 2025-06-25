@@ -204,6 +204,8 @@ in {
       ];
 
       extraOptions = [
+        # Limit memory use as deluged eating crazy amounts of memory over time
+        "--memory=2048m"
         "--ip=10.10.10.50"
         "--privileged=true"
         ''--sysctl="net.ipv4.conf.all.src_valid_mark=1"''
