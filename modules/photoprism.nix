@@ -14,6 +14,8 @@ in {
   systemd.tmpfiles.rules = [
     # Ensure photos storage exists
     "d /media/photos 0755 photoprism photoprism - -"
+    # Set a mask to allow main system user to have full permission
+    "A /media/photos - - - - m::rwx"
     # Ensure "photoprism" user has permissions to read/write photos storage
     "A+ /media/photos - - - - u:photoprism:rwx"
     # Grant main system user permission to read/write photos storage. This user

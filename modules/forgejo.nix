@@ -40,6 +40,8 @@ in {
     "d /media/forgejo 0755 forgejo forgejo - -"
     "d /media/forgejo/repositories 0755 forgejo forgejo - -"
     "d /media/forgejo/lsf 0755 forgejo forgejo - -"
+    # Set a mask to allow main system user to have full permission
+    "A /media/forgejo - - - - m::rwx"
     # Grant forgejo user/group to read/write git storage
     "A+ /media/forgejo - - - - u:forgejo:rwx,g:forgejo:rwx"
     # Grant main system user permission to read/write git storage
