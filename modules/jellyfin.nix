@@ -1,8 +1,6 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{config, ...}: let
+  uuid = 3000;
+in {
   networking = {
     firewall.allowedTCPPorts = [
       55686
@@ -19,6 +17,33 @@
       '';
     };
   };
+
+  users.users.media = {
+    isNormalUser = true;
+    description = "Movies & Shows media user";
+    group = "media";
+    uid = uuid;
+  };
+
+  users.groups.media = {
+    name = "media";
+    gid = uuid;
+  };
+
+  systemd.tmpfiles.rules = [
+    # Ensure movies/shows/in-progress storage exists
+    "d /media/movies 0755 media media - -"
+    "d /media/shows 0755 media media - -"
+    "d /media/in-progress 0755 media media - -"
+    # Ensure "media" user/group has permissions to read/write media storage
+    "A+ /media/movies - - - - u:media:rwx,g:media:rwx"
+    "A+ /media/shows - - - - u:media:rwx,g:media:rwx"
+    "A+ /media/in-progress - - - - u:media:rwx,g:media:rwx"
+    # Grant main system user permission to read/write media storage
+    "A+ /media/movies - - - - u:${config.user}:rwx"
+    "A+ /media/shows - - - - u:${config.user}:rwx"
+    "A+ /media/in-progress - - - - u:${config.user}:rwx"
+  ];
 
   # TODO this need to be rootless container
   containers.jellyfin = {
@@ -91,12 +116,12 @@
         isNormalUser = true;
         description = "Movies & Shows media user";
         group = "media";
-        uid = 3000;
+        uid = uuid;
       };
 
       users.groups.media = {
         name = "media";
-        gid = 3000;
+        gid = uuid;
         members = ["jellyfin" "sonarr" "radarr" "jackett"];
       };
 
@@ -158,24 +183,10 @@
     };
   };
 
-  # Media group to access media storage
-  users.users.media = {
-    isNormalUser = true;
-    description = "Movies & Shows media user";
-    group = "media";
-    uid = 3000;
-  };
-
-  users.groups.media = {
-    name = "media";
-    gid = 3000;
-    members = [config.user "media"];
-  };
-
   # binhex/arch-delugevpn uses iptables 'filter' table
   boot.kernelModules = ["iptable_filter"];
-
   networking.extraHosts = ''10.10.10.50 deluge.containers'';
+
   virtualisation.oci-containers.containers = {
     "deluge" = {
       image = "binhex/arch-delugevpn";
