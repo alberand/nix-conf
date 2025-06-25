@@ -34,10 +34,15 @@ in {
   users.groups.forgejo.gid = uuid;
 
   systemd.tmpfiles.rules = [
-    # Ensure git storage exists
+    # Ensure forgejo configuration dir exists
     "d /media/var/lib/forgejo 0755 forgejo forgejo - -"
+    # Ensure forgejo repositories and lsf directories exists
     "d /media/forgejo 0755 forgejo forgejo - -"
+    "d /media/forgejo/repositories 0755 forgejo forgejo - -"
+    "d /media/forgejo/lsf 0755 forgejo forgejo - -"
+    # Grant forgejo user/group to read/write git storage
     "A+ /media/forgejo - - - - u:forgejo:rwx,g:forgejo:rwx"
+    # Grant main system user permission to read/write git storage
     "A+ /media/forgejo - - - - u:${config.user}:rwx"
   ];
 
@@ -130,10 +135,13 @@ in {
           createDatabase = true;
         };
 
-        repositoryRoot = "/media/forgejo";
+        repositoryRoot = "/media/forgejo/repositories";
 
         # Enable support for Git Large File Storage
-        lfs.enable = true;
+        lfs = {
+          enable = true;
+          contentDir = "/media/forgejo/lfs";
+        };
         settings = {
           server = {
             DOMAIN = "git.alberand.com";
