@@ -99,6 +99,8 @@
       "files.alberand.com".extraConfig = ''
         encode gzip
         reverse_proxy 10.10.10.60
+        redir /.well-known/carddav /remote.php/dav/ 301
+        redir /.well-known/caldav /remote.php/dav/ 301
         tls ${certlocname {name = "files";}}/cert.pem ${certlocname {name = "files";}}/key.pem {
           protocols tls1.3
         }
