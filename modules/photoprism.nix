@@ -1,4 +1,26 @@
-{...}: {
+{config, ...}: let
+  uuid = 3100;
+in {
+  users.users.photoprism = {
+    isNormalUser = true;
+    uid = uuid;
+    group = "photoprism";
+  };
+
+  users.groups.photoprism = {
+    gid = uuid;
+  };
+
+  systemd.tmpfiles.rules = [
+    # Ensure photos storage exists
+    "d /media/photos 0755 photoprism photoprism - -"
+    # Ensure "photoprism" user has permissions to read/write photos storage
+    "A+ /media/photos - - - - u:photoprism:rwx"
+    # Grant main system user permission to read/write photos storage. This user
+    # has syncthing running, the syncthing uploads more photos
+    "A+ /media/photos - - - - u:${config.user}:rwx"
+  ];
+
   containers.photos = {
     autoStart = true;
     ephemeral = true;
@@ -24,12 +46,12 @@
     }: {
       users.users.photoprism = {
         isNormalUser = true;
-        uid = 3000;
+        uid = uuid;
         group = "photoprism";
       };
 
       users.groups.photoprism = {
-        gid = 3000;
+        gid = uuid;
       };
 
       services.photoprism = {
