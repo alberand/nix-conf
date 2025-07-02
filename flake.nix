@@ -56,7 +56,7 @@
     };
 
     lib = nixpkgs.lib;
-  in {
+  in rec {
     nixosConfigurations = {
       nixxy = lib.nixosSystem {
         inherit pkgs;
@@ -116,6 +116,32 @@
           }
         ];
       };
+
+      quesada = lib.nixosSystem {
+        inherit pkgs;
+        inherit system;
+
+        modules = [
+          disko.nixosModules.disko
+          agenix.nixosModules.default
+          ./machines/quesada/configuration.nix
+          {
+            environment.systemPackages = [agenix.packages.${system}.default];
+          }
+        ];
+      };
+    };
+
+    apps.${system} = let
+      makeVmApp = host: let
+        hostname = nixosConfigurations.${host}.config.networking.hostName;
+        vm = nixosConfigurations.${host}.config.system.build.vm;
+      in {
+        type = "app";
+        program = "${vm}/bin/run-${hostname}-vm";
+      };
+    in {
+      quesada = makeVmApp "quesada";
     };
   };
 }

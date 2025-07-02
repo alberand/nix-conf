@@ -10,6 +10,7 @@ let
 
   nixxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrvWws1g7nmmEV0hff+49ufO4yM4GCUfHgzPVL5Raw+";
   thinky = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIByn5I88HSu5WM3EIr8GVtbEbxHPpT+JB6m9Su0r3NLY";
+  quesada = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINg+a+8SnLxBS/Dq1WiVQsMTy7iorO6xG9D1bIN5fW3S";
   systems = [thinky];
 in {
   "thinky-env.age".publicKeys = [aalbersh thinky];
@@ -18,4 +19,5 @@ in {
   "nextcloud.age".publicKeys = [nixxy alberand alberand-rsa];
   "binary-cache-key.age".publicKeys = [nixxy alberand];
   "nixbuilder_ed25519.age".publicKeys = [aalbersh alberand thinky];
+  "quesada-tskey.age".publicKeys = [alberand quesada];
 }
