@@ -42,9 +42,12 @@
           adminpassFile = "/etc/password";
           dbtype = "sqlite";
         };
-        settings.trusted_proxies = [
-          "100.69.0.100"
-        ];
+        settings = {
+          log_type = "file";
+          trusted_proxies = [
+            "100.69.0.100"
+          ];
+        };
       };
 
       system.stateVersion = "25.05";
