@@ -97,7 +97,7 @@
     };
 
     networking.nat.enable = true;
-    networking.nat.internalInterfaces = ["ve-+" "vb-+" "veth+" "cbr"];
+    networking.nat.internalInterfaces = ["ve-+" "vb-+" "veth+" "cbr" "enp34s0"];
     networking.nat.externalInterface = "wlo1";
     networking.nat.internalIPs = [
       "10.10.10.100/24"
@@ -108,6 +108,7 @@
       "interface-name:vb-*"
       "interface-name:veth*"
       "interface-name:cbr"
+      "interface-name:enp34s0"
     ];
 
     # ash drive
