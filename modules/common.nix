@@ -225,9 +225,6 @@
 
   nix = {
     settings = {
-      # needed by direnv so shell don't get garbage collected
-      keep-outputs = true;
-      keep-derivations = true;
       auto-optimise-store = true;
       extra-sandbox-paths = [config.programs.ccache.cacheDir];
       trusted-users = ["alberand" "aalbersh"];
@@ -239,8 +236,6 @@
     };
     extraOptions = ''
       experimental-features = nix-command flakes
-      keep-outputs = true
-      keep-derivations = true
     '';
     optimise.automatic = true;
   };
