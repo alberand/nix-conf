@@ -16,6 +16,7 @@
     agenix.url = "github:ryantm/agenix";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+    impermanence.url = "github:nix-community/impermanence";
   };
 
   outputs = {
@@ -27,6 +28,7 @@
     redhat,
     agenix,
     disko,
+    impermanence,
   }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -124,6 +126,7 @@
         modules = [
           disko.nixosModules.disko
           agenix.nixosModules.default
+          impermanence.nixosModules.impermanence
           ./machines/quesada/configuration.nix
           {
             environment.systemPackages = [agenix.packages.${system}.default];
