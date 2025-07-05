@@ -264,6 +264,8 @@
       server = {port = 6742;};
     };
 
+    networking.extraHosts = ''10.10.10.150 quesada.container'';
+
     nix.settings.trusted-users = ["nixremote"];
 
     # This value determines the NixOS release from which the default
