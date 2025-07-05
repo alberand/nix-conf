@@ -57,4 +57,45 @@
       ];
     };
   };
+
+  services.kea.dhcp4 = {
+    enable = true;
+    settings = {
+      interfaces-config = {
+        interfaces = [
+          "cbr"
+        ];
+      };
+      lease-database = {
+        name = "/var/lib/kea/dhcp4.leases";
+        persist = true;
+        type = "memfile";
+      };
+      rebind-timer = 2000;
+      renew-timer = 1000;
+      subnet4 = [
+        {
+          id = 1;
+          subnet = "10.10.10.0/24";
+          interface = "cbr";
+          pools = [
+            {
+              pool = "10.10.10.150 - 10.10.10.200";
+            }
+          ];
+          option-data = [
+            {
+              name = "routers";
+              data = "10.10.10.100";
+            }
+            {
+              name = "domain-name-servers";
+              data = "1.1.1.1,9.9.9.9";
+            }
+          ];
+        }
+      ];
+      valid-lifetime = 4000;
+    };
+  };
 }
