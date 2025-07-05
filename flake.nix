@@ -111,8 +111,10 @@
         inherit system;
 
         modules = [
-          ./machines/door/configuration.nix
+          disko.nixosModules.disko
           agenix.nixosModules.default
+          impermanence.nixosModules.impermanence
+          ./machines/door/configuration.nix
           {
             environment.systemPackages = [agenix.packages.${system}.default];
           }

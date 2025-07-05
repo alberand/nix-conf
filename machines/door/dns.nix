@@ -2,7 +2,7 @@
   domain,
   public_ip,
 }: {config, ...}: {
-  containers.headscale = {
+  containers.dns = {
     autoStart = true;
     privateNetwork = true;
     hostAddress = "10.10.10.10";
