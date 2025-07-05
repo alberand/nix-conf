@@ -67,6 +67,10 @@
     pkgs.zsh
     pkgs.firefox
     pkgs.networkmanager
+    (pkgs.kodi.withPackages (kodiPkgs:
+      with kodiPkgs; [
+        jellyfin
+      ]))
   ];
 
   networking = {
@@ -140,18 +144,10 @@
     extraUpFlags = ["--advertise-tags=tag:lonely"];
   };
 
-  services = {
-    xserver.desktopManager.plasma5.bigscreen.enable = true;
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
-  };
-
-  services.displayManager.sddm.settings = {
-    Autologin = {
-      Session = "plasma";
-      User = "alberand";
-    };
-  };
+  users.extraUsers.kodi.isNormalUser = true;
+  services.cage.user = "kodi";
+  services.cage.program = "${pkgs.kodi-wayland}/bin/kodi-standalone";
+  services.cage.enable = true;
 
   environment.persistence."/persistent" = {
     enable = true;
