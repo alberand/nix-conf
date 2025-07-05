@@ -5,7 +5,7 @@ usage() {
 	echo "\tdeploy.sh quesada 10.10.10.69"
 }
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -lt 2 ]; then
 	usage
 	exit 1
 fi
@@ -15,7 +15,9 @@ if [ -z "$SSHPASS" ]; then
 fi
 
 host=$1
-hostip=$2
+shift
+hostip=$1
+shift
 
 # Create a temporary directory
 temp=$(mktemp -d)
@@ -36,6 +38,7 @@ cat "./secrets/${host}_ed25519.pub" > "$temp/etc/ssh/ssh_host_ed25519_key.pub"
 chmod 600 "$temp/etc/ssh/ssh_host_ed25519_key"
 
 sudo SSHPASS=$SSHPASS nix run github:nix-community/nixos-anywhere -- \
+	$@ \
 	--flake .#$host \
 	--target-host root@$hostip \
 	--env-password \

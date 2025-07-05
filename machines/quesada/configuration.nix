@@ -74,7 +74,7 @@
   ];
 
   networking = {
-    useDHCP = true;
+    useDHCP = false;
     networkmanager.enable = false;
     hostName = "quesada";
     nameservers = [
@@ -121,6 +121,7 @@
     description = "alberand";
     uid = 1000;
     shell = pkgs.zsh;
+    home = "/home/alberand";
     hashedPassword = "$6$sDIm5DtPaJyCyq9e$WnjbB10099NocG7Lg4BdzkU9OnJuZpWhKFuY/WpL.pytKdfNsZldK5iitnG5VF32u3WyeuE6PbZ.1xdtFDocx0";
     extraGroups = [
       "wheel"
@@ -128,11 +129,11 @@
       "networkmanager"
       "disk"
     ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsaaX1d/7zZHiZIsPFhtvmEChTB0p7sKECk7p6UcUqr"
+    ];
   };
 
-  users.users.alberand.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsaaX1d/7zZHiZIsPFhtvmEChTB0p7sKECk7p6UcUqr andrey.albershteyn@gmail.com"
-  ];
   services.openssh.settings.AllowUsers = ["alberand"];
 
   age.secrets.tailscale.file = ../../secrets/quesada-tskey.age;
@@ -170,6 +171,14 @@
         parentDirectory = {mode = "u=rwx,g=,o=";};
       }
     ];
+    users.alberand = {
+      directories = [
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
+      ];
+    };
   };
 
   nix = {

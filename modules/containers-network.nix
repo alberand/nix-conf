@@ -71,8 +71,12 @@
         persist = true;
         type = "memfile";
       };
-      rebind-timer = 2000;
-      renew-timer = 1000;
+      # leases will be valid for 5s
+      valid-lifetime = 5;
+      # clients should renew every 6h
+      # renew-timer = 21600;
+      # clients should start looking for other servers after 9h
+      # rebind-timer = 32400;
       subnet4 = [
         {
           id = 1;
@@ -95,7 +99,6 @@
           ];
         }
       ];
-      valid-lifetime = 4000;
     };
   };
 }
