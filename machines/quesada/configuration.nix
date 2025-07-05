@@ -136,6 +136,8 @@
     enable = true;
     openFirewall = true;
     authKeyFile = config.age.secrets.tailscale.path;
+    # TODO Not sure that I need it
+    extraUpFlags = ["--advertise-tags=tag:lonely"];
   };
 
   services = {
