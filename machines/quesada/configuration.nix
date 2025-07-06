@@ -67,14 +67,10 @@
     pkgs.zsh
     pkgs.firefox
     pkgs.networkmanager
-    (pkgs.kodi.withPackages (kodiPkgs:
-      with kodiPkgs; [
-        jellyfin
-      ]))
   ];
 
   networking = {
-    useDHCP = false;
+    useDHCP = true;
     networkmanager.enable = false;
     hostName = "quesada";
     nameservers = [
@@ -147,7 +143,13 @@
 
   users.extraUsers.kodi.isNormalUser = true;
   services.cage.user = "kodi";
-  services.cage.program = "${pkgs.kodi-wayland}/bin/kodi-standalone";
+  services.cage.program = let
+    kodi = pkgs.kodi-wayland.withPackages (kodiPkgs:
+      with kodiPkgs; [
+        jellyfin
+        youtube
+      ]);
+  in "${kodi}/bin/kodi-standalone";
   services.cage.enable = true;
 
   environment.persistence."/persistent" = {
@@ -176,6 +178,14 @@
         {
           directory = ".ssh";
           mode = "0700";
+        }
+      ];
+    };
+    users.kodi = {
+      directories = [
+        {
+          directory = ".kodi";
+          mode = "0755";
         }
       ];
     };
