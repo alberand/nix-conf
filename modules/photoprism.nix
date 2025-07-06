@@ -56,6 +56,10 @@ in {
         gid = uuid;
       };
 
+      environment.systemPackages = with pkgs; [
+        photoprism
+      ];
+
       services.photoprism = {
         enable = true;
         address = "10.10.10.80";
