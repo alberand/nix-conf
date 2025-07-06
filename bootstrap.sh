@@ -29,13 +29,13 @@ cleanup() {
 trap cleanup EXIT
 
 # Create the directory where sshd expects to find the host keys
-install -d -m755 "$temp/etc/ssh"
+install -d -m755 "$temp/persistent/etc/ssh"
 
-cat "./secrets/${host}_ed25519" > "$temp/etc/ssh/ssh_host_ed25519_key"
-cat "./secrets/${host}_ed25519.pub" > "$temp/etc/ssh/ssh_host_ed25519_key.pub"
+cat "./secrets/${host}_ed25519" > "$temp/persistent/etc/ssh/ssh_host_ed25519_key"
+cat "./secrets/${host}_ed25519.pub" > "$temp/persistent/etc/ssh/ssh_host_ed25519_key.pub"
 
 # Set the correct permissions so sshd will accept the key
-chmod 600 "$temp/etc/ssh/ssh_host_ed25519_key"
+chmod 600 "$temp/persistent/etc/ssh/ssh_host_ed25519_key"
 
 sudo SSHPASS=$SSHPASS nix run github:nix-community/nixos-anywhere -- \
 	$@ \
