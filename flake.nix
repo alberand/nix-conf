@@ -17,6 +17,8 @@
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.url = "github:nix-community/impermanence";
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -29,6 +31,7 @@
     agenix,
     disko,
     impermanence,
+    deploy-rs,
   }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -148,5 +151,29 @@
     in {
       quesada = makeVmApp "quesada";
     };
+
+    # Deploy with
+    # nix run github:serokell/deploy-rs .#quesada
+    deploy.nodes.quesada = {
+      hostname = "quesada.container";
+      sshUser = "alberand";
+      interactiveSudo = true;
+      autoRollback = true;
+      remoteBuild = false;
+      activationTimeout = 600;
+      profiles.system = {
+        user = "root";
+        path =
+          deploy-rs.lib.x86_64-linux.activate.nixos
+          self.nixosConfigurations.quesada;
+      };
+    };
+
+    # This is highly advised, and will prevent many possible mistakes
+    checks =
+      builtins.mapAttrs
+      (system: deployLib:
+        deployLib.deployChecks self.deploy)
+      deploy-rs.lib;
   };
 }
