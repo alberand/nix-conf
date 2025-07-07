@@ -29,6 +29,7 @@
       "photos.alberand.com" = certfor { name = "photos"; };
       "jellyseerr.alberand.com" = certfor { name = "jellyseerr"; };
       "files.alberand.com" = certfor { name = "files"; };
+      "health.alberand.com" = certfor { name = "health"; };
     };
 
     certs."whereisiss.com" = {
@@ -102,6 +103,13 @@
         redir /.well-known/carddav /remote.php/dav/ 301
         redir /.well-known/caldav /remote.php/dav/ 301
         tls ${certlocname {name = "files";}}/cert.pem ${certlocname {name = "files";}}/key.pem {
+          protocols tls1.3
+        }
+      '';
+      "health.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.10.10.90:3110
+        tls ${certlocname {name = "health";}}/cert.pem ${certlocname {name = "health";}}/key.pem {
           protocols tls1.3
         }
       '';

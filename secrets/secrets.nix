@@ -20,4 +20,5 @@ in {
   "binary-cache-key.age".publicKeys = [nixxy alberand];
   "nixbuilder_ed25519.age".publicKeys = [aalbersh alberand thinky];
   "quesada-tskey.age".publicKeys = [alberand quesada];
+  "gatus.age".publicKeys = [alberand nixxy];
 }
