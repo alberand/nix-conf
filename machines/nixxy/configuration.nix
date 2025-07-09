@@ -85,6 +85,7 @@
           # 2049 # NFS
         ];
       };
+      extraHosts = ''10.10.10.150 quesada.container'';
     };
 
     services.resolved = {
@@ -297,8 +298,6 @@
       motherboard = "amd";
       server = {port = 6742;};
     };
-
-    networking.extraHosts = ''10.10.10.150 quesada.container'';
 
     nix.settings.trusted-users = ["nixremote"];
 
