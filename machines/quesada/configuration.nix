@@ -25,9 +25,9 @@
       availableKernelModules = [
         "ata_piix"
         "uhci_hcd"
+        "virtio_pci"
         "sr_mod"
-        "amdgpu"
-        "radeon"
+        "virtio_blk"
       ];
       postResumeCommands = lib.mkAfter ''
         mkdir /btrfs_tmp
