@@ -112,6 +112,39 @@
       "interface-name:enp34s0"
     ];
 
+    services.kea.dhcp4 = {
+      enable = true;
+      settings = {
+        interfaces-config = {
+          interfaces = [
+            "enp34s0"
+          ];
+        };
+        subnet4 = [
+          {
+            id = 2;
+            subnet = "10.10.100.0/24";
+            interface = "enp34s0";
+            pools = [
+              {
+                pool = "10.10.100.200 - 10.10.100.210";
+              }
+            ];
+            option-data = [
+              {
+                name = "routers";
+                data = "10.10.100.100";
+              }
+              {
+                name = "domain-name-servers";
+                data = "1.1.1.1,9.9.9.9";
+              }
+            ];
+          }
+        ];
+      };
+    };
+
     # ash drive
     services.udev.extraRules = ''
       SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"

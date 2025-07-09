@@ -72,7 +72,7 @@
         type = "memfile";
       };
       # leases will be valid for 5s
-      valid-lifetime = 5;
+      valid-lifetime = 10800;
       # clients should renew every 6h
       # renew-timer = 21600;
       # clients should start looking for other servers after 9h
