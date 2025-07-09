@@ -62,6 +62,10 @@
     pkgs.zsh
     pkgs.firefox
     pkgs.networkmanager
+    pkgs.libcec
+    pkgs.v4l-utils
+    pkgs.util-linux
+    pkgs.busybox
   ];
 
   networking = {
@@ -103,6 +107,10 @@
         path = "/etc/ssh/ssh_host_ed25519_key";
         type = "ed25519";
       }
+      {
+        path = "/persistent/etc/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
     ];
   };
 
@@ -136,6 +144,8 @@
     extraUpFlags = ["--advertise-tags=tag:lonely"];
   };
 
+  systemd.services.tailscaled-autoconnect.after = ["network-online.service"];
+
   users.extraUsers.kodi.isNormalUser = true;
   services.cage.user = "kodi";
   services.cage.program = let
@@ -143,9 +153,11 @@
       with kodiPkgs; [
         jellyfin
         youtube
+        keymap
       ]);
   in "${kodi}/bin/kodi-standalone";
   services.cage.enable = true;
+  services.cage.extraArguments = ["-s" "-d"];
 
   environment.persistence."/persistent" = {
     enable = true;
