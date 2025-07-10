@@ -27,6 +27,7 @@
     ../../modules/containers-network.nix
     ../../modules/nextcloud.nix
     ../../modules/gatus.nix
+    ../../modules/rustdesk.nix
   ];
 
   config = {
