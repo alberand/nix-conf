@@ -84,6 +84,7 @@
     ];
     firewall = {
       enable = true;
+      allowedTCPPorts = [ 8384 ];
     };
   };
 
@@ -199,7 +200,44 @@
           directory = ".kodi";
           mode = "0755";
         }
+        {
+          directory = "photos";
+          mode = "0755";
+        }
+        {
+          directory = ".config/syncthing";
+          mode = "0755";
+        }
       ];
+    };
+  };
+
+  services.syncthing = {
+    enable = true;
+    dataDir = "/home/kodi/photos";
+    configDir = "/home/kodi/.config/syncthing";
+    # overrides any devices added or deleted through the WebUI
+    overrideDevices = true;
+    # overrides any folders added or deleted through the WebUI
+    overrideFolders = true;
+    # Open firewall ports
+    openDefaultPorts = true;
+    guiAddress = "0.0.0.0:8384";
+    user = "kodi";
+    group = "users";
+    settings = {
+      devices = {
+        "nixxy" = {
+          id = "QZWNQM5-IH7BAU5-INVUVQO-Q4XDK45-SJUFUAJ-XFQMLBJ-2RYAYHS-NEACKA7";
+        };
+      };
+
+      folders = {
+        "quesada-photos" = {
+          path = "/home/kodi/photos";
+          devices = ["nixxy"];
+        };
+      };
     };
   };
 
