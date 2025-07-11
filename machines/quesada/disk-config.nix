@@ -4,7 +4,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/sda";
+        device = "/dev/vdb";
         content = {
           type = "gpt";
           partitions = {
