@@ -18,9 +18,14 @@
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
-        efiSupport = false;
+        efiSupport = true;
+        device = "nodev";
       };
     };
+    kernelParams = [
+      "console=tty1"
+      "console=ttyS0,115200"
+    ];
     initrd = {
       availableKernelModules = [
         "ata_piix"
