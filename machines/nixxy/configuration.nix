@@ -86,7 +86,11 @@
           # 2049 # NFS
         ];
       };
-      extraHosts = ''10.10.10.150 quesada.container'';
+      extraHosts = ''
+        10.10.10.150 quesada.container
+        10.10.10.150 door.container
+        10.10.100.200 quesada.hp-laptop
+      '';
     };
 
     services.resolved = {

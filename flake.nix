@@ -154,18 +154,35 @@
 
     # Deploy with
     # nix run github:serokell/deploy-rs .#quesada
-    deploy.nodes.quesada = {
-      hostname = "quesada.container";
-      sshUser = "alberand";
-      interactiveSudo = true;
-      autoRollback = true;
-      remoteBuild = false;
-      activationTimeout = 600;
-      profiles.system = {
-        user = "root";
-        path =
-          deploy-rs.lib.x86_64-linux.activate.nixos
-          self.nixosConfigurations.quesada;
+    deploy.nodes = {
+      quesada = {
+        hostname = "quesada.container";
+        sshUser = "alberand";
+        interactiveSudo = true;
+        autoRollback = true;
+        remoteBuild = false;
+        activationTimeout = 600;
+        profiles.system = {
+          user = "root";
+          path =
+            deploy-rs.lib.x86_64-linux.activate.nixos
+            self.nixosConfigurations.quesada;
+        };
+      };
+
+      door = {
+        hostname = "door.container";
+        sshUser = "alberand";
+        interactiveSudo = true;
+        autoRollback = true;
+        remoteBuild = false;
+        activationTimeout = 600;
+        profiles.system = {
+          user = "root";
+          path =
+            deploy-rs.lib.x86_64-linux.activate.nixos
+            self.nixosConfigurations.door;
+        };
       };
     };
 

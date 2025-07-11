@@ -1,2 +1,4 @@
 secrets/quesada_ed25519
 secrets/quesada_ed25519.pub
+secrets/door_ed25519
+secrets/door_ed25519.pub

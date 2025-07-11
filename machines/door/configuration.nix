@@ -135,11 +135,76 @@ in {
 
   services.openssh.settings.AllowUsers = ["alberand"];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     pkgs.curl
     pkgs.gitMinimal
     pkgs.zsh
+    pkgs.util-linux
+    pkgs.busybox
   ];
+
+  age.secrets.tailscale.file = ../../secrets/door-tskey.age;
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+    authKeyFile = config.age.secrets.tailscale.path;
+    # TODO Not sure that I need it
+    extraUpFlags = ["--advertise-tags=tag:lonely"];
+  };
+
+  systemd.services.tailscaled-autoconnect.after = ["network-online.service"];
+
+  environment.persistence."/persistent" = {
+    enable = true;
+    hideMounts = true;
+    directories = [
+      "/var/log"
+      "/var/lib/nixos"
+      "/var/lib/systemd/coredump"
+      "/etc/NetworkManager/system-connections"
+    ];
+    files = [
+      # machine-id is used by systemd for the journal, to see previous boots
+      "/etc/machine-id"
+      {
+        file = "/etc/ssh/ssh_host_ed25519_key";
+        parentDirectory = {mode = "u=rwx,g=,o=";};
+      }
+      {
+        file = "/etc/ssh/ssh_host_ed25519_key.pub";
+        parentDirectory = {mode = "u=rwx,g=,o=";};
+      }
+    ];
+    users.alberand = {
+      directories = [
+        {
+          directory = ".ssh";
+          mode = "0700";
+        }
+      ];
+    };
+  };
+
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      trusted-users = ["alberand"];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    optimise.automatic = true;
+  };
+
+  system.autoUpgrade = {
+    enable = false;
+    allowReboot = false;
+  };
 
   system.stateVersion = "25.05";
 }
