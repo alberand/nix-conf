@@ -239,6 +239,9 @@
           "nothing-phone" = {
             id = "74LMGV3-VGBB6J7-CT7LRHY-CANX5WF-UOVYYXG-762UH5M-6HFZKLB-AXNP2QW";
           };
+          "quesada" = {
+            id = "N5L5J3F-PCNTF24-GRHGOCL-3EZ3GY2-YB5FG7U-ZAZUZUF-D65MMXS-5AJKRQU";
+          };
         };
 
         folders = {
@@ -249,6 +252,10 @@
           "Photos" = {
             path = "/media/photos/nothing-phone";
             devices = ["lonmoun" "nothing-phone"];
+          };
+          "quesada-photos" = {
+            path = "/media/photos/quesada";
+            devices = ["quesada"];
           };
         };
       };
