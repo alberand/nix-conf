@@ -11,8 +11,8 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
-    # ((import ./headscale.nix) {inherit domain public_ip;})
-    # ((import ./dns.nix) {inherit domain public_ip;})
+    ((import ./headscale.nix) {inherit domain public_ip;})
+    ((import ./dns.nix) {inherit domain public_ip;})
   ];
 
   fileSystems."/persistent".neededForBoot = true;

@@ -15,7 +15,7 @@ let
   systems = [thinky];
 in {
   "thinky-env.age".publicKeys = [aalbersh thinky];
-  "acme-env.age".publicKeys = [nixxy alberand alberand-rsa];
+  "acme-env.age".publicKeys = [nixxy door alberand alberand-rsa];
   "paperless.age".publicKeys = [nixxy alberand alberand-rsa];
   "nextcloud.age".publicKeys = [nixxy alberand alberand-rsa];
   "binary-cache-key.age".publicKeys = [nixxy alberand];

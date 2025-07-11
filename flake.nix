@@ -81,6 +81,7 @@
           }
         ];
       };
+
       thinky = lib.nixosSystem {
         inherit pkgs;
         inherit system;
@@ -100,15 +101,7 @@
           }
         ];
       };
-      placeholder = lib.nixosSystem {
-        inherit pkgs;
-        inherit system;
 
-        modules = [
-          disko.nixosModules.disko
-          ./machines/placeholder/configuration.nix
-        ];
-      };
       door = lib.nixosSystem {
         inherit pkgs;
         inherit system;
