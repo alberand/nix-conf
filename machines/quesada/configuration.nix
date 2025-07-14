@@ -99,7 +99,6 @@
   '';
 
   services.ntp.enable = true;
-  services.automatic-timezoned.enable = true;
 
   services.openssh = {
     enable = true;
