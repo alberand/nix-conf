@@ -30,6 +30,7 @@
       "jellyseerr.alberand.com" = certfor { name = "jellyseerr"; };
       "files.alberand.com" = certfor { name = "files"; };
       "health.alberand.com" = certfor { name = "health"; };
+      "door.alberand.com" = certfor { name = "door"; };
     };
 
     certs."whereisiss.com" = {
