@@ -26,4 +26,7 @@ in {
   "door-tskey.age".publicKeys = [alberand door];
   "door-cert.age".publicKeys = [alberand door];
   "door-key.age".publicKeys = [alberand door];
+  "door-pocket-id-env.age".publicKeys = [alberand door];
+  "door-pocket-id-cert.age".publicKeys = [alberand door];
+  "door-pocket-id-key.age".publicKeys = [alberand door];
 }
