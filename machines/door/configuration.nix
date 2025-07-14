@@ -5,8 +5,7 @@
   ...
 }: let
   domain = "door.alberand.com";
-  # TODO
-  public_ip = "";
+  public_ip = "77.90.6.241";
 in {
   imports = [
     ./hardware-configuration.nix
@@ -68,7 +67,20 @@ in {
   networking = {
     useDHCP = true;
     networkmanager.enable = false;
-    hostName = "quesada";
+    hostName = "door";
+    interfaces.ens3 = {
+      ipv4.addresses = [
+        {
+          address = public_ip;
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway = {
+      address = "77.90.6.1";
+      interface = "ens3";
+    };
+
     nameservers = [
       "194.242.2.9" # Mullvad
       "1.1.1.1"
@@ -80,9 +92,13 @@ in {
     nat = {
       enable = true;
       internalInterfaces = ["ve-+"];
-      externalInterface = "eth0";
+      externalInterface = "ens3";
     };
     networkmanager.unmanaged = ["interface-name:ve-*"];
+    extraHosts = ''
+      10.10.10.11 headscale.container
+      10.10.10.12 bind.container
+    '';
   };
 
   services.resolved = {
@@ -96,7 +112,6 @@ in {
   '';
 
   services.ntp.enable = true;
-  services.automatic-timezoned.enable = true;
 
   services.openssh = {
     enable = true;
@@ -114,7 +129,6 @@ in {
     ];
   };
 
-  programs.zsh.enable = true;
   users.users.alberand = {
     isNormalUser = true;
     description = "alberand";
@@ -143,15 +157,6 @@ in {
     pkgs.busybox
   ];
 
-  age.secrets.tailscale.file = ../../secrets/door-tskey.age;
-  services.tailscale = {
-    enable = true;
-    openFirewall = true;
-    authKeyFile = config.age.secrets.tailscale.path;
-    # TODO Not sure that I need it
-    extraUpFlags = ["--advertise-tags=tag:lonely"];
-  };
-
   systemd.services.tailscaled-autoconnect.after = ["network-online.service"];
 
   environment.persistence."/persistent" = {
@@ -160,6 +165,7 @@ in {
     directories = [
       "/var/log"
       "/var/lib/nixos"
+      "/var/lib/headscale"
       "/var/lib/systemd/coredump"
       "/etc/NetworkManager/system-connections"
     ];
@@ -183,6 +189,39 @@ in {
         }
       ];
     };
+  };
+
+  programs.zsh = {
+    enable = true;
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+    };
+
+    shellInit = ''
+      # Uncomment the following line to enable command auto-correction.
+      ENABLE_CORRECTION="true"
+
+      # Uncomment the following line to display red dots whilst waiting for completion.
+      COMPLETION_WAITING_DOTS="true"
+
+      # Without this zsh will echo entered command
+      DISABLE_AUTO_TITLE="true"
+
+      # Uncomment the following line if you want to change the command execution time
+      # stamp shown in the history command output.
+      # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+      HIST_STAMPS="dd.mm.yyyy"
+
+      # Locale
+      export LC_ALL=en_US.UTF-8
+      export LANG=en_US.UTF-8
+      export LANGUAGE=en_US.UTF-8
+
+      export TERM=screen-256color
+      export VISUAL="nvim"
+      export EDITOR="nvim"
+    '';
   };
 
   nix = {

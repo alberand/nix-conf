@@ -143,6 +143,7 @@
       };
     in {
       quesada = makeVmApp "quesada";
+      door = makeVmApp "door";
     };
 
     # Deploy with

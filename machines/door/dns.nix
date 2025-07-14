@@ -17,24 +17,24 @@
     }: {
       services.bind = {
         enable = true;
+        listenOn = [
+          "10.10.10.100"
+        ];
         forwarders = [
-          "1.1.1.1"
           "194.242.2.2"
         ];
         extraOptions = ''
           dnssec-validation auto;
-          allow-query-cache { any; };
         '';
         zones = let
           fqdn = "alberand.com";
           mainserver = "${public_ip}";
         in {
           "${fqdn}" = {
-            allowQuery = [
-              "localhost"
-              "100.69.0.0/24"
-            ];
             master = true;
+            allowQuery = [
+              "any"
+            ];
             file = pkgs.writeText "${fqdn}" ''
               $ORIGIN ${fqdn}.
               $TTL    604800
