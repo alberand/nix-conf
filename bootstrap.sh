@@ -37,9 +37,8 @@ cat "./secrets/${host}_ed25519.pub" > "$temp/persistent/etc/ssh/ssh_host_ed25519
 # Set the correct permissions so sshd will accept the key
 chmod 600 "$temp/persistent/etc/ssh/ssh_host_ed25519_key"
 
-sudo SSHPASS=$SSHPASS nix run github:nix-community/nixos-anywhere -- \
+SSHPASS=$SSHPASS nix run github:nix-community/nixos-anywhere -- \
 	$@ \
 	--flake .#$host \
 	--target-host root@$hostip \
-	--env-password \
 	--extra-files "$temp"
