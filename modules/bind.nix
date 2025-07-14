@@ -42,7 +42,13 @@
           ns            IN      A       ${mainserver}
 
           alberand.com. IN      A       185.199.108.153
-          *             IN      A       ${mainserver}
+          home         IN      A       ${mainserver}
+          git           IN      A       ${mainserver}
+          food          IN      A       ${mainserver}
+          photos        IN      A       ${mainserver}
+          jellyseerr    IN      A       ${mainserver}
+          files         IN      A       ${mainserver}
+          health        IN      A       ${mainserver}
           jellyfin      IN      A       89.221.212.102
         '';
       };
