@@ -165,7 +165,7 @@
       };
 
       door = {
-        hostname = "door.container";
+        hostname = "door.vps";
         sshUser = "alberand";
         interactiveSudo = true;
         autoRollback = true;

@@ -89,6 +89,7 @@
       extraHosts = ''
         10.10.10.150 quesada.container
         10.10.10.150 door.container
+        77.90.6.241 door.vps
         10.10.100.200 quesada.hp-laptop
       '';
     };
