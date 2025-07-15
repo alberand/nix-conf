@@ -12,6 +12,7 @@ in {
     ./disk-config.nix
     ((import ./headscale.nix) {inherit domain public_ip;})
     ((import ./dns.nix) {inherit domain public_ip;})
+    ./pocket-id.nix
   ];
 
   fileSystems."/persistent".neededForBoot = true;
@@ -82,23 +83,12 @@ in {
     };
 
     nameservers = [
-      "194.242.2.9" # Mullvad
-      "1.1.1.1"
-      "8.8.8.8"
+      "127.0.0.1"
     ];
     firewall = {
       enable = true;
+      allowedTCPPorts = [80 443];
     };
-    nat = {
-      enable = true;
-      internalInterfaces = ["ve-+"];
-      externalInterface = "ens3";
-    };
-    networkmanager.unmanaged = ["interface-name:ve-*"];
-    extraHosts = ''
-      10.10.10.11 headscale.container
-      10.10.10.12 bind.container
-    '';
   };
 
   services.resolved = {
@@ -166,7 +156,10 @@ in {
       "/var/log"
       "/var/lib/nixos"
       "/var/lib/headscale"
+      "/var/run/headscale"
       "/var/lib/systemd/coredump"
+      "/var/lib/pocket-id"
+      "/etc/headscale"
       "/etc/NetworkManager/system-connections"
     ];
     files = [

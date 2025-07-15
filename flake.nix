@@ -56,6 +56,7 @@
           jackett = unstable.jackett;
           xournalpp = unstable.xournalpp;
           jujutsu = unstable.jujutsu;
+          pocket-id = unstable.pocket-id;
         })
       ];
     };
