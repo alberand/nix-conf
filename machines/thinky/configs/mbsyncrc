@@ -33,9 +33,6 @@ Channel redhat-inbox
 Far :gmail-remote:"[Gmail]/All Mail"
 # What we're connecting on a local side
 Near :redhat-local:inbox
-# Exclude everything under the internal [Gmail] folder, except the interesting
-# folders
-Pattern "[Gmail]/All Mail"
 Sync All
 # Automatically create missing mailboxes, both locally and on the server
 Create Both
@@ -54,9 +51,6 @@ Channel redhat-sent
 Far :gmail-remote:"[Gmail]/Sent Mail"
 # What we're connecting on a local side
 Near :redhat-local:sent
-# Exclude everything under the internal [Gmail] folder, except the interesting
-# folders
-Pattern "[Gmail]/Sent Mail"
 Sync All
 # Automatically create missing mailboxes, both locally and on the server
 Create Both
