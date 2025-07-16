@@ -29,13 +29,13 @@
   services = {
     headscale = {
       enable = true;
-      address = "127.0.0.1";
+      address = "0.0.0.0";
       port = 8080;
       settings = {
         log.level = "debug";
         logtail.enabled = false;
-        server_url = "http://${domain}";
-        metrics_listen_addr = "127.0.0.1:9090";
+        server_url = "https://${domain}";
+        metrics_listen_addr = "0.0.0.0:9090";
         dns = {
           override_local_dns = true;
           magic_dns = true;
@@ -62,10 +62,13 @@
     caddy = {
       enable = true;
 
-      virtualHosts = {
+      virtualHosts = let
+        cert = config.age.secrets.cert.path;
+        key = config.age.secrets.key.path;
+      in {
         "door.alberand.com".extraConfig = ''
           reverse_proxy 127.0.0.1:${toString config.services.headscale.port}
-          tls ${config.age.secrets.cert.path} ${config.age.secrets.key.path} {
+          tls ${cert} ${key} {
             protocols tls1.3
           }
         '';

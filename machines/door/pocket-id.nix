@@ -33,10 +33,11 @@
       virtualHosts = let
         cert = config.age.secrets.pocket-id-cert.path;
         key = config.age.secrets.pocket-id-key.path;
+        port = builtins.toString config.services.pocket-id.settings.PORT;
       in {
         "login.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 127.0.0.1:${builtins.toString config.services.pocket-id.settings.PORT}
+          reverse_proxy 127.0.0.1:${port}
           tls ${cert} ${key} {
             protocols tls1.3
           }
