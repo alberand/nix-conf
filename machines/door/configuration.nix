@@ -141,7 +141,26 @@ in {
     ];
   };
 
-  services.openssh.settings.AllowUsers = ["alberand"];
+  users.users.deploy = {
+    isNormalUser = true;
+    description = "System deploy user";
+    uid = 2000;
+    extraGroups = [
+      "wheel"
+      "sudo"
+    ];
+    openssh.authorizedKeys.keys = [
+      # alberand key
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICsaaX1d/7zZHiZIsPFhtvmEChTB0p7sKECk7p6UcUqr"
+    ];
+  };
+
+  services.openssh.settings.AllowUsers = ["alberand" "deploy"];
+
+  # Enable 'sudo' with SSH key
+  security.pam.sshAgentAuth = {
+    enable = true;
+  };
 
   environment.systemPackages = [
     pkgs.curl
