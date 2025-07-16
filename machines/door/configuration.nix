@@ -248,7 +248,7 @@ in {
   nix = {
     settings = {
       auto-optimise-store = true;
-      trusted-users = ["alberand"];
+      trusted-users = ["alberand" "deploy"];
     };
     gc = {
       automatic = true;
