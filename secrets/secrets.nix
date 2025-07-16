@@ -23,7 +23,7 @@ in {
   "quesada-tskey.age".publicKeys = [alberand quesada];
   "gatus.age".publicKeys = [alberand nixxy];
   "davfs.age".publicKeys = [alberand nixxy];
-  "door-tskey.age".publicKeys = [alberand door];
+  "door-hskey.age".publicKeys = [alberand door];
   "door-cert.age".publicKeys = [alberand door];
   "door-key.age".publicKeys = [alberand door];
   "door-pocket-id-env.age".publicKeys = [alberand door];
