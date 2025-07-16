@@ -177,8 +177,9 @@
 
       door = {
         hostname = "door.vps";
-        sshUser = "alberand";
-        interactiveSudo = true;
+        sshUser = "deploy";
+        sshOpts = ["-i" "/home/alberand/.ssh/id_ed25519.pub"];
+        interactiveSudo = false;
         autoRollback = true;
         remoteBuild = false;
         activationTimeout = 600;
