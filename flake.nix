@@ -55,6 +55,7 @@
           jackett = unstable.jackett;
           xournalpp = unstable.xournalpp;
           jujutsu = unstable.jujutsu;
+          # Want version 1.6.2
           pocket-id = unstable.pocket-id;
         })
       ];
@@ -113,6 +114,16 @@
           ./machines/door/configuration.nix
           {
             environment.systemPackages = [agenix.packages.${system}.default];
+
+            # Want version 1.6.2
+            disabledModules = [
+              "services/security/pocket-id.nix"
+            ];
+
+            # then we add an import of the same module from nixpkgs-unstable
+            imports = [
+              "${unstablepkgs}/nixos/modules/services/security/pocket-id.nix"
+            ];
           }
         ];
       };

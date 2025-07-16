@@ -30,15 +30,12 @@
     caddy = {
       enable = true;
 
-      logFormat = pkgs.lib.mkForce "level DEBUG";
-
       virtualHosts = let
         cert = config.age.secrets.pocket-id-cert.path;
         key = config.age.secrets.pocket-id-key.path;
       in {
         "login.alberand.com".extraConfig = ''
           encode gzip
-          @blocked not remote_ip 217.30.74.39
           reverse_proxy 127.0.0.1:${builtins.toString config.services.pocket-id.settings.PORT}
           tls ${cert} ${key} {
             protocols tls1.3
