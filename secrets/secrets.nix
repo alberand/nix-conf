@@ -30,4 +30,5 @@ in {
   "door-pocket-id-cert.age".publicKeys = [alberand door];
   "door-pocket-id-key.age".publicKeys = [alberand door];
   "door-headscale-pocket-id.age".publicKeys = [alberand door];
+  "door-mullvad-key.age".publicKeys = [alberand door];
 }
