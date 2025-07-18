@@ -88,12 +88,47 @@ in {
     firewall = {
       enable = true;
       allowedTCPPorts = [80 443];
+      trustedInterfaces = ["headscale"];
     };
   };
 
   services.resolved = {
     enable = true;
     dnssec = "false";
+  };
+
+  age.secrets.hskey = {
+    file = ../../secrets/door-hskey.age;
+    mode = "400";
+    owner = "root";
+    group = "root";
+  };
+
+  # Self connect
+  services.tailscale = {
+    enable = true;
+    openFirewall = true;
+    interfaceName = "headscale";
+    authKeyFile = config.age.secrets.hskey.path;
+    extraUpFlags = [
+      "--login-server=https://${domain}"
+      "--hostname=door"
+      "--reset"
+    ];
+  };
+
+  # Start after headscale
+  systemd.services = {
+    tailscaled-autoconnect.after = [
+      "network-online.service"
+      "headscale.service"
+      "bind.service"
+    ];
+    tailscaled.after = [
+      "network-online.service"
+      "headscale.service"
+      "bind.service"
+    ];
   };
 
   services.journald.extraConfig = ''
@@ -169,8 +204,6 @@ in {
     pkgs.util-linux
     pkgs.busybox
   ];
-
-  systemd.services.tailscaled-autoconnect.after = ["network-online.service"];
 
   environment.persistence."/persistent" = {
     enable = true;
