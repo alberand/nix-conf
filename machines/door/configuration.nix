@@ -104,6 +104,13 @@ in {
     group = "root";
   };
 
+  # IP forwarding from one interface to another, this is necessary to act as
+  # Exit Node
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+    "net.ipv6.conf.all.forwarding" = 1;
+  };
+
   # Self connect
   services.tailscale = {
     enable = true;
@@ -113,6 +120,7 @@ in {
     extraUpFlags = [
       "--login-server=https://${domain}"
       "--hostname=door"
+      "--advertise-exit-node"
       "--reset"
     ];
   };
