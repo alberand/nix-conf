@@ -55,6 +55,9 @@
             "alberand"
             "andrey.albershteyn@gmail.com"
           ];
+          pkce = {
+            enabled = true;
+          };
         };
       };
     };

@@ -119,6 +119,22 @@
         "type": "github"
       }
     },
+    "headscale-pkce": {
+      "locked": {
+        "lastModified": 1753099944,
+        "narHash": "sha256-TIsFP7alnR0rQdzf+F4aoIhgIG+DmnCF9tiWbM0fE2I=",
+        "owner": "alberand",
+        "repo": "nixpkgs",
+        "rev": "34150d208eead70b0ee95f44b818c9af47cf19e3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "alberand",
+        "ref": "headscale-pkce",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -250,6 +266,7 @@
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
         "disko": "disko",
+        "headscale-pkce": "headscale-pkce",
         "home-manager": "home-manager_2",
         "impermanence": "impermanence",
         "nixos-hardware": "nixos-hardware",

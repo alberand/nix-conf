@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     unstablepkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    headscale-pkce.url = "github:alberand/nixpkgs/headscale-pkce";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +33,7 @@
     disko,
     impermanence,
     deploy-rs,
+    headscale-pkce
   }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -115,14 +117,17 @@
           {
             environment.systemPackages = [agenix.packages.${system}.default];
 
-            # Want version 1.6.2
             disabledModules = [
+              # Want version 1.6.2
               "services/security/pocket-id.nix"
+              # PKCE config options
+              # https://github.com/NixOS/nixpkgs/pull/427132
+              "services/networking/headscale.nix"
             ];
 
-            # then we add an import of the same module from nixpkgs-unstable
             imports = [
               "${unstablepkgs}/nixos/modules/services/security/pocket-id.nix"
+              "${headscale-pkce}/nixos/modules/services/networking/headscale.nix"
             ];
           }
         ];
