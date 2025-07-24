@@ -34,18 +34,22 @@ in {
     # Ensure movies/shows/in-progress storage exists
     "d /media/movies 0755 media media - -"
     "d /media/shows 0755 media media - -"
+    "d /media/music 0755 media media - -"
     "d /media/in-progress 0755 media media - -"
     # Set a mask to allow main system user to have full permission
     "A /media/movies - - - - m::rwx"
     "A /media/shows - - - - m::rwx"
+    "A /media/music - - - - m::rwx"
     "A /media/in-progress - - - - m::rwx"
     # Ensure "media" user/group has permissions to read/write media storage
     "A+ /media/movies - - - - u:media:rwx,g:media:rwx"
     "A+ /media/shows - - - - u:media:rwx,g:media:rwx"
+    "A+ /media/music - - - - u:media:rwx,g:media:rwx"
     "A+ /media/in-progress - - - - u:media:rwx,g:media:rwx"
     # Grant main system user permission to read/write media storage
     "A+ /media/movies - - - - u:${config.user}:rwx"
     "A+ /media/shows - - - - u:${config.user}:rwx"
+    "A+ /media/music - - - - u:${config.user}:rwx"
     "A+ /media/in-progress - - - - u:${config.user}:rwx"
   ];
 
@@ -126,7 +130,7 @@ in {
       users.groups.media = {
         name = "media";
         gid = uuid;
-        members = ["jellyfin" "sonarr" "radarr" "jackett"];
+        members = ["jellyfin" "sonarr" "radarr" "jackett" "lidarr"];
       };
 
       environment.systemPackages = with pkgs; [
@@ -166,6 +170,14 @@ in {
         openFirewall = true;
         user = "media";
         group = "media";
+      };
+
+      services.lidarr = {
+        enable = true;
+        openFirewall = true;
+        user = "media";
+        group = "media";
+        settings.server.port = 8686;
       };
 
       system.stateVersion = "25.05";
