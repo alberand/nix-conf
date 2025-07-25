@@ -28,6 +28,7 @@
     ../../modules/nextcloud.nix
     ../../modules/gatus.nix
     ../../modules/rustdesk.nix
+    ../../modules/projects-test.nix
   ];
 
   config = {
@@ -75,8 +76,6 @@
           # 111 # NFS
           # 2049 # NFS
           5000 # binary cache
-          6969 # testing my pet-projects
-          4242 # nemambyt test container
         ];
         allowedUDPPorts = [
           53 # dns

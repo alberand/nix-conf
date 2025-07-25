@@ -95,10 +95,6 @@
           protocols tls1.3
         }
       '';
-      "test.nemambyt.com".extraConfig = ''
-        encode gzip
-        reverse_proxy 100.69.0.100:4242
-      '';
       "files.alberand.com".extraConfig = ''
         encode gzip
         reverse_proxy 10.10.10.60
