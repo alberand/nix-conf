@@ -1,4 +1,20 @@
-{...}: {
+{...}: let 
+  uuid = 1911;
+in {
+  users.users.mealie = {
+    isNormalUser = true;
+    description = "mealie user";
+    uid = uuid;
+    group = "mealie";
+    # home = "/media/var/lib/forgejo";
+  };
+  users.groups.mealie.gid = uuid;
+
+  systemd.tmpfiles.rules = [
+    # Ensure forgejo configuration dir exists
+    "d /media/var/lib/mealie 0755 mealie mealie - -"
+  ];
+
   containers.food = {
     autoStart = true;
     ephemeral = true;
@@ -7,8 +23,8 @@
     hostAddress = "10.10.10.100";
     localAddress = "10.10.10.70/24";
     bindMounts = {
-      "/var/lib/tandoor-recipes" = {
-        hostPath = "/media/var/lib/tandoor-recipes";
+      "/var/lib" = {
+        hostPath = "/media/var/lib";
         isReadOnly = false;
       };
     };
@@ -18,15 +34,17 @@
       lib,
       ...
     }: {
-      services.tandoor-recipes = {
-        enable = true;
-        address = "10.10.10.70";
-        port = 8114;
-        extraConfig = {
-          ALLOWED_HOSTS = "food.alberand.com";
-          DB_ENGINE = "django.db.backends.sqlite3";
-          GUNICORN_MEDIA = "1";
+      services.mealie = {
+        settings = {
+          PUID = uuid;
+          PGID = uuid;
+          ALLOW_SIGNUP = "false";
+          TZ = "UTC+2";
+          DB_ENGINE = "sqlite";
         };
+        port = 9000;
+        listenAddress = "0.0.0.0";
+        enable = true;
       };
 
       system.stateVersion = "25.05";
@@ -35,7 +53,7 @@
         firewall = {
           enable = true;
           allowedTCPPorts = [
-            8114
+            config.services.mealie.port
           ];
         };
         # Use systemd-resolved inside the container

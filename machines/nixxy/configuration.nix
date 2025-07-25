@@ -16,7 +16,7 @@
     ../../modules/minecraft.nix
     ../../modules/borgbackup.nix
     ../../modules/photoprism.nix
-    ../../modules/tandoor.nix
+    ../../modules/mealie.nix
     ../../modules/tailscale.nix
     ../../modules/caddy.nix
     ../../modules/bind.nix
