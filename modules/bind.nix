@@ -50,6 +50,7 @@
           files         IN      A       ${mainserver}
           health        IN      A       ${mainserver}
           login         IN      A       77.90.6.241
+          door          IN      A       77.90.6.241
           jellyfin      IN      A       89.221.212.102
         '';
       };
