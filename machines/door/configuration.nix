@@ -10,6 +10,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
+    ((import ./vpn.nix) {inherit domain public_ip;})
     ((import ./headscale.nix) {inherit domain public_ip;})
     ((import ./dns.nix) {inherit domain public_ip;})
     ./pocket-id.nix
@@ -66,7 +67,7 @@ in {
   };
 
   networking = {
-    useDHCP = true;
+    useDHCP = false;
     networkmanager.enable = false;
     hostName = "door";
     interfaces.ens3 = {
@@ -88,6 +89,7 @@ in {
     firewall = {
       enable = true;
       allowedTCPPorts = [80 443];
+      checkReversePath = "loose";
       trustedInterfaces = ["headscale"];
     };
   };
@@ -211,6 +213,7 @@ in {
     pkgs.zsh
     pkgs.util-linux
     pkgs.busybox
+    pkgs.tcpdump
   ];
 
   environment.persistence."/persistent" = {

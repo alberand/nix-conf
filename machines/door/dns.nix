@@ -13,7 +13,8 @@
       "100.69.0.0/24"
     ];
     forwarders = [
-      "194.242.2.2"
+      "100.64.0.55"
+      "194.242.2.4"
     ];
     extraOptions = ''
       dnssec-validation auto;
