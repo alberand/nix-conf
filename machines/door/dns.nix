@@ -1,11 +1,25 @@
 {
   domain,
   public_ip,
-}: {config, pkgs, ...}: {
+}: {
+  config,
+  pkgs,
+  ...
+}: {
+  networking.firewall = {
+    allowedUDPPorts = [
+      53
+    ];
+    allowedTCPPorts = [
+      53
+    ];
+  };
+
   services.bind = {
     enable = true;
     listenOn = [
       "127.0.0.1"
+      "100.69.0.4"
     ];
     cacheNetworks = [
       "127.0.0.0/24"
@@ -48,4 +62,6 @@
       };
     };
   };
+
+  systemd.services.bind.after = ["wg-quick-vpn.service"];
 }

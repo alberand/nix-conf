@@ -45,7 +45,7 @@
   # Enable WireGuard
   networking.wg-quick.interfaces = let
     server_ip = "185.65.135.72";
-    dns = "100.64.0.55";
+    dns = "100.69.0.4";
   in {
     vpn = {
       autostart = true;
