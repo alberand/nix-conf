@@ -1,5 +1,6 @@
 {...}: let 
   uuid = 1911;
+  port = 9000;
 in {
   users.users.mealie = {
     isNormalUser = true;
@@ -9,6 +10,26 @@ in {
     # home = "/media/var/lib/forgejo";
   };
   users.groups.mealie.gid = uuid;
+
+  networking = {
+    firewall.allowedTCPPorts = [
+      port
+    ];
+    nftables = {
+      enable = true;
+
+      tables.services = {
+        enable = true;
+        family = "ip";
+        content = ''
+          chain PREROUTING {
+            type nat hook prerouting priority dstnat; policy accept;
+            iifname "tailscale0" tcp dport ${builtins.toString port} dnat to 10.10.10.70:${builtins.toString port}
+          }
+        '';
+      };
+    };
+  };
 
   systemd.tmpfiles.rules = [
     # Ensure forgejo configuration dir exists
@@ -42,7 +63,7 @@ in {
           TZ = "UTC+2";
           DB_ENGINE = "sqlite";
         };
-        port = 9000;
+        inherit port;
         listenAddress = "0.0.0.0";
         enable = true;
       };

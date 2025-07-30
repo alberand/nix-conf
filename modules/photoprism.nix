@@ -1,5 +1,6 @@
 {config, ...}: let
   uuid = 3100;
+  port = 8113;
 in {
   users.users.photoprism = {
     isNormalUser = true;
@@ -9,6 +10,26 @@ in {
 
   users.groups.photoprism = {
     gid = uuid;
+  };
+
+  networking = {
+    firewall.allowedTCPPorts = [
+      port
+    ];
+    nftables = {
+      enable = true;
+
+      tables.services = {
+        enable = true;
+        family = "ip";
+        content = ''
+          chain PREROUTING {
+            type nat hook prerouting priority dstnat; policy accept;
+            iifname "tailscale0" tcp dport ${builtins.toString port} dnat to 10.10.10.80:${builtins.toString port}
+          }
+        '';
+      };
+    };
   };
 
   systemd.tmpfiles.rules = [
@@ -63,7 +84,7 @@ in {
       services.photoprism = {
         enable = true;
         address = "10.10.10.80";
-        port = 8113;
+        inherit port;
         originalsPath = "/media/photos";
         settings = {
           PHOTOPRISM_HTTP_HOSTNAME = "photos.alberand.com";
@@ -119,7 +140,7 @@ in {
         firewall = {
           enable = true;
           allowedTCPPorts = [
-            8113
+            port
           ];
         };
         # Use systemd-resolved inside the container

@@ -1,26 +1,42 @@
 {config, ...}: let
   cfg = config.services.forgejo;
   uuid = 3200;
+  port = 3000;
 in {
   networking = {
     # SSH port on container
     firewall.allowedTCPPorts = [
       2222
+      port
     ];
     nftables = {
       enable = true;
-      ruleset = ''
-        table ip nat {
-          chain PREROUTING {
-            type nat hook prerouting priority dstnat; policy accept;
-            iifname "tailscale0" tcp dport 2222 dnat to 10.10.10.40:2222
-          }
-          chain POSTROUTING {
-            type nat hook postrouting priority srcnat; policy accept;
-            ip daddr 10.10.10.40 tcp dport 2222 masquerade
-          }
-        }
-      '';
+      tables = {
+        services = {
+          enable = true;
+          family = "ip";
+          content = ''
+            chain PREROUTING {
+              type nat hook prerouting priority dstnat; policy accept;
+              iifname "tailscale0" tcp dport ${builtins.toString port} dnat to 10.10.10.40:${builtins.toString port}
+            }
+          '';
+        };
+        forgejo = {
+          enable = true;
+          family = "ip";
+          content = ''
+            chain PREROUTING {
+              type nat hook prerouting priority dstnat; policy accept;
+              iifname "tailscale0" tcp dport 2222 dnat to 10.10.10.40:2222
+            }
+            chain POSTROUTING {
+              type nat hook postrouting priority srcnat; policy accept;
+              ip daddr 10.10.10.40 tcp dport 2222 masquerade
+            }
+          '';
+        };
+      };
     };
   };
 
@@ -150,7 +166,7 @@ in {
             # You need to specify this to remove the port from URLs in the web UI.
             ROOT_URL = "https://git.alberand.com/";
             HTTP_ADDR = "10.10.10.40";
-            HTTP_PORT = 3000;
+            HTTP_PORT = port;
 
             DISABLE_SSH = false;
             START_SSH_SERVER = true;
@@ -182,7 +198,7 @@ in {
         firewall = {
           enable = true;
           allowedTCPPorts = [
-            3000
+            port
             2222
           ];
         };

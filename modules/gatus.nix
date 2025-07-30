@@ -1,5 +1,6 @@
 {config, ...}: let
   uuid = 3110;
+  port = 3110;
 in {
   users.users.gatus = {
     isNormalUser = true;
@@ -14,6 +15,26 @@ in {
   age.secrets.gatus = {
     file = ../secrets/gatus.age;
     owner = "gatus";
+  };
+
+  networking = {
+    firewall.allowedTCPPorts = [
+      port
+    ];
+    nftables = {
+      enable = true;
+
+      tables.services = {
+        enable = true;
+        family = "ip";
+        content = ''
+          chain PREROUTING {
+            type nat hook prerouting priority dstnat; policy accept;
+            iifname "tailscale0" tcp dport ${builtins.toString port} dnat to 10.10.10.90:${builtins.toString port}
+          }
+        '';
+      };
+    };
   };
 
   containers.gatus = {
@@ -45,7 +66,7 @@ in {
         openFirewall = true;
         environmentFile = "/run/agenix/gatus";
         settings = {
-          web.port = 3110;
+          web.port = port;
           storage = {
             type = "sqlite";
             path = "/var/lib/gatus/data.db";
@@ -286,7 +307,7 @@ in {
         firewall = {
           enable = true;
           allowedTCPPorts = [
-            3110
+            port
           ];
         };
         useHostResolvConf = lib.mkForce false;
