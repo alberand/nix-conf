@@ -226,6 +226,7 @@ in {
       "/var/run/headscale"
       "/var/lib/systemd/coredump"
       "/var/lib/pocket-id"
+      "/var/lib/www/blog"
       "/etc/headscale"
       "/etc/NetworkManager/system-connections"
     ];
