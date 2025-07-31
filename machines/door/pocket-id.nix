@@ -31,11 +31,11 @@
       enable = true;
 
       virtualHosts = let
-        cert = config.age.secrets.pocket-id-cert.path;
-        key = config.age.secrets.pocket-id-key.path;
+        cert = "/var/lib/acme/alberand.com/cert.pem";
+        key = "/var/lib/acme/alberand.com/key.pem";
         port = builtins.toString config.services.pocket-id.settings.PORT;
       in {
-        "login.alberand.com".extraConfig = ''
+        "id.alberand.com".extraConfig = ''
           encode gzip
           reverse_proxy 127.0.0.1:${port}
           tls ${cert} ${key} {
@@ -48,7 +48,7 @@
     pocket-id = {
       enable = true;
       settings = {
-        APP_URL = "https://login.alberand.com";
+        APP_URL = "https://id.alberand.com";
         TRUST_PROXY = true;
         PORT = 3000;
       };

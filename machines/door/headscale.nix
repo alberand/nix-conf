@@ -48,7 +48,7 @@
 
         oidc = {
           scope = ["openid" "profile" "email" "groups"];
-          issuer = "https://login.alberand.com";
+          issuer = "https://id.alberand.com";
           client_secret_path = config.age.secrets.headscale-pocket-id.path;
           client_id = "24c49914-ceb8-47ff-ac23-178632f6d399";
           allowed_users = [
@@ -66,8 +66,8 @@
       enable = true;
 
       virtualHosts = let
-        cert = config.age.secrets.cert.path;
-        key = config.age.secrets.key.path;
+        cert = "/var/lib/acme/alberand.com/cert.pem";
+        key = "/var/lib/acme/alberand.com/key.pem";
       in {
         "door.alberand.com".extraConfig = ''
           reverse_proxy 127.0.0.1:${toString config.services.headscale.port}
