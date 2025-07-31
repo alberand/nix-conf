@@ -34,7 +34,7 @@
       in {
         "alberand.com".extraConfig = ''
           encode gzip
-          root * /var/lib/www/blog
+          root * /var/www/blog
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -112,10 +112,10 @@
 
   systemd.tmpfiles.rules = [
     # Ensure alberand.com dir exists
-    "d /var/lib/www/blog 0755 caddy caddy - -"
+    "d /var/www 0755 caddy caddy - -"
     # Set a mask to allow main system user to have full permission
-    "A /var/lib/www/blog - - - - m::rwx"
+    "A /var/www - - - - m::rwx"
     # Grant main system user permission to read/write git storage
-    "A+ /var/lib/www/blog - - - - u:alberand:rwx"
+    "A+ /var/www - - - - u:alberand:rwx"
   ];
 }
