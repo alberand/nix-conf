@@ -106,6 +106,14 @@
             protocols tls1.3
           }
         '';
+
+        "pdf.alberand.com".extraConfig = ''
+          encode gzip
+          reverse_proxy 100.69.0.100:8080
+          tls ${cert} ${key} {
+            protocols tls1.3
+          }
+        '';
       };
     };
   };

@@ -29,6 +29,7 @@
     ../../modules/gatus.nix
     ../../modules/rustdesk.nix
     ../../modules/projects-test.nix
+    ../../modules/stirling-pdf.nix
   ];
 
   config = {
