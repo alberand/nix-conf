@@ -57,11 +57,10 @@
 
           alberand.com. IN      A       ${mainserver}
           *             IN      A       ${mainserver}
-          jellyfin      IN      A       89.221.212.102
         '';
       };
     };
   };
 
-  systemd.services.bind.after = ["wg-quick-vpn.service"];
+  systemd.services.bind.requires = ["wg-quick-vpn.service"];
 }
