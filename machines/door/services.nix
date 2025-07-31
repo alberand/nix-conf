@@ -36,6 +36,7 @@
         "alberand.com".extraConfig = ''
           encode gzip
           root * /var/www/blog
+          file_server
           tls ${cert} ${key} {
             protocols tls1.3
           }
