@@ -1,8 +1,4 @@
-{
-  config,
-  callPackage,
-  ...
-}: {
+{callPackage}: {config, ...}: {
   age.secrets.acme-env.file = ../../secrets/acme-env.age;
 
   security.acme = {
@@ -15,7 +11,9 @@
       "alberand.com" = {
         group = config.services.caddy.group;
 
-        domain = "*.alberand.com";
+        domain = "alberand.com";
+        extraDomainNames = [ "*.alberand.com" ];
+
         dnsProvider = "wedos";
         dnsResolver = "ns.wedos.net:53";
         dnsPropagationCheck = true;
@@ -30,8 +28,8 @@
       enable = true;
 
       virtualHosts = let
-        cert = config.age.secrets.acme-cert.path;
-        key = config.age.secrets.acme-key.path;
+        cert = "/var/lib/acme/alberand.com/cert.pem";
+        key = "/var/lib/acme/alberand.com/key.pem";
         dashboard = callPackage (import ../../configs/dashboard/derivation.nix) {};
       in {
         "alberand.com".extraConfig = ''

@@ -14,6 +14,7 @@ in {
     ((import ./headscale.nix) {inherit domain public_ip;})
     ((import ./dns.nix) {inherit domain public_ip;})
     ./pocket-id.nix
+    ((import ./services.nix) {inherit (pkgs) callPackage;})
   ];
 
   fileSystems."/persistent".neededForBoot = true;
