@@ -101,7 +101,7 @@ in {
   };
 
   age.secrets.hskey = {
-    file = ../../secrets/door-hskey.age;
+    file = ../../secrets/hskey.age;
     mode = "400";
     owner = "root";
     group = "root";
