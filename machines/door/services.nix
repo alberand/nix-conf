@@ -5,7 +5,7 @@
     acceptTerms = true;
     defaults.email = "andrey.albershteyn@gmail.com";
     defaults.enableDebugLogs = true;
-    defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
+    # defaults.server = "https://acme-staging-v02.api.letsencrypt.org/directory";
 
     certs = {
       "alberand.com" = {
@@ -31,6 +31,7 @@
         cert = "/var/lib/acme/alberand.com/cert.pem";
         key = "/var/lib/acme/alberand.com/key.pem";
         dashboard = callPackage (import ../../configs/dashboard/derivation.nix) {};
+        server_ip = "100.69.0.2";
       in {
         "alberand.com".extraConfig = ''
           encode gzip
@@ -42,7 +43,7 @@
 
         "jellyfin.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:55686
+          reverse_proxy ${server_ip}:55686
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -59,7 +60,7 @@
 
         "photos.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:8113
+          reverse_proxy ${server_ip}:8113
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -67,7 +68,7 @@
 
         "food.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:9000
+          reverse_proxy ${server_ip}:9000
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -75,7 +76,7 @@
 
         "git.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:3000
+          reverse_proxy ${server_ip}:3000
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -83,7 +84,7 @@
 
         "jellyseerr.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:5055
+          reverse_proxy ${server_ip}:5055
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -91,7 +92,7 @@
 
         "files.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:7000
+          reverse_proxy ${server_ip}:7000
           redir /.well-known/carddav /remote.php/dav/ 301
           redir /.well-known/caldav /remote.php/dav/ 301
           tls ${cert} ${key} {
@@ -101,7 +102,7 @@
 
         "health.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:3110
+          reverse_proxy ${server_ip}:3110
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -109,7 +110,7 @@
 
         "pdf.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy 100.69.0.100:8080
+          reverse_proxy ${server_ip}:8080
           tls ${cert} ${key} {
             protocols tls1.3
           }
