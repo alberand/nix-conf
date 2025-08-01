@@ -32,6 +32,7 @@
         key = "/var/lib/acme/alberand.com/key.pem";
         dashboard = callPackage (import ../../configs/dashboard/derivation.nix) {};
         server_ip = "100.69.0.2";
+        vps_ip = "100.69.0.4";
       in {
         "alberand.com".extraConfig = ''
           encode gzip
@@ -51,6 +52,7 @@
         '';
 
         "home.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           root * ${dashboard}/dashboard/
           file_server
@@ -60,6 +62,7 @@
         '';
 
         "photos.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:8113
           tls ${cert} ${key} {
@@ -68,6 +71,7 @@
         '';
 
         "food.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:9000
           tls ${cert} ${key} {
@@ -76,6 +80,7 @@
         '';
 
         "git.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:3000
           tls ${cert} ${key} {
@@ -84,6 +89,7 @@
         '';
 
         "jellyseerr.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:5055
           tls ${cert} ${key} {
@@ -92,6 +98,7 @@
         '';
 
         "files.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:7000
           redir /.well-known/carddav /remote.php/dav/ 301
@@ -102,6 +109,7 @@
         '';
 
         "health.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:3110
           tls ${cert} ${key} {
@@ -110,6 +118,7 @@
         '';
 
         "pdf.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:8080
           tls ${cert} ${key} {
@@ -118,6 +127,7 @@
         '';
 
         "status.alberand.com".extraConfig = ''
+          bind ${vps_ip}
           encode gzip
           reverse_proxy ${server_ip}:3110
           tls ${cert} ${key} {
