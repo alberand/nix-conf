@@ -116,6 +116,14 @@
             protocols tls1.3
           }
         '';
+
+        "status.alberand.com".extraConfig = ''
+          encode gzip
+          reverse_proxy ${server_ip}:3110
+          tls ${cert} ${key} {
+            protocols tls1.3
+          }
+        '';
       };
     };
   };
