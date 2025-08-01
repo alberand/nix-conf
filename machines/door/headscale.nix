@@ -54,6 +54,10 @@
           allowed_users = [
             "alberand"
             "andrey.albershteyn@gmail.com"
+            "julia"
+            "iuliia.albershtein@gmail.com"
+            "misha"
+            "warindeon@gmail.com"
           ];
           pkce = {
             enabled = true;
