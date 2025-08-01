@@ -7,12 +7,15 @@
   ...
 }: {
   networking.firewall = {
-    allowedUDPPorts = [
-      53
-    ];
-    allowedTCPPorts = [
-      53
-    ];
+    enable = true;
+    interfaces.headscale = {
+      allowedTCPPorts = [
+        53
+      ];
+      allowedUDPPorts = [
+        53
+      ];
+    };
   };
 
   services.bind = {

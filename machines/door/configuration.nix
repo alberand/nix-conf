@@ -89,7 +89,6 @@ in {
     ];
     firewall = {
       enable = true;
-      allowedTCPPorts = [80 443];
       checkReversePath = "loose";
       trustedInterfaces = ["headscale"];
     };

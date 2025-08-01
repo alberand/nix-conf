@@ -1,4 +1,8 @@
-{config, pkgs,...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   age.secrets.pocket-id-env = {
     file = ../../secrets/door-pocket-id-env.age;
     mode = "440";
@@ -25,6 +29,15 @@
   environment.systemPackages = [
     pkgs.nss
   ];
+
+  networking.firewall = {
+    enable = true;
+    interfaces.ens3.allowedTCPPorts = [
+      # id.alberand.com
+      80
+      443
+    ];
+  };
 
   services = {
     caddy = {
@@ -54,5 +67,5 @@
       };
       environmentFile = config.age.secrets.pocket-id-env.path;
     };
-};
+  };
 }

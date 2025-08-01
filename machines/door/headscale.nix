@@ -26,6 +26,15 @@
     group = "headscale";
   };
 
+  networking.firewall = {
+    enable = true;
+    interfaces.ens3.allowedTCPPorts = [
+      # id.alberand.com
+      80
+      443
+    ];
+  };
+
   services = {
     headscale = {
       enable = true;

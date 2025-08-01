@@ -1,6 +1,16 @@
 {callPackage}: {config, ...}: {
   age.secrets.acme-env.file = ../../secrets/acme-env.age;
 
+  networking.firewall = {
+    enable = true;
+    interfaces.headscale = {
+      allowedTCPPorts = [
+        80
+        443
+      ];
+    };
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "andrey.albershteyn@gmail.com";
