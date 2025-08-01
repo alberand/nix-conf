@@ -18,8 +18,8 @@
     ../../modules/photoprism.nix
     ../../modules/mealie.nix
     ../../modules/tailscale.nix
-    ../../modules/caddy.nix
-    ../../modules/bind.nix
+    #../../modules/caddy.nix
+    #../../modules/bind.nix
     ../../modules/forgejo.nix
     ../../modules/paperless.nix
     ../../modules/binary-cache.nix
