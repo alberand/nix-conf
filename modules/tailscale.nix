@@ -38,7 +38,6 @@
   };
 
   networking = {
-    nameservers = ["100.100.100.100"];
     firewall = {
       checkReversePath = "loose";
       trustedInterfaces = ["tailscale0"];
