@@ -66,24 +66,20 @@
     networking = {
       hostName = "nixxy";
       # Pick only one of the below networking options.
+      useDHCP = false;
       networkmanager.enable = true;
+      nameservers = [
+        "100.69.0.4"
+      ];
       firewall.enable = true;
       firewall = {
         # Syncthing opens ports by itself
         allowedTCPPorts = [
-          53 # dns
           443 # https
-          1194 # OpenVPN
-          # 111 # NFS
-          # 2049 # NFS
           5000 # binary cache
         ];
         allowedUDPPorts = [
-          53 # dns
           443 # https
-          1194 # OpenVPN
-          # 111 # NFS
-          # 2049 # NFS
         ];
       };
       extraHosts = ''
@@ -97,11 +93,14 @@
     services.resolved = {
       enable = true;
       dnssec = "true";
-      domains = ["~."];
-      fallbackDns = ["194.242.2.4"];
-      extraConfig = ''
-        DNSOverTLS=no
-      '';
+      domains = [
+        "alberand.com"
+        "~id.alberand.com"
+        "~door.alberand.com"
+        "~alberand.com"
+        "~."
+      ];
+      fallbackDns = ["1.1.1.1"];
     };
 
     networking.nat.enable = true;
