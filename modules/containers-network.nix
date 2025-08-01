@@ -94,7 +94,7 @@
             }
             {
               name = "domain-name-servers";
-              data = "1.1.1.1,9.9.9.9";
+              data = "194.242.2.4";
             }
           ];
         }

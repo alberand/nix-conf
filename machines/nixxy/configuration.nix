@@ -98,7 +98,7 @@
       enable = true;
       dnssec = "true";
       domains = ["~."];
-      fallbackDns = ["1.1.1.1#one.one.one.one"];
+      fallbackDns = ["194.242.2.4"];
       extraConfig = ''
         DNSOverTLS=no
       '';
@@ -144,7 +144,7 @@
               }
               {
                 name = "domain-name-servers";
-                data = "1.1.1.1,9.9.9.9";
+                data = "194.242.2.4";
               }
             ];
           }

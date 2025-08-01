@@ -79,8 +79,6 @@
     hostName = "quesada";
     nameservers = [
       "194.242.2.9" # Mullvad
-      "1.1.1.1"
-      "8.8.8.8"
     ];
     firewall = {
       enable = true;
