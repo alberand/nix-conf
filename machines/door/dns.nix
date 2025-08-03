@@ -38,7 +38,8 @@
     '';
     zones = let
       fqdn = "alberand.com";
-      mainserver = "${public_ip}";
+      vps_ip = "${public_ip}";
+      nixxy = "100.69.0.2";
     in {
       "${fqdn}" = {
         master = true;
@@ -56,10 +57,13 @@
                                    604800         ; Negative Cache TTL
                                    )
           @             IN      NS      ns
-          ns            IN      A       ${mainserver}
+          ns            IN      A       ${vps_ip}
 
-          alberand.com. IN      A       ${mainserver}
-          *             IN      A       ${mainserver}
+          alberand.com. IN      A       ${vps_ip}
+          door          IN      A       ${vps_ip}
+          id            IN      A       ${vps_ip}
+          jellyfin      IN      A       ${vps_ip}
+          *             IN      A       ${nixxy}
         '';
       };
     };

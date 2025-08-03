@@ -5,20 +5,6 @@
     firewall.allowedTCPPorts = [
       55686
     ];
-    nftables = {
-      enable = true;
-
-      tables.services = {
-        enable = true;
-        family = "ip";
-        content = ''
-          chain PREROUTING {
-            type nat hook prerouting priority dstnat; policy accept;
-            iifname "tailscale0" tcp dport 7000 dnat to 10.10.10.60
-          }
-        '';
-      };
-    };
   };
 
   containers.nextcloud = {

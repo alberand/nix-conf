@@ -21,20 +21,6 @@ in {
     firewall.allowedTCPPorts = [
       port
     ];
-    nftables = {
-      enable = true;
-
-      tables.services = {
-        enable = true;
-        family = "ip";
-        content = ''
-          chain PREROUTING {
-            type nat hook prerouting priority dstnat; policy accept;
-            iifname "tailscale0" tcp dport ${builtins.toString port} dnat to 10.10.10.90:${builtins.toString port}
-          }
-        '';
-      };
-    };
   };
 
   containers.gatus = {

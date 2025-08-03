@@ -1,4 +1,4 @@
-{...}: let 
+{...}: let
   uuid = 1911;
   port = 9000;
 in {
@@ -15,20 +15,6 @@ in {
     firewall.allowedTCPPorts = [
       port
     ];
-    nftables = {
-      enable = true;
-
-      tables.services = {
-        enable = true;
-        family = "ip";
-        content = ''
-          chain PREROUTING {
-            type nat hook prerouting priority dstnat; policy accept;
-            iifname "tailscale0" tcp dport ${builtins.toString port} dnat to 10.10.10.70:${builtins.toString port}
-          }
-        '';
-      };
-    };
   };
 
   systemd.tmpfiles.rules = [

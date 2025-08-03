@@ -22,7 +22,7 @@
         group = config.services.caddy.group;
 
         domain = "alberand.com";
-        extraDomainNames = [ "*.alberand.com" ];
+        extraDomainNames = ["*.alberand.com"];
 
         dnsProvider = "wedos";
         dnsResolver = "ns.wedos.net:53";
@@ -40,9 +40,7 @@
       virtualHosts = let
         cert = "/var/lib/acme/alberand.com/cert.pem";
         key = "/var/lib/acme/alberand.com/key.pem";
-        dashboard = callPackage (import ../../configs/dashboard/derivation.nix) {};
         server_ip = "100.69.0.2";
-        vps_ip = "100.69.0.4";
       in {
         "alberand.com".extraConfig = ''
           encode gzip
@@ -56,90 +54,6 @@
         "jellyfin.alberand.com".extraConfig = ''
           encode gzip
           reverse_proxy ${server_ip}:55686
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "home.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          root * ${dashboard}/dashboard/
-          file_server
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "photos.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:8113
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "food.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:9000
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "git.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:3000
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "jellyseerr.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:5055
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "files.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:7000
-          redir /.well-known/carddav /remote.php/dav/ 301
-          redir /.well-known/caldav /remote.php/dav/ 301
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "health.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:3110
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "pdf.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:8080
-          tls ${cert} ${key} {
-            protocols tls1.3
-          }
-        '';
-
-        "status.alberand.com".extraConfig = ''
-          bind ${vps_ip}
-          encode gzip
-          reverse_proxy ${server_ip}:3110
           tls ${cert} ${key} {
             protocols tls1.3
           }

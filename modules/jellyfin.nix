@@ -15,7 +15,6 @@ in {
           chain PREROUTING {
             type nat hook prerouting priority dstnat; policy accept;
             iifname "tailscale0" tcp dport 55686 dnat to 10.10.10.30:55686
-            iifname "tailscale0" tcp dport 5055 dnat to 10.10.10.30:5055
           }
         '';
       };
