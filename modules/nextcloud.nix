@@ -51,7 +51,7 @@
         settings = {
           log_type = "file";
           trusted_proxies = [
-            "100.69.0.100"
+            "100.69.0.4"
           ];
         };
       };

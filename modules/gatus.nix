@@ -145,8 +145,8 @@ in {
               ];
             }
             {
-              name = "Tandoor Recipes";
-              url = "https://food.alberand.com/search/";
+              name = "Mealie";
+              url = "https://food.alberand.com/";
               interval = "5m";
               conditions = [
                 "[STATUS] == 200"
@@ -184,14 +184,14 @@ in {
             }
             {
               name = "DNS";
-              url = "100.69.0.100";
+              url = "100.69.0.4";
               interval = "5m";
               dns = {
                 query-name = "home.alberand.com";
                 query-type = "A";
               };
               conditions = [
-                "[BODY] == 100.69.0.100"
+                "[BODY] == 100.69.0.4"
                 "[DNS_RCODE] == NOERROR"
               ];
               alerts = [
@@ -289,7 +289,7 @@ in {
       system.stateVersion = "25.05";
 
       networking = {
-        nameservers = ["100.69.0.100"];
+        nameservers = ["100.69.0.4"];
         firewall = {
           enable = true;
           allowedTCPPorts = [

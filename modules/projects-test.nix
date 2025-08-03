@@ -13,7 +13,7 @@
     virtualHosts = {
       "test.nemambyt.com".extraConfig = ''
         encode gzip
-        reverse_proxy 100.69.0.100:4242
+        reverse_proxy 100.69.0.2:4242
       '';
       "http://127.0.0.1:6969".extraConfig = ''
         encode gzip

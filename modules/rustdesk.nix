@@ -8,6 +8,6 @@
     openFirewall = true;
     signal.enable = true;
     relay.enable = true;
-    signal.relayHosts = ["100.69.0.100"];
+    signal.relayHosts = ["100.69.0.4"];
   };
 }
