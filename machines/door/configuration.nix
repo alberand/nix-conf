@@ -214,6 +214,7 @@ in {
     pkgs.util-linux
     pkgs.busybox
     pkgs.tcpdump
+    pkgs.btop
   ];
 
   environment.persistence."/persistent" = {
