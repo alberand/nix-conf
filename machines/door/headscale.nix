@@ -50,7 +50,7 @@
           magic_dns = true;
           base_domain = "door.alberand.com";
           nameservers.global = [
-            "194.242.2.9" # Mullvad
+            "100.69.0.4"
           ];
         };
         prefixes.v4 = "100.69.0.0/24";
