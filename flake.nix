@@ -21,6 +21,7 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     copyparty.url = "github:9001/copyparty";
+    sherlock.url = "github:Skxxtz/sherlock";
   };
 
   outputs = {
@@ -36,6 +37,7 @@
     deploy-rs,
     headscale-pkce
     copyparty,
+    sherlock,
   }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -79,7 +81,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.alberand = import ./machines/nixxy/home.nix;
+            home-manager.users.alberand =
+              pkgs.callPackage (import
+                ./machines/nixxy/home.nix) {inherit sherlock;};
           }
           agenix.nixosModules.default
           {

@@ -1,10 +1,13 @@
-{
+{sherlock}: {
   config,
   pkgs,
   lib,
   ...
 }: {
-  imports = [../../modules/home-base.nix];
+  imports = [
+    ../../modules/home-base.nix
+    sherlock.homeModules.default
+  ];
 
   home.username = "alberand";
   home.homeDirectory = "/home/alberand";
@@ -44,5 +47,33 @@
       {command = "swaymsg 'workspace 10; exec thunderbird'";}
       {command = "swaymsg 'exec \"sleep 1; flameshot\"'";}
     ];
+  };
+
+  programs.sherlock = {
+    enable = true;
+    settings = {
+      launchers = [
+        {
+          name = "App Launcher";
+          type = "app_launcher";
+          args = {};
+          priority = 1;
+          home = true;
+        }
+        {
+          name = "Web Search";
+          display_name = "Duckduckgo Search";
+          tag_start = "{keyword}";
+          tag_end = "{keyword}";
+          alias = "s";
+          type = "web_launcher";
+          args = {
+            search_engine = "duckduckgo";
+            icon = "duckduckgo";
+          };
+          priority = 100;
+        }
+      ];
+    };
   };
 }
