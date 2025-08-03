@@ -106,7 +106,7 @@
 
       "pdf.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy 10.10.10.90:8080
+        reverse_proxy 10.10.10.81:8080
         tls ${cert} ${key} {
           protocols tls1.3
         }
