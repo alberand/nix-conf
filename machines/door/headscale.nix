@@ -49,9 +49,18 @@
           override_local_dns = true;
           magic_dns = true;
           base_domain = "door.alberand.com";
-          nameservers.global = [
-            "100.69.0.4"
-          ];
+          nameservers = {
+            global = [
+              "100.69.0.4"
+            ];
+            search_domains = [
+              "alberand.com"
+              "~id.alberand.com"
+              "~door.alberand.com"
+              "~alberand.com"
+              "~."
+            ];
+          };
         };
         prefixes.v4 = "100.69.0.0/24";
 
