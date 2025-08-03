@@ -71,6 +71,7 @@
     pkgs.v4l-utils
     pkgs.util-linux
     pkgs.busybox
+    pkgs.rustdesk-flutter
   ];
 
   networking = {
@@ -82,7 +83,21 @@
     ];
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 8384 ];
+      allowedTCPPorts = [
+        # syncthing
+        8384
+        # rustdesk
+        21115
+        21116
+        21118
+        # rustdesk relay
+        21117
+        21119
+      ];
+      allowedUDPPorts = [
+        # rustdesk
+        21116
+      ];
     };
   };
 
@@ -255,6 +270,16 @@
         };
       };
     };
+  };
+
+  services.rustdesk-server = {
+    enable = true;
+    openFirewall = true;
+    signal.enable = true;
+    relay.enable = true;
+    signal.relayHosts = [
+      "0.0.0.0"
+    ];
   };
 
   nix = {
