@@ -30,6 +30,7 @@
     ../../modules/rustdesk.nix
     ../../modules/projects-test.nix
     ../../modules/stirling-pdf.nix
+    ../../modules/redlib.nix
   ];
 
   config = {

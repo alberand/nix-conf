@@ -111,6 +111,14 @@
           protocols tls1.3
         }
       '';
+
+      "reddit.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 127.0.0.1:9001
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
     };
   };
 }
