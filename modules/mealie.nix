@@ -2,6 +2,8 @@
   uuid = 1911;
   port = 9000;
 in {
+  age.secrets.mealie.file = ../../secrets/nixxy-mealie.age;
+
   users.users.mealie = {
     isNormalUser = true;
     description = "mealie user";
@@ -52,6 +54,7 @@ in {
         inherit port;
         listenAddress = "0.0.0.0";
         enable = true;
+        credentialsFile = config.age.secrets.mealie.path;
       };
 
       system.stateVersion = "25.05";
