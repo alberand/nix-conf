@@ -119,6 +119,14 @@
           protocols tls1.3
         }
       '';
+
+      "copyparty.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 127.0.0.1:3210
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
     };
   };
 }

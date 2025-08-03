@@ -31,6 +31,7 @@
     ../../modules/projects-test.nix
     ../../modules/stirling-pdf.nix
     ../../modules/redlib.nix
+    ../../modules/copyparty.nix
   ];
 
   config = {

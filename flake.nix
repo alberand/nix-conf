@@ -20,6 +20,7 @@
     impermanence.url = "github:nix-community/impermanence";
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+    copyparty.url = "github:9001/copyparty";
   };
 
   outputs = {
@@ -34,6 +35,7 @@
     impermanence,
     deploy-rs,
     headscale-pkce
+    copyparty,
   }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -60,6 +62,7 @@
           # Want version 1.6.2
           pocket-id = unstable.pocket-id;
         })
+        copyparty.overlays.default
       ];
     };
 
@@ -82,6 +85,7 @@
           {
             environment.systemPackages = [agenix.packages.${system}.default];
           }
+          copyparty.nixosModules.default
         ];
       };
 
