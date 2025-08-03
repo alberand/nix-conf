@@ -1,8 +1,8 @@
-{...}: let
+{config, ...}: let
   uuid = 1911;
   port = 9000;
 in {
-  age.secrets.mealie.file = ../../secrets/nixxy-mealie.age;
+  age.secrets.mealie.file = ../secrets/nixxy-mealie.age;
 
   users.users.mealie = {
     isNormalUser = true;
@@ -36,6 +36,10 @@ in {
         hostPath = "/media/var/lib";
         isReadOnly = false;
       };
+      "/etc/mealie.env" = {
+        hostPath = config.age.secrets.mealie.path;
+        isReadOnly = false;
+      };
     };
     config = {
       config,
@@ -54,7 +58,7 @@ in {
         inherit port;
         listenAddress = "0.0.0.0";
         enable = true;
-        credentialsFile = config.age.secrets.mealie.path;
+        credentialsFile = "/etc/mealie.env";
       };
 
       system.stateVersion = "25.05";
