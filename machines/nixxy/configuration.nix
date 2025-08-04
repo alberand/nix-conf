@@ -70,9 +70,6 @@
       # Pick only one of the below networking options.
       useDHCP = false;
       networkmanager.enable = true;
-      nameservers = [
-        "100.69.0.4"
-      ];
       firewall.enable = true;
       firewall = {
         # Syncthing opens ports by itself
@@ -95,14 +92,15 @@
     services.resolved = {
       enable = true;
       dnssec = "true";
-      domains = [
-        "alberand.com"
-        "~id.alberand.com"
-        "~door.alberand.com"
-        "~alberand.com"
-        "~."
-      ];
       fallbackDns = ["1.1.1.1"];
+      extraConfig = ''
+        # Primary DNS for subdomain.alberand.com
+        DNS=100.69.0.4
+        Domains=~alberand.com
+
+        DNS=1.1.1.1
+        Domains=~.
+      '';
     };
 
     networking.nat.enable = true;
