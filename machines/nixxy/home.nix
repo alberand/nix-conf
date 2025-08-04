@@ -52,6 +52,37 @@
   programs.sherlock = {
     enable = true;
     settings = {
+      config = {
+        default_apps = {
+          calendar_client = "thunderbird";
+          terminal = "kitty";
+          browser = "${pkgs.firefox}/bin/firefox %u";
+        };
+        units = {
+          lengths = "meters";
+          weights = "kg";
+          volumes = "l";
+          temperatures = "C";
+          currency = "eur";
+        };
+        binds = {
+          up = "control-k";
+          down = "control-j";
+          left = "control-ih";
+          right = "control-l";
+          context = "control-i";
+          modifier = "control";
+          exec_inplace = "control-return";
+        };
+      };
+      aliases = {
+        workfox = {
+          name = "workfox";
+          icon = "firefox";
+          keywords = "firefox";
+          exec = "${pkgs.firefox}/bin/firefox -P RedHat";
+        };
+      };
       launchers = [
         {
           name = "App Launcher";
@@ -61,12 +92,39 @@
           home = true;
         }
         {
+          name = "Clipboard";
+          type = "clipboard-execution";
+          args.capabilities = [
+            "url"
+            "colors.hex"
+            "colors.rgb"
+            "colors.hsl"
+            "calc.math"
+            "calc.lengths"
+            "calc.weights"
+            "calc.temperatures"
+          ];
+          priority = 2;
+          home = true;
+        }
+        {
+          name = "Emoji Picker";
+          type = "emoji_picker";
+          alias = "em";
+          args = {
+            default_skin_tone = "Simpsons";
+          };
+          priority = 3;
+          home = "Search";
+        }
+        {
           name = "Web Search";
           display_name = "Duckduckgo Search";
           tag_start = "{keyword}";
           tag_end = "{keyword}";
-          alias = "s";
+          alias = "gg";
           type = "web_launcher";
+          exec = "${pkgs.firefox}/bin/firefox %u";
           args = {
             search_engine = "duckduckgo";
             icon = "duckduckgo";
