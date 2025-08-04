@@ -40,7 +40,7 @@
       virtualHosts = let
         cert = "/var/lib/acme/alberand.com/cert.pem";
         key = "/var/lib/acme/alberand.com/key.pem";
-        server_ip = "100.69.0.2";
+        nixxy = "100.69.0.1";
       in {
         "alberand.com".extraConfig = ''
           encode gzip
@@ -53,7 +53,7 @@
 
         "jellyfin.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy ${server_ip}:55686
+          reverse_proxy ${nixxy}:55686
           tls ${cert} ${key} {
             protocols tls1.3
           }

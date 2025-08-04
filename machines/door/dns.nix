@@ -38,7 +38,7 @@
     zones = let
       fqdn = "alberand.com";
       vps_ip = "${public_ip}";
-      nixxy = "100.69.0.2";
+      nixxy = "100.69.0.1";
     in {
       "${fqdn}" = {
         master = true;

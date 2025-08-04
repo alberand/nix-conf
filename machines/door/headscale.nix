@@ -54,11 +54,7 @@
               "100.69.0.4"
             ];
             search_domains = [
-              "alberand.com"
-              "~id.alberand.com"
-              "~door.alberand.com"
               "~alberand.com"
-              "~."
             ];
           };
         };
