@@ -102,6 +102,8 @@
       "xfstests-config"
       # kernel environment shell
       "kernel-shell.nix"
+      # clang cache
+      ".cache"
     ];
   };
 }
