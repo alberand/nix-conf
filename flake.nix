@@ -35,7 +35,7 @@
     disko,
     impermanence,
     deploy-rs,
-    headscale-pkce
+    headscale-pkce,
     copyparty,
     sherlock,
   }: let
