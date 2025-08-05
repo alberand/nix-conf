@@ -28,11 +28,18 @@
 
   networking.firewall = {
     enable = true;
-    interfaces.ens3.allowedTCPPorts = [
-      # id.alberand.com
-      80
-      443
-    ];
+    interfaces.ens3 = {
+      allowedTCPPorts = [
+        # id.alberand.com
+        80
+        443
+      ];
+      allowedUDPPorts = [
+        443
+        3478
+        41641
+      ];
+    };
   };
 
   services = {
@@ -58,7 +65,10 @@
             ];
           };
         };
-        prefixes.v4 = "100.69.0.0/24";
+        prefixes = {
+          v4 = "100.69.0.0/24";
+          v6 = "fd7a:115c:a1e0::/48";
+        };
 
         oidc = {
           scope = ["openid" "profile" "email" "groups"];
@@ -75,6 +85,19 @@
           ];
           pkce = {
             enabled = true;
+          };
+          only_start_if_oidc_is_available = true;
+        };
+
+        derp = {
+          server = {
+            enabled = true;
+            region_id = 999;
+            region_code = "door";
+            region_name = "Headscale Embedded DERP";
+            stun_listen_addr = "0.0.0.0:3478";
+            auto_update_enabled = true;
+            automatically_add_embedded_derp_region = true;
           };
         };
       };
