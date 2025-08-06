@@ -1,6 +1,7 @@
 {
   domain,
   public_ip,
+  door_ip,
 }: {config, ...}: {
   users.groups.headscale.members = [
     "caddy"
@@ -58,7 +59,7 @@
           base_domain = "door.alberand.com";
           nameservers = {
             global = [
-              "100.69.0.4"
+              "${door_ip}"
             ];
             search_domains = [
               "~alberand.com"

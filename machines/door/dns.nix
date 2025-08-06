@@ -1,6 +1,7 @@
 {
   domain,
   public_ip,
+  door_ip,
 }: {
   config,
   pkgs,
@@ -22,7 +23,7 @@
     enable = true;
     listenOn = [
       "127.0.0.1"
-      "100.69.0.4"
+      "${door_ip}"
     ];
     cacheNetworks = [
       "127.0.0.0/24"
@@ -67,4 +68,6 @@
       };
     };
   };
+
+  systemd.services.bind.requires = ["tailscaled.service"];
 }
