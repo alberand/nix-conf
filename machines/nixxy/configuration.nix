@@ -176,6 +176,9 @@
         "dialout"
         "nextcloud-usb-sync"
       ];
+      openssh.authorizedKeys.keyFiles = [
+        ../../secrets/nothing_ed25519.pub
+      ];
     };
 
     system.activationScripts = {
