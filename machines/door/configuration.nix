@@ -10,7 +10,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./disk-config.nix
-    ((import ./vpn.nix) {inherit domain public_ip;})
+    #((import ./vpn.nix) {inherit domain public_ip;})
     ((import ./headscale.nix) {inherit domain public_ip;})
     ((import ./dns.nix) {inherit domain public_ip;})
     ./pocket-id.nix

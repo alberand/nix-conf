@@ -67,6 +67,4 @@
       };
     };
   };
-
-  systemd.services.bind.requires = ["wg-quick-vpn.service"];
 }
