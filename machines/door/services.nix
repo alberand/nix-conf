@@ -53,7 +53,7 @@
 
         "jellyfin.alberand.com".extraConfig = ''
           encode gzip
-          reverse_proxy ${nixxy}:55686
+          reverse_proxy 10.20.10.2:55686
           tls ${cert} ${key} {
             protocols tls1.3
           }
@@ -70,4 +70,32 @@
     # Grant main system user permission to read/write git storage
     "A+ /var/www - - - - u:alberand:rwx"
   ];
+
+  age.secrets.wg-private-file = {
+    file = ../../secrets/jellyfin-wg-server.age;
+    mode = "400";
+    owner = "root";
+    group = "root";
+  };
+
+  networking = {
+    firewall = {
+      allowedUDPPorts = [
+        config.networking.wg-quick.interfaces.jellyfin-wg.listenPort
+      ];
+    };
+    wg-quick.interfaces = {
+      jellyfin-wg = {
+        address = ["10.20.10.1/24"];
+        listenPort = 51820;
+        privateKeyFile = config.age.secrets.wg-private-file.path;
+        peers = [
+          {
+            publicKey = "Zv787q2jg/1tLLUms3ni0rCag5UuiE2wZEh7ualinAI=";
+            allowedIPs = ["10.20.10.2/32"];
+          }
+        ];
+      };
+    };
+  };
 }

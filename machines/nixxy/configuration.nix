@@ -97,7 +97,14 @@
     };
 
     networking.nat.enable = true;
-    networking.nat.internalInterfaces = ["ve-+" "vb-+" "veth+" "cbr" "enp34s0"];
+    networking.nat.internalInterfaces = [
+      "ve-+"
+      "vb-+"
+      "veth+"
+      "cbr"
+      "enp34s0"
+      "jellyfin-wg"
+    ];
     networking.nat.externalInterface = "wlo1";
     networking.nat.internalIPs = [
       "10.10.10.100/24"

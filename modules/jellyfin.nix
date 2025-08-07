@@ -1,10 +1,37 @@
 {config, ...}: let
   uuid = 3000;
 in {
+  age.secrets.wg-private-file = {
+    file = ../secrets/jellyfin-wg-client.age;
+    mode = "400";
+    owner = "root";
+    group = "root";
+  };
+
   networking = {
-    firewall.allowedTCPPorts = [
-      55686
-    ];
+    firewall = {
+      allowedTCPPorts = [
+        55686
+      ];
+      allowedUDPPorts = [
+        config.networking.wg-quick.interfaces.jellyfin-wg.listenPort
+      ];
+    };
+    wg-quick.interfaces = {
+      jellyfin-wg = {
+        address = ["10.20.10.2/24"];
+        listenPort = 51820;
+        privateKeyFile = config.age.secrets.wg-private-file.path;
+        peers = [
+          {
+            publicKey = "dwXTUUzaKrApHoByhEv7FqqEK0n4Qe3G8ESoUbo6zC0=";
+            allowedIPs = ["10.20.10.0/24"];
+            endpoint = "77.90.6.241:51820";
+            persistentKeepalive = 25;
+          }
+        ];
+      };
+    };
     nftables = {
       enable = true;
 
@@ -14,7 +41,7 @@ in {
         content = ''
           chain PREROUTING {
             type nat hook prerouting priority dstnat; policy accept;
-            iifname "tailscale0" tcp dport 55686 dnat to 10.10.10.30:55686
+            iifname "jellyfin-wg" tcp dport 55686 dnat to 10.10.10.30:55686
           }
         '';
       };

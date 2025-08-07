@@ -33,4 +33,6 @@ in {
   "door-mullvad-key.age".publicKeys = [alberand door];
   "nixxy-mealie.age".publicKeys = [alberand nixxy];
   "nixxy-copyparty.age".publicKeys = [alberand nixxy];
+  "jellyfin-wg-server.age".publicKeys = [alberand door];
+  "jellyfin-wg-client.age".publicKeys = [alberand nixxy];
 }
