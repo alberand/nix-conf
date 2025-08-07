@@ -92,11 +92,11 @@
 
         derp = {
           server = {
-            enabled = true;
+            enabled = false;
             region_id = 999;
             region_code = "door";
             region_name = "Headscale Embedded DERP";
-            stun_listen_addr = "0.0.0.0:3478";
+            stun_listen_addr = "${public_ip}:3478";
             auto_update_enabled = true;
             automatically_add_embedded_derp_region = true;
           };
