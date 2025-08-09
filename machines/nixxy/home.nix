@@ -12,7 +12,23 @@
   home.username = "alberand";
   home.homeDirectory = "/home/alberand";
 
-  home.packages = with pkgs; [
+  xdg.desktopEntries = {
+    workfox = {
+      name = "workfox";
+      exec = "workfox";
+      genericName = "Work Web Browser";
+      icon = "firefox";
+      categories = ["Network" "WebBrowser"];
+      terminal = false;
+      startupNotify = true;
+    };
+  };
+
+  home.packages = with pkgs; let
+    workfox =
+      writeShellScriptBin "workfox"
+      "exec -a $0 ${firefox}/bin/firefox -P RedHat $@";
+  in [
     cargo
     (discord.override {nss = pkgs.nss_latest;})
     freecad
@@ -29,6 +45,7 @@
     openrgb
     tdesktop
     vlc
+    workfox
   ];
 
   home.file = {
@@ -75,14 +92,7 @@
           exec_inplace = "control-return";
         };
       };
-      aliases = {
-        workfox = {
-          name = "workfox";
-          icon = "firefox";
-          keywords = "firefox";
-          exec = "${pkgs.firefox}/bin/firefox -P RedHat";
-        };
-      };
+      aliases = {};
       launchers = [
         {
           name = "App Launcher";
