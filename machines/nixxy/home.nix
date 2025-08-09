@@ -141,6 +141,30 @@
           };
           priority = 100;
         }
+        {
+          name = "Nix Commands";
+          alias = "nix";
+          type = "command";
+          args = {
+            commands = {
+              "Search Packages" = {
+                icon = "nix-snowflake";
+                exec = "firefox https://search.nixos.org/packages?query={keyword}";
+                search_string = "packages;search;nixpkgs";
+                tag_start = "search:";
+                tag_end = "";
+              };
+              "Search Options" = {
+                icon = "nix-snowflake";
+                exec = "firefox https://search.nixos.org/options?query={keyword}";
+                search_string = "options;config;nixos";
+                tag_start = "options:";
+                tag_end = "";
+              };
+            };
+          };
+          priority = 5;
+        }
       ];
     };
   };
