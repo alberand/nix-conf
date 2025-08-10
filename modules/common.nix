@@ -131,6 +131,7 @@
     yazi
     nurl
     btop
+    moreutils # errno
   ];
 
   programs.zsh.enable = true;
