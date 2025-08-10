@@ -127,6 +127,46 @@
           protocols tls1.3
         }
       '';
+
+      "deluge.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.10.10.50:8112
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
+
+      "radarr.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.10.10.30:7878
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
+
+      "sonarr.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.10.10.30:8989
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
+
+      "jackett.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.10.10.30:9117
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
+
+      "lidarr.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 10.10.10.30:8686
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
     };
   };
 }
