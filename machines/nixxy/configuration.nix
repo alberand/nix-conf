@@ -32,6 +32,7 @@
     ../../modules/stirling-pdf.nix
     ../../modules/redlib.nix
     ../../modules/copyparty.nix
+    ../../modules/immich.nix
   ];
 
   config = {

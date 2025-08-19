@@ -56,7 +56,7 @@
 
       "photos.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy 10.10.10.80:8113
+        reverse_proxy 10.10.10.11:2283
         tls ${cert} ${key} {
           protocols tls1.3
         }
