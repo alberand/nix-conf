@@ -8,8 +8,6 @@
     ../../options.nix
     ../../modules/common.nix
     #../../modules/wireguard.nix
-    ../../modules/nginx.nix
-    ../../modules/grafana.nix
     ../../modules/qemu-guest-network.nix
     #../../modules/home-assistant.nix
     ../../modules/mysql.nix

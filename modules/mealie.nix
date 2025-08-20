@@ -9,7 +9,6 @@ in {
     description = "mealie user";
     uid = uuid;
     group = "mealie";
-    # home = "/media/var/lib/forgejo";
   };
   users.groups.mealie.gid = uuid;
 
