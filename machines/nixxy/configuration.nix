@@ -15,7 +15,6 @@
     ../../modules/mysql.nix
     ../../modules/minecraft.nix
     ../../modules/borgbackup.nix
-    ../../modules/photoprism.nix
     ../../modules/mealie.nix
     ../../modules/tailscale.nix
     ../../modules/caddy.nix
