@@ -6,28 +6,8 @@ in {
   networking = {
     # SSH port on container
     firewall.allowedTCPPorts = [
-      2222
-      port
+      22
     ];
-    nftables = {
-      enable = true;
-      tables = {
-        forgejo = {
-          enable = true;
-          family = "ip";
-          content = ''
-            chain PREROUTING {
-              type nat hook prerouting priority dstnat; policy accept;
-              iifname "tailscale0" tcp dport 2222 dnat to 10.10.10.40:2222
-            }
-            chain POSTROUTING {
-              type nat hook postrouting priority srcnat; policy accept;
-              ip daddr 10.10.10.40 tcp dport 2222 masquerade
-            }
-          '';
-        };
-      };
-    };
   };
 
   users.users.forgejo = {
@@ -35,7 +15,9 @@ in {
     description = "forgejo user";
     uid = uuid;
     group = "forgejo";
-    # home = "/media/var/lib/forgejo";
+    openssh.authorizedKeys.keyFiles = [
+      ../secrets/nixxy_ed25519.pub
+    ];
   };
   users.groups.forgejo.gid = uuid;
 
@@ -54,33 +36,33 @@ in {
     "A+ /media/forgejo - - - - u:${config.user}:rwx"
   ];
 
-  #services.openssh = {
-  #  hostKeys = [
-  #    {
-  #      bits = 4096;
-  #      path = "/etc/ssh/ssh_host_rsa_key";
-  #      type = "rsa";
-  #    }
-  #    {
-  #      path = "/etc/ssh/ssh_host_ed25519_key";
-  #      type = "ed25519";
-  #    }
-  #    {
-  #      path = "/media/var/lib/forgejo/data/ssh/gitea.rsa";
-  #      type = "rsa";
-  #    }
-  #  ];
-  #  extraConfig = ''
-  #    # Route forgejo user to container
-  #    Match User forgejo
-  #        ForceCommand ssh -T -o StrictHostKeyChecking=no -p 2222 forgejo@10.10.10.40 "$SSH_ORIGINAL_COMMAND"
-  #        PermitTTY no
-  #        X11Forwarding no
-  #        AllowAgentForwarding no
-  #        AllowUsers forgejo
-  #        AuthenticationMethods publickey
-  #  '';
-  #};
+  services.openssh = {
+    hostKeys = [
+      {
+        bits = 4096;
+        path = "/etc/ssh/ssh_host_rsa_key";
+        type = "rsa";
+      }
+      {
+        path = "/etc/ssh/ssh_host_ed25519_key";
+        type = "ed25519";
+      }
+      {
+        path = "/media/var/lib/forgejo/data/ssh/gitea.rsa";
+        type = "rsa";
+      }
+    ];
+    extraConfig = ''
+      # Route forgejo user to container
+      Match User forgejo
+          ForceCommand ssh -T -o StrictHostKeyChecking=no -p 2222 forgejo@10.10.10.40 "\$SSH_ORIGINAL_COMMAND"
+          PermitTTY no
+          X11Forwarding no
+          AllowAgentForwarding yes
+          AllowUsers forgejo
+          AuthenticationMethods publickey
+    '';
+  };
 
   containers.forgejo = {
     autoStart = true;
@@ -89,13 +71,6 @@ in {
     hostBridge = "cbr";
     hostAddress = "10.10.10.100";
     localAddress = "10.10.10.40/24";
-    forwardPorts = [
-      {
-        containerPort = 2222;
-        hostPort = 2222;
-        protocol = "tcp";
-      }
-    ];
     bindMounts = {
       "/media/forgejo" = {
         hostPath = "/media/forgejo";
@@ -153,6 +128,7 @@ in {
         settings = {
           server = {
             DOMAIN = "git.alberand.com";
+            LANDING_PAGE = "login";
             # You need to specify this to remove the port from URLs in the web UI.
             ROOT_URL = "https://git.alberand.com/";
             HTTP_ADDR = "10.10.10.40";
@@ -160,7 +136,7 @@ in {
 
             DISABLE_SSH = false;
             START_SSH_SERVER = true;
-            SSH_PORT = 2222;
+            SSH_LISTEN_PORT = 2222;
             SSH_LISTEN_HOST = "0.0.0.0";
             SSH_DOMAIN = "git.alberand.com";
           };

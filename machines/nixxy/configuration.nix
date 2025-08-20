@@ -156,7 +156,7 @@
       SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"
     '';
 
-    services.openssh.settings.AllowUsers = ["alberand"];
+    services.openssh.settings.AllowUsers = ["alberand" "forgejo"];
 
     users.users.nixremote = {
       isNormalUser = true;
