@@ -23,7 +23,7 @@ in {
 
   systemd.tmpfiles.rules = [
     # Ensure forgejo configuration dir exists
-    "d /media/var/lib/forgejo 0755 forgejo forgejo - -"
+    "d /media/cstate/forgejo/var/lib/forgejo 0755 forgejo forgejo - -"
     # Ensure forgejo repositories and lsf directories exists
     "d /media/forgejo 0755 forgejo forgejo - -"
     "d /media/forgejo/repositories 0755 forgejo forgejo - -"
@@ -48,7 +48,7 @@ in {
         type = "ed25519";
       }
       {
-        path = "/media/var/lib/forgejo/data/ssh/gitea.rsa";
+        path = "/media/cstate/forgejo/var/lib/forgejo/data/ssh/gitea.rsa";
         type = "rsa";
       }
     ];
@@ -77,7 +77,7 @@ in {
         isReadOnly = false;
       };
       "/var/lib/forgejo" = {
-        hostPath = "/media/var/lib/forgejo";
+        hostPath = "/media/cstate/forgejo/var/lib/forgejo";
         isReadOnly = false;
       };
     };

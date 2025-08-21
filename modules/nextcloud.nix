@@ -24,7 +24,7 @@
         isReadOnly = false;
       };
       "/var/lib/nextcloud" = {
-        hostPath = "/media/var/lib/nextcloud";
+        hostPath = "/media/cstate/nextcloud/var/lib/nextcloud";
         isReadOnly = false;
       };
     };

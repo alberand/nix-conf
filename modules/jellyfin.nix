@@ -140,7 +140,7 @@ in {
       # TODO This let container save all the data to /media, which is not
       # desired for backups
       "/var/lib" = {
-        hostPath = "/media/var/lib";
+        hostPath = "/media/cstate/media/var/lib";
         isReadOnly = false;
       };
     };

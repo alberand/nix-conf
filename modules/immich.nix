@@ -19,7 +19,7 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d /media/immich/var/lib/immich 0755 immich immich - -"
+    "d /media/cstate/immich/var/lib 0755 immich immich - -"
     "d /media/photos/immich 0755 immich immich - -"
     "A /media/photos/immich - - - - m::rwx"
     "A+ /media/photos/immich - - - - u:immich:rwx"
@@ -63,7 +63,7 @@ in {
         isReadOnly = false;
       };
       "/var/lib" = {
-        hostPath = "/media/immich/var/lib";
+        hostPath = "/media/cstate/immich/var/lib";
         isReadOnly = false;
       };
     };

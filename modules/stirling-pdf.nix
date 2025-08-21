@@ -19,10 +19,10 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d /media/var/lib/stirling-pdf 0755 stirling-pdf stirling-pdf - -"
-    "A /media/var/lib/stirling-pdf - - - - m::rwx"
-    "A+ /media/var/lib/stirling-pdf - - - - u:stirling-pdf:rwx"
-    "A+ /media/var/lib/stirling-pdf - - - - u:${config.user}:rwx"
+    "d /media/cstate/stirling-pdf/var/lib/stirling-pdf 0755 stirling-pdf stirling-pdf - -"
+    "A /media/cstate/stirling-pdf/var/lib/stirling-pdf - - - - m::rwx"
+    "A+ /media/cstate/stirling-pdf/var/lib/stirling-pdf - - - - u:stirling-pdf:rwx"
+    "A+ /media/cstate/stirling-pdf/var/lib/stirling-pdf - - - - u:${config.user}:rwx"
   ];
 
   containers.stirling-pdf = {
@@ -34,7 +34,7 @@ in {
     localAddress = "10.10.10.81/24";
     bindMounts = {
       "/var/lib" = {
-        hostPath = "/media/var/lib";
+        hostPath = "/media/cstate/stirling-pdf/var/lib";
         isReadOnly = false;
       };
     };

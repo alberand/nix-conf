@@ -21,6 +21,7 @@ in {
   systemd.tmpfiles.rules = [
     # Ensure forgejo configuration dir exists
     "d /media/var/lib/mealie 0755 mealie mealie - -"
+    "d /media/cstate/mealie/var/lib/mealie 0755 mealie mealie - -"
   ];
 
   containers.food = {
@@ -32,7 +33,7 @@ in {
     localAddress = "10.10.10.70/24";
     bindMounts = {
       "/var/lib" = {
-        hostPath = "/media/var/lib";
+        hostPath = "/media/cstate/mealie/var/lib";
         isReadOnly = false;
       };
       "/etc/mealie.env" = {
