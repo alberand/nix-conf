@@ -31,4 +31,7 @@ in {
   "nixxy-copyparty.age".publicKeys = [alberand nixxy];
   "jellyfin-wg-server.age".publicKeys = [alberand door];
   "jellyfin-wg-client.age".publicKeys = [alberand nixxy];
+  "nixxy-rclone-key.age".publicKeys = [alberand nixxy];
+  "restic-hetzner-key.age".publicKeys = [alberand nixxy];
+  "restic-password.age".publicKeys = [alberand nixxy];
 }

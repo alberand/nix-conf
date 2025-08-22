@@ -30,6 +30,7 @@
     ../../modules/redlib.nix
     ../../modules/copyparty.nix
     ../../modules/immich.nix
+    ../../modules/storage-box.nix
   ];
 
   config = {
