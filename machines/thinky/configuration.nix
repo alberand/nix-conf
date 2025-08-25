@@ -110,6 +110,7 @@
       wdisplays # tool to configure displays
       revumatic
       koji
+      claude
     ];
 
     # Enable WeeChat to run as service with attached 'screen' session To

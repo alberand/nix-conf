@@ -63,6 +63,7 @@
           jujutsu = unstable.jujutsu;
           # Want version 1.6.2
           pocket-id = unstable.pocket-id;
+          claude = redhat.packages."${system}".claude;
         })
         copyparty.overlays.default
       ];
