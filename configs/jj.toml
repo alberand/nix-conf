@@ -21,11 +21,6 @@ default-command = "l"
 pager = "bat --plain --tabs 8"
 paginate = "auto"
 
-[templates]
-commit_trailers = '''
-"Signed-off-by: " ++ committer ++ "\n"
-'''
-
 [colors]
 # Highlight hunks with background
 "diff removed token" = { bg = "#221111", underline = false }
