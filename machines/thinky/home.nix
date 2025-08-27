@@ -61,6 +61,10 @@
       {command = "swaymsg 'workspace 2; exec kitty'";}
       {command = "swaymsg 'exec \"sleep 1; flameshot\"'";}
     ];
+
+    keybindings = {
+      "Mod1+p" = lib.mkForce "exec wofi --show run";
+    };
   };
 
   # Waybar widgets position and battery
