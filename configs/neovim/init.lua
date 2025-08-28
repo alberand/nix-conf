@@ -50,8 +50,8 @@ vim.opt.updatetime = 250
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = false
-vim.opt.listchars = { trail = '·', nbsp = '␣' }
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', lead = '·', trail = '·', nbsp = '•' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -99,8 +99,16 @@ vim.opt.undofile = true
 
 -- Linux dev related
 -- Whitespace damage
-vim.cmd[[ highlight RedundantSpaces ctermbg=red guibg=red ]]
-vim.cmd[[ match RedundantSpaces /\s\+$\| \+\ze\t/ ]]
+-- vim.cmd[[ highlight RedundantSpaces ctermbg=red guibg=red ]]
+-- vim.cmd[[ match RedundantSpaces /\s\+$\| \+\ze\t/ ]]
+vim.api.nvim_set_hl(0, 'TrailingWhitespace', { bg='red' })
+vim.api.nvim_create_autocmd('BufEnter', {
+	pattern = '*',
+	command = [[
+		syntax clear TrailingWhitespace |
+		syntax match TrailingWhitespace "\_s\+$"
+	]]}
+)
 
 -- Use .vimrc if it is appear in current folder. !!!DANGER!!!
 vim.opt.exrc = true
@@ -342,6 +350,11 @@ require('treesitter-context').setup{
 }
 
 require("ibl").setup {
+  enabled = false;
+  indent = {
+    tab_char = '>',
+    smart_indent_cap = false,
+  },
 	scope = {
 		priority = 1000,
 		highlight = {"Function", "Label"},
