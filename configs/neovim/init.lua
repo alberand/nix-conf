@@ -58,14 +58,6 @@ vim.opt.inccommand = 'split'
 
 vim.opt.autoindent = true
 
--- TODO this should move to c filetype
-vim.opt.tabstop = 8
--- Doesn't work somehow
-vim.opt.expandtab = false
---vim.cmd[[ set noexpandtab ]]
-vim.opt.shiftwidth = 8
-vim.opt.softtabstop = 0
-
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
