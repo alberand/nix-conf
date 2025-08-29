@@ -15,15 +15,12 @@
     (b4.overrideAttrs (final: prev: {
       version = "git";
       # Latest master as of 12.05.25
-      src = pkgs.fetchgit {
-        url = "git://git.kernel.org/pub/scm/utils/b4/b4.git";
-        rev = "6f78e874e96b0b3bac1767a1743b20af20cb0e2f";
-        hash = "sha256-fPtXfycJfLhHmqVIrrnHB9JNee1Q3VuIi+FXbcy8bOE=";
+      src = pkgs.fetchFromGitHub {
+        owner = "alberand";
+        repo = "b4";
+        rev = "8ea8cb28ee8ade9075cea64954d15e31e6242ca6";
+        sha256 = "sha256-Bphg3n5SpB21CpMBr29i5n7rYC1UTkSY3LEJ5C+hi1s=";
       };
-      patches = [
-        ../patches/0001-ez-introduce-in-reply-to-for-send.patch
-        ../patches/0001-ez-introduce-branch-BRANCH-argument-for-send.patch
-      ];
     }))
     cmst
     feh
