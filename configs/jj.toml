@@ -2,11 +2,9 @@
 name = "Andrey Albershteyn"
 email = "aalbersh@kernel.org"
 
-[core]
-fsmonitor = "watchman"
-
-[core.watchman]
-register-snapshot-trigger = true
+[fsmonitor]
+backend = "watchman"
+watchman.register-snapshot-trigger = true
 
 [aliases]
 l = ["log", "-r", "ancestors(reachable(@, mutable()), 2)", "--limit", "25"]
