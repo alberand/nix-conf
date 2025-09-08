@@ -13,6 +13,7 @@ lm = ["log", "-T", "builtin_log_detailed"]
 lp = ["log", "--patch"]
 lg = ["log", "--patch", "-T", "builtin_log_detailed"]
 cm = ["commit"]
+fp = ["show", "--git", "--template", "git_format_patch_email_headers"]
 
 [ui]
 default-command = "l"
