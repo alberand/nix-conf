@@ -104,6 +104,9 @@
       "kernel-shell.nix"
       # clang cache
       ".cache"
+      # patch -p1 
+      ".orig"
+      ".rej"
     ];
   };
 }
