@@ -24,7 +24,7 @@
     openssh.authorizedKeys.keyFiles = [
       ../secrets/restic_ed25519.pub
     ];
-    extraGroups = ["media" "immich"];
+    extraGroups = ["media" "immich" "minecraft"];
   };
   users.groups.restic.gid = 1004;
 
@@ -33,6 +33,8 @@
     "A /media/backup - - - - m::rwx"
     "A+ /media/backup - - - - u:restic:rwx,g:restic:rwx"
     "A+ /media/backup - - - - u:${config.user}:rwx"
+    "A /var/lib/minecraft - - - - m::rwx"
+    "A+ /var/lib/minecraft - - - - u:restic:rwx,g:restic:rwx"
   ];
 
   fileSystems."/media/backup/photos" = {
