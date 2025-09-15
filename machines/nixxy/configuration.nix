@@ -18,7 +18,6 @@
     ../../modules/caddy.nix
     #../../modules/bind.nix
     ../../modules/forgejo.nix
-    ../../modules/paperless.nix
     ../../modules/binary-cache.nix
     ../../modules/jellyfin.nix
     ../../modules/containers-network.nix
