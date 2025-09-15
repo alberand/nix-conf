@@ -6,7 +6,7 @@
     wrapperFeatures.gtk = true;
     config = rec {
       terminal = "kitty";
-      menu = "sherlock";
+      menu = "wofi --show run";
       modifier = "Mod1";
 
       window.titlebar = false;
