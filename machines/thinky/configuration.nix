@@ -90,7 +90,6 @@
       description = "Andrey Albershteyn";
       uid = 1000;
       shell = pkgs.zsh;
-      group = "users";
       extraGroups = [
         "wheel"
         "sudo"
@@ -100,6 +99,14 @@
         "wireshark"
         "dialout"
       ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDTyoIDtgjlNfutIx2mL1rcJgTgy2xPtBE658NMuEKxy"
+      ];
+    };
+
+    # Enable 'sudo' with SSH key
+    security.pam.sshAgentAuth = {
+      enable = true;
     };
 
     # List packages installed in system profile. To search, run:
