@@ -3,9 +3,17 @@
   pkgs,
   ...
 }: {
+  age.secrets.neomutt-passwords = {
+    file = ../secrets/thinky-neomutt.age;
+  };
+
   home.packages = with pkgs; [
     # Email client
     neomutt
+    (writeShellScriptBin "nn" ''
+      source ${config.age.secrets.neomutt-passwords.path}
+      ${neomutt}/bin/neomutt
+    '')
     # Email indexing and tagging
     notmuch
     # Email fetcher (downloader)

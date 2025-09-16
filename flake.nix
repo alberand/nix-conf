@@ -105,7 +105,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.aalbersh = import ./machines/thinky/home.nix;
+            home-manager.users.aalbersh =
+              pkgs.callPackage (import
+                ./machines/thinky/home.nix) {inherit agenix;};
           }
           agenix.nixosModules.default
           {

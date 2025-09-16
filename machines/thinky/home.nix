@@ -1,10 +1,11 @@
-{
+{agenix}: {
   config,
   pkgs,
   lib,
   ...
-}: {
+}: rec {
   imports = [
+    agenix.homeManagerModules.default
     ../../modules/home-base.nix
     ../../modules/neomutt.nix
     ../../modules/redhat-beaker.nix
