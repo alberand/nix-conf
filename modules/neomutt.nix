@@ -32,10 +32,33 @@
     "${config.xdg.configHome}/neomutt/neomuttrc" = {
       source = ../configs/neomuttrc;
     };
-    ".mutt/dracula.muttrc" = {source = ../configs/dracula.muttrc;};
-    ".mutt/signature" = {source = ../configs/signature;};
-    ".mailcap" = {source = ../configs/mailcap;};
+    "${config.xdg.configHome}/neomutt/dracula.muttrc" = {
+      source = ../configs/dracula.muttrc;
+    };
+    "${config.xdg.configHome}/neomutt/signature.korg" = {
+      source = ../configs/signature;
+    };
+    "${config.xdg.configHome}/neomutt/signature.redhat" = {
+      source = ../configs/signature;
+    };
+    ".mailcap" = {
+      source = ../configs/mailcap;
+    };
+    "${config.xdg.configHome}/neomutt/profile.redhat" = {
+      source = ../configs/profile.redhat;
+    };
+    "${config.xdg.configHome}/neomutt/profile.korg" = {
+      source = ../configs/profile.korg;
+    };
   };
+
+  programs.zsh.shellAliases = {
+    neomutt-korg = "neomutt -F ${config.xdg.configHome}/neomutt/profile.korg";
+    neomutt-redhat = "neomutt -F ${config.xdg.configHome}/neomutt/profile.redhat";
+  };
+
+  services.mbsync.configFile = ../configs/mbsyncrc;
+  services.mbsync.postExec = "${pkgs.bash}/bin/sh ${config.home.homeDirectory}/.redhat/notmuch-hook.sh";
 
   services.mbsync = {
     enable = true;

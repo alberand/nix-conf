@@ -4,7 +4,7 @@ set from = "aalbersh@redhat.com"
 set realname = "Andrey Albershteyn"
 alternates "(andrey.albershteyn@redhat\.com)"
 
-set signature="~/.mutt/signature"
+set signature="~/.config/neomutt/signature.redhat"
 
 # Credentials
 set smtp_url = "smtps://aalbersh@redhat.com@smtp.gmail.com/"
@@ -41,5 +41,14 @@ virtual-mailboxes "beaker" "notmuch://?query=tag:beaker"
 folder-hook . "set display_filter=''"
 # Set filter for Jira/Bugzilla folder
 folder-hook "bugzilla-hook-filter" "set display_filter='~/.redhat/neomutt-jira.sh'"
+
+# Highlight the boss =)
+color index blue default "~f esandeen@redhat.com"
+color index blue default "~f sandeen@redhat.com"
+# Highlight mailing list announces
+color index cyan default "~s ANNOUNCE"
+# Highlight reminders from Workday
+color index blue default "~f timetracking@redhat.com"
+
 
 color status     brightgreen    red	# redhat

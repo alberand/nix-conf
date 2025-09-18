@@ -6,7 +6,7 @@ set smtp_url     = "smtps://aalbersh@mail.kernel.org:465/"
 set smtp_pass    = "$KORG_PASS"
 set ssl_starttls = yes
 
-set signature    = "~/.neomutt/signature.korg"
+set signature    = "~/.config/neomutt/signature.korg"
 set folder       = "~/.mail/korg/inbox"
 
 unmailboxes *

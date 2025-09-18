@@ -1,7 +1,7 @@
 # vi ~/.muttrc
 # About Me
 
-set editor = "nvim -c 'set spell spelllang=en'"
+set editor="nvim -c 'set ft=mail tw=68 spell spelllang=en'"
 set mark_old = no
 
 set index_format = "%4C %Z [%{%d %b}] %-15.15L %s"
@@ -31,12 +31,12 @@ set implicit_autoview=yes # Load in pager if setting in .mailcap says 'copiousou
 # My mailboxes
 set virtual_spoolfile=yes
 # Include it here to save order of the mailboxes
-source ~/.neomutt/profile.korg
-folder-hook "Korg"	'source ~/.neomutt/profile.krog'
-source ~/.neomutt/profile.redhat
-folder-hook "Inbox"	'source ~/.neomutt/profile.redhat'
-macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.neomutt/profile.redhat<enter><change-folder>!<enter>'
-macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.neomutt/profile.korg<enter><change-folder>!<enter>'
+source ~/.config/neomutt/profile.korg
+folder-hook "Korg"	'source ~/.config/neomutt/profile.krog'
+source ~/.config/neomutt/profile.redhat
+folder-hook "Inbox"	'source ~/.config/neomutt/profile.redhat'
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.config/neomutt/profile.redhat<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.config/neomutt/profile.korg<enter><change-folder>!<enter>'
 
 macro index,pager b "<tag-thread><tag-prefix><modify-labels>!bookmark\n<previous-entry><tag-thread>" "Toggle the 'bookmark' tag"
 
@@ -54,17 +54,11 @@ set certificate_file = "~/.mutt/certificates"
 #mailboxes =Memos =fstests =xfs =outage =Sent
 
 # Etc
-#set mail_check = 30
-#set move = no
-#set imap_keepalive = 900
 set sort = threads
-set editor="nvim -c 'set ft=mail tw=68'"
 set pager_index_lines=10
 
 # Read all in mailbox
 macro index \CA "T ~O | ~N\n;N\n"
-# Limit view to current thread
-bind index \Cl limit-current-thread
 
 bind index <space> collapse-thread
 bind pager j next-line
@@ -92,16 +86,8 @@ alias djwong Darrick J. Wong <djwong@kernel.org>
 alias xfs linux-xfs <linux-xfs@vger.kernel.org>
 alias fstests fstests <fstests@vger.kernel.org>
 
-# Highlight the boss =)
-color index blue default "~f esandeen@redhat.com"
-color index blue default "~f sandeen@redhat.com"
-# Highlight mailing list announces
-color index cyan default "~s ANNOUNCE"
-# Highlight reminders from Workday
-color index blue default "~f timetracking@redhat.com"
-
 # Add some colors (theme)
-source ~/.mutt/dracula.muttrc
+source ~/.config/neomutt/dracula.muttrc
 
 color header color102 black .
 color header yellow black ^Subject

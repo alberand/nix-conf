@@ -33,8 +33,6 @@
   ];
 
   home.file = {
-    ".neomutt/profile.redhat" = {source = ./configs/profile.redhat;};
-    ".neomutt/profile.korg" = {source = ./configs/profile.korg;};
     ".notmuch-config" = {source = ./configs/notmuch-config;};
     ".redhat/notmuch-hook.sh" = {source = ./configs/notmuch-hook.sh;};
     ".redhat/neomutt-jira.sh" = {source = ./configs/neomutt-jira.sh;};
@@ -42,8 +40,6 @@
     ".consolerc" = {source = ./configs/consolerc;};
     ".config/jj/config.toml" = {source = ../../configs/jj.toml;};
   };
-  services.mbsync.configFile = ./configs/mbsyncrc;
-  services.mbsync.postExec = "${pkgs.bash}/bin/sh ${config.home.homeDirectory}/.redhat/notmuch-hook.sh";
 
   programs.gpg = {
     enable = true;
