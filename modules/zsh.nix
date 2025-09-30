@@ -14,6 +14,10 @@
       size = 50000;
     };
 
+    shellAliases = {
+      claude = "cd /home/aalbersh/claude && ${pkgs.claude}/bin/claude";
+    };
+
     initContent = ''
       # Uncomment the following line to enable command auto-correction.
       ENABLE_CORRECTION="true"
