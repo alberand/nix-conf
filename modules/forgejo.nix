@@ -17,6 +17,7 @@ in {
     group = "forgejo";
     openssh.authorizedKeys.keyFiles = [
       ../secrets/nixxy_ed25519.pub
+      ../secrets/thinky_ed25519.pub
     ];
   };
   users.groups.forgejo.gid = uuid;
