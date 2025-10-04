@@ -47,7 +47,7 @@
       config.allowUnfree = true;
       overlays = [
         (final: prev: {
-          # Example of bringing in an unstable package:
+          # To get 1.21.8 (5 Oct 2025)
           minecraft-server = unstable.minecraft-server;
           revumatic = redhat.packages."${system}".revumatic;
           koji = redhat.packages."${system}".koji;
