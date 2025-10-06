@@ -48,7 +48,12 @@
 
   programs.git = {
     extraConfig = {user = {signingkey = "46A7EA18AC33E108";};};
-    ignores = [".envrc"];
+    ignores = [
+      ".envrc"
+      # patch -p1 
+      "*.orig"
+      "*.rej"
+    ];
   };
 
   # Auto-run applications
