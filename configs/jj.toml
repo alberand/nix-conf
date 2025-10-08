@@ -14,6 +14,7 @@ lp = ["log", "--patch"]
 lg = ["log", "--patch", "-T", "builtin_log_detailed"]
 cm = ["commit"]
 fp = ["show", "--git", "--template", "git_format_patch_email_headers"]
+mine = ["bookmark", "list", "-r", "mine()"]
 
 [ui]
 default-command = "l"
