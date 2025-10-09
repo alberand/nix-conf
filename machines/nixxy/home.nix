@@ -45,6 +45,9 @@
     tdesktop
     vlc
     workfox
+    typescript-language-server
+    lua-language-server
+    pyright
   ];
 
   home.file = {

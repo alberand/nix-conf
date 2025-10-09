@@ -210,6 +210,8 @@
       radeontop
       docker-compose
       openrgb-plugin-effects
+      wireshark
+      parted
     ];
 
     virtualisation = {

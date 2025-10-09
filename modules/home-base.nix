@@ -12,32 +12,13 @@
   ];
 
   home.packages = with pkgs; [
-    (b4.overrideAttrs (final: prev: {
-      version = "git";
-      # Latest master as of 12.05.25
-      src = pkgs.fetchFromGitHub {
-        owner = "alberand";
-        repo = "b4";
-        rev = "8ea8cb28ee8ade9075cea64954d15e31e6242ca6";
-        sha256 = "sha256-Bphg3n5SpB21CpMBr29i5n7rYC1UTkSY3LEJ5C+hi1s=";
-      };
-
-      propagatedBuildInputs =
-        prev.propagatedBuildInputs
-        ++ (with python3Packages; [
-          packaging
-        ]);
-    }))
     cmst
     feh
     file
     firefox
     flameshot
     foot
-    isync
-    neomutt
     nmap
-    notmuch
     openssl
     python3
     jq
@@ -49,12 +30,9 @@
     zathura
     zlib
     qpwgraph
-    zeal
-    python3
     jujutsu
     watchman # needed by jujutsu
     stgit
-    meld
     tree
     zoxide
     pinentry

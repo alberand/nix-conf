@@ -98,8 +98,6 @@
     bluez
     bluez-alsa
     bluez-tools
-    wireshark
-    parted
     iptables
     nss
 
@@ -222,7 +220,7 @@
     };
     gc = {
       automatic = true;
-      dates = "monthly";
+      dates = "weekly";
       options = "--delete-older-than 7d";
     };
     extraOptions = ''
