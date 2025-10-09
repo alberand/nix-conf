@@ -57,6 +57,7 @@ in {
       # Route forgejo user to container
       Match User forgejo
           ForceCommand ssh -T -o StrictHostKeyChecking=no -p 2222 forgejo@10.10.10.40 "\$SSH_ORIGINAL_COMMAND"
+          # AuthorizedKeysCommand forgejo-cli --config /var/lib/forgejo/custom/conf/app.ini keys -e git -u %u -t %t -k %k
           PermitTTY no
           X11Forwarding no
           AllowAgentForwarding yes
