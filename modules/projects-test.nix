@@ -22,6 +22,17 @@
           file_server browse
         }
       '';
+      "http://test.nemambyt.com:4242".extraConfig = ''
+        encode gzip
+        handle_path /api/* {
+          reverse_proxy 10.10.10.69:6969
+        }
+
+        handle {
+          root * /var/lib/www
+          file_server browse
+        }
+      '';
       "http://127.0.0.1:6969".extraConfig = ''
         encode gzip
         handle_path /api/* {
@@ -44,19 +55,5 @@
     extraHosts = ''
       10.10.10.69 nemambyt.container
     '';
-    nftables = {
-      enable = true;
-
-      tables.services = {
-        enable = true;
-        family = "ip";
-        content = ''
-          chain PREROUTING {
-            type nat hook prerouting priority dstnat; policy accept;
-            iifname "tailscale0" tcp dport 4242 dnat to 10.10.10.69:4242
-          }
-        '';
-      };
-    };
   };
 }
