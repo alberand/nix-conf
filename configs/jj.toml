@@ -20,6 +20,7 @@ mine = ["bookmark", "list", "-r", "mine()"]
 default-command = "l"
 pager = "bat --plain --tabs 8"
 paginate = "auto"
+merge-editor = "mergiraf"
 
 [colors]
 # Highlight hunks with background

@@ -37,6 +37,7 @@
     zoxide
     pinentry
     devenv
+    mergiraf
 
     (writeShellScriptBin "calc"
       "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
