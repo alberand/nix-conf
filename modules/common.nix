@@ -130,6 +130,7 @@
     nurl
     btop
     moreutils # errno
+    busybox
   ];
 
   programs.zsh.enable = true;
