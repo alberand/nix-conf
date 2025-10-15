@@ -283,6 +283,24 @@ lspconfig['pyright'].setup{
     }
 }
 
+lspconfig['ruff'].setup({
+  on_attach = on_attach,
+  init_options = {
+    settings = {
+      args = {
+        "--ignore",
+        "F821",
+        "--ignore",
+        "E402",
+        "--ignore",
+        "E722",
+        "--ignore",
+        "E712",
+      },
+    },
+  },
+})
+
 -- Javascript/HTML/CSS/typescript
 lspconfig['ts_ls'].setup{
     on_attach = on_attach,
@@ -400,3 +418,4 @@ require('gitsigns').setup{
     map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
   end
 }
+

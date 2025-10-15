@@ -14,6 +14,7 @@ in {
   home.packages = with pkgs; [
     vscode-langservers-extracted
     deadnix
+    ruff
   ];
 
   programs.neovim = {
