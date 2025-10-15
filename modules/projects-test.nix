@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   systemd.tmpfiles.rules = [
     "d /var/lib/www 0755 caddy caddy - -"
     # Set a mask to allow main system user to have full permission
@@ -10,7 +14,22 @@
   ];
 
   services.caddy = {
-    virtualHosts = {
+    virtualHosts = let
+      cert = "/var/lib/acme/alberand.com/cert.pem";
+      key = "/var/lib/acme/alberand.com/key.pem";
+      shinjira = pkgs.stdenv.mkDerivation {
+        name = "shinjira.html";
+
+        src = ../configs/shinjira.html;
+
+        phases = ["installPhase"];
+
+        installPhase = ''
+          mkdir $out
+          cp $src $out/index.html
+        '';
+      };
+    in {
       "http://100.69.0.1:4242".extraConfig = ''
         encode gzip
         handle_path /api/* {
@@ -42,6 +61,13 @@
         handle {
           root * /var/lib/www
           file_server browse
+        }
+      '';
+      "shinjira.alberand.com".extraConfig = ''
+        reverse_proxy 127.0.0.1:3000
+
+        tls ${cert} ${key} {
+          protocols tls1.3
         }
       '';
     };
