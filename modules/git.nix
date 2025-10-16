@@ -102,6 +102,7 @@
       "kernel-shell.nix"
       # clang cache
       ".cache"
+      "*.loT"
     ];
   };
 }
