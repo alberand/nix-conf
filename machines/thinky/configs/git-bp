@@ -11,9 +11,10 @@ function get_issue_code() {
 
 function is_linux() {
 	local dirname=$1
-	if [[ $dirname == *"rhel7"* || \
-		$dirname == *"rhel8"* || \
-		$dirname == *"rhel9"* ]]; then
+	if [[ $dirname == *"rhel"* || \
+		$dirname == *"centos-stream"* || \
+		$dirname == *"linux"* || \
+		$dirname == *"kernel"* ]]; then
 		return 0
 	fi
 
