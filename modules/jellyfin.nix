@@ -42,6 +42,7 @@ in {
           chain PREROUTING {
             type nat hook prerouting priority dstnat; policy accept;
             iifname "jellyfin-wg" tcp dport 55686 dnat to 10.10.10.30:55686
+            iifname "wlo1" tcp dport 55686 dnat to 10.10.10.30:55686
           }
         '';
       };
