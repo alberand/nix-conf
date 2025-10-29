@@ -38,6 +38,7 @@
 
         handle {
           root * /var/lib/www
+          try_files {path} /index.html
           file_server browse
         }
       '';
@@ -49,6 +50,7 @@
 
         handle {
           root * /var/lib/www
+          try_files {path} /index.html
           file_server browse
         }
       '';
@@ -60,6 +62,7 @@
 
         handle {
           root * /var/lib/www
+          try_files {path} /index.html
           file_server browse
         }
       '';
