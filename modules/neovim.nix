@@ -54,6 +54,7 @@ in {
       # Git
       gitsigns-nvim
       vim-fugitive
+      vim-svelte
     ];
     extraConfig = ''
       set noexpandtab
