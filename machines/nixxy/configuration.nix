@@ -75,6 +75,7 @@
         allowedTCPPorts = [
           443 # https
           5000 # binary cache
+          4141
         ];
         allowedUDPPorts = [
           443 # https
