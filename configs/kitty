@@ -7,7 +7,9 @@ map kitty_mod+h show_scrollback
 
 #: JetBrains Mono Font
 #: font_family JetBrains Mono
-font_family Fira Code
+#: font_family Fira Code
+font_family LilexNerdFont-Mono
+font_size 11.0
 #: I don't like ligatures (those fancy -> -- == one chars)
 disable_ligatures always
 
