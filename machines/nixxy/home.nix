@@ -27,6 +27,9 @@
     workfox =
       writeShellScriptBin "workfox"
       "exec -a $0 ${firefox}/bin/firefox -P RedHat $@";
+    work =
+      writeShellScriptBin "work"
+      "exec -a $0 ${kitty}/bin/kitty sh -c '${kitty}/bin/kitten ssh work'";
   in [
     cargo
     (discord.override {nss = pkgs.nss_latest;})
@@ -45,6 +48,7 @@
     tdesktop
     vlc
     workfox
+    work
     typescript-language-server
     lua-language-server
     pyright
