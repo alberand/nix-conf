@@ -56,7 +56,7 @@
         dns = {
           override_local_dns = true;
           magic_dns = true;
-          base_domain = "door.alberand.com";
+          base_domain = "dns.alberand.com";
           nameservers = {
             global = [
               "${door_ip}"
