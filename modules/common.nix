@@ -11,12 +11,6 @@
     loader.grub.configurationLimit = 5;
   };
 
-  systemd = {
-    extraConfig = ''
-      DefaultTimeoutStopSec=10s
-    '';
-  };
-
   services.journald.extraConfig = ''
     SystemMaxUse=250M
     SystemMaxFileSize=50M
@@ -32,7 +26,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     # noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     # fira-code
     # fira-code-symbols
     # font-awesome
@@ -102,7 +96,6 @@
     iptables
     nss
 
-    pinentry
     libva-utils
 
     # work

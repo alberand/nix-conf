@@ -40,12 +40,11 @@
     prismlauncher # Minecraft launcher
     rust-analyzer
     steam
-    tdesktop # telegram
+    telegram-desktop
     thunderbird
     libreoffice
     rustfmt
     openrgb
-    tdesktop
     vlc
     workfox
     work
