@@ -28,6 +28,9 @@ auto_view text/html         # Automatically parse html messages through w3m
 auto_view text/x-vcard      # vcard attachments viewed through mutt.vcard.filter
 set implicit_autoview=yes # Load in pager if setting in .mailcap says 'copiousoutput'.
 
+# To open urls in HTML emails
+macro index,pager \cu "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs"
+
 # My mailboxes
 set virtual_spoolfile=yes
 # Include it here to save order of the mailboxes

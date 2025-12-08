@@ -22,6 +22,8 @@
     w3m
     # Open HTML emails in w3m
     mailcap
+    # To scan and open links
+    urlscan
   ];
 
   # Configs to add:
