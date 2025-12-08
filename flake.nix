@@ -192,7 +192,7 @@
         sshUser = "deploy";
         sshOpts = ["-i" "/home/alberand/.ssh/id_ed25519.pub"];
         interactiveSudo = false;
-        autoRollback = true;
+        autoRollback = false;
         remoteBuild = false;
         activationTimeout = 600;
         profiles.system = {
