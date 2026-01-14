@@ -68,24 +68,36 @@ in {
     "d /media/music 0755 media media - -"
     "d /media/in-progress 0755 media media - -"
     "d /media/new 0755 media media - -"
+    "d /media/youtube 0755 media media - -"
+    "d /media/anime 0755 media media - -"
+    "d /media/nosee 0755 media media - -"
     # Set a mask to allow main system user to have full permission
     "A /media/movies - - - - m::rwx"
     "A /media/shows - - - - m::rwx"
     "A /media/music - - - - m::rwx"
     "A /media/in-progress - - - - m::rwx"
     "A /media/new - - - - m::rwx"
+    "A /media/youtube - - - - m::rwx"
+    "A /media/anime - - - - m::rwx"
+    "A /media/nosee - - - - m::rwx"
     # Ensure "media" user/group has permissions to read/write media storage
     "A+ /media/movies - - - - u:media:rwx,g:media:rwx"
     "A+ /media/shows - - - - u:media:rwx,g:media:rwx"
     "A+ /media/music - - - - u:media:rwx,g:media:rwx"
     "A+ /media/in-progress - - - - u:media:rwx,g:media:rwx"
     "A+ /media/new - - - - u:media:rwx,g:media:rwx"
+    "A+ /media/youtube - - - - u:media:rwx,g:media:rwx"
+    "A+ /media/anime - - - - u:media:rwx,g:media:rwx"
+    "A+ /media/nosee - - - - u:media:rwx,g:media:rwx"
     # Grant main system user permission to read/write media storage
     "A+ /media/movies - - - - u:${config.user}:rwx"
     "A+ /media/shows - - - - u:${config.user}:rwx"
     "A+ /media/music - - - - u:${config.user}:rwx"
     "A+ /media/in-progress - - - - u:${config.user}:rwx"
     "A+ /media/new - - - - u:${config.user}:rwx"
+    "A+ /media/youtube - - - - u:${config.user}:rwx"
+    "A+ /media/anime - - - - u:${config.user}:rwx"
+    "A+ /media/nosee - - - - u:${config.user}:rwx"
   ];
 
   # TODO this need to be rootless container
