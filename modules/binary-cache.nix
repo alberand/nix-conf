@@ -10,14 +10,10 @@
   services.caddy = {
     enable = true;
     virtualHosts = {
-      "192.168.0.100:80".extraConfig = ''
+      "cache.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy ${config.services.nix-serve.bindAddress}:${
-          toString config.services.nix-serve.port
-        }
+        reverse_proxy ${config.services.nix-serve.bindAddress}:${toString config.services.nix-serve.port}
       '';
     };
   };
-
-  networking.firewall.allowedTCPPorts = [80];
 }
