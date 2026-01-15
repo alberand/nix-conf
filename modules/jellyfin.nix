@@ -163,6 +163,16 @@ in {
       lib,
       ...
     }: {
+      nixpkgs.overlays = [
+        (final: prev: {
+          # Jackett quite often fails tests and break builds
+          # https://github.com/NixOS/nixpkgs/issues/478145
+          jackett = prev.jackett.overrideAttrs (_oldAttrs: {
+            doCheck = false;
+          });
+        })
+      ];
+
       hardware.graphics = {
         enable = true;
       };

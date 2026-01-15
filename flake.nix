@@ -55,8 +55,6 @@
           beaker-client = redhat.packages."${system}".beaker-client;
           kup = redhat.packages."${system}".kup;
           xfstestsdb = redhat.packages."${system}".xfstestsdb;
-          # Can be removed soon https://github.com/NixOS/nixpkgs/issues/371837
-          jackett = unstable.jackett;
           xournalpp = unstable.xournalpp;
           jujutsu = unstable.jujutsu;
           # Want version 1.6.2
