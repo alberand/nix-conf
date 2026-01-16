@@ -268,11 +268,8 @@ require("telescope").setup({
   }
 })
 
--- Language server configurations
-local lspconfig = require('lspconfig')
-
 -- Python
-lspconfig['pyright'].setup{
+vim.lsp.config('pyright', {
     on_attach = on_attach,
     settings = {
       python = {
@@ -281,9 +278,9 @@ lspconfig['pyright'].setup{
         }
       }
     }
-}
+})
 
-lspconfig['ruff'].setup({
+vim.lsp.config('ruff', {
   on_attach = on_attach,
   init_options = {
     settings = {
@@ -302,40 +299,40 @@ lspconfig['ruff'].setup({
 })
 
 -- Javascript/HTML/CSS/typescript
-lspconfig['ts_ls'].setup{
+vim.lsp.config('ts_ls', {
     on_attach = on_attach,
-}
+})
 
-lspconfig['jsonls'].setup{
+vim.lsp.config('jsonls', {
     on_attach = on_attach,
-}
+})
 
-lspconfig['eslint'].setup{
+vim.lsp.config('eslint', {
     on_attach = on_attach,
-}
+})
 
-lspconfig['cssls'].setup{
+vim.lsp.config('cssls', {
     on_attach = on_attach,
-}
+})
 
-lspconfig['html'].setup{
+vim.lsp.config('html', {
     on_attach = on_attach,
-}
+})
 
 -- Rust
-lspconfig['rust_analyzer'].setup{
+vim.lsp.config('rust_analyzer', {
     on_attach = on_attach,
     settings = {
       ["rust-analyzer"] = {}
     }
-}
+})
 
 -- C
-lspconfig['clangd'].setup{
+vim.lsp.config('clangd', {
     on_attach = on_attach,
-}
+})
 
-lspconfig['nil_ls'].setup{}
+vim.lsp.config('nil_ls', {})
 
 local null_ls = require("null-ls")
 
