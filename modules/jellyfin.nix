@@ -187,7 +187,13 @@ in {
       users.groups.media = {
         name = "media";
         gid = uuid;
-        members = ["jellyfin" "sonarr" "radarr" "jackett" "lidarr"];
+        members = [
+          "jellyfin"
+          "sonarr"
+          "radarr"
+          "jackett"
+          "lidarr"
+        ];
       };
 
       environment.systemPackages = with pkgs; [
@@ -290,7 +296,7 @@ in {
 
   # binhex/arch-delugevpn uses iptables 'filter' table
   boot.kernelModules = ["iptable_filter"];
-  networking.extraHosts = ''10.10.10.50 deluge.containers'';
+  networking.extraHosts = "10.10.10.50 deluge.containers";
 
   virtualisation.oci-containers.containers = {
     "deluge" = {

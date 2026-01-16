@@ -99,9 +99,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.aalbersh =
-              pkgs.callPackage (import
-                ./machines/thinky/home.nix) {inherit agenix;};
+            home-manager.users.aalbersh = pkgs.callPackage (import ./machines/thinky/home.nix) {
+              inherit agenix;
+            };
           }
           agenix.nixosModules.default
           {
@@ -179,34 +179,29 @@
         activationTimeout = 600;
         profiles.system = {
           user = "root";
-          path =
-            deploy-rs.lib.x86_64-linux.activate.nixos
-            self.nixosConfigurations.quesada;
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.quesada;
         };
       };
 
       door = {
         hostname = "door.vps";
         sshUser = "deploy";
-        sshOpts = ["-i" "/home/alberand/.ssh/id_ed25519.pub"];
+        sshOpts = [
+          "-i"
+          "/home/alberand/.ssh/id_ed25519.pub"
+        ];
         interactiveSudo = false;
         autoRollback = false;
         remoteBuild = false;
         activationTimeout = 600;
         profiles.system = {
           user = "root";
-          path =
-            deploy-rs.lib.x86_64-linux.activate.nixos
-            self.nixosConfigurations.door;
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.door;
         };
       };
     };
 
     # This is highly advised, and will prevent many possible mistakes
-    checks =
-      builtins.mapAttrs
-      (system: deployLib:
-        deployLib.deployChecks self.deploy)
-      deploy-rs.lib;
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };
 }
