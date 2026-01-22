@@ -53,6 +53,9 @@
       # Pick only one of the below networking options.
       networkmanager.enable = true;
       networkmanager.dns = "systemd-resolved";
+      # This need to be investigated because this causes all requests to timeout
+      # first on ipv6 and then fall back to ipv4
+      enableIPv6 = false;
       # VPN configuration
       # Configure the NAT/Firewall
       firewall.enable = true;
