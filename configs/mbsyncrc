@@ -34,10 +34,10 @@ Far :gmail-remote:"[Gmail]/All Mail"
 # What we're connecting on a local side
 Near :redhat-local:inbox
 Sync All
-# Automatically create missing mailboxes, both locally and on the server
-Create Both
-# Sync the movement of messages between folders and deletions, add after making
-# sure the sync works
+# Don't create mailboxes, as I don't use them, both locally and on the server
+Create None
+# Remove messages on remote, removed locally
+Remove Both
 Expunge Both
 # Save the synchronization state files in the in channel (~/.mail/gmail)
 # directory
@@ -52,8 +52,8 @@ Far :gmail-remote:"[Gmail]/Sent Mail"
 # What we're connecting on a local side
 Near :redhat-local:sent
 Sync All
-# Automatically create missing mailboxes, both locally and on the server
-Create Both
+# Dont create mailboxes, as I don't use them, both locally and on the server
+Create None
 # Sync the movement of messages between folders and deletions, add after making
 # sure the sync works
 Expunge Both
