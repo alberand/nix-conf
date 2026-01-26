@@ -37,8 +37,8 @@ Sync All
 # Don't create mailboxes, as I don't use them, both locally and on the server
 Create None
 # Remove messages on remote, removed locally
-Remove Both
-Expunge Both
+Remove Near
+Expunge Near
 # Save the synchronization state files in the in channel (~/.mail/gmail)
 # directory
 SyncState *
