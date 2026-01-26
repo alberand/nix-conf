@@ -269,6 +269,7 @@ require("telescope").setup({
 })
 
 -- Python
+vim.lsp.enable('pyright')
 vim.lsp.config('pyright', {
     on_attach = on_attach,
     settings = {
@@ -280,6 +281,7 @@ vim.lsp.config('pyright', {
     }
 })
 
+vim.lsp.enable('ruff')
 vim.lsp.config('ruff', {
   on_attach = on_attach,
   init_options = {
@@ -299,27 +301,33 @@ vim.lsp.config('ruff', {
 })
 
 -- Javascript/HTML/CSS/typescript
+vim.lsp.enable('ts_ls')
 vim.lsp.config('ts_ls', {
     on_attach = on_attach,
 })
 
+vim.lsp.enable('jsonls')
 vim.lsp.config('jsonls', {
     on_attach = on_attach,
 })
 
+vim.lsp.enable('eslint')
 vim.lsp.config('eslint', {
     on_attach = on_attach,
 })
 
+vim.lsp.enable('cssls')
 vim.lsp.config('cssls', {
     on_attach = on_attach,
 })
 
+vim.lsp.enable('html')
 vim.lsp.config('html', {
     on_attach = on_attach,
 })
 
 -- Rust
+vim.lsp.enable('rust_analyzer')
 vim.lsp.config('rust_analyzer', {
     on_attach = on_attach,
     settings = {
@@ -328,10 +336,12 @@ vim.lsp.config('rust_analyzer', {
 })
 
 -- C
+vim.lsp.enable('clangd')
 vim.lsp.config('clangd', {
     on_attach = on_attach,
 })
 
+vim.lsp.enable('nil_ls')
 vim.lsp.config('nil_ls', {})
 
 local null_ls = require("null-ls")
