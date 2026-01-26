@@ -2,7 +2,7 @@
   home.packages = [pkgs.delta];
 
   programs.git = {
-    extraConfig = {
+    settings = {
       core = {pager = "delta";};
       interactive = {diffFilter = "delta --color-only";};
       merge = {

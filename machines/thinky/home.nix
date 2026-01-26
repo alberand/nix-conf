@@ -66,10 +66,10 @@
   };
 
   programs.git = {
-    extraConfig = {user = {signingkey = "46A7EA18AC33E108";};};
+    settings = {user = {signingkey = "46A7EA18AC33E108";};};
     ignores = [
       ".envrc"
-      # patch -p1 
+      # patch -p1
       "*.orig"
       "*.rej"
     ];
