@@ -49,7 +49,7 @@
         fixes = ''Fixes: %h ("%s")'';
       };
       am = {
-        threeWay = true;
+        threeWay = false;
       };
       rebase = {
         autostash = true;
