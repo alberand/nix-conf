@@ -2,6 +2,13 @@
 name = "Andrey Albershteyn"
 email = "aalbersh@kernel.org"
 
+# RHEL
+[[--scope]]
+--when.repositories = [ "~/Projects/rhel" ]
+[--scope.user]
+name = "Andrey Albershteyn"
+email = "aalbersh@redhat.com"
+
 [fsmonitor]
 backend = "watchman"
 watchman.register-snapshot-trigger = true

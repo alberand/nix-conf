@@ -85,7 +85,15 @@
       };
     };
 
-    includes = [{path = "~/.gitconfig.local";}];
+    includes = [
+      {
+        path = "~/.gitconfig.local";
+      }
+      {
+        path = "~/.gitconfig.redhat.local";
+        condition = "gitdir:~/Projects/rhel/**";
+      }
+    ];
 
     ignores = [
       "tmp"
