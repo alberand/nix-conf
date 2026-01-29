@@ -1,5 +1,6 @@
 {config, ...}: let
   uuid = 3000;
+  port = 55686;
 in {
   age.secrets.wg-private-file = {
     file = ../secrets/jellyfin-wg-client.age;
@@ -11,7 +12,7 @@ in {
   networking = {
     firewall = {
       allowedTCPPorts = [
-        55686
+        port
       ];
       allowedUDPPorts = [
         config.networking.wg-quick.interfaces.jellyfin-wg.listenPort
@@ -41,8 +42,8 @@ in {
         content = ''
           chain PREROUTING {
             type nat hook prerouting priority dstnat; policy accept;
-            iifname "jellyfin-wg" tcp dport 55686 dnat to 10.10.10.30:55686
-            iifname "wlo1" tcp dport 55686 dnat to 10.10.10.30:55686
+            iifname "jellyfin-wg" tcp dport 55686 dnat to 10.10.10.30:${builtins.toString port}
+            iifname "wlo1" tcp dport 55686 dnat to 10.10.10.30:${builtins.toString port}
           }
         '';
       };
@@ -250,7 +251,7 @@ in {
           enable = true;
           # TODO I have non-standard port for Jellyfin, revert it
           allowedTCPPorts = [
-            55686
+            port
           ];
         };
         # Use systemd-resolved inside the container
