@@ -57,7 +57,6 @@
     ".redhat/neomutt-jira.sh" = {source = ./configs/neomutt-jira.sh;};
     ".shrc.local" = {source = ./configs/shrc.local;};
     ".consolerc" = {source = ./configs/consolerc;};
-    ".config/jj/config.toml" = {source = ../../configs/jj.toml;};
   };
 
   programs.gpg = {

@@ -55,7 +55,6 @@
 
   home.file = {
     ".shrc.local" = {source = ./configs/shrc.local;};
-    ".config/jj/config.toml" = {source = ../../configs/jj.toml;};
   };
 
   # Script to check work VPN connectivity
