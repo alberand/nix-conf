@@ -43,6 +43,8 @@
     (writeShellScriptBin "tmux-sessionizer"
       (builtins.readFile ../configs/tmux-sessionizer))
     (writeShellScriptBin "todo" (builtins.readFile ../configs/todo.sh))
+    (writeShellScriptBin "build-test"
+      (builtins.readFile ../configs/build-test.sh))
   ];
 
   home.file = {
