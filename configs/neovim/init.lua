@@ -176,6 +176,20 @@ vim.keymap.set('i', '<leader>r', 'Reviewed-by: Andrey Albershteyn <aalbersh@kern
 vim.keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>')
 vim.keymap.set('n', '<leader>gl', '<cmd>Git log -p %<CR>')
 
+vim.filetype.add({
+  extension = {
+    trace = 'trace',
+  },
+  filename = {
+    ['trace.txt'] = 'trace',
+    ['trace.log'] = 'trace',
+  },
+  pattern = {
+    ['.*trace%.dat%.txt'] = 'trace',
+    ['.*%.trace'] = 'trace',
+  },
+})
+
 -- Plugins
 
 -- Status line
