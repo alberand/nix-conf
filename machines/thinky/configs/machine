@@ -10,7 +10,7 @@ help (){
 	echo "$(basename $0) [OPTIONS] name"
 	echo ""
 	echo "name must be in following format: dist_bugzilla"
-	echo "where dist is: rhel6 rhel7 rhel8 rhel9 cs8 cs9 fedora34 fedora35"
+	echo "where dist is: rhel6 rhel7 rhel8 rhel9 rhel10 cs8 cs9 fedora34 fedora35"
 	echo "where bugzilla is Bugzilla/JIRA ticket number"
 	echo ""
 	echo "For example:"
@@ -55,6 +55,10 @@ get_full_system_name(){
 		echo "CentOSStream9"
 	fi
 
+	if [[ "rhel10 cs10" == *$name* ]]; then
+		echo "CentOSStream10"
+	fi
+
 	if [[ $name =~ fedora[0-9]+ ]]; then
 		echo "Fedora${name: -2}"
 	fi
@@ -67,7 +71,7 @@ get_variant(){
 		echo "Workstation"
 	fi
 
-	if [[ "rhel8 rhel9 cs8 cs9" == *$name* ]]; then
+	if [[ "rhel8 rhel9 rhel10 cs8 cs9 cs10" == *$name* ]]; then
 		echo "BaseOS"
 	fi
 
@@ -103,11 +107,17 @@ get_remote_url(){
 		"rhel9")
 			repo="alberand-rh/centos-stream-9"
 			;;
+		"rhel10")
+			repo="alberand-rh/centos-stream-10"
+			;;
 		"cs8")
 			repo="alberand-rh/centos-stream-8"
 			;;
 		"cs9")
 			repo="alberand-rh/centos-stream-9"
+			;;
+		"cs10")
+			repo="alberand-rh/centos-stream-10"
 			;;
 		"linux")
 			repo="alberand-rh/linux"
