@@ -338,11 +338,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769081883,
-        "narHash": "sha256-BFe2GuNn5YDTPCNTc5JARMkHs6vTucyR9u0Zw6bygK8=",
+        "lastModified": 1770748576,
+        "narHash": "sha256-f/2Um1btQeSo/C4NL33jiTtRfu1wl+skJOqSAbd1dM0=",
         "owner": "alberand-rh",
         "repo": "redhat-nixos-workstation",
-        "rev": "c9cf5a82d3ea506ed2779acdb3e33471566c7478",
+        "rev": "afb7032ec80acda0e3c582281699f42d8827d6a8",
         "type": "gitlab"
       },
       "original": {
