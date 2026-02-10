@@ -26,10 +26,7 @@
 #   systemctl start openvpn-vpn.service
 # Check that everything works:
 #   curl <beaker url>
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   networking.firewall = {
     allowedTCPPorts = [
       1194 # openvpn
@@ -54,8 +51,16 @@
   };
 
   security.pki = {
-    certificateFiles = ["${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt" ../secrets/redhat.crt];
+    certificateFiles = [
+      "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
+      ../secrets/redhat.crt
+    ];
   };
+
+  systemd.services.nix-daemon.serviceConfig.Environment = [
+    # NOTE: this must be `ca-certificates.crt`, not `ca-bundle.crt` or any other value
+    "NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+  ];
 
   # Configure our OpenVPN client
   services.openvpn.servers = {
