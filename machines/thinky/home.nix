@@ -20,6 +20,7 @@
     neomutt
     notmuch
     xfstestsdb
+    kerneloscope
     (b4.overrideAttrs (final: prev: {
       version = "git";
       # Latest master as of 12.05.25
