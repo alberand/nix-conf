@@ -12,12 +12,10 @@ let
 in {
   "thinky-neomutt.age".publicKeys = [aalbersh thinky];
   "acme-env.age".publicKeys = [nixxy door alberand alberand-rsa];
-  "nextcloud.age".publicKeys = [nixxy alberand alberand-rsa];
   "cache-private-key.age".publicKeys = [nixxy alberand];
   "nixbuilder_ed25519.age".publicKeys = [aalbersh alberand thinky];
   "quesada-tskey.age".publicKeys = [alberand quesada];
   "gatus.age".publicKeys = [alberand nixxy];
-  "davfs.age".publicKeys = [alberand nixxy];
   "hskey.age".publicKeys = [alberand door nixxy];
   "door-cert.age".publicKeys = [alberand door];
   "door-key.age".publicKeys = [alberand door];

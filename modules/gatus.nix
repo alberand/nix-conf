@@ -164,25 +164,6 @@ in {
               ];
             }
             {
-              name = "Nextcloud";
-              url = "https://files.alberand.com/apps/theming/favicon/files?v=bcd3195f";
-              interval = "5m";
-              conditions = [
-                "[STATUS] == 200"
-                "[RESPONSE_TIME] < 500"
-              ];
-              alerts = [
-                {
-                  enabled = true;
-                  type = "telegram";
-                  failure-threshold = 2;
-                  success-threshold = 1;
-                  description = "Nextcloud is down!";
-                  send-on-resolved = true;
-                }
-              ];
-            }
-            {
               name = "DNS";
               url = "100.69.0.4";
               interval = "5m";

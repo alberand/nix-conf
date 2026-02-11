@@ -21,7 +21,6 @@
     ../../modules/binary-cache.nix
     ../../modules/jellyfin.nix
     ../../modules/containers-network.nix
-    ../../modules/nextcloud.nix
     ../../modules/gatus.nix
     ../../modules/rustdesk.nix
     ../../modules/projects-test.nix
@@ -291,94 +290,6 @@
       package = pkgs.openrgb-with-all-plugins;
       motherboard = "amd";
       server = {port = 6742;};
-    };
-
-    users.users.nextcloud-usb-sync = {
-      isNormalUser = true;
-      description = "User to sync nextcloud dir to USB flash drive";
-      uid = 3400;
-      group = "nextcloud-usb-sync";
-    };
-    users.groups.nextcloud-usb-sync.gid = 3400;
-
-    services.davfs2.enable = true;
-    age.secrets.davfs = {
-      file = ../../secrets/davfs.age;
-      path = "/etc/davfs2/secrets";
-    };
-
-    fileSystems = let
-      davfs-config = pkgs.writeTextFile {
-        name = "davfs-config";
-        text = ''
-          use_locks 0
-        '';
-      };
-    in {
-      # https://github.com/NixOS/nixpkgs/issues/24570
-      "/export/alberand" = {
-        device = "/home/alberand/Share/local";
-        options = ["bind"];
-      };
-
-      "/mnt/usb" = {
-        device = "/dev/disk/by-uuid/04E7-3687";
-        fsType = "auto";
-        options = [
-          "rw"
-          "uid=nextcloud-usb-sync"
-          "gid=nextcloud-usb-sync"
-          "umask=002"
-          "noauto"
-          "nofail"
-          "x-systemd.automount"
-          "x-systemd.idle-timeout=2"
-          "x-systemd.device-timeout=2"
-        ];
-      };
-      "/mnt/nextcloud" = {
-        device = "https://files.alberand.com/remote.php/dav/files/nextcloud-usb-sync";
-        fsType = "davfs";
-        options = [
-          "conf=${davfs-config}"
-          "rw"
-          "uid=nextcloud-usb-sync"
-          "gid=nextcloud-usb-sync"
-          "umask=002"
-          "noauto"
-          "nofail"
-          "x-systemd.automount"
-          "x-systemd.idle-timeout=2"
-          "x-systemd.device-timeout=2"
-        ];
-      };
-    };
-
-    systemd = {
-      timers = {
-        "nextcloud-usb-sync" = {
-          wantedBy = ["timers.target"];
-          timerConfig = {
-            OnCalendar = "*-*-* *:*:0/10";
-            Unit = "nextcloud-usb-sync.service";
-            Persistent = true;
-          };
-        };
-      };
-      services = {
-        "nextcloud-usb-sync" = {
-          serviceConfig = {
-            Type = "oneshot";
-            User = "nextcloud-usb-sync";
-            Group = "nextcloud-usb-sync";
-            DynamicUser = false;
-          };
-          unitConfig = {
-            ConditionPathExists = "/mnt/usb/flash.lock";
-          };
-          script = builtins.readFile ./configs/nextcloud-usb-sync.sh;
-        };
-      };
     };
 
     nix.settings.trusted-users = ["nixremote"];
