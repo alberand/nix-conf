@@ -209,6 +209,12 @@ in {
         group = "media";
       };
 
+      systemd.services.jellyfin.serviceConfig = {
+        MemoryAccounting = true;
+        MemoryHigh = "8G";
+        MemoryMax = "9G";
+      };
+
       services.radarr = {
         enable = true;
         openFirewall = true;
