@@ -212,9 +212,6 @@
       auto-optimise-store = true;
       extra-sandbox-paths = [config.programs.ccache.cacheDir];
       trusted-users = ["alberand" "aalbersh"];
-      trusted-public-keys = [
-        (builtins.readFile ../secrets/cache-public-key.pem)
-      ];
     };
     gc = {
       automatic = true;
