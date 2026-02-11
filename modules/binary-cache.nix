@@ -1,5 +1,5 @@
 {config, ...}: {
-  age.secrets.binary-cache-key.file = ../secrets/binary-cache-key.age;
+  age.secrets.cache-private-key.file = ../secrets/cache-private-key.age;
 
   # test with
   #   $ nix store info --store https://cache.alberand.com
@@ -14,7 +14,7 @@
   services.nix-serve = {
     enable = true;
     port = 5000;
-    secretKeyFile = config.age.secrets.binary-cache-key.path;
+    secretKeyFile = config.age.secrets.cache-private-key.path;
   };
 
   services.caddy = {

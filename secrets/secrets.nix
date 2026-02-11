@@ -13,7 +13,7 @@ in {
   "thinky-neomutt.age".publicKeys = [aalbersh thinky];
   "acme-env.age".publicKeys = [nixxy door alberand alberand-rsa];
   "nextcloud.age".publicKeys = [nixxy alberand alberand-rsa];
-  "binary-cache-key.age".publicKeys = [nixxy alberand];
+  "cache-private-key.age".publicKeys = [nixxy alberand];
   "nixbuilder_ed25519.age".publicKeys = [aalbersh alberand thinky];
   "quesada-tskey.age".publicKeys = [alberand quesada];
   "gatus.age".publicKeys = [alberand nixxy];
