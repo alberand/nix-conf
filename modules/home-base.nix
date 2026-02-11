@@ -54,7 +54,7 @@
     ".fdignore" = {source = ../configs/fdignore;};
     ".config/kitty/kitty.conf" = {source = ../configs/kitty;};
     ".tmux.conf" = {source = ../configs/tmux.conf;};
-    ".config/jj/config.toml" = {source = ../../configs/jj.toml;};
+    ".config/jj/config.toml" = {source = ../configs/jj.toml;};
   };
 
   services.gpg-agent = {
