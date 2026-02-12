@@ -167,6 +167,14 @@
           protocols tls1.3
         }
       '';
+
+      "grafana.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 127.0.0.1:3000
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
     };
   };
 }

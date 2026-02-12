@@ -29,6 +29,7 @@
     ../../modules/copyparty.nix
     ../../modules/immich.nix
     ../../modules/storage-box.nix
+    ../../modules/monitoring.nix
   ];
 
   config = {
