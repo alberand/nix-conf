@@ -6,6 +6,7 @@
     address = "0.0.0.0";
     settings = {
       REDLIB_DEFAULT_SHOW_NSFW = "on";
+      REDLIB_DEFAULT_USE_HLS = "on";
       THEME = "dark";
     };
   };
