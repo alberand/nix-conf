@@ -271,10 +271,21 @@
       ensureDatabases = ["kvart"];
       ensureUsers = [
         {
+          name = "alberand";
+          ensureClauses.superuser = true;
+        }
+        {
           name = "kvart";
           ensureDBOwnership = true;
         }
       ];
+      extensions = ps: with ps; [
+        postgis
+      ];
+      # This probably doesn't work as it need to be run in specific database
+      initialScript = pkgs.writeText "init-sql-script" ''
+        CREATE EXTENSION postgis;
+      '';
     };
 
     # services.nfs.server.enable = true;
