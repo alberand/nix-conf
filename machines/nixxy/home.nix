@@ -84,4 +84,50 @@
         categories = [ "Development" "Utility" ];
     };
   };
+
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+    matchBlocks = {
+      "*" = {
+        addKeysToAgent = "yes";
+        forwardAgent = true;
+        serverAliveInterval = 15;
+        serverAliveCountMax = 3;
+        userKnownHostsFile = "~/.ssh/known_hosts";
+      };
+      door = {
+        hostname = "77.90.6.241";
+        user = "alberand";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      hetzner-backup = {
+        hostname = "u486743.your-storagebox.de";
+        user = "u486743";
+        port = 23;
+        addressFamily = "inet";
+      };
+      nemambyt = {
+        hostname = "89.221.212.102";
+        user = "root";
+        port = 42424;
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      nemambytc = {
+        hostname = "10.233.2.2";
+        user = "root";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+        proxyJump = "nemambyt";
+      };
+      work = {
+        hostname = "100.69.0.3";
+        user = "aalbersh";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+      };
+    };
+  };
 }
