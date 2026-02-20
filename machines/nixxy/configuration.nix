@@ -30,6 +30,7 @@
     ../../modules/immich.nix
     ../../modules/storage-box.nix
     ../../modules/monitoring.nix
+    ../../modules/miniflux.nix
   ];
 
   config = {

@@ -175,6 +175,14 @@
           protocols tls1.3
         }
       '';
+
+      "miniflux.alberand.com".extraConfig = ''
+        encode gzip
+        reverse_proxy 127.0.0.1:9191
+        tls ${cert} ${key} {
+          protocols tls1.3
+        }
+      '';
     };
   };
 }

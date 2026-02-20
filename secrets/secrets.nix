@@ -31,4 +31,6 @@ in {
   "nixxy-rclone-key.age".publicKeys = [alberand nixxy];
   "restic-hetzner-key.age".publicKeys = [alberand nixxy];
   "restic-password.age".publicKeys = [alberand nixxy];
+  "miniflux-id.age".publicKeys = [alberand nixxy];
+  "miniflux-secret.age".publicKeys = [alberand nixxy];
 }
