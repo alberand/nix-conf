@@ -1,5 +1,5 @@
 -- Theme
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd[[colorscheme alabaster-dark]]
 
 -- <leader> key
 vim.g.mapleader = ","

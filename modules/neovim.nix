@@ -11,6 +11,7 @@ in {
   xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
   xdg.configFile."nvim/ftplugin".source = ../configs/ftplugin;
   xdg.configFile."nvim/syntax".source = ../configs/neovim/syntax;
+  xdg.configFile."nvim/colors".source = ../configs/neovim/colors;
 
   home.packages = with pkgs; [
     vscode-langservers-extracted
