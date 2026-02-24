@@ -10,10 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    redhat = {
-      url = "gitlab:alberand-rh/redhat-nixos-workstation";
-      inputs.nixpkgs.follows = "unstablepkgs";
-    };
+    redhat.url = "gitlab:alberand-rh/redhat-nixos-workstation";
     agenix.url = "github:ryantm/agenix";
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
