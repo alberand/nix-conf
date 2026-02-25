@@ -27,6 +27,7 @@ notmuch tag +newsletters -inbox -new -- from:mhibbets@redhat.com
 # Mailing lists
 notmuch tag +list +fstests -inbox -new -- to:fstests@vger.kernel.org
 notmuch tag +list +linux-xfs -inbox -new -- to:linux-xfs@vger.kernel.org or cc:linux-xfs@vger.kernel.org
+notmuch tag +list +fsverity -inbox -new -- to:fsverity@vger.kernel.org or cc:fsverity@vger.kernel.org
 notmuch tag +list +linux-fsdevel -inbox -new -- to:linux-fsdevel@vger.kernel.org
 notmuch tag +list +kernel-info -inbox -new -- to:kernel-info@redhat.com
 notmuch tag +list +memos -inbox -new -newsletters -- to:memo-list@redhat.com

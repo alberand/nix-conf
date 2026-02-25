@@ -12,5 +12,8 @@ set folder       = "~/.mail/korg/inbox"
 unmailboxes *
 virtual-mailboxes "inbox" "notmuch://?query=tag:korg"
 virtual-mailboxes "xfsprogs" "notmuch://?query=tag:xfsprogs-list"
+virtual-mailboxes "xfs" "notmuch://?query=tag:linux-xfs"
+virtual-mailboxes "fsverity" "notmuch://?query=tag:fsverity"
+virtual-mailboxes "fsdevel" "notmuch://?query=tag:linux-fsdevel"
 
 color status     brightgreen    blue	# korg
