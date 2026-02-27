@@ -4,7 +4,7 @@
   ...
 }: {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.lib.mkDefault pkgs.linuxPackages_latest;
     kernelParams = ["mitigations=off"];
     tmp.cleanOnBoot = true;
     loader.systemd-boot.configurationLimit = 5;
