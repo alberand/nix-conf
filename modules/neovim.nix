@@ -7,6 +7,15 @@
       sha256 = "70kp644jOtJ4wguty/SUFX+YEsoxW12LGg3vZh7BdPY=";
     };
   };
+  nn = pkgs.vimUtils.buildVimPlugin {
+    name = "99";
+    src = pkgs.fetchFromGitHub {
+      owner = "ThePrimeagen";
+      repo = "99";
+      rev = "6a64e0b2f4c7f1e3911db1f8318e5d7c68cb8dff";
+      hash = "sha256-OOj2bnhxn3Ou7VQOmi3RVPcVs+CqolnJzEgfkXk2p5Q=";
+    };
+  };
 in {
   xdg.configFile."nvim/init.lua".source = ../configs/neovim/init.lua;
   xdg.configFile."nvim/ftplugin".source = ../configs/ftplugin;
@@ -57,6 +66,7 @@ in {
       gitsigns-nvim
       vim-fugitive
       vim-svelte
+      nn
     ];
     extraConfig = ''
       set noexpandtab
