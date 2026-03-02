@@ -141,6 +141,10 @@ in {
         hostPath = "/media";
         isReadOnly = false;
       };
+      "/bigdata" = {
+        hostPath = "/bigdata";
+        isReadOnly = false;
+      };
       # On the host jellyseerr config is stored at
       # /media/var/lib/jellyseerr/config. On the guest, jellyseerr has
       # DynamicUser enabled, that's means that service unit will have private
