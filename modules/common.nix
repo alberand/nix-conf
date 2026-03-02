@@ -208,6 +208,9 @@
 
   services.upower.enable = true;
 
+  # ZSH autocomplete
+  environment.pathsToLink = [ "/share/zsh" ];
+
   nix = {
     settings = {
       auto-optimise-store = true;

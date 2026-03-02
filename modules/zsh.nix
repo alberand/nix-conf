@@ -1,12 +1,22 @@
-{pkgs, config, ...}: {
+{pkgs, ...}: {
+  home.packages = [
+    pkgs.zsh-completions
+  ];
+
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
     oh-my-zsh = {
       enable = true;
       theme = "robbyrussell";
     };
     autosuggestion.enable = true;
-    plugins = [];
+    plugins = [
+      {
+        name = "zsh-completions";
+        src = "${pkgs.zsh-completions}/share/zsh/site-functions";
+      }
+    ];
     history = {
       ignoreDups = true;
       save = 50000;
@@ -143,6 +153,37 @@
       if [ -f ~/.shrc.local ]; then
           . ~/.shrc.local
       fi
+
+      # Hook to dynamically load completions from Nix devShells and direnv
+      autoload -U add-zsh-hook
+      _DIRENV_LAST_PATH=""
+      
+      _load_nix_completions() {
+        # Only run if direnv/Nix just updated the PATH
+        if [[ "$PATH" == "$_DIRENV_LAST_PATH" ]]; then
+          return
+        fi
+        _DIRENV_LAST_PATH="$PATH"
+        
+        local -a new_fpaths
+        # Scan the current PATH for matching zsh completion directories
+        for p in ''${(s.:.)PATH}; do
+          local comp_dir="''${p%/bin}/share/zsh/site-functions"
+          # If the directory exists and isn't already in fpath, add it
+          if [[ -d "$comp_dir" ]] && [[ -z "''${fpath[(r)$comp_dir]}" ]]; then
+            new_fpaths+=("$comp_dir")
+          fi
+        done
+
+        # If we found new completion directories, append them and reload compinit
+        if (( ''${#new_fpaths[@]} )); then
+          fpath=($new_fpaths $fpath)
+          compinit -D # The -D flag prevents slow cache rebuilds
+        fi
+      }
+      
+      # Run this check before every prompt
+      add-zsh-hook precmd _load_nix_completions
 
       # Run Sway on tty0 automatically
       if [[ "$(tty)" == /dev/tty1 ]]; then
