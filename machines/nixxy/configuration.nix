@@ -56,6 +56,14 @@
           preLVM = true;
         };
       };
+
+      swraid = {
+        enable = true;
+        mdadmConf = ''
+          PROGRAM ${pkgs.coreutils}/bin/true
+          ARRAY /dev/md0 level=raid1 num-devices=2 metadata=1.2 UUID=e1a6ff50:7594b005:4442e9ab:9d5c5251
+        '';
+      };
     };
 
     # Vulkan API/OpenCL API/Modern AMD Graphics Core Next (GCN) GPUs
@@ -214,6 +222,7 @@
       openrgb-plugin-effects
       wireshark
       parted
+      mdadm
     ];
 
     virtualisation = {
