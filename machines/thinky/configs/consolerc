@@ -1,9 +1,9 @@
 config * {
-    master conserver-01.host.prod.eng.brq2.redhat.com;
-    username aalbersh;
-    port 782;
+	master conserver1.cons-002.prod.brq2.dc.redhat.com;
+	username aalbersh;
+	port 782;
 }
 terminal xterm {
-        attach "^[]0;conserver: U@C^G";
-        attachsubst U=us,C=cs;
+	attach "^[]0;conserver: U@C^G";
+	attachsubst U=us,C=cs;
 }
