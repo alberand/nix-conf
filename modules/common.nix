@@ -211,6 +211,8 @@
   # ZSH autocomplete
   environment.pathsToLink = [ "/share/zsh" ];
 
+  programs.command-not-found.enable = true;
+
   nix = {
     settings = {
       auto-optimise-store = true;
