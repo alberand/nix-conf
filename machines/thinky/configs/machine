@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+# Command if I need to install this manually:
+# dnf install --skip-unavailable acl attr automake bc dbench dump e2fsprogs fio \
+# 	gawk gcc gdbm-devel git kernel-devel indent libacl-devel libaio-devel \
+# 	libcap-devel libtool liburing-devel libuuid-devel lvm2 make psmisc \
+# 	python3 quota sed sqlite udftools xfsprogs btrfs-progs exfatprogs \
+# 	f2fs-tools ocfs2-tools openssl xfsdump xfsprogs-devel inih inih-devel \
+# 	userspace-rcu userspace-rcu-devel libblkid libblkid-devel wget rsync \
+# 	bison flex ncurses-devel openssl-devel dwarves cscope trace-cmd indent \
+# 	fsverity-utils tmux
+
 REPO_ARCHIVE="https://gitlab.com/alberand-rh/rh-dotfiles/-/archive/master/rh-dotfiles-master.zip"
 GIT_CLONE_TASK_URL="$REPO_ARCHIVE#rh-dotfiles-master/git-clone-task"
 FSTEST_TASK_URL="$REPO_ARCHIVE#rh-dotfiles-master/fstests-task"
