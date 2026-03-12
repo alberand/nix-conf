@@ -163,7 +163,10 @@
       SUBSYSTEMS=="usb", ATTR{idVendor}=="8564", ATTR{idProduct}=="1000", MODE="0660", OWNER="alberand"
     '';
 
-    services.openssh.settings.AllowUsers = ["alberand" "forgejo"];
+    services.openssh.settings.AllowUsers = [
+      "alberand"
+      "forgejo"
+    ];
 
     users.users.nixremote = {
       isNormalUser = true;
@@ -262,11 +265,17 @@
         folders = {
           "Documents" = {
             path = "/home/alberand/Share/Documents";
-            devices = ["lonmoun" "nothing-phone"];
+            devices = [
+              "lonmoun"
+              "nothing-phone"
+            ];
           };
           "Photos" = {
             path = "/media/photos/nothing-phone";
-            devices = ["lonmoun" "nothing-phone"];
+            devices = [
+              "lonmoun"
+              "nothing-phone"
+            ];
           };
           "quesada-photos" = {
             path = "/media/photos/quesada";
@@ -311,7 +320,9 @@
       enable = true;
       package = pkgs.openrgb-with-all-plugins;
       motherboard = "amd";
-      server = {port = 6742;};
+      server = {
+        port = 6742;
+      };
     };
 
     nix.settings.trusted-users = ["nixremote"];
