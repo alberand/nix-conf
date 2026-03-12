@@ -25,7 +25,6 @@
     ../../modules/rustdesk.nix
     ../../modules/projects-test.nix
     ../../modules/stirling-pdf.nix
-    ../../modules/redlib.nix
     ../../modules/copyparty.nix
     ../../modules/immich.nix
     ../../modules/storage-box.nix

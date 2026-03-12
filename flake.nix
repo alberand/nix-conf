@@ -62,7 +62,6 @@
           # Want version 1.6.2
           pocket-id = unstable.pocket-id;
           claude = redhat.packages."${system}".claude;
-          redlib = unstable.redlib;
         })
         copyparty.overlays.default
       ];
