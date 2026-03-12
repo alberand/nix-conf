@@ -33,5 +33,4 @@ in {
   "restic-password.age".publicKeys = [alberand nixxy];
   "miniflux-id.age".publicKeys = [alberand nixxy];
   "miniflux-secret.age".publicKeys = [alberand nixxy];
-  "pinchflat.age".publicKeys = [alberand nixxy];
 }

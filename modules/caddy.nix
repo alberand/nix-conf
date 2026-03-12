@@ -183,14 +183,6 @@
           protocols tls1.3
         }
       '';
-
-      "pinchflat.alberand.com".extraConfig = ''
-        encode gzip
-        reverse_proxy 127.0.0.1:8945
-        tls ${cert} ${key} {
-          protocols tls1.3
-        }
-      '';
     };
   };
 }

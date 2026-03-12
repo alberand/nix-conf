@@ -31,7 +31,6 @@
     ../../modules/storage-box.nix
     ../../modules/monitoring.nix
     ../../modules/miniflux.nix
-    ../../modules/pinchflat.nix
   ];
 
   config = {
