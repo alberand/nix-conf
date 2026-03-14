@@ -32,7 +32,6 @@
     "d /media/backup 0755 restic restic - -"
     "A /media/backup - - - - m::rwx"
     "A+ /media/backup - - - - u:restic:rwx,g:restic:rwx"
-    "A+ /media/backup - - - - u:${config.user}:rwx"
     "A /var/lib/minecraft - - - - m::rwx"
     "A+ /var/lib/minecraft - - - - u:restic:rwx,g:restic:rwx"
   ];

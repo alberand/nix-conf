@@ -20,9 +20,7 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /media/copyparty 0755 copyparty copyparty - -"
-    "A /media/copyparty - - - - m::rwx"
-    "A+ /media/copyparty - - - - u:${config.user}:rwx"
+    "d /media/copyparty 2755 copyparty copyparty -"
   ];
 
   services.copyparty = {

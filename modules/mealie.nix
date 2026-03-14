@@ -19,9 +19,8 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    # Ensure forgejo configuration dir exists
-    "d /media/var/lib/mealie 0755 mealie mealie - -"
-    "d /media/cstate/mealie/var/lib/mealie 0755 mealie mealie - -"
+    "d /media/var/lib/mealie 2755 mealie mealie -"
+    "d /media/cstate/mealie/var/lib/mealie 2755 mealie mealie -"
   ];
 
   containers.food = {

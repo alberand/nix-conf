@@ -19,10 +19,7 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d /media/cstate/stirling-pdf/var/lib/stirling-pdf 0755 stirling-pdf stirling-pdf - -"
-    "A /media/cstate/stirling-pdf/var/lib/stirling-pdf - - - - m::rwx"
-    "A+ /media/cstate/stirling-pdf/var/lib/stirling-pdf - - - - u:stirling-pdf:rwx"
-    "A+ /media/cstate/stirling-pdf/var/lib/stirling-pdf - - - - u:${config.user}:rwx"
+    "d /media/cstate/stirling-pdf/var/lib/stirling-pdf 2755 stirling-pdf stirling-pdf -"
   ];
 
   containers.stirling-pdf = {

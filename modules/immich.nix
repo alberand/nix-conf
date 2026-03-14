@@ -19,11 +19,8 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d /media/cstate/immich/var/lib 0755 immich immich - -"
-    "d /media/photos/immich 0755 immich immich - -"
-    "A /media/photos/immich - - - - m::rwx"
-    "A+ /media/photos/immich - - - - u:immich:rwx"
-    "A+ /media/photos/immich - - - - u:${config.user}:rwx"
+    "d /media/cstate/immich/var/lib 2755 immich immich -"
+    "d /media/photos/immich 2755 immich immich -"
   ];
 
   containers.immich = {

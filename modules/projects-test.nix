@@ -4,13 +4,7 @@
   ...
 }: {
   systemd.tmpfiles.rules = [
-    "d /var/lib/www 0755 caddy caddy - -"
-    # Set a mask to allow main system user to have full permission
-    "A /var/lib/www - - - - m::rwx"
-    # Grant caddy user/group to read/write git storage
-    "A+ /var/lib/www - - - - u:caddy:rwx,g:caddy:rwx"
-    # Grant main system user permission to read/write git storage
-    "A+ /var/lib/www - - - - u:${config.user}:rwx"
+    "d /var/lib/www 2755 caddy caddy -"
   ];
 
   services.caddy = {

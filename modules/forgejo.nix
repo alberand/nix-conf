@@ -23,18 +23,8 @@ in {
   users.groups.forgejo.gid = uuid;
 
   systemd.tmpfiles.rules = [
-    # Ensure forgejo configuration dir exists
-    "d /media/cstate/forgejo/var/lib/forgejo 0755 forgejo forgejo - -"
-    # Ensure forgejo repositories and lsf directories exists
-    "d /media/forgejo 0755 forgejo forgejo - -"
-    "d /media/forgejo/repositories 0755 forgejo forgejo - -"
-    "d /media/forgejo/lsf 0755 forgejo forgejo - -"
-    # Set a mask to allow main system user to have full permission
-    "A /media/forgejo - - - - m::rwx"
-    # Grant forgejo user/group to read/write git storage
-    "A+ /media/forgejo - - - - u:forgejo:rwx,g:forgejo:rwx"
-    # Grant main system user permission to read/write git storage
-    "A+ /media/forgejo - - - - u:${config.user}:rwx"
+    "d /media/cstate/forgejo/var/lib/forgejo 2755 forgejo forgejo -"
+    "d /media/forgejo 2755 forgejo forgejo -"
   ];
 
   services.openssh = {

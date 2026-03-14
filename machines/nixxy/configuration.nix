@@ -191,6 +191,13 @@
         "disk"
         "dialout"
         "nextcloud-usb-sync"
+        "media"
+        "stirling-pdf"
+        "copyparty"
+        "immich"
+        "mealie"
+        "forgejo"
+        "caddy"
       ];
       openssh.authorizedKeys.keyFiles = [
         ../../secrets/nothing_ed25519.pub
