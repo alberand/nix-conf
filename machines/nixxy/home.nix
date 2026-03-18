@@ -128,6 +128,18 @@
         identitiesOnly = true;
         identityFile = "~/.ssh/id_ed25519";
       };
+      rpi-zero-lan = {
+        hostname = "192.168.0.104";
+        user = "alberand";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      rpi-zero = {
+        hostname = "100.69.0.11";
+        user = "alberand";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+      };
     };
   };
 }
