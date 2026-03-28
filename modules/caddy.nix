@@ -120,9 +120,9 @@
         }
       '';
 
-      "deluge.alberand.com".extraConfig = ''
+      "transmission.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy 10.10.10.50:8112
+        reverse_proxy localhost:9091
         tls ${cert} ${key} {
           protocols tls1.3
         }

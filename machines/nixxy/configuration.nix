@@ -30,6 +30,7 @@
     ../../modules/storage-box.nix
     ../../modules/monitoring.nix
     ../../modules/miniflux.nix
+    ../../modules/transmission.nix
   ];
 
   config = {

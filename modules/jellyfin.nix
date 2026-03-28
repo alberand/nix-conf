@@ -246,37 +246,37 @@ in {
     };
   };
 
-  boot.kernelPatches = [
-    {
-      name = "iptables-deluge-config";
-      patch = null;
-      extraConfig = ''
-        NETFILTER_XTABLES_LEGACY y
-        NETFILTER_XT_NAT m
-        IP_NF_IPTABLES_LEGACY m
-        IP_NF_FILTER m
-        IP_NF_TARGET_REJECT m
-        IP_NF_NAT m
-        IP_NF_MANGLE m
-        IP6_NF_IPTABLES_LEGACY m
-        IP6_NF_FILTER m
-        IP6_NF_TARGET_REJECT m
-        IP6_NF_MANGLE m
+  # boot.kernelPatches = [
+  #   {
+  #     name = "iptables-deluge-config";
+  #     patch = null;
+  #     extraConfig = ''
+  #       NETFILTER_XTABLES_LEGACY y
+  #       NETFILTER_XT_NAT m
+  #       IP_NF_IPTABLES_LEGACY m
+  #       IP_NF_FILTER m
+  #       IP_NF_TARGET_REJECT m
+  #       IP_NF_NAT m
+  #       IP_NF_MANGLE m
+  #       IP6_NF_IPTABLES_LEGACY m
+  #       IP6_NF_FILTER m
+  #       IP6_NF_TARGET_REJECT m
+  #       IP6_NF_MANGLE m
 
-        NETFILTER y
-        NETFILTER_ADVANCED y
-        NETFILTER_XTABLES m
-        IP_NF_IPTABLES m
-        IP6_NF_IPTABLES m
-        NETFILTER_XT_MATCH_STATE m
-        NETFILTER_XT_MATCH_CONNTRACK m
-        NETFILTER_XT_TARGET_LOG m
-        NETFILTER_XT_TARGET_MASQUERADE m
-        NF_CONNTRACK m
-        NF_NAT m
-      '';
-    }
-  ];
+  #       NETFILTER y
+  #       NETFILTER_ADVANCED y
+  #       NETFILTER_XTABLES m
+  #       IP_NF_IPTABLES m
+  #       IP6_NF_IPTABLES m
+  #       NETFILTER_XT_MATCH_STATE m
+  #       NETFILTER_XT_MATCH_CONNTRACK m
+  #       NETFILTER_XT_TARGET_LOG m
+  #       NETFILTER_XT_TARGET_MASQUERADE m
+  #       NF_CONNTRACK m
+  #       NF_NAT m
+  #     '';
+  #   }
+  # ];
 
   # binhex/arch-delugevpn uses iptables 'filter' table
   boot.kernelModules = ["iptable_filter"];
