@@ -21,31 +21,37 @@
     notmuch
     xfstestsdb
     kerneloscope
-    (b4.overrideAttrs (final: prev: {
-      version = "git";
-      # Latest master as of 12.05.25
-      src = pkgs.fetchFromGitHub {
-        owner = "alberand";
-        repo = "b4";
-        rev = "8ea8cb28ee8ade9075cea64954d15e31e6242ca6";
-        sha256 = "sha256-Bphg3n5SpB21CpMBr29i5n7rYC1UTkSY3LEJ5C+hi1s=";
-      };
+    (b4.overrideAttrs (
+      final: prev: {
+        version = "git";
+        # Latest master as of 12.05.25
+        src = pkgs.fetchFromGitHub {
+          owner = "alberand";
+          repo = "b4";
+          rev = "8ea8cb28ee8ade9075cea64954d15e31e6242ca6";
+          sha256 = "sha256-Bphg3n5SpB21CpMBr29i5n7rYC1UTkSY3LEJ5C+hi1s=";
+        };
 
-      propagatedBuildInputs =
-        prev.propagatedBuildInputs
-        ++ (with python3Packages; [
-          packaging
-        ]);
-    }))
+        propagatedBuildInputs =
+          prev.propagatedBuildInputs
+          ++ (with python3Packages; [
+            packaging
+          ]);
+      }
+    ))
     # Script to open serial console to Beaker machine
-    (let
-      wrapper =
-        writeShellScriptBin "con" (builtins.readFile ./configs/console.sh);
-    in
-      pkgs.symlinkJoin {
-        name = "conserver-bkr";
-        paths = [(conserver.override {gssapiSupport = true;}) wrapper];
-      })
+    (
+      let
+        wrapper = writeShellScriptBin "con" (builtins.readFile ./configs/console.sh);
+      in
+        pkgs.symlinkJoin {
+          name = "conserver-bkr";
+          paths = [
+            (conserver.override {gssapiSupport = true;})
+            wrapper
+          ];
+        }
+    )
     # Git script to backport fixes from upstream to downstream
     (writeShellScriptBin "git-bp" (builtins.readFile ./configs/git-bp))
     # Beaker script to reserve machines for testing
@@ -53,22 +59,38 @@
   ];
 
   home.file = {
-    ".notmuch-config" = {source = ./configs/notmuch-config;};
-    ".redhat/notmuch-hook.sh" = {source = ./configs/notmuch-hook.sh;};
-    ".redhat/neomutt-jira.sh" = {source = ./configs/neomutt-jira.sh;};
-    ".shrc.local" = {source = ./configs/shrc.local;};
-    ".consolerc" = {source = ./configs/consolerc;};
+    ".notmuch-config" = {
+      source = ./configs/notmuch-config;
+    };
+    ".redhat/notmuch-hook.sh" = {
+      source = ./configs/notmuch-hook.sh;
+    };
+    ".redhat/neomutt-jira.sh" = {
+      source = ./configs/neomutt-jira.sh;
+    };
+    ".shrc.local" = {
+      source = ./configs/shrc.local;
+    };
+    ".consolerc" = {
+      source = ./configs/consolerc;
+    };
   };
 
   xdg.configFile."niri/config.kdl".source = ./configs/niri.kdl;
 
   programs.gpg = {
     enable = true;
-    settings = {default-key = "46A7EA18AC33E108";};
+    settings = {
+      default-key = "46A7EA18AC33E108";
+    };
   };
 
   programs.git = {
-    settings = {user = {signingkey = "46A7EA18AC33E108";};};
+    settings = {
+      user = {
+        signingkey = "46A7EA18AC33E108";
+      };
+    };
     ignores = [
       ".envrc"
       # patch -p1
@@ -97,9 +119,7 @@
       "custom/vpn".exec = builtins.readFile ./configs/vpn-check.sh;
       # Waybar widget to show SSH and Kerberos state
       "custom/access".exec =
-        (pkgs.writeShellScriptBin "access"
-          (builtins.readFile ./configs/access.sh))
-        + "/bin/access";
+        (pkgs.writeShellScriptBin "access" (builtins.readFile ./configs/access.sh)) + "/bin/access";
 
       modules-right = lib.mkForce [
         "custom/access"
@@ -136,6 +156,22 @@
   home.file = {
     ".config/pkcs11/modules/opensc.module" = {
       source = ./configs/opensc.module;
+    };
+  };
+
+  programs.rofi = {
+    enable = true;
+    theme = "sidebar";
+    font = "sans-serif";
+    package = pkgs.rofi;
+    modes = [
+      "drun"
+      "run"
+      "window"
+      "ssh"
+    ];
+    extraConfig = {
+      show-icons = true;
     };
   };
 }
