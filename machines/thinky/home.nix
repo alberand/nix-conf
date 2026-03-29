@@ -60,6 +60,8 @@
     ".consolerc" = {source = ./configs/consolerc;};
   };
 
+  xdg.configFile."niri/config.kdl".source = ./configs/niri.kdl;
+
   programs.gpg = {
     enable = true;
     settings = {default-key = "46A7EA18AC33E108";};

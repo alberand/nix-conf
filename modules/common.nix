@@ -142,7 +142,6 @@
   };
 
   programs.ssh = {
-    startAgent = true;
     agentTimeout = null;
   };
 

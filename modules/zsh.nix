@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
@@ -146,7 +146,7 @@
 
       # Run Sway on tty0 automatically
       if [[ "$(tty)" == /dev/tty1 ]]; then
-          exec sway
+          exec niri-session
       fi
     '';
   };
