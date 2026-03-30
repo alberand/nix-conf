@@ -28,8 +28,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "alberand";
           repo = "b4";
-          rev = "8ea8cb28ee8ade9075cea64954d15e31e6242ca6";
-          sha256 = "sha256-Bphg3n5SpB21CpMBr29i5n7rYC1UTkSY3LEJ5C+hi1s=";
+          rev = "ad80ce422da0ca1e3c4f2be8de21faf7421918d0";
+          sha256 = "sha256-zrnKEP9W5Cktzw/UaGW1cL4+nVKicnIPCs+7qnEgqzc=";
         };
 
         propagatedBuildInputs =
