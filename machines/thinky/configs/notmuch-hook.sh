@@ -41,6 +41,7 @@ notmuch tag +bot +bugzilla -inbox -new -- from:bugzilla-daemon@kernel.org
 notmuch tag +bot +bugzilla -inbox -new -- to:bugzilla@redhat.com
 notmuch tag +bot +bugzilla -inbox -new -- to:bugzilla-daemon@kernel.org
 notmuch tag +bot +bugzilla -inbox -new -- from:jira-issues@redhat.com
+notmuch tag +bot +bugzilla -inbox -new -- from:fs-maint@redhat.com
 notmuch tag -unread -- from:jira-issues@redhat.com and from:"Errata Tool (Jira)"
 notmuch tag -unread -- from:jira-issues@redhat.com and from:"Gitlab-jira-bot Gitlab-redhat (Jira)"
 
