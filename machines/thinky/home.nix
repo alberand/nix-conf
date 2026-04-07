@@ -1,4 +1,4 @@
-{agenix}: {
+{agenix, noctalia}: {
   config,
   pkgs,
   lib,
@@ -10,6 +10,8 @@
     ../../modules/neomutt.nix
     ../../modules/redhat-beaker.nix
     ./modules/maintainer.nix
+    ./modules/noctalia.nix
+    noctalia.homeModules.default
   ];
 
   home.username = "aalbersh";

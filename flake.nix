@@ -18,6 +18,10 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     copyparty.url = "github:9001/copyparty";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -33,6 +37,7 @@
     deploy-rs,
     headscale-pkce,
     copyparty,
+    noctalia,
   }: let
     system = "x86_64-linux";
     unstable = import unstablepkgs {
@@ -98,12 +103,15 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.aalbersh = pkgs.callPackage (import ./machines/thinky/home.nix) {
-              inherit agenix;
+              inherit agenix noctalia;
             };
           }
           agenix.nixosModules.default
           {
-            environment.systemPackages = [agenix.packages.${system}.default];
+            environment.systemPackages = [
+              agenix.packages.${system}.default
+              noctalia.packages.${system}.default
+            ];
           }
         ];
       };

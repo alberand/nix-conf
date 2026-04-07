@@ -162,6 +162,13 @@
 
     programs.niri.enable = true;
 
+    nix.settings = {
+      extra-substituters = ["https://noctalia.cachix.org"];
+      extra-trusted-public-keys = [
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+      ];
+    };
+
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave
