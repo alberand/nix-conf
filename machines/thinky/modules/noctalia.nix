@@ -22,16 +22,22 @@
           ];
           center = [
             {
-              hideUnoccupied = false;
+              hideUnoccupied = true;
               id = "Workspace";
               labelMode = "none";
             }
           ];
           right = [
             {
-              alwaysShowPercentage = false;
+              alwaysShowPercentage = true;
               id = "Battery";
-              warningThreshold = 30;
+              warningThreshold = 15;
+            }
+            {
+              id = "Volume";
+            }
+            {
+              id = "Brightness";
             }
             {
               formatHorizontal = "HH:mm";
@@ -73,6 +79,70 @@
       };
       dock = {
         enabled = false;
+      };
+      controlCenter.cards = [
+        {
+          enabled = true;
+          id = "profile-card";
+        }
+        {
+          enabled = true;
+          id = "shortcuts-card";
+        }
+        {
+          enabled = true;
+          id = "audio-card";
+        }
+        {
+          enabled = false;
+          id = "brightness-card";
+        }
+        {
+          enabled = true;
+          id = "weather-card";
+        }
+        {
+          enabled = false;
+          id = "media-sysmon-card";
+        }
+      ];
+
+      appLauncher = {
+        enableClipboardHistory = true;
+        autoPasteClipboard = false;
+        enableClipPreview = true;
+        clipboardWrapText = true;
+        enableClipboardSmartIcons = true;
+        enableClipboardChips = true;
+        clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
+        clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
+        position = "center";
+        pinnedApps = [];
+        sortByMostUsed = true;
+        terminalCommand = "kitty";
+        customLaunchPrefixEnabled = false;
+        customLaunchPrefix = "";
+        viewMode = "list";
+        showCategories = true;
+        iconMode = "tabler";
+        showIconBackground = false;
+        enableSettingsSearch = true;
+        enableWindowsSearch = true;
+        enableSessionSearch = true;
+        ignoreMouseInput = false;
+        screenshotAnnotationTool = "";
+        overviewLayer = false;
+        density = "default";
+      };
+
+      nightLight = {
+        enabled = true;
+        forced = false;
+        autoSchedule = true;
+        nightTemp = "4000";
+        dayTemp = "6500";
+        manualSunrise = "06:30";
+        manualSunset = "18:30";
       };
     };
     # this may also be a string or a path to a JSON file.

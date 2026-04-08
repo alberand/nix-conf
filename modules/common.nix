@@ -206,6 +206,8 @@
     config = {common = {default = ["gtk"];};};
   };
 
+  services.upower.enable = true;
+
   nix = {
     settings = {
       auto-optimise-store = true;
