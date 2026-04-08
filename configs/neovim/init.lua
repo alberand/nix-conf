@@ -89,18 +89,16 @@ vim.opt.wrap = true
 -- Undo history
 vim.opt.undofile = true
 
--- Linux dev related
--- Whitespace damage
--- vim.cmd[[ highlight RedundantSpaces ctermbg=red guibg=red ]]
--- vim.cmd[[ match RedundantSpaces /\s\+$\| \+\ze\t/ ]]
+-- Whitespace damage (highlight trailing whitespace with red background)
 vim.api.nvim_set_hl(0, 'TrailingWhitespace', { bg='red' })
-vim.api.nvim_create_autocmd('BufEnter', {
-	pattern = '*',
-	command = [[
-		syntax clear TrailingWhitespace |
-		syntax match TrailingWhitespace "\_s\+$"
-	]]}
-)
+
+-- autocmd to match trailing whitespace
+vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufRead', 'BufNewFile' }, {
+  pattern = '*',
+  callback = function()
+    vim.fn.matchadd('TrailingWhitespace', '\\s\\+$')
+  end,
+})
 
 -- Use .vimrc if it is appear in current folder. !!!DANGER!!!
 vim.opt.exrc = true
