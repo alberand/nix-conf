@@ -23,6 +23,7 @@
     notmuch
     xfstestsdb
     kerneloscope
+    lynx
     (b4.overrideAttrs (
       final: prev: {
         version = "git";
