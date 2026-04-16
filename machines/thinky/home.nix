@@ -9,9 +9,9 @@
     ../../modules/home-base.nix
     ../../modules/neomutt.nix
     ../../modules/redhat-beaker.nix
-    ./modules/maintainer.nix
-    ./modules/noctalia.nix
+    ../../modules/noctalia.nix
     noctalia.homeModules.default
+    ./modules/maintainer.nix
   ];
 
   home.username = "aalbersh";
@@ -77,8 +77,6 @@
       source = ./configs/consolerc;
     };
   };
-
-  xdg.configFile."niri/config.kdl".source = ./configs/niri.kdl;
 
   programs.gpg = {
     enable = true;

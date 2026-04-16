@@ -1,4 +1,4 @@
-{
+{noctalia}: {
   config,
   pkgs,
   lib,
@@ -6,6 +6,8 @@
 }: {
   imports = [
     ../../modules/home-base.nix
+    ../../modules/noctalia.nix
+    noctalia.homeModules.default
   ];
 
   home.username = "alberand";

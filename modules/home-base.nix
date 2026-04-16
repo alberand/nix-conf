@@ -56,6 +56,7 @@
     ".tmux.conf" = {source = ../configs/tmux.conf;};
     ".config/jj/config.toml" = {source = ../configs/jj.toml;};
   };
+  xdg.configFile."niri/config.kdl".source = ../configs/niri.kdl;
 
   services.gpg-agent = {
     enable = true;

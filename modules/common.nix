@@ -213,6 +213,8 @@
 
   programs.command-not-found.enable = true;
 
+  programs.niri.enable = true;
+
   nix = {
     settings = {
       auto-optimise-store = true;
@@ -220,6 +222,10 @@
       trusted-users = ["alberand" "aalbersh"];
       trusted-public-keys = [
         (builtins.readFile ../secrets/cache-public-key.pem)
+      ];
+      extra-substituters = ["https://noctalia.cachix.org"];
+      extra-trusted-public-keys = [
+        "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
       ];
     };
     gc = {

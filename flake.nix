@@ -80,11 +80,16 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.alberand = import ./machines/nixxy/home.nix;
+            home-manager.users.alberand = pkgs.callPackage (import ./machines/nixxy/home.nix) {
+              inherit noctalia;
+            };
           }
           agenix.nixosModules.default
           {
-            environment.systemPackages = [agenix.packages.${system}.default];
+            environment.systemPackages = [
+              agenix.packages.${system}.default
+              noctalia.packages.${system}.default
+            ];
           }
           copyparty.nixosModules.default
         ];
