@@ -28,7 +28,6 @@
   };
 
   networking.firewall = {
-    enable = true;
     interfaces.headscale = {
       allowedTCPPorts = [
         80

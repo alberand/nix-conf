@@ -4,7 +4,6 @@
   ...
 }: {
   networking.firewall = {
-    enable = true;
     interfaces.headscale.allowedTCPPorts = [
       21115
       21116
