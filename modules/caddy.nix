@@ -121,7 +121,7 @@
 
       "transmission.alberand.com".extraConfig = ''
         encode gzip
-        reverse_proxy localhost:9091
+        reverse_proxy 10.30.10.10:9091
         tls ${cert} ${key} {
           protocols tls1.3
         }

@@ -111,6 +111,7 @@
       "cbr"
       "enp34s0"
       "jellyfin-wg"
+      "transmission"
     ];
     networking.nat.externalInterface = "wlo1";
     networking.nat.internalIPs = [

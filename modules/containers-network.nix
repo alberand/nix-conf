@@ -5,10 +5,21 @@
   networking.useNetworkd = true;
 
   systemd.network = {
-    netdevs."cbr" = {
-      netdevConfig = {
-        Name = "cbr";
-        Kind = "bridge";
+    netdevs = {
+      "cbr" = {
+        netdevConfig = {
+          Name = "cbr";
+          Kind = "bridge";
+        };
+      };
+      "transmission" = {
+        netdevConfig = {
+          Name = "transmission";
+          Kind = "veth";
+        };
+        peerConfig = {
+          Name = "tc";
+        };
       };
     };
 
@@ -27,6 +38,12 @@
             Destination = "10.10.10.0/24";
           }
         ];
+      };
+      "30-transmission" = {
+        matchConfig.Name = "tc";
+        networkConfig = {
+          Address = "10.30.10.100/24";
+        };
       };
     };
   };
