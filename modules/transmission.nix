@@ -11,11 +11,11 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /bigdata/transmission             2755 media media -"
-    "d /bigdata/download                 2755 media media -"
-    "d /bigdata/download/download        2755 media media -"
-    "d /bigdata/download/incomplete      2755 media media -"
-    "d /bigdata/download/watch           2755 media media -"
+    "d /bigdata/transmission                    2755 media media -"
+    "d /bigdata/transmission/download           2755 media media -"
+    "d /bigdata/transmission/download/watch     2755 media media -"
+    "d /bigdata/media/download                  2755 media media -"
+    "d /bigdata/media/incomplete                2755 media media -"
   ];
 
   systemd.services."netns@" = {
@@ -129,10 +129,10 @@
 
         settings = {
           watch-dir-enabled = true;
-          watch-dir = "/bigdata/download/watch";
+          watch-dir = "/bigdata/transmission/download/watch";
           incomplete-dir-enabled = true;
-          incomplete-dir = "/bigdata/download/incomplete";
-          download-dir = "/bigdata/download/download";
+          incomplete-dir = "/bigdata/media/incomplete";
+          download-dir = "/bigdata/media/download";
           umask = "022";
           message-level = 5;
           rpc-bind-address = "10.30.10.10";
