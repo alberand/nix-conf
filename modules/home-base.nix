@@ -37,6 +37,7 @@
     zoxide
     devenv
     mergiraf
+    colordiff
 
     (writeShellScriptBin "calc"
       "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
@@ -45,6 +46,8 @@
     (writeShellScriptBin "todo" (builtins.readFile ../configs/todo.sh))
     (writeShellScriptBin "build-test"
       (builtins.readFile ../configs/build-test.sh))
+    (writeShellScriptBin "compare-branches"
+      (builtins.readFile ../configs/compare-branches.sh))
   ];
 
   home.file = {

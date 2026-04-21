@@ -24,6 +24,7 @@ fp = ["show", "--git", "--template", "git_format_patch_email_headers"]
 mine = ["bookmark", "list", "-r", "mine()"]
 tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 build-test = ["util", "exec", "--", "build-test"]
+cb = ["util", "exec", "--", "compare-branches"]
 
 [ui]
 default-command = "l"
