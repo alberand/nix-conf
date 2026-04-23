@@ -7,16 +7,15 @@ cover=$(jj log -r "(first_ancestors($branch) & empty())" --no-graph -n 1 -T 'cha
 total=$(($(jj log -r $cover:: -T 'change_id ++ "\n"' --no-graph | wc -l) - 3))
 
 for i in $(seq $total -1 0); do
-	output=$(jj --config-file $HOME/.config/jj/config.toml interdiff \
+	output=$(jj interdiff \
 			--to "parents($branch, $i)" \
 			--from "parents($original, $i)" \
-			--no-pager \
-			--git)
+			2>&1)
 	if [ -n "$output" ]; then
 		jj log \
 			-r "parents($branch, $i)" \
 			-T 'change_id.shortest() ++ " (" ++ commit_id.short() ++ ") " ++ description.first_line() ++ "\n"'\
 			--no-graph
-		echo "$output" | colordiff
+		echo "$output"
 	fi
 done
