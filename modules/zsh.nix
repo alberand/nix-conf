@@ -26,6 +26,7 @@
 
     shellAliases = {
       claude = "cd /home/aalbersh/claude && ${pkgs.claude}/bin/claude";
+      unrpm = "function unrpm { ${pkgs.rpm}/bin/rpm2cpio $1 | ${pkgs.cpio}/bin/cpio -idmv }; unrpm ";
     };
 
     initContent = ''
