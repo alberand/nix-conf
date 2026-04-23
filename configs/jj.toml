@@ -31,6 +31,7 @@ default-command = "l"
 pager = "bat --plain --tabs 8"
 paginate = "auto"
 merge-editor = "mergiraf"
+diff-formatter = ["delta", "--no-gitconfig", "--color-only", "$left", "$right"]
 
 [colors]
 # Highlight hunks with background

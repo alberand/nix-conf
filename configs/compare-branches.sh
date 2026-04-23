@@ -7,7 +7,7 @@ cover=$(jj log -r "(first_ancestors($branch) & empty())" --no-graph -n 1 -T 'cha
 total=$(($(jj log -r $cover:: -T 'change_id ++ "\n"' --no-graph | wc -l) - 3))
 
 for i in $(seq $total -1 0); do
-	output=$(jj interdiff \
+	output=$(jj --config-file $HOME/.config/jj/config.toml interdiff \
 			--to "parents($branch, $i)" \
 			--from "parents($original, $i)" \
 			--no-pager \

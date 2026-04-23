@@ -30,6 +30,7 @@
     zathura
     zlib
     qpwgraph
+    delta
     jujutsu
     watchman # needed by jujutsu
     stgit
