@@ -28,10 +28,10 @@ cb = ["util", "exec", "--", "compare-branches"]
 
 [ui]
 default-command = "l"
-pager = "delta --no-gitconfig --color-only"
+pager = "delta-safe"
 paginate = "auto"
 merge-editor = "mergiraf"
-diff-formatter = ["delta", "--no-gitconfig", "--color-only", "$left", "$right"]
+diff-formatter = ["delta-safe", "$left", "$right"]
 
 # Expect 1 exit code as delta returns 1 if diff is not empty
 [merge-tools.delta]
