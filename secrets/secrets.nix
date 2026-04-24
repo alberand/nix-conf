@@ -33,5 +33,6 @@ in {
   "restic-password.age".publicKeys = [alberand nixxy];
   "miniflux-id.age".publicKeys = [alberand nixxy];
   "miniflux-secret.age".publicKeys = [alberand nixxy];
-  "transmission-wg.age".publicKeys = [alberand nixxy];
+  "deluge-wg.age".publicKeys = [alberand nixxy];
+  "deluge-auth.age".publicKeys = [alberand nixxy];
 }

@@ -30,7 +30,7 @@
     ../../modules/storage-box.nix
     ../../modules/monitoring.nix
     ../../modules/miniflux.nix
-    ../../modules/transmission.nix
+    ../../modules/deluge.nix
   ];
 
   config = {
@@ -111,7 +111,7 @@
       "cbr"
       "enp34s0"
       "jellyfin-wg"
-      "transmission"
+      "dc"
     ];
     networking.nat.externalInterface = "wlo1";
     networking.nat.internalIPs = [

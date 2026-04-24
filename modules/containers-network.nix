@@ -12,13 +12,13 @@
           Kind = "bridge";
         };
       };
-      "transmission" = {
+      "deluge" = {
         netdevConfig = {
-          Name = "transmission";
+          Name = "deluge";
           Kind = "veth";
         };
         peerConfig = {
-          Name = "tc";
+          Name = "dc";
         };
       };
     };
@@ -39,8 +39,8 @@
           }
         ];
       };
-      "30-transmission" = {
-        matchConfig.Name = "tc";
+      "30-deluge" = {
+        matchConfig.Name = "dc";
         networkConfig = {
           Address = "10.30.10.100/24";
         };
