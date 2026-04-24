@@ -42,7 +42,7 @@
     prismlauncher # Minecraft launcher
     rust-analyzer
     steam
-    #telegram-desktop
+    telegram-desktop
     thunderbird
     libreoffice
     rustfmt
