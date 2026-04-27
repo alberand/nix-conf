@@ -83,6 +83,12 @@
         # Current branch with upstream
         cb = "!git rev-parse --abbrev-ref $(git rev-parse --abbrev-ref HEAD)@{u}";
       };
+      advice = {
+        setUpstreamFailure = false;
+      };
+      tag = {
+        gpgSign = true;
+      };
     };
 
     includes = [
