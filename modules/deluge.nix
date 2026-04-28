@@ -149,9 +149,9 @@
           share_ratio_limit = 2;
           max_connections_global = 200;
           max_download_speed = 5000;
-          max_active_seeding = 10;
+          max_active_seeding = 100;
           max_active_downloading = 10;
-          max_active_limit = 20;
+          max_active_limit = 100;
           dont_count_slow_torrents = true;
           queue_new_to_top = true;
           stop_seed_at_ratio = true;
