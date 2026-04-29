@@ -87,6 +87,10 @@
 
     services.openssh.settings.AllowUsers = ["aalbersh"];
 
+    users.groups.aalbersh ={
+      gid = 1000;
+      members = ["aalbersh"];
+    };
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.aalbersh = {
       isNormalUser = true;
@@ -94,6 +98,7 @@
       uid = 1000;
       shell = pkgs.zsh;
       extraGroups = [
+        "aalbersh"
         "wheel"
         "sudo"
         "libvirtd"

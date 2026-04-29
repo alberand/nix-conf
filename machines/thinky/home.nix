@@ -22,7 +22,8 @@
     neomutt
     notmuch
     xfstestsdb
-    kerneloscope
+    #kerneloscope
+    toolbox
     lynx
     (b4.overrideAttrs (
       final: prev: {
