@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     unstablepkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    headscale-pkce.url = "github:alberand/nixpkgs/headscale-pkce";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +34,6 @@
     disko,
     impermanence,
     deploy-rs,
-    headscale-pkce,
     copyparty,
     noctalia,
   }: let
@@ -135,14 +133,10 @@
             disabledModules = [
               # Want version 1.6.2
               "services/security/pocket-id.nix"
-              # PKCE config options
-              # https://github.com/NixOS/nixpkgs/pull/427132
-              "services/networking/headscale.nix"
             ];
 
             imports = [
               "${unstablepkgs}/nixos/modules/services/security/pocket-id.nix"
-              "${headscale-pkce}/nixos/modules/services/networking/headscale.nix"
             ];
           }
         ];
