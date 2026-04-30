@@ -38,7 +38,6 @@
     freecad
     gimp
     inkscape
-    kicad
     prismlauncher # Minecraft launcher
     rust-analyzer
     steam
