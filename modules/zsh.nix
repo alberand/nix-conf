@@ -186,7 +186,7 @@
       # Run this check before every prompt
       add-zsh-hook precmd _load_nix_completions
 
-      # Run Sway on tty0 automatically
+      # Run Niri on tty0 automatically
       if [[ "$(tty)" == /dev/tty1 ]]; then
           exec niri-session
       fi

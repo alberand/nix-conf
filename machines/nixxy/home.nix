@@ -58,20 +58,7 @@
     ".shrc.local" = {source = ./configs/shrc.local;};
   };
 
-  # Script to check work VPN connectivity
-  programs.waybar.settings.mainBar."custom/vpn".exec =
-    builtins.readFile ./configs/vpn-check.sh;
-
-  wayland.windowManager.sway.config = {
-    startup = [
-      {command = "swaymsg 'workspace 1; exec firefox'";}
-      {command = "swaymsg 'workspace 2; exec kitty'";}
-      {command = "swaymsg 'workspace 10; exec thunderbird'";}
-      {command = "swaymsg 'exec \"sleep 1; flameshot\"'";}
-    ];
-  };
-
-  # Shinjira 
+  # Shinjira
   xdg.desktopEntries = {
     shinjira = {
         name = "Shinjira";

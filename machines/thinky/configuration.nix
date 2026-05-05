@@ -121,7 +121,6 @@
     # $ nix search wget
     environment.systemPackages = with pkgs; [
       bemenu # wayland clone of dmenu
-      mako # notification system developed by swaywm maintainer
       wdisplays # tool to configure displays
       revumatic
       koji

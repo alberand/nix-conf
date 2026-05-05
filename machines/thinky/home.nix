@@ -101,55 +101,6 @@
     ];
   };
 
-  # Auto-run applications
-  wayland.windowManager.sway.config = {
-    startup = [
-      {command = "swaymsg 'workspace 1; exec firefox'";}
-      {command = "swaymsg 'workspace 2; exec kitty'";}
-      {command = "swaymsg 'exec \"sleep 1; flameshot\"'";}
-    ];
-
-    keybindings = {
-      "Mod1+p" = lib.mkForce "exec wofi --show run";
-    };
-  };
-
-  # Waybar widgets position and battery
-  programs.waybar = {
-    settings.mainBar = {
-      # Waybar widget to show work VPN connectivity
-      "custom/vpn".exec = builtins.readFile ./configs/vpn-check.sh;
-      # Waybar widget to show SSH and Kerberos state
-      "custom/access".exec =
-        (pkgs.writeShellScriptBin "access" (builtins.readFile ./configs/access.sh)) + "/bin/access";
-
-      modules-right = lib.mkForce [
-        "custom/access"
-        "battery"
-        "pulseaudio"
-        "network"
-        "custom/vpn"
-        "sway/language"
-        "custom/suspend"
-        "tray"
-      ];
-
-      "battery" = {
-        bat = "BAT0";
-        interval = 60;
-        states = {
-          warning = 30;
-          critical = 15;
-        };
-        format = "{capacity}% {icon}";
-        #format-icons = {
-        #default = ["", "", "", "", "", "", ""];
-        #};
-        max-length = 25;
-      };
-    };
-  };
-
   # Prevent Firefox from querying Nitrokey
   #
   # Firefox is setup to query Smart Cards and for that reason it talks to

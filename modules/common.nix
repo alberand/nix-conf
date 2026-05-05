@@ -159,7 +159,6 @@
 
   security.polkit.enable = true;
   security.pam.services.swaylock = {};
-  systemd.user.services.waybar.enable = true;
   systemd.user.services.swayidle.enable = true;
 
   # Wireshark permissions

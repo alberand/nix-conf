@@ -2,10 +2,7 @@
   imports = [
     ./neovim.nix
     ./zsh.nix
-    ./waybar.nix
     ./wofi.nix
-    ./mako.nix
-    ./sway.nix
     ./git.nix
     ./tmux.nix
     ./kanshi.nix
@@ -24,7 +21,6 @@
     jq
     ripgrep
     util-linux
-    waybar
     wl-clipboard
     xdg-utils
     zathura
@@ -75,9 +71,6 @@
     defaultCacheTtl = 34560000;
     maxCacheTtl = 34560000;
   };
-
-  # So, we can autostart it via sway
-  services.flameshot = {enable = false;};
 
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
