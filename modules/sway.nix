@@ -36,8 +36,6 @@
       # autostart
       startup = [
         {command = "exec blueman-applet";}
-        {command = "exec easyeffects";}
-        {command = "exec qpwgraph";}
       ];
 
       # Display device configuration

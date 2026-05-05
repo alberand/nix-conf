@@ -105,7 +105,6 @@
     vulkan-headers
     vulkan-loader
     vulkan-tools
-    easyeffects
     adwaita-icon-theme
     gnomeExtensions.appindicator
     qalculate-gtk
