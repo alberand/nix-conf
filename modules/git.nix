@@ -135,6 +135,11 @@
       # clang cache
       ".cache"
       "*.loT"
+
+      # kd files
+      ".kd"
+      ".kd.toml"
+      ".envrc"
     ];
   };
 }
