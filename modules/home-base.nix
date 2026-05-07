@@ -84,6 +84,7 @@
     ".config/kitty/kitty.conf" = {source = ../configs/kitty;};
     ".tmux.conf" = {source = ../configs/tmux.conf;};
     ".config/jj/config.toml" = {source = ../configs/jj.toml;};
+    ".emailaliases" = {source = ../configs/emailaliases;};
   };
   xdg.configFile."niri/config.kdl".source = ../configs/niri.kdl;
 

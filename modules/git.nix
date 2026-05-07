@@ -89,6 +89,10 @@
       tag = {
         gpgSign = true;
       };
+      sendemail = {
+        aliasesFile = "~/.emailaliases";
+        aliasFileType = "mutt";
+      };
     };
 
     includes = [

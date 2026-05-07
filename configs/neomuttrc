@@ -80,14 +80,8 @@ bind generic / search-reverse
 bind generic <Esc>/ search
 
 # People
-alias me Andrey Albershteyn <aalbersh@redhat.com>
-alias eric Eric Sandeen <esandeen@redhat.com>
-alias cem Carlos Maiolino <cmaiolino@redhat.com>
-alias bill Bill O'Donnel <bodonnel@redhat.com>
-alias dave Dave Chinner <dchinner@redhat.com>
-alias djwong Darrick J. Wong <djwong@kernel.org>
-alias xfs linux-xfs <linux-xfs@vger.kernel.org>
-alias fstests fstests <fstests@vger.kernel.org>
+set alias_file = "~/.emailaliases"
+source $alias_file
 
 # Add some colors (theme)
 source ~/.config/neomutt/dracula.muttrc
