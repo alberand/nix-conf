@@ -116,6 +116,13 @@
         identitiesOnly = true;
         identityFile = "~/.ssh/id_ed25519";
       };
+      tester = {
+        hostname = "fs-i40c-09.fast.eng.rdu2.dc.redhat.com";
+        user = "aalbersh";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+        proxyJump = "work";
+      };
       rpi-zero-lan = {
         hostname = "192.168.0.104";
         user = "alberand";
