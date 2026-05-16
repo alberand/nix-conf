@@ -104,7 +104,7 @@
         identityFile = "~/.ssh/id_ed25519";
       };
       nemambytc = {
-        hostname = "10.233.2.2";
+        hostname = "10.10.10.200";
         user = "root";
         identitiesOnly = true;
         identityFile = "~/.ssh/id_ed25519";
