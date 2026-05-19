@@ -84,6 +84,7 @@
           443 # https
           5000 # binary cache
           4141
+          11111 # proxy
         ];
         allowedUDPPorts = [
           443 # https
@@ -330,6 +331,19 @@
       motherboard = "amd";
       server = {
         port = 6742;
+      };
+    };
+
+    # Exit node
+    services.privoxy = {
+      enable = true;
+      settings = {
+        listen-address = "100.69.0.1:11111";
+        # Deny all connections first (default deny)
+        deny-access = "0.0.0.0/0";
+
+        # Allow only specific IP address
+        permit-access = "100.69.0.0/24";
       };
     };
 
