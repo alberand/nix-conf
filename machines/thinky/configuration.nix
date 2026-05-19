@@ -87,7 +87,7 @@
 
     services.openssh.settings.AllowUsers = ["aalbersh"];
 
-    users.groups.aalbersh ={
+    users.groups.aalbersh = {
       gid = 1000;
       members = ["aalbersh"];
     };

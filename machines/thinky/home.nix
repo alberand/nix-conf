@@ -1,4 +1,7 @@
-{agenix, noctalia}: {
+{
+  agenix,
+  noctalia,
+}: {
   config,
   pkgs,
   lib,

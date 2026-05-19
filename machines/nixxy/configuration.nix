@@ -307,9 +307,10 @@
           ensureDBOwnership = true;
         }
       ];
-      extensions = ps: with ps; [
-        postgis
-      ];
+      extensions = ps:
+        with ps; [
+          postgis
+        ];
       # This probably doesn't work as it need to be run in specific database
       initialScript = pkgs.writeText "init-sql-script" ''
         CREATE EXTENSION postgis;

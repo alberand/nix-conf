@@ -158,14 +158,14 @@
       # Hook to dynamically load completions from Nix devShells and direnv
       autoload -U add-zsh-hook
       _DIRENV_LAST_PATH=""
-      
+
       _load_nix_completions() {
         # Only run if direnv/Nix just updated the PATH
         if [[ "$PATH" == "$_DIRENV_LAST_PATH" ]]; then
           return
         fi
         _DIRENV_LAST_PATH="$PATH"
-        
+
         local -a new_fpaths
         # Scan the current PATH for matching zsh completion directories
         for p in ''${(s.:.)PATH}; do
@@ -182,7 +182,7 @@
           compinit -D # The -D flag prevents slow cache rebuilds
         fi
       }
-      
+
       # Run this check before every prompt
       add-zsh-hook precmd _load_nix_completions
 

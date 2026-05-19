@@ -207,7 +207,7 @@
   services.upower.enable = true;
 
   # ZSH autocomplete
-  environment.pathsToLink = [ "/share/zsh" ];
+  environment.pathsToLink = ["/share/zsh"];
 
   programs.command-not-found.enable = true;
 

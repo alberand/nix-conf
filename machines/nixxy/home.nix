@@ -61,15 +61,15 @@
   # Shinjira
   xdg.desktopEntries = {
     shinjira = {
-        name = "Shinjira";
-        genericName = "Shinjira";
-        comment = "Handle URL Scheme shinjira://";
-        exec = "/home/alberand/Projects/shin/echo.sh %u";
-        terminal = false;
-        type = "Application";
-        mimeType = ["x-scheme-handler/shinjira"];
-        icon = "potato-icon";
-        categories = [ "Development" "Utility" ];
+      name = "Shinjira";
+      genericName = "Shinjira";
+      comment = "Handle URL Scheme shinjira://";
+      exec = "/home/alberand/Projects/shin/echo.sh %u";
+      terminal = false;
+      type = "Application";
+      mimeType = ["x-scheme-handler/shinjira"];
+      icon = "potato-icon";
+      categories = ["Development" "Utility"];
     };
   };
 
