@@ -99,6 +99,13 @@
       up = builtins.readFile ../configs/client.up;
       down = builtins.readFile ../configs/client.down;
     };
+    brq2-proxy = {
+      config = "config /etc/openvpn/ovpn-brq2-tcp-proxy.conf";
+      # Don't autostart as VPN needs credentials
+      autoStart = false;
+      up = builtins.readFile ../configs/client.up;
+      down = builtins.readFile ../configs/client.down;
+    };
     brq2-udp = {
       config = "config /etc/openvpn/ovpn-brq2-udp.conf";
       # Don't autostart as VPN needs credentials
