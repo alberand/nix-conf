@@ -30,6 +30,8 @@
     lynx
     agenix.packages.${system}.default
     noctalia.packages.${system}.default
+    tmt
+    tft-cli
     (b4.overrideAttrs (
       final: prev: {
         version = "git";

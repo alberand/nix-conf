@@ -57,6 +57,8 @@
         # Want version 1.6.2
         pocket-id = unstable.pocket-id;
         claude = redhat.packages."${system}".claude;
+        tmt = redhat.packages."${system}".tmt;
+        tft-cli = redhat.packages."${system}".tft-cli;
       }
     );
     pkgs = import nixpkgs {
