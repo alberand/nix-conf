@@ -39,7 +39,7 @@
       "http://test.nemambyt.com:4242".extraConfig = ''
         encode gzip
         handle_path /api/* {
-          reverse_proxy 10.10.10.69:33333
+          reverse_proxy 10.10.10.69:6969
         }
 
         handle {
