@@ -296,14 +296,25 @@
 
     services.postgresql = {
       enable = true;
-      ensureDatabases = ["kvart"];
+      ensureDatabases = [
+        "kvart"
+        "nemambyt"
+      ];
       ensureUsers = [
+        {
+          name = "root";
+          ensureClauses.superuser = true;
+        }
         {
           name = "alberand";
           ensureClauses.superuser = true;
         }
         {
           name = "kvart";
+          ensureDBOwnership = true;
+        }
+        {
+          name = "nemambyt";
           ensureDBOwnership = true;
         }
       ];
@@ -314,6 +325,16 @@
       # This probably doesn't work as it need to be run in specific database
       initialScript = pkgs.writeText "init-sql-script" ''
         CREATE EXTENSION postgis;
+      '';
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database  DBuser    auth-method
+        local all       all       trust
+        host  all       all       127.0.0.1/32    trust
+        host  all       all       ::1/128         trust
+        host  kvart     kvart     10.10.10.69/32  trust
+        host  nemambyt  kvart     10.10.10.69/32  trust
+        host  kvart     nemambyt  10.10.10.69/32  trust
+        host  nemambyt  nemambyt  10.10.10.69/32  trust
       '';
     };
 
