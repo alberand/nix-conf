@@ -128,6 +128,12 @@
       claude
     ];
 
+    environment.variables = {
+      REQUESTS_CA_BUNDLE = "/etc/ssl/certs/ca-certificates.crt";
+      SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+      NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+    };
+
     # Enable WeeChat to run as service with attached 'screen' session To
     # attach use: screen -x weechat/wc
     nixpkgs.overlays = [
