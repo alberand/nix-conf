@@ -102,9 +102,6 @@
     };
     ignores = [
       ".envrc"
-      # patch -p1
-      "*.orig"
-      "*.rej"
     ];
   };
 
