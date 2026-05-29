@@ -397,11 +397,11 @@
         "nixpkgs-unstable": "nixpkgs-unstable"
       },
       "locked": {
-        "lastModified": 1779892355,
-        "narHash": "sha256-rmq3SQJNQlKO9V5FdNbuzecKUAx/bPbifHrJQN2HCrY=",
+        "lastModified": 1780050764,
+        "narHash": "sha256-KDzCo/yB5yAqiifs9o6LaiPR16Ncy7Ge13/VxLA2EuY=",
         "owner": "alberand-rh",
         "repo": "redhat-nixos-workstation",
-        "rev": "5c22b622837dbffa86faba48d43e36f950c39618",
+        "rev": "084e97784f8c61777f4a3f9b4d7d04a78e2fb32d",
         "type": "gitlab"
       },
       "original": {
