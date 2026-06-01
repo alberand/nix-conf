@@ -33,8 +33,7 @@ Far :gmail-remote:"[Gmail]/All Mail"
 # What we're connecting on a local side
 Near :redhat-local:inbox
 Sync All
-# Don't create mailboxes, as I don't use them, both locally and on the server
-Create None
+Create Near
 # Remove messages on remote, removed locally
 Remove Near
 Expunge Near
@@ -51,8 +50,7 @@ Far :gmail-remote:"[Gmail]/Sent Mail"
 # What we're connecting on a local side
 Near :redhat-local:sent
 Sync All
-# Dont create mailboxes, as I don't use them, both locally and on the server
-Create None
+Create Near
 # Sync the movement of messages between folders and deletions, add after making
 # sure the sync works
 Expunge Both
