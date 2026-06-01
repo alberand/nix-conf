@@ -16,6 +16,7 @@
     firewall.allowedTCPPorts = [
       3210
       3211
+      3921
     ];
   };
 
@@ -35,6 +36,8 @@
       no-reload = true;
       # using 'false' will do nothing and omit the value when generating a config
       ignored-flag = false;
+
+      ftp = 3921;
     };
 
     # create users
