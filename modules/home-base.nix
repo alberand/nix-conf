@@ -9,6 +9,29 @@
   ];
 
   home.packages = with pkgs; [
+    kitty
+    firefox
+    zsh
+    gdb
+    tmux
+    mc
+    fzf
+    fd
+    xdg-utils # for opening default programs when clicking links
+    wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
+    unzip
+    man-pages
+    man-pages-posix
+    libvirt
+    qalculate-gtk
+    virt-manager
+    alejandra
+    chromium
+    bat
+    pinta
+    btop
+    moreutils # errno
+    sublime
     cmst
     feh
     file

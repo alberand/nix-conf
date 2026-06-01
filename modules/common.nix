@@ -61,33 +61,20 @@
   documentation.enable = true;
 
   environment.systemPackages = with pkgs; [
-    htop
     vim
-    neovim
     wget
-    kitty
+    htop
     git
-    wireguard-tools
     unzip
-    zsh
-    gdb
-    tmux
-    mc
-    fzf
     fd
-    xdg-utils # for opening default programs when clicking links
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
 
     # utils
     usbutils
     lshw
     pciutils
-    man-pages
-    man-pages-posix
     traceroute
     dig
-    libvirt
-    virt-manager
     wayland
     waypipe
     bluez
@@ -107,22 +94,16 @@
     vulkan-tools
     adwaita-icon-theme
     gnomeExtensions.appindicator
-    qalculate-gtk
     weechat
     swayidle
     wayland-protocols
     nil
-    alejandra
-    chromium
     bat
     swaylock
-    sublime
-    pinta
     tomlq
     yazi
     nurl
     btop
-    moreutils # errno
     busybox
   ];
 
