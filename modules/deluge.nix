@@ -144,6 +144,7 @@
             6889
           ];
           pre_allocate_storage = true;
+          incoming_interface = "wg0";
           outgoing_interface = "wg0";
           max_upload_speed = 5000;
           share_ratio_limit = 2;
