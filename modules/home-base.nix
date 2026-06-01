@@ -80,11 +80,6 @@
 
   xdg.enable = true;
 
-  services.ssh-agent = {
-    enable = true;
-    defaultMaximumIdentityLifetime = 604800;
-  };
-
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
