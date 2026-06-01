@@ -28,6 +28,8 @@
     #kerneloscope
     toolbox
     lynx
+    agenix.packages.${system}.default
+    noctalia.packages.${system}.default
     (b4.overrideAttrs (
       final: prev: {
         version = "git";

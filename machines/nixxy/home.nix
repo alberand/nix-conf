@@ -1,4 +1,4 @@
-{noctalia}: {
+{agenix, noctalia}: {
   config,
   pkgs,
   lib,
@@ -8,6 +8,7 @@
     ../../modules/home-base.nix
     ../../modules/noctalia.nix
     noctalia.homeModules.default
+    agenix.homeManagerModules.default
   ];
 
   home.username = "alberand";
@@ -52,6 +53,8 @@
     typescript-language-server
     lua-language-server
     pyright
+    agenix.packages.${system}.default
+    noctalia.packages.${system}.default
   ];
 
   home.file = {
