@@ -7,13 +7,16 @@
     file = ../secrets/thinky-neomutt.age;
   };
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs; let
+    neomutt = (
+      writeShellScriptBin "neomutt" ''
+        source ${config.age.secrets.neomutt-passwords.path}
+        ${pkgs.neomutt}/bin/neomutt
+      ''
+    );
+  in [
     # Email client
     neomutt
-    (writeShellScriptBin "nn" ''
-      source ${config.age.secrets.neomutt-passwords.path}
-      ${neomutt}/bin/neomutt
-    '')
     # Email indexing and tagging
     notmuch
     # Email fetcher (downloader)
@@ -25,6 +28,12 @@
     # To scan and open links
     urlscan
   ];
+
+  systemd.user.services.mbsync = {
+    Service = {
+      EnvironmentFile = "%t/agenix/neomutt-passwords";
+    };
+  };
 
   # Configs to add:
   # - .notmuch-config

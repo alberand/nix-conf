@@ -141,10 +141,6 @@
       alias cal='cal -m | grep --color -EC6 "\b$(date +%e | sed "s/ //g")"'
       # Better zooming when feh is opened
       alias feh="feh --auto-zoom --scale-down"
-      # Decrypt password for email apps
-      alias mutt="with_passwords mutt"
-      alias neomutt="with_passwords neomutt"
-      alias mbsync="with_passwords mbsync"
       # Who thought that it's cool to use number in cli?
       alias bb=b4
       alias vimdiff="nvim -d"

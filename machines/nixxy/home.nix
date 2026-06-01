@@ -3,7 +3,7 @@
   pkgs,
   lib,
   ...
-}: {
+}: rec {
   imports = [
     ../../modules/home-base.nix
     ../../modules/noctalia.nix
@@ -13,6 +13,7 @@
 
   home.username = "alberand";
   home.homeDirectory = "/home/alberand";
+  age.identityPaths = [ "${home.homeDirectory}/.ssh/id_agenix" ];
 
   xdg.desktopEntries = {
     workfox = {

@@ -8,9 +8,10 @@ let
   # Systems
   nixxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICrvWws1g7nmmEV0hff+49ufO4yM4GCUfHgzPVL5Raw+";
   thinky = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIByn5I88HSu5WM3EIr8GVtbEbxHPpT+JB6m9Su0r3NLY";
+  thinky_agenix = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHkgp5W5C8EJlcSNWBotyCRheKdNUay4snXx65CGjrRA";
   quesada = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINg+a+8SnLxBS/Dq1WiVQsMTy7iorO6xG9D1bIN5fW3S";
 in {
-  "thinky-neomutt.age".publicKeys = [aalbersh thinky];
+  "thinky-neomutt.age".publicKeys = [aalbersh thinky thinky_agenix];
   "acme-env.age".publicKeys = [nixxy door alberand alberand-rsa];
   "cache-private-key.age".publicKeys = [nixxy alberand];
   "nixbuilder_ed25519.age".publicKeys = [aalbersh alberand thinky];

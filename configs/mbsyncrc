@@ -10,11 +10,10 @@ IMAPAccount gmail
 Host imap.gmail.com
 Port 993
 User aalbersh@redhat.com
-PassCmd "gpg --no-tty -qd $HOME/.secrets/email-passwords.sh.gpg | awk -F\\\" '/MUTT_PASS/ {print $2}'"
+PassCmd "echo $MUTT_PASS"
 TLSType IMAPS
 TLSVersions +1.2 +1.3
-CertificateFile ~/.secrets/imap.gmail.com.pem
-CertificateFile ~/.secrets/Equifax_Secure_CA.pem
+CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore gmail-remote
 Account gmail

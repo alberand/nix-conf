@@ -19,10 +19,9 @@
 
   home.username = "aalbersh";
   home.homeDirectory = "/home/aalbersh";
+  age.identityPaths = ["${home.homeDirectory}/.ssh/id_agenix"];
 
   home.packages = with pkgs; [
-    isync
-    neomutt
     notmuch
     xfstestsdb
     #kerneloscope
