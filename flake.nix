@@ -42,31 +42,36 @@
       inherit system;
       config.allowUnfree = true;
     };
+    overlay = (
+      final: prev: {
+        # To get 1.21.8 (5 Oct 2025)
+        minecraft-server = unstable.minecraft-server;
+        revumatic = redhat.packages."${system}".revumatic;
+        koji = redhat.packages."${system}".koji;
+        kerneloscope = redhat.packages."${system}".kerneloscope;
+        beaker-client = redhat.packages."${system}".beaker-client;
+        kup = redhat.packages."${system}".kup;
+        xfstestsdb = redhat.packages."${system}".xfstestsdb;
+        xournalpp = unstable.xournalpp;
+        jujutsu = unstable.jujutsu;
+        # Want version 1.6.2
+        pocket-id = unstable.pocket-id;
+        claude = redhat.packages."${system}".claude;
+      }
+    );
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        (final: prev: {
-          # To get 1.21.8 (5 Oct 2025)
-          minecraft-server = unstable.minecraft-server;
-          revumatic = redhat.packages."${system}".revumatic;
-          koji = redhat.packages."${system}".koji;
-          kerneloscope = redhat.packages."${system}".kerneloscope;
-          beaker-client = redhat.packages."${system}".beaker-client;
-          kup = redhat.packages."${system}".kup;
-          xfstestsdb = redhat.packages."${system}".xfstestsdb;
-          xournalpp = unstable.xournalpp;
-          jujutsu = unstable.jujutsu;
-          # Want version 1.6.2
-          pocket-id = unstable.pocket-id;
-          claude = redhat.packages."${system}".claude;
-        })
+        overlay
         copyparty.overlays.default
       ];
     };
 
     lib = nixpkgs.lib;
   in rec {
+    overlays.default = overlay;
+
     nixosModules.redhat-home = (import ./machines/thinky/home.nix) {
       inherit agenix noctalia;
     };
