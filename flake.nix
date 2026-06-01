@@ -67,6 +67,10 @@
 
     lib = nixpkgs.lib;
   in rec {
+    nixosModules.redhat-home = (import ./machines/thinky/home.nix) {
+      inherit agenix noctalia;
+    };
+
     nixosConfigurations = {
       nixxy = lib.nixosSystem {
         inherit pkgs;
