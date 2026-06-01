@@ -115,8 +115,14 @@
         identityFile = "~/.ssh/id_ed25519";
         proxyJump = "nemambyt";
       };
-      work = {
+      thinky = {
         hostname = "100.69.0.3";
+        user = "aalbersh";
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      work = {
+        hostname = "100.69.0.12";
         user = "aalbersh";
         identitiesOnly = true;
         identityFile = "~/.ssh/id_ed25519";
