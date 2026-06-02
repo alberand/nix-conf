@@ -28,7 +28,8 @@ cb = ["util", "exec", "--", "compare-branches"]
 
 [ui]
 default-command = "l"
-pager = "delta-safe"
+# Somehow delta buggy on larger output
+# pager = "delta-safe"
 paginate = "auto"
 merge-editor = "mergiraf"
 diff-formatter = ["delta-safe", "$left", "$right"]
