@@ -112,19 +112,8 @@
       ];
     };
 
-    # Enable 'sudo' with SSH key
-    security.pam.sshAgentAuth = {
-      enable = true;
-    };
-
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
     environment.systemPackages = with pkgs; [
-      bemenu # wayland clone of dmenu
       wdisplays # tool to configure displays
-      revumatic
-      koji
-      claude
     ];
 
     environment.variables = {
@@ -132,34 +121,6 @@
       SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
       NIX_SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
     };
-
-    # Enable WeeChat to run as service with attached 'screen' session To
-    # attach use: screen -x weechat/wc
-    nixpkgs.overlays = [
-      (self: super: {
-        weechat = super.weechat.override {
-          configure = {availablePlugins, ...}: {
-            scripts = with super.weechatScripts; [
-              weechat-autosort
-              weechat-notify-send
-              weechat-go
-              wee-slack
-            ];
-          };
-        };
-      })
-    ];
-
-    # fileSystems."/mnt/lonmoun" = {
-    #   device = "192.168.0.100:/alberand";
-    #   fsType = "nfs";
-    #   options = [
-    #     "noauto"
-    #     "x-systemd.automount"
-    #     "nofail"
-    #     "x-systemd.mount-timeout=5s"
-    #   ];
-    # };
 
     programs.firefox = {
       enable = true;

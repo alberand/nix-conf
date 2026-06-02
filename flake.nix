@@ -44,6 +44,16 @@
     };
     overlay = (
       final: prev: {
+        weechat = prev.weechat.override {
+          configure = {...}: {
+            scripts = with prev.weechatScripts; [
+              weechat-autosort
+              weechat-notify-send
+              weechat-go
+              wee-slack
+            ];
+          };
+        };
         # To get 1.21.8 (5 Oct 2025)
         minecraft-server = unstable.minecraft-server;
         revumatic = redhat.packages."${system}".revumatic;

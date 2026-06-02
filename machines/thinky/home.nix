@@ -31,6 +31,9 @@
     noctalia.packages.${system}.default
     tmt
     tft-cli
+    revumatic
+    koji
+    claude
     (b4.overrideAttrs (
       final: prev: {
         version = "git";
