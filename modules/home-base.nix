@@ -56,6 +56,7 @@
     devenv
     mergiraf
     colordiff
+    pinentry-all
 
     (writeShellScriptBin "calc"
       "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
