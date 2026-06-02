@@ -22,6 +22,9 @@
       diff = {
         colorMoved = "default";
       };
+      delta = {
+        color-only = true;
+      };
       creo = {
         autocrlf = true;
       };

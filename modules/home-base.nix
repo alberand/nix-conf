@@ -6,6 +6,7 @@
     ./git.nix
     ./tmux.nix
     ./kanshi.nix
+    ./delta.nix
   ];
 
   home.packages = with pkgs; [
@@ -48,7 +49,6 @@
     xdg-utils
     zathura
     zlib
-    delta
     jujutsu
     watchman # needed by jujutsu
     stgit
@@ -67,13 +67,6 @@
       (builtins.readFile ../configs/build-test.sh))
     (writeShellScriptBin "compare-branches"
       (builtins.readFile ../configs/compare-branches.sh))
-    (writeShellScriptBin "delta-safe" ''
-      delta --no-gitconfig --color-only "$@"
-
-      status=$?
-      [ $status -gt 1 ] && exit $status
-      exit 0
-    '')
   ];
 
   home.file = {

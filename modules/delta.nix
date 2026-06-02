@@ -1,19 +1,14 @@
 {pkgs, ...}: {
-  home.packages = [pkgs.delta];
-
-  programs.git = {
-    settings = {
-      core = {pager = "delta";};
-      interactive = {diffFilter = "delta --color-only";};
-      merge = {
-        conflictstyle = "zdiff3";
-      };
-      delta = {
+  programs.delta = {
+    enable = true;
+    enableJujutsuIntegration = true;
+    options = {
+      decorations = {
         file-style = "bold yellow ul";
         file-decoration-style = "none";
         hunk-header-decoration-style = "yellow";
-        tabs = "8";
       };
+      tabs = "8";
     };
   };
 }
