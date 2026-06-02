@@ -5,7 +5,6 @@
     ./wofi.nix
     ./git.nix
     ./tmux.nix
-    ./kanshi.nix
     ./delta.nix
   ];
 

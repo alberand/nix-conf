@@ -7,6 +7,7 @@
   imports = [
     ../../modules/home-base.nix
     ../../modules/noctalia.nix
+    ../../kanshi.nix
     noctalia.homeModules.default
     agenix.homeManagerModules.default
   ];
