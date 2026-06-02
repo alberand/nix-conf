@@ -83,7 +83,6 @@
 
   services.gpg-agent = {
     enable = true;
-    enableSshSupport = true;
     # 400 days
     defaultCacheTtl = 34560000;
     maxCacheTtl = 34560000;
@@ -96,6 +95,11 @@
   programs.home-manager.enable = true;
 
   xdg.enable = true;
+
+  services.ssh-agent = {
+    enable = true;
+    defaultMaximumIdentityLifetime = 604800;
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
