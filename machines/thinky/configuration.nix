@@ -50,7 +50,6 @@
 
     networking = {
       hostName = "thinky";
-      proxy.default = "http://100.69.0.1:11111";
       # Pick only one of the below networking options.
       networkmanager.enable = true;
       networkmanager.dns = "systemd-resolved";
