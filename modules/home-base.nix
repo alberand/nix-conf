@@ -86,6 +86,11 @@
     # 400 days
     defaultCacheTtl = 34560000;
     maxCacheTtl = 34560000;
+
+    pinentry = {
+      package = pkgs.pinentry-all;
+      program = "pinentry-tty";
+    };
   };
 
   programs.direnv.enable = true;
