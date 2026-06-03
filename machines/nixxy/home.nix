@@ -146,6 +146,16 @@
         identitiesOnly = true;
         identityFile = "~/.ssh/id_ed25519";
       };
+      dummy = {
+        hostname = "10.10.10.151";
+        user = "root";
+        extraOptions = {
+          "PreferredAuthentications" = "password";
+          "PubkeyAuthentication" = "no";
+          "UserKnownHostsFile" = "/dev/null";
+          "StrictHostKeyChecking" = "no";
+        };
+      };
     };
   };
 }
