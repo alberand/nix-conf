@@ -11,7 +11,9 @@
     neomutt = (
       writeShellScriptBin "neomutt" ''
         source ${config.age.secrets.neomutt-passwords.path}
-        ${pkgs.neomutt}/bin/neomutt
+        export MUTT_PASS
+        export KORG_PASS
+        ${pkgs.neomutt}/bin/neomutt $@
       ''
     );
   in [
