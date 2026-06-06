@@ -101,8 +101,15 @@
         port = 23;
         addressFamily = "inet";
       };
-      nemambyt = {
+      nemambyt-old = {
         hostname = "89.221.212.102";
+        user = "root";
+        port = 42424;
+        identitiesOnly = true;
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      nemambyt = {
+        hostname = "167.233.42.91";
         user = "root";
         port = 42424;
         identitiesOnly = true;
