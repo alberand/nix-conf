@@ -2,7 +2,13 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  server = "10.175.251.254";
+  server_ipv6 = "fd7d:76ee:e68f:a993:ab82:4b25:ee6d:cf20";
+  dns = "10.128.0.1";
+  mtu = "1320";
+  port = 47107;
+in {
   age.secrets.deluge-wg = {
     file = ../secrets/deluge-wg.age;
     mode = "400";
@@ -64,8 +70,8 @@
         ${pkgs.iproute2}/bin/ip link add wg0 type wireguard
         ${pkgs.iproute2}/bin/ip link set wg0 netns deluge
         ${pkgs.iproute2}/bin/ip link set deluge netns deluge
-        ${pkgs.iproute2}/bin/ip -n deluge -4 addr add 10.73.91.65/32 dev wg0
-        ${pkgs.iproute2}/bin/ip -n deluge -6 addr add fc00:bbbb:bbbb:bb01::a:5b40/128 dev wg0
+        ${pkgs.iproute2}/bin/ip -n deluge -4 addr add ${server}/32 dev wg0
+        ${pkgs.iproute2}/bin/ip -n deluge -6 addr add ${server_ipv6}/128 dev wg0
         ${pkgs.iproute2}/bin/ip -n deluge -4 addr add 10.30.10.10/32 dev deluge
         ${pkgs.iproute2}/bin/ip netns exec deluge \
           ${pkgs.wireguard-tools}/bin/wg setconf wg0 ${config.age.secrets.deluge-wg.path}
@@ -73,7 +79,7 @@
         ${pkgs.iproute2}/bin/ip -n deluge link set lo up
         ${pkgs.iproute2}/bin/ip -n deluge link set deluge up
         ${pkgs.iproute2}/bin/ip -n deluge route add default dev wg0
-        ${pkgs.iproute2}/bin/ip -n deluge link set wg0 mtu 1420
+        ${pkgs.iproute2}/bin/ip -n deluge link set wg0 mtu ${mtu}
       '';
       ExecStop = pkgs.writers.writeDash "wg-down" ''
         ${pkgs.iproute2}/bin/ip -n deluge link del wg0
@@ -139,13 +145,15 @@
           download_location = "/bigdata/media/download";
           allow_remote = true;
           daemon_port = 58846;
+          listen_interface = "10.175.251.254";
+          listen_random_port = false;
+          random_port = false;
           listen_ports = [
-            6881
-            6889
+            28779
+            28800
           ];
           pre_allocate_storage = true;
-          incoming_interface = "wg0";
-          outgoing_interface = "wg0";
+          outgoing_interface = "10.175.251.254";
           max_upload_speed = 5000;
           share_ratio_limit = 2;
           max_connections_global = 200;
@@ -180,7 +188,13 @@
       networking.firewall = {
         allowedTCPPorts = [
           8112
+          28779
+          28800
           58846
+        ];
+        allowedUDPPorts = [
+          28779
+          28800
         ];
       };
 
@@ -202,7 +216,7 @@
       };
 
       networking = {
-        nameservers = ["10.64.0.1"];
+        nameservers = [dns];
         firewall = {
           enable = true;
         };
@@ -220,6 +234,7 @@
   networking = {
     firewall = {
       allowedTCPPorts = [
+        port
         58846
       ];
     };
