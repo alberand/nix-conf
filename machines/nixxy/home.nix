@@ -57,6 +57,7 @@
     pyright
     agenix.packages.${system}.default
     noctalia.packages.${system}.default
+    claude-code
   ];
 
   home.file = {
