@@ -22,14 +22,14 @@
     memoryPercent = 25;
   };
 
-  fonts.fontconfig.enable = true;
   fonts.packages = with pkgs; [
+    # wiki> Noto is a free font family comprising over 100 individual computer
+    # fonts, which are together designed to cover all the scripts encoded in
+    # the Unicode standard.
     noto-fonts
-    # noto-fonts-cjk-sans
+    # Emoji
     noto-fonts-color-emoji
-    # fira-code
-    # fira-code-symbols
-    # font-awesome
+    # Nice monospace
     nerd-fonts.lilex
   ];
 
@@ -182,7 +182,11 @@
     wlr.enable = true;
     # gtk portal needed to make gtk apps happy
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    config = {common = {default = ["gtk"];};};
+    config = {
+      common = {
+        default = ["gtk"];
+      };
+    };
   };
 
   services.upower.enable = true;
@@ -198,7 +202,10 @@
     settings = {
       auto-optimise-store = true;
       extra-sandbox-paths = [config.programs.ccache.cacheDir];
-      trusted-users = ["alberand" "aalbersh"];
+      trusted-users = [
+        "alberand"
+        "aalbersh"
+      ];
       trusted-public-keys = [
         (builtins.readFile ../secrets/cache-public-key.pem)
       ];

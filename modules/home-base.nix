@@ -58,26 +58,38 @@
     colordiff
     pinentry-all
 
-    (writeShellScriptBin "calc"
-      "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
-    (writeShellScriptBin "tmux-sessionizer"
-      (builtins.readFile ../configs/tmux-sessionizer))
+    (writeShellScriptBin "calc" "exec -a $0 ${qalculate-gtk}/bin/qalculate-gtk $@")
+    (writeShellScriptBin "tmux-sessionizer" (builtins.readFile ../configs/tmux-sessionizer))
     (writeShellScriptBin "todo" (builtins.readFile ../configs/todo.sh))
-    (writeShellScriptBin "build-test"
-      (builtins.readFile ../configs/build-test.sh))
-    (writeShellScriptBin "compare-branches"
-      (builtins.readFile ../configs/compare-branches.sh))
+    (writeShellScriptBin "build-test" (builtins.readFile ../configs/build-test.sh))
+    (writeShellScriptBin "compare-branches" (builtins.readFile ../configs/compare-branches.sh))
   ];
 
   home.file = {
-    ".ctags" = {source = ../configs/ctags;};
-    ".gdbinit" = {source = ../configs/gdbinit;};
-    ".vimrc.local" = {source = ../configs/vimrc.local;};
-    ".fdignore" = {source = ../configs/fdignore;};
-    ".config/kitty/kitty.conf" = {source = ../configs/kitty;};
-    ".tmux.conf" = {source = ../configs/tmux.conf;};
-    ".config/jj/config.toml" = {source = ../configs/jj.toml;};
-    ".emailaliases" = {source = ../configs/emailaliases;};
+    ".ctags" = {
+      source = ../configs/ctags;
+    };
+    ".gdbinit" = {
+      source = ../configs/gdbinit;
+    };
+    ".vimrc.local" = {
+      source = ../configs/vimrc.local;
+    };
+    ".fdignore" = {
+      source = ../configs/fdignore;
+    };
+    ".config/kitty/kitty.conf" = {
+      source = ../configs/kitty;
+    };
+    ".tmux.conf" = {
+      source = ../configs/tmux.conf;
+    };
+    ".config/jj/config.toml" = {
+      source = ../configs/jj.toml;
+    };
+    ".emailaliases" = {
+      source = ../configs/emailaliases;
+    };
   };
   xdg.configFile."niri/config.kdl".source = ../configs/niri.kdl;
 
@@ -104,6 +116,28 @@
   services.ssh-agent = {
     enable = true;
     defaultMaximumIdentityLifetime = 604800;
+  };
+
+  fonts = {
+    fontconfig = {
+      enable = true;
+      antialiasing = true;
+      defaultFonts = {
+        emoji = [
+          "Noto Color Emoji:style=Regular"
+        ];
+        monospace = [
+          "Lilex Nerd Font Mono:style=Regular"
+          "DejaVu Sans Mono:style=Book"
+        ];
+        serif = [
+          "DejaVu Sans:style=Book"
+        ];
+        sansSerif = [
+          "DejaVu Serif:style=Book"
+        ];
+      };
+    };
   };
 
   # This value determines the Home Manager release that your
