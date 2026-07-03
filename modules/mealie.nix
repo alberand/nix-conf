@@ -60,7 +60,7 @@ in {
         credentialsFile = "/etc/mealie.env";
       };
 
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
 
       networking = {
         firewall = {

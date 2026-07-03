@@ -82,7 +82,7 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+    settings = {
       "*" = {
         addKeysToAgent = "yes";
         forwardAgent = true;
@@ -157,12 +157,10 @@
       dummy = {
         hostname = "10.10.10.151";
         user = "root";
-        extraOptions = {
-          "PreferredAuthentications" = "password";
-          "PubkeyAuthentication" = "no";
-          "UserKnownHostsFile" = "/dev/null";
-          "StrictHostKeyChecking" = "no";
-        };
+        PreferredAuthentications = "password";
+        PubkeyAuthentication = "no";
+        UserKnownHostsFile = "/dev/null";
+        StrictHostKeyChecking = "no";
       };
     };
   };

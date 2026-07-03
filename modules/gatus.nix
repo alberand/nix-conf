@@ -267,7 +267,7 @@ in {
         };
       };
 
-      system.stateVersion = "25.11";
+      system.stateVersion = "26.05";
 
       networking = {
         nameservers = ["100.69.0.4"];

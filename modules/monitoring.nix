@@ -1,9 +1,13 @@
-{...}: {
+{config, ...}: {
+  age.secrets.grafana-key.file = ../secrets/grafana-key.age;
   services.grafana = {
     enable = true;
-    settings.server = {
-      http_port = 3000;
-      http_addr = "127.0.0.1";
+    settings = {
+      security.secret_key = "$__file{${config.age.secrets.grafana-key.path}}";
+      server = {
+        http_port = 3000;
+        http_addr = "127.0.0.1";
+      };
     };
     provision.datasources.settings.datasources = [
       {

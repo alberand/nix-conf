@@ -36,4 +36,5 @@ in {
   "miniflux-secret.age".publicKeys = [alberand nixxy];
   "deluge-wg.age".publicKeys = [alberand nixxy];
   "deluge-auth.age".publicKeys = [alberand nixxy];
+  "grafana-key.age".publicKeys = [alberand nixxy];
 }
