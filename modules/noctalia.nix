@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  home.packages = with pkgs; [
+    mpvpaper
+  ];
+
   programs.noctalia = {
     enable = true;
     # noctalia config export > noctalia.toml
