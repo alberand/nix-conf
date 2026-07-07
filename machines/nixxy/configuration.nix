@@ -371,6 +371,10 @@
       };
     };
 
+    services.smartd = {
+      enable = true;
+    };
+
     nix.settings.trusted-users = ["nixremote"];
 
     # This value determines the NixOS release from which the default
