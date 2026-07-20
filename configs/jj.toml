@@ -9,9 +9,9 @@ email = "aalbersh@kernel.org"
 name = "Andrey Albershteyn"
 email = "aalbersh@redhat.com"
 
-[fsmonitor]
-backend = "watchman"
-watchman.register-snapshot-trigger = true
+#[fsmonitor]
+#backend = "watchman"
+#watchman.register-snapshot-trigger = true
 
 [aliases]
 l = ["log", "-r", "ancestors(reachable(@, mutable()), 2)", "--limit", "25"]
